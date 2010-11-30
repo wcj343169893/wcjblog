@@ -17,6 +17,10 @@
 		<servlet-class>com.google.choujone.blog.servlet.CalendarServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>BlogType</servlet-name>
+		<servlet-class>com.google.choujone.blog.servlet.BlogTypeServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>User</servlet-name>
 		<servlet-class>com.google.choujone.blog.servlet.UserServlet</servlet-class>
 	</servlet>
@@ -43,6 +47,10 @@
 	<servlet-mapping>
 		<servlet-name>Calendars</servlet-name>
 		<url-pattern>/calendars</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BlogType</servlet-name>
+		<url-pattern>/blogType</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>User</servlet-name>

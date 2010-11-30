@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加博客</title>
 	<script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/js/jquery.js"></script>
 </head>
 <body>
 <div class="main">
@@ -44,7 +45,27 @@
 			<div class="container-type">
 				分类：
 			</div>
-			<input type="text"	name="tid" value="1" > 
+			<!-- ajax 动态读取分类 -->
+			<div id="tid">
+			</div>
+			<script type="text/javascript">
+				function tlist(){
+					$.post("/blogType", {},function(data){
+							$("#tid").html(data);
+						});
+					}
+				function tadd(){
+					$.get("/blogType", {"tname":$("#tname").val()},function(data){
+							$("#tid").html(data);
+						});
+					}
+				tlist();
+			</script>
+			
+			<div id="addType">
+				<input type="text" id="tname" value="1" > 
+			</div>
+			<!-- ajax 动态增加 -->
 			<div class="container-tags">
 				关键字：
 			</div>
