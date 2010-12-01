@@ -11,25 +11,37 @@
 <%@page import="com.google.choujone.blog.entity.Reply"%>
 <%@page import="com.google.choujone.blog.entity.User"%>
 <%@page import="com.google.choujone.blog.dao.UserDao"%>
-<%@page import="com.google.choujone.blog.common.Operation"%><html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@page import="com.google.choujone.blog.common.Operation"%>
+<%@page import="com.google.choujone.blog.dao.BlogTypeDao"%>
+<%@page import="com.google.choujone.blog.entity.BlogType"%><html>
 <%
 	String id=request.getParameter("id");
 	if(id!=null && !"".equals(id.trim())){
 	BlogDao blogDao=new BlogDao();
 	Blog blog=blogDao.getBlogById(Tools.strTolong(id));
 	if(blog == null){
-		out.println("文章不存在");
-		return;
-	}
+%>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>访问的文章不存在</title>
+</head>
+<body>
+<div class="notices">访问的文章不存在</div>
+</body>
+<%
+}else{
 	blogDao.operationBlog(Operation.readTimes,blog);
 	Blog preBlog=blogDao.getPreBlog(blog.getId());
 	Blog nextBlog=blogDao.getNextBlog(blog.getId());
 	User login_user=(User)request.getSession().getAttribute("login_user");//获取登录信息
 	UserDao userDao=new UserDao();
+	//查询所有的分类
+	BlogTypeDao btd=new BlogTypeDao();
+	BlogType bt=btd.getBlogTypeById(blog.getTid());
 	User blog_user= userDao.getUserDetail();
 %>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=blog_user.getpTitle() %> -- <%=blog.getTitle() %></title>
 <script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
 <script type="text/javascript" src="/js/content.js"></script>
@@ -67,7 +79,7 @@
 	</font>
 	<font class="post-footer">
 			发布:<%=blog_user.getName() %> | 
-			分类:<%=blog.getTid()%> | 
+			分类:<%=bt.getName()%> | 
 			评论:<%=blog.getReplyCount() %> | 
 			浏览:<%=blog.getCount() %> 
 				<%if(login_user!=null){	%> 
@@ -174,5 +186,5 @@
 <jsp:include page="footer.jsp"></jsp:include>
 </div>
 </body>
-<%} %>
+<%} }%>
 </html>

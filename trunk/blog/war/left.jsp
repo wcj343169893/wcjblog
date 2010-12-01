@@ -59,7 +59,7 @@
 			<%if(blog_hot!= null){ for(int i=0;i<blog_hot.size();i++){ 
 				Blog b=blog_hot.get(i);
 			%>
-				<li><a href="/blog_detail.jsp?id=<%=b.getId() %>"><%=b.getTitle() %></a></li>
+				<li title="<%=b.getSdTime() %>"><a href="/blog_detail.jsp?id=<%=b.getId() %>"><%=b.getTitle() %></a></li>
 			<%}} %>
 		</ul>
 	</div>
@@ -75,7 +75,7 @@
 			<%if(replyList!= null){ for(int i=0;i<replyList.size();i++){ 
 					Reply r=replyList.get(i);
 			%>
-				<li><a href="/blog_detail.jsp?id=<%=r.getBid() %>"><%=r.getContent() %></a></li>
+				<li title="post by <%=r.getName() %>  <%=r.getSdTime() %>"><a href="/blog_detail.jsp?id=<%=r.getBid() %>"><%=r.getContent() %></a></li>
 			<%}} %>
 		</ul>
 	</div>
@@ -88,7 +88,7 @@
 			<%if(replyList!= null){ for(int i=0;i<replyList.size();i++){ 
 					Reply r=replyList.get(i);
 			%>
-				<li><a href="/leaveMessage.jsp"><%=r.getContent() %></a></li>
+				<li title="post by <%=r.getName() %>  <%=r.getSdTime() %>"><a href="/leaveMessage.jsp"><%=r.getContent() %></a></li>
 			<%}} %>
 		</ul>
 	</div>
@@ -125,8 +125,8 @@
 				for(int i=0;i<friendsList.size();i++){
 					Friends f=friendsList.get(i);
 			%>
-			<li>
-				<a href="<%=f.getUrl() %>" target="_bank"><%=f.getName() %></a>
+			<li title="<%=f.getDescription() %>">
+				<a href="<%=f.getUrl() %>" target="_bank" title="<%=f.getDescription() %>"><%=f.getName() %></a>
 			</li>
 			<%} %>
 		</ul>

@@ -9,7 +9,12 @@
 <%@page import="com.google.choujone.blog.entity.User"%>
 <%@page import="com.google.choujone.blog.common.Operation"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%><html>
+<%@page import="java.util.Date"%>
+<%@page import="com.google.choujone.blog.dao.BlogTypeDao"%>
+<%@page import="com.google.choujone.blog.entity.BlogType"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
@@ -18,6 +23,14 @@
 	User login_user=(User)request.getSession().getAttribute("login_user");
 	String title=user.getpTitle();
 	userDao.closePM();
+	//查询所有的分类
+	BlogTypeDao btd=new BlogTypeDao();
+	List<BlogType> blogTypeList = new ArrayList<BlogType>();
+	blogTypeList=btd.getBlogTypeList();
+	Map<Long,String> typeMaps=new HashMap<Long,String>();
+	for(int i=0;i<blogTypeList.size();i++){
+		typeMaps.put(blogTypeList.get(i).getId(),blogTypeList.get(i).getName());
+	}
 %>
 <title><%=title %></title>
 <script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
@@ -74,7 +87,7 @@ for(int i=0;i<blogs.size();i++){
 		</font>
 		<font class="post-footer">
 			发布:<%=user.getName() %> | 
-			分类:<%=blog.getTid()%> | 
+			分类:<%=typeMaps.get(blog.getTid())%> | 
 			评论:<%=blog.getReplyCount() %> | 
 			浏览:<%=blog.getCount() %>
 			<%if(login_user!=null){	%> 
