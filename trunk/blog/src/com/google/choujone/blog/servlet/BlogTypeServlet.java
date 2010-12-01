@@ -101,10 +101,10 @@ public class BlogTypeServlet extends HttpServlet {
 					type_str += "<option value=\"";
 					type_str += blogType.getId();
 					type_str += "\"";
-					if (tid == blogType.getId()) {
+					if (tid.equals(blogType.getId())) {
 						type_str += " selected";
 					}
-					type_str += "\">";
+					type_str += ">";
 					type_str += blogType.getName();
 					type_str += "</option>";
 				}
