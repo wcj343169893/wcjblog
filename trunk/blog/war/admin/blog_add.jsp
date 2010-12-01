@@ -43,35 +43,39 @@
 			</div>
 				<textarea rows="20" cols="100" name="content"></textarea>
 			<div class="container-type">
-				分类：
+				分类：<input type="hidden" value="0" id="t">
 			</div>
 			<!-- ajax 动态读取分类 -->
-			<div id="tid">
+			<div id="typelist">
 			</div>
-			<script type="text/javascript">
-				function tlist(){
-					$.post("/blogType", {},function(data){
-							$("#tid").html(data);
-						});
-					}
-				function tadd(){
-					$.get("/blogType", {"tname":$("#tname").val()},function(data){
-							$("#tid").html(data);
-						});
-					}
-				tlist();
-			</script>
-			
-			<div id="addType">
-				<input type="text" id="tname" value="1" > 
-			</div>
-			<!-- ajax 动态增加 -->
 			<div class="container-tags">
 				关键字：
 			</div>
 			<input type="text" name="tag"><br>
 			<input type="checkbox" value="0" id="isVisible" name="isVisible"><label for="isVisible">发布</label> &nbsp;<input type="submit" value="保存">
 		</form>
+		<script type="text/javascript">
+				function tlist(){
+					$.post("/blogType", {"tid":$("#t").val() },function(data){
+							$("#typelist").html(data);
+						});
+					}
+				function tadd(){
+					$.get("/blogType", {"tname":$("#tname").val(),"info":$("#info").val(),"opera":$("#opera").val()},function(data){
+							//$("#tid").html(data);
+							alert(data);
+							tlist();
+						});
+					}
+				tlist();
+			</script>			
+			<!-- ajax 动态增加 -->
+			<div id="addType" style="display: none;">
+				<input type="hidden" id="opera" value="add" > 
+				分类名:<input type="text" id="tname" value="" > <br>
+				简介:<input type="text" id="info" value="" > <br>
+				<input type="button" onclick="tadd()" value="保存"> 
+			</div>
 	</div>
 	<jsp:include page="/admin/bottom.jsp"></jsp:include>
 </div>
