@@ -15,7 +15,7 @@ import com.google.choujone.blog.util.PMF;
 public class BlogTypeDao {
 	PersistenceManager pm;
 
-	public boolean operationBlog(Operation operation, BlogType blogType) {
+	public boolean operationBlogType(Operation operation, BlogType blogType) {
 		boolean flag = false;
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 		if (operation.equals(Operation.add)) {// 新增
@@ -29,7 +29,7 @@ public class BlogTypeDao {
 			}
 		} else if (operation.equals(Operation.delete)) {// 删除
 			try {
-				Query query = pm.newQuery(Blog.class, " id == "
+				Query query = pm.newQuery(BlogType.class, " id == "
 						+ blogType.getId());
 				List<BlogType> blogTypes = (List<BlogType>) query.execute();
 				if (blogTypes.size() > 0) {
@@ -70,6 +70,23 @@ public class BlogTypeDao {
 			e.printStackTrace();
 		}
 		return blogTypeList;
+	}
+
+	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public BlogType getBlogTypeById(Long id) {
+		BlogType bt = null;
+		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+		Query query = pm.newQuery(BlogType.class, " id == " + id);
+		List<BlogType> blogTypes = (List<BlogType>) query.execute();
+		if (blogTypes.size() > 0) {
+			bt = blogTypes.get(0);
+		}
+		return bt;
 	}
 
 	/**

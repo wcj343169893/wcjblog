@@ -26,16 +26,38 @@ public class BlogTypeServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String tname = req.getParameter("tname");
-		String info = req.getParameter("info");
-		String operation = req.getParameter("opera");
+		String tname = req.getParameter("tname") != null ? req
+				.getParameter("tname") : "";
+		String info = req.getParameter("info") != null ? req
+				.getParameter("info") : "";
+		String operation = req.getParameter("opera") != null ? req
+				.getParameter("opera") : "";
+		String t = req.getParameter("t") != null
+				&& !"".equals(req.getParameter("t").trim()) ? req
+				.getParameter("t") : "0";// 获取博文原来的类型
 		boolean flag = false;
 		btd = new BlogTypeDao();
 		BlogType bt = new BlogType();
 		bt.setInfo(info);
 		bt.setName(tname);
-		if (Operation.add.toString().equals(operation.trim())) {
-			flag = btd.operationBlog(Operation.add, bt);
+		if (Operation.add.toString().equals(operation.trim())) {// 新增
+			flag = btd.operationBlogType(Operation.add, bt);
+		} else if (Operation.modify.toString().equals(operation.trim())) {// 修改
+			Long tid = 0L;
+			try {
+				tid = Long.valueOf(t);
+			} catch (Exception e) {
+			}
+			bt.setId(tid);
+			flag = btd.operationBlogType(Operation.modify, bt);
+		} else {// 删除
+			Long tid = 0L;
+			try {
+				tid = Long.valueOf(t);
+			} catch (Exception e) {
+			}
+			bt.setId(tid);
+			flag = btd.operationBlogType(Operation.delete, bt);
 		}
 		resp.setContentType("text/html;charset=utf-8");
 		resp.setCharacterEncoding("UTF-8");
@@ -58,33 +80,61 @@ public class BlogTypeServlet extends HttpServlet {
 		String t = req.getParameter("t") != null
 				&& !"".equals(req.getParameter("t").trim()) ? req
 				.getParameter("t") : "0";// 获取博文原来的类型
-		int tid = 0;
+		String operation = req.getParameter("opera") != null ? req
+				.getParameter("opera") : "";
+
+		Long tid = 0L;
 		try {
-			tid = Integer.parseInt(t);
+			tid = Long.valueOf(t);
 		} catch (Exception e) {
 		}
 		btd = new BlogTypeDao();
-		List<BlogType> blogTypeList = btd.getBlogTypeList();
 		resp.setContentType("text/html;charset=utf-8");
 		resp.setCharacterEncoding("UTF-8");
 		resp.setHeader("Cache-Control", "no-cache");
-		String type_str = "<select name=\"tid\">";
-		if (blogTypeList != null && blogTypeList.size() > 0) {
-			for (BlogType blogType : blogTypeList) {
-				type_str += "<option value=\"";
-				type_str += blogType.getId();
-				type_str += "\"";
-				if (tid == blogType.getId()) {
-					type_str += " selected";
-				}
-				type_str += "\">";
-				type_str += blogType.getName();
-				type_str += "</option>";
-			}
-		}
-		type_str += "</select><a href=\"javascript:void(0)\" onclick=\"showOrHideDiv('addType')\">增加分类</a>";
 		PrintWriter out = resp.getWriter();
-		out.println(type_str);
+		if (operation.equals(Operation.lists.toString())) {// 查询所有
+			List<BlogType> blogTypeList = btd.getBlogTypeList();
+			String type_str = "<select name=\"tid\" id=\"tids\">";
+			if (blogTypeList != null && blogTypeList.size() > 0) {
+				for (BlogType blogType : blogTypeList) {
+					type_str += "<option value=\"";
+					type_str += blogType.getId();
+					type_str += "\"";
+					if (tid == blogType.getId()) {
+						type_str += " selected";
+					}
+					type_str += "\">";
+					type_str += blogType.getName();
+					type_str += "</option>";
+				}
+			}
+			type_str += "</select>&nbsp;";
+			type_str += "<a href=\"javascript:void(0)\" onclick=\"showOrHideDiv('addType')\">增加</a>&nbsp;";
+			type_str += "<a href=\"javascript:void(0)\" onclick=\"modifyType('modifyType','tids')\">修改</a>&nbsp;";
+			type_str += "<a href=\"javascript:void(0)\" onclick=\"deleteType('tids')\">删除</a>";
+			out.println(type_str);
+		} else {// 根据id查询
+			BlogType bt = btd.getBlogTypeById(tid);
+			if (bt != null) {
+				StringBuffer sb = new StringBuffer();
+				sb.append("<strong>修改：</strong>&nbsp;<input type=\"hidden\" id=\"modifytid\" value=\"");
+				sb.append(bt.getId());
+				sb.append("\" > ");
+				sb
+						.append("分类名:<input type=\"text\" id=\"modifytname\" value=\"");
+				sb.append(bt.getName());
+				sb.append("\" >");
+				sb
+						.append("简 &nbsp;&nbsp;介:<input type=\"text\" id=\"modifyinfo\" value=\"");
+				sb.append(bt.getInfo());
+				sb.append("\" >");
+				sb
+						.append("<input type=\"button\" onclick=\"tmodify()\" value=\"保存\">");
+				out.println(sb.toString());
+			}
+
+		}
 		out.close();
 	}
 }
