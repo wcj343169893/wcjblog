@@ -44,6 +44,14 @@
 				<textarea rows="20" cols="100" name="content"></textarea>
 			<div class="container-type">
 				分类：<input type="hidden" value="0" id="t">
+				<span id="addType" style="display: none;">
+				<strong>新增：</strong>&nbsp;分类名:<input type="text" id="tname" value="" > 
+					简 &nbsp;&nbsp;介:<input type="text" id="info" value="" >
+					<input type="button" onclick="tadd()" value="保存">
+				</span>
+				<span id="modifyType" style="display: none;">
+				</span>
+				<span id="result"></span>
 			</div>
 			<!-- ajax 动态读取分类 -->
 			<div id="typelist">
@@ -56,28 +64,71 @@
 		</form>
 		<script type="text/javascript">
 				function tlist(){
-					$.post("/blogType", {"tid":$("#t").val() },function(data){
+					$.post("/blogType", {"t":$("#t").val(),"opera":"lists" },function(data){
 							$("#typelist").html(data);
 						});
 					}
 				function tadd(){
-					$.get("/blogType", {"tname":$("#tname").val(),"info":$("#info").val(),"opera":$("#opera").val()},function(data){
-							//$("#tid").html(data);
-							alert(data);
-							tlist();
+					if($("#tname").val() != ""){
+						$.get("/blogType", {"tname":$("#tname").val(),"info":$("#info").val(),"opera":"add"},function(data){
+								if(data){
+									$("#result").html("新增成功");
+									$("#tname").val("");
+									$("#info").val("")
+								}else{
+									$("#result").html("新增失败");
+								}
+								tlist();
+							});
+						}else{
+							$("#result").html("请输入分类名");
+							}
+						$("#tname").focus();
+					}
+				function modifyType(modifyId,tids){
+					var modifyDiv = document.getElementById(modifyId);
+					modifyDiv.style.display = modifyDiv.style.display=="none"?"block":"none";
+					if(modifyDiv.style.display == "block"){
+						var ts = document.getElementById(tids);
+						$.post("/blogType", {"t":ts.value},function(data){
+							$("#modifyType").html(data);
 						});
+					}
+				}
+				function tmodify(){
+					if($("#modifytname").val() != ""){
+						$.get("/blogType", {"t":$("#modifytid").val(),"info":$("#modifyinfo").val(),"tname":$("#modifytname").val(),"opera":"modify"},function(data){
+								if(data){
+									$("#result").html("修改成功");
+								}else{
+									$("#result").html("修改失败");
+								}
+								showOrHideDiv("modifyType");
+								tlist();
+							});
+						}else{
+							$("#result").html("请输入分类名");
+							}
+						$("#tname").focus();
+					}
+				function deleteType(){
+					$.get("/blogType", {"t":$("#tids").val()},function(data){
+						if(data){
+							$("#result").html("删除成功");
+							document.getElementById("addType").style.display="none";
+							document.getElementById("modifyType").style.display="none";
+						}else{
+							$("#result").html("删除失败");
+						}
+						tlist();
+					});
 					}
 				tlist();
 			</script>			
-			<!-- ajax 动态增加 -->
-			<div id="addType" style="display: none;">
-				<input type="hidden" id="opera" value="add" > 
-				分类名:<input type="text" id="tname" value="" > <br>
-				简介:<input type="text" id="info" value="" > <br>
-				<input type="button" onclick="tadd()" value="保存"> 
-			</div>
+			
 	</div>
 	<jsp:include page="/admin/bottom.jsp"></jsp:include>
 </div>
+
 </body>
 </html>
