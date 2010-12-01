@@ -45,7 +45,7 @@
 	</div>
 	<div class="tools">
 		<span class="tools-left">
-			<input type="button" value="删除">
+			<input type="button" onclick="alert('删除中....')" value="删除">
 		</span>
 		<span class="tools-right">
 			共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
@@ -71,7 +71,7 @@
 				for(int i=0;i<friendsList.size();i++){
 				Friends friends=friendsList.get(i); %>
 			<tr>
-				<td class="vito-content-check"><input type="checkbox"/></td>
+				<td class="vito-content-check"><input type="checkbox" value="<%=friends.getId() %>"/></td>
 				<td class="vito-title"> <a href="/friends?op=modify&id=<%=friends.getId() %>">[修改]</a> <%=friends.getName() %> </td>
 				<td><a href="<%=friends.getUrl() %>" title='查看  "<%=friends.getName() %>"' target="_bank"><%=friends.getUrl() %></a> </td>
 				<td><%=friends.getDescription()%></td>

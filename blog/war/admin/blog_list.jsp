@@ -4,7 +4,12 @@
 <%@page import="com.google.choujone.blog.dao.BlogDao"%>
 <%@page import="com.google.choujone.blog.common.Pages"%>
 <%@page import="java.util.List"%>
-<%@page import="com.google.choujone.blog.entity.Blog"%><html>
+<%@page import="com.google.choujone.blog.entity.Blog"%>
+<%@page import="com.google.choujone.blog.dao.BlogTypeDao"%>
+<%@page import="com.google.choujone.blog.entity.BlogType"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>文章列表</title>
@@ -20,6 +25,14 @@
 	int p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
 	Pages pages=new Pages();
 	pages.setPageNo(p);
+	//查询所有的分类
+	BlogTypeDao btd=new BlogTypeDao();
+	List<BlogType> blogTypeList = new ArrayList<BlogType>();
+	blogTypeList=btd.getBlogTypeList();
+	Map<Long,String> typeMaps=new HashMap<Long,String>();
+	for(int i=0;i<blogTypeList.size();i++){
+		typeMaps.put(blogTypeList.get(i).getId(),blogTypeList.get(i).getName());
+	}
 	List<Blog> blogs = blogDao.getBlogsByPage(pages);
 	%>
 	<div class="main-title">
@@ -46,6 +59,7 @@
 				<th class="vito-content-check"><input type="checkbox"/></th>
 				<th width="300px">标题</th>
 				<th width="300px">内容</th>
+				<th width="100px">分类</th>
 				<th>回复/查看</th>
 				<th>发表时间 </th>
 				<th>最后修改时间</th>
@@ -59,6 +73,7 @@
 				<td class="vito-content-check"><input type="checkbox"/></td>
 				<td class="vito-title">&nbsp;&nbsp;<a href="/blog?id=<%=blog.getId() %>&op=modify" title='修改   "<%=blog.getTitle() %>"'>[ 编辑 ]</a> &nbsp;  <a href="/blog_detail.jsp?id=<%=blog.getId() %>" target="_blank" title='查看  "<%=blog.getTitle() %>"'><%=blog.getTitle() %></a></td>
 				<td><%=blog.getContent(10).getValue() %></td>
+				<td><%=typeMaps.get(blog.getTid())%></td>
 				<td><%=blog.getReplyCount() %>/<%=blog.getCount() %></td>
 				<td><%=blog.getSdTime() %> </td>
 				<td><%=blog.getMoTime() %> </td>
