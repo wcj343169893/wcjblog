@@ -6,6 +6,8 @@
 <%@page import="com.google.choujone.blog.dao.UserDao"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/css/3d.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/js/3d.js"></script>
 <%
 	UserDao userDao=new UserDao();
 	User blog_user= userDao.getUserDetail();
@@ -16,7 +18,32 @@
 <div class="main">
 	<jsp:include page="/admin/menu.jsp"></jsp:include>	
 		<div class="vito-middle">
-			<div align="center" style="margin-top: 200px;"><h1>这里放几个特效</h1></div>
+			<div id="screen">
+				<div id="command">
+					<br>
+					可以选择下面的方块来选择图片
+					<div id="bar"></div>
+				</div>
+				<div id="urlInfo"></div>
+			</div>
+			<script type="text/javascript">
+/* ==== start script ==== */
+setTimeout(function() {
+	m3D.init(
+		[ 
+			{ src: 'duck.jpg', url: 'http://yooyoor.appspot.com/blog_initBlogInfo.action?article.articleId=16', title: '点击进入', color: '#fff' },
+			{ src: 'juan.jpg' },
+			{ src: 'me.jpg' },
+			{ src: 'metoo.jpg' },
+			
+			{ src: 'mumengmei.jpg' },
+			{ src: 'qinqin.gif' },
+			{ src: 'tiantian.jpg' },
+			{ src: 'xiaoyan.jpg' }
+		]
+	);
+}, 500);
+</script>
 		</div>
 	<jsp:include page="/admin/bottom.jsp"></jsp:include>
 </div>
