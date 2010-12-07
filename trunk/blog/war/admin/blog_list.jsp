@@ -12,6 +12,7 @@
 <%@page import="java.util.ArrayList"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="/js/jquery.js"></script>
 <title>文章列表</title>
 </head>
 <body>
@@ -40,7 +41,7 @@
 	</div>
 	<div class="tools">
 		<span class="tools-left">
-			<input type="button" value="删除">
+			<input type="button" value="删除" onclick="deletes('/blog')">
 		</span>
 		<span class="tools-right">
 			共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
@@ -56,7 +57,7 @@
 	<div class="vito-content">	
 		<table cellpadding="0" cellspacing="0">
 			<tr>
-				<th class="vito-content-check"><input type="checkbox"/></th>
+				<th class="vito-content-check"><input type="checkbox" id="input_check_all" onclick="allCheckFlag(this)"/></th>
 				<th width="300px">标题</th>
 				<th width="300px">内容</th>
 				<th width="100px">分类</th>
@@ -70,7 +71,7 @@
 				for(int i=0;i<blogs.size();i++){
 				Blog blog=blogs.get(i); %>
 			<tr>
-				<td class="vito-content-check"><input type="checkbox"/></td>
+				<td class="vito-content-check"><input type="checkbox" id="rid_<%=blog.getId() %>" class="input_check_single" onclick="singleDeleteFlag(this)" name="deleteFlag" value="<%=blog.getId() %>"/></td>
 				<td class="vito-title">&nbsp;&nbsp;<a href="/blog?id=<%=blog.getId() %>&op=modify" title='修改   "<%=blog.getTitle() %>"'>[ 编辑 ]</a> &nbsp;  <a href="/blog_detail.jsp?id=<%=blog.getId() %>" target="_blank" title='查看  "<%=blog.getTitle() %>"'><%=blog.getTitle() %></a></td>
 				<td><%=blog.getContent(10).getValue() %></td>
 				<td><%=typeMaps.get(blog.getTid())%></td>
@@ -78,7 +79,15 @@
 				<td><%=blog.getSdTime() %> </td>
 				<td><%=blog.getMoTime() %> </td>
 				<td><%=blog.getIsVisible() == 0 ? "发布" : "隐藏" %></td>
-				<td><a href="/blog?id=<%=blog.getId() %>&op=delete">删除</a></td>
+				<td>
+				<% 
+					if(blog.getIsVisible() == 0){
+				%>
+					<a href="/blog?id=<%=blog.getId() %>&op=delete&isVisible=1">隐藏</a>
+				<%}else{ %>
+					<a href="/blog?id=<%=blog.getId() %>&op=delete&isVisible=0">发布</a>
+				<%} %>
+				</td>
 			</tr>
 			<%}} %>
 		</table>

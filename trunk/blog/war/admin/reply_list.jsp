@@ -10,6 +10,7 @@
 <%@page import="com.google.choujone.blog.dao.ReplyDao"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="/js/jquery.js"></script>
 <title>评论列表</title>
 </head>
 <body>
@@ -31,7 +32,7 @@
 	</div>
 	<div class="tools">
 		<span class="tools-left">
-			<input type="button" value="删除">
+			<input type="button" value="删除" onclick="deletes('/reply')">
 		</span>
 		<span class="tools-search">
 			<input type="text" name="name"><input type="button" value="查询">
@@ -49,7 +50,7 @@
 	<div class="vito-content">	
 		<table cellpadding="0" cellspacing="0">
 			<tr>
-				<th class="vito-content-check"><input type="checkbox"/></th>
+				<th class="vito-content-check"><input type="checkbox" id="input_check_all" onclick="allCheckFlag(this)"/></th>
 				<th>编号</th>
 				<th width="200px;">文章标题</th>
 				<th>评论者</th>
@@ -62,8 +63,8 @@
 				for(int i=0;i<replyList.size();i++){
 				Reply reply=replyList.get(i); %>
 			<tr>
-				<td class="vito-content-check"><input type="checkbox"/></td>
-				<td class="vito-title"><%=reply.getId() %></td>
+				<td class="vito-content-check"><input type="checkbox" id="rid_<%=reply.getId() %>" class="input_check_single" onclick="singleDeleteFlag(this)" name="deleteFlag" value="<%=reply.getId() %>" /></td>
+				<td class="vito-title"><label for="rid_<%=reply.getId() %>"><%=reply.getId() %></label></td>
 				<td class="vito-title">
 				<% if(reply.getBid()>0){
 					Blog b=blogDao.getBlogById(reply.getBid());
