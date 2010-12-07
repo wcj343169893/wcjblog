@@ -57,6 +57,10 @@
 <!-- 左边结束 -->
 <!-- 右边开始 -->
 <div class="right">
+	<div style="font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif; font-size: 14px; color: #ffd247; padding: 0 0 10px 20px;">
+		文章详细
+	</div>
+	<div class="vito-content-detail">
 	<div class="vito-prenext">
 	<%if(preBlog!=null){ %>
 		<span style="float: left; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=preBlog.getId() %>">&laquo; <%=preBlog.getTitle(20) %></a></span>
@@ -129,6 +133,7 @@
 			</div>
 			<%} %>
 		</div>
+		<br>
 		<div class="vito-prenext">
 		共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
 				<%if(p > 1){ %>
@@ -138,8 +143,8 @@
 					<a href="/blog_detail.jsp?p=<%=p + 1 %>&id=<%=blog.getId() %>">下一页</a>&nbsp;&nbsp;
 				<%} %>
 		</div>
-		<%} %>
 	</div>
+		<%} %>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
 			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv')">点击这里 发表评论</a>
@@ -179,8 +184,7 @@
 			◎欢迎参与讨论，请在这里发表您的看法、交流您的观点。
 		</p>
 	</div>
-
-	
+</div>
 </div>
 <!-- 右边结束 -->
 <jsp:include page="footer.jsp"></jsp:include>

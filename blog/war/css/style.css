@@ -2,6 +2,9 @@
 
 body {
 	font-size: 12px;
+	background-image: url("/images/nav_top.jpg");
+	background-repeat: repeat-x;
+	background-color: #F5F5F5;	
 }
 
 IMG {
@@ -22,6 +25,7 @@ a:HOVER {
 	width: 250px;
 	float: left;
 	border: 1px solid #E6E6E6;
+	background-color: #F5F5F5;
 }
 #calendars{
 	text-align: center;
@@ -40,7 +44,7 @@ a:HOVER {
 	color: gray;
 }
 .tdays{
-	background-color: #EDEDED;
+	color: #A3E1F8;
 }
 .top {
 	
@@ -55,8 +59,7 @@ a:HOVER {
 }
 
 .top .top-menu {
-	margin-top: 20px;
-	border: 1px solid #E6E6E6;
+	margin-top: 14px;
 }
 
 .top ul li {
@@ -78,6 +81,7 @@ a:HOVER {
 	width: 680px;
 	float: left;
 	border: 1px solid #E6E6E6;
+	background-color: #F5F5F5;
 }
 
 .footer {
@@ -93,7 +97,8 @@ a:HOVER {
 .list:HOVER {
 	background-color: #A3A3A3;
 }
-
+.vito-content-detail{
+}
 .vito-content {
 	PADDING-RIGHT: 0px;
 	PADDING-LEFT: 0px;
@@ -102,7 +107,9 @@ a:HOVER {
 	PADDING-TOP: 0px;
 	border: 1px solid #E6E6E6;
 }
-
+.vito-content:HOVER{
+	background-color: #F5F5F5;
+}
 .vito-content-title {
 	PADDING-RIGHT: 0px;
 	PADDING-LEFT: 30px;
@@ -114,7 +121,7 @@ a:HOVER {
 	PADDING-TOP: 0px;
 	FONT-FAMILY: 微软雅黑, Arial, Helvetica, sans-serif;
 	LETTER-SPACING: 1px;
-	_background: url(/images/blog/article.gif) no-repeat left;
+	_background: url(/images/article.png) no-repeat left;
 }
 
 .vito-content-title A:link {
@@ -261,6 +268,7 @@ a:HOVER {
 	PADDING-TOP: 10px;
 	HEIGHT: 15px;
 	TEXT-ALIGN: center;
+	background-color: #E3EAFF;
 }
 
 .vito-left-title {
@@ -275,6 +283,7 @@ a:HOVER {
 	HEIGHT: 23px;
 	border: 1px solid #E6E6E6;
 	font-size: 14px;
+	background-color: #F5F5F5;
 }
 
 .vito-left-contentul {
@@ -286,6 +295,7 @@ a:HOVER {
 	LINE-HEIGHT: 23px;
 	PADDING-TOP: 0px;
 	border: 1px solid #E6E6E6;
+	background-color: white;
 }
 
 .vito-right-contentul {
@@ -341,6 +351,9 @@ a:HOVER {
 	margin-top: 10px;
 }
 
+.vito-postcommentlist:HOVER {
+	background-color: #F5F5F5;
+}
 .quote {
 	BORDER-RIGHT: #c1c1c1 1px dotted;
 	PADDING-RIGHT: 10px;
