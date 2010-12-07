@@ -44,16 +44,19 @@ public class BlogDao {
 			} catch (Exception e) {
 				flag = false;
 			}
-		} else if (operation.equals(Operation.delete)) {// 删除
+		} else if (operation.equals(Operation.delete)) {// 隐藏
 			try {
-				Query query = pm.newQuery(Blog.class, " id == " + blog.getId());
-				List<Blog> blogs = (List<Blog>) query.execute();
-				if (blogs.size() > 0) {
-					pm.deletePersistent(blogs.get(0));
-					flag = true;
-				}
+				// Query query = pm.newQuery(Blog.class, " id == " +
+				// blog.getId());
+				// List<Blog> blogs = (List<Blog>) query.execute();
+				// if (blogs.size() > 0) {
+				// pm.deletePersistent(blogs.get(0));
+				// flag = true;
+				// }
 				// pm.deletePersistent(pm.getObjectById(Blog.class,
 				// blog.getId()));
+				Blog b = pm.getObjectById(Blog.class, blog.getId());
+				b.setIsVisible(blog.getIsVisible());
 				flag = true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -99,8 +102,37 @@ public class BlogDao {
 	 * @return
 	 */
 	public Blog getBlogById(Long id) {
+		Blog blog = new Blog();
+		try {
+			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			blog = pm.getObjectById(Blog.class, id);
+		} catch (Exception e) {
+		}
+		return blog;
+	}
+
+	/**
+	 * 根据id删除博客已经评论(真删除)
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteBlog(Long id) {
+		Reply reply = new Reply();
+		reply.setBid(id);
+		boolean flag = false;
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
-		return pm.getObjectById(Blog.class, id);
+		Query query = pm.newQuery(Blog.class, " id == " + id);
+		List<Blog> blogs = (List<Blog>) query.execute();
+		if (blogs.size() > 0) {
+			pm.deletePersistent(blogs.get(0));
+			flag = true;
+		}
+		if (flag) {
+			ReplyDao rd = new ReplyDao();
+			rd.operationReply(Operation.delete, reply);
+		}
+		return flag;
 	}
 
 	/**
@@ -177,10 +209,9 @@ public class BlogDao {
 		try {
 			// String filter = "select count(id) from " + Blog.class.getName()
 			// + " where isVisible==0 ";
-			String filter = " isVisible==0 && name >= " + time
-					+ "%";
-			 Query query = pm.newQuery(Blog.class);
-			 blogs = (List<Blog>) query.execute();
+			String filter = " isVisible==0 && name >= " + time + "%";
+			Query query = pm.newQuery(Blog.class);
+			blogs = (List<Blog>) query.execute();
 			// if (time != null && !"".equals(time.trim())) {
 			// filter += " && sdTime == date";
 			// }

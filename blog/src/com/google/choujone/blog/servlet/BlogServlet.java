@@ -18,15 +18,29 @@ public class BlogServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String operation = req.getParameter("op");// 获取操作
-		String ids = req.getParameter("id");// 博客id
+		String id = req.getParameter("id");// 博客id
+		String ids = req.getParameter("ids");// 博客id数组
+		String isVisible = req.getParameter("isVisible");// 是否显示
 		Blog blog = new Blog();
 		BlogDao blogDao = new BlogDao();
 		if (operation.trim().equals(Operation.delete.toString())) {// 删除
-			blog.setId(Long.valueOf(ids));
-			blogDao.operationBlog(Operation.delete, blog);
+			if (ids != null) {
+				String[] id_str = ids.split(",");
+				for (int i = 0; i < id_str.length; i++) {
+					Long bid = Long.valueOf(id_str[i].trim());
+					if (bid > 0) {
+						blogDao.deleteBlog(bid);// 真删除
+					}
+				}
+			}
+			if (id != null && isVisible != null && Long.valueOf(id.trim()) > 0) {// 隐藏
+				blog.setId(Long.valueOf(id.trim()));
+				blog.setIsVisible(Integer.parseInt(isVisible));
+				blogDao.operationBlog(Operation.delete, blog);
+			}
 			resp.sendRedirect("/admin/blog_list.jsp");
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 加载修改
-			blog = blogDao.getBlogById(Tools.strTolong(ids));
+			blog = blogDao.getBlogById(Tools.strTolong(id));
 			req.setAttribute("blog", blog);
 			req.getRequestDispatcher("/admin/blog_edit.jsp").forward(req, resp);
 		}
@@ -36,12 +50,13 @@ public class BlogServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String operation = req.getParameter("op");// 获取操作
-		String title = req.getParameter("title");//标题
-		String content = req.getParameter("content");//文章信息
-		String tag = req.getParameter("tag");//关键字
-		String ids = req.getParameter("id");//文章id
-		String tid = req.getParameter("tid");//分类id
-		String isVisible=req.getParameter("isVisible") != null ? req.getParameter("isVisible") : "1";//是否发布
+		String title = req.getParameter("title");// 标题
+		String content = req.getParameter("content");// 文章信息
+		String tag = req.getParameter("tag");// 关键字
+		String ids = req.getParameter("id");// 文章id
+		String tid = req.getParameter("tid");// 分类id
+		String isVisible = req.getParameter("isVisible") != null ? req
+				.getParameter("isVisible") : "1";// 是否发布
 		Blog blog = new Blog();
 		BlogDao blogDao = new BlogDao();
 		blog.setTag(tag);
