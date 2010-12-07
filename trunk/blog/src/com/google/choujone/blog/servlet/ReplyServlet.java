@@ -21,15 +21,15 @@ public class ReplyServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String operation = req.getParameter("op") != null ? req
 				.getParameter("op") : "";// 获取操作
-		String ids = req.getParameter("bid");// 博客id
+		String ids = req.getParameter("ids");// 博客id
 		String id = req.getParameter("id") != null ? req.getParameter("id")
 				: "";// 回复
 		String repyMsg = req.getParameter("msg");
 		ReplyDao replyDao = new ReplyDao();
 		Reply reply = new Reply();
 		if (operation.trim().equals(Operation.delete.toString())) {// 删除
-			reply.setId(Long.valueOf(ids));
-			replyDao.operationReply(Operation.delete, reply);
+			//reply.setId(Long.valueOf(ids));
+			replyDao.deleteReply(ids);
 			resp.sendRedirect("/admin/reply_list.jsp");
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 加载修改(页面直接用url请求)
 			reply.setId(Tools.strTolong(id));

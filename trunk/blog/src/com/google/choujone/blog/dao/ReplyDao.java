@@ -8,6 +8,7 @@ import javax.jdo.Query;
 
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
+import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Reply;
 import com.google.choujone.blog.util.PMF;
 import com.google.choujone.blog.util.Tools;
@@ -39,6 +40,23 @@ public class ReplyDao {
 				e.printStackTrace();
 				flag = false;
 			}
+		} else if (operation.equals(Operation.delete)) {// 删除
+			try {
+				Query query = pm.newQuery(Reply.class, " bid == "
+						+ reply.getBid());
+				List<Reply> replys = (List<Reply>) query.execute();
+				if (replys.size() > 0) {
+					for (int i = 0; i < replys.size(); i++) {
+						pm.deletePersistent(replys.get(i));
+					}
+					flag = true;
+				}
+				// pm.deletePersistent(pm.getObjectById(Blog.class,
+				// blog.getId()));
+				flag = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (operation.equals(Operation.modify)) {// 我回复
 			try {
 				Reply r = (Reply) pm.getObjectById(Reply.class, reply.getId());
@@ -47,6 +65,31 @@ public class ReplyDao {
 			} catch (Exception e) {
 				e.printStackTrace();
 				flag = false;
+			}
+		}
+		closePM();
+		return flag;
+	}
+
+	/**根据id编号数组删除回复
+	 * @param ids
+	 * @return
+	 */
+	public boolean deleteReply(String ids) {
+		boolean flag = false;
+		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+		if (ids != null) {
+			String[] id_str = ids.split(",");
+			for (int i = 0; i < id_str.length; i++) {
+				Long id = Long.valueOf(id_str[i]);
+				if (id > 0) {
+					Query query = pm.newQuery(Reply.class, " id == " + id);
+					List<Reply> replys = (List<Reply>) query.execute();
+					if (replys.size() > 0) {
+						pm.deletePersistent(replys.get(0));
+						flag = true;
+					}
+				}
 			}
 		}
 		closePM();
