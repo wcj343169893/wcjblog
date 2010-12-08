@@ -2,9 +2,10 @@
 
 body {
 	font-size: 12px;
-	background-image: url("/images/nav_top.jpg");
+	background-image: url("/images/guitar_top.jpg");
 	background-repeat: repeat-x;
-	background-color: #F5F5F5;
+	background-color: black;
+	color: #565A5B;
 }
 
 IMG {
@@ -24,8 +25,6 @@ a:HOVER {
 	margin-bottom: 10px;
 	width: 250px;
 	float: left;
-	border: 1px solid #E6E6E6;
-	background-color: #F5F5F5;
 }
 
 #calendars {
@@ -79,7 +78,7 @@ a:HOVER {
 .main {
 	width: 980px;
 	margin-left: -490px;
-	padding-left: 50%;
+	padding-left: 40%;
 }
 
 .right {
@@ -87,8 +86,6 @@ a:HOVER {
 	margin: 10px 10px 10px 10px;
 	width: 680px;
 	float: left;
-	border: 1px solid #E6E6E6;
-	background-color: #F5F5F5;
 }
 
 .footer {
@@ -115,11 +112,11 @@ a:HOVER {
 	PADDING-BOTTOM: 0px;
 	MARGIN: 0px;
 	PADDING-TOP: 0px;
-	border: 1px solid #E6E6E6;
+	/*border: 1px dotted #E6E6E6;*/
 }
 
 .vito-content:HOVER {
-	background-color: #F5F5F5;
+	
 }
 
 .vito-content-title {
@@ -273,41 +270,41 @@ a:HOVER {
 }
 
 .vito-prenext {
-	PADDING-RIGHT: 0px;
+	PADDING-RIGHT: 200px;
 	PADDING-LEFT: 0px;
 	PADDING-BOTTOM: 10px;
 	MARGIN: 0px auto;
 	PADDING-TOP: 10px;
 	HEIGHT: 15px;
 	TEXT-ALIGN: center;
-	background-color: #E3EAFF;
 }
 
 .vito-left-title {
 	PADDING-RIGHT: 0px;
 	PADDING-LEFT: 6px;
 	PADDING-BOTTOM: 0px;
-	MARGIN: 10px 10px 10px 5px;
-	WIDTH: 230px;
-	COLOR: #ffd247;
+	margin-top: 10px;
+	COLOR: #51A53D;
 	LINE-HEIGHT: 23px;
 	PADDING-TOP: 0px;
 	HEIGHT: 23px;
 	border: 1px solid #E6E6E6;
 	font-size: 14px;
-	background-color: #F5F5F5;
+	background-image: url("/images/style.png");
+	background-position: 0px 305px;
+	font-weight: bold;
+	COLOR: #51A53D;
 }
 
 .vito-left-contentul {
 	PADDING-RIGHT: 0px;
 	PADDING-LEFT: 6px;
 	PADDING-BOTTOM: 0px;
-	MARGIN: 10px 10px 10px 5px;
-	WIDTH: 230px;
 	LINE-HEIGHT: 23px;
 	PADDING-TOP: 0px;
 	border: 1px solid #E6E6E6;
 	background-color: white;
+	color: black;
 }
 
 .vito-right-contentul {
@@ -360,12 +357,11 @@ a:HOVER {
 	PADDING-LEFT: 20px;
 	PADDING-BOTTOM: 10px;
 	PADDING-TOP: 10px;
-	border: 1px solid #E6E6E6;
 	margin-top: 10px;
 }
 
 .vito-postcommentlist:HOVER {
-	background-color: #F5F5F5;
+	
 }
 
 .quote {
@@ -402,4 +398,16 @@ a:HOVER {
 .vito-ct-id input {
 	margin-bottom: 5px;
 	margin-top: 5px;
+}
+
+.vito-postcomment-title {
+	margin-top: 10px;
+	COLOR: #51A53D;
+	LINE-HEIGHT: 23px;
+	HEIGHT: 23px;
+	border: 1px solid #E6E6E6;
+	font-size: 14px;
+	background-image: url("/images/style.png");
+	background-position: 0px 305px;
+	font-weight: bold;
 }

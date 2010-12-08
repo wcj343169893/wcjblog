@@ -3,7 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@page import="com.google.choujone.blog.entity.User"%>
-<%@page import="com.google.choujone.blog.dao.UserDao"%><html>
+<%@page import="com.google.choujone.blog.dao.UserDao"%>
+<%@page import="java.util.List"%>
+<%@page import="com.google.choujone.blog.util.Config"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
@@ -39,6 +41,18 @@
 					<td class="title">博客访问地址</td>
 					<td>
 						<input type="text" name="url" value="<%=user.getUrl() %>">
+					</td>
+				</tr>
+				<tr>
+					<td class="title">博客风格</td>
+					<td>
+						<%List<String> styleList=Config.style_urls; 
+						%>
+						<select name="styleUrl">
+						<%for(String s :styleList){ %>
+							<option value="<%=s %>" <% if(Config.style_url.equals(s)){out.print("selected");} %>><%=s %></option>
+						<%} %>
+						</select>
 					</td>
 				</tr>
 				<tr>

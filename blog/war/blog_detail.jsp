@@ -143,8 +143,8 @@
 					<a href="/blog_detail.jsp?p=<%=p + 1 %>&id=<%=blog.getId() %>">下一页</a>&nbsp;&nbsp;
 				<%} %>
 		</div>
-	</div>
 		<%} %>
+	</div>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
 			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv')">点击这里 发表评论</a>

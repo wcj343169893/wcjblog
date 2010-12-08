@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.User;
+import com.google.choujone.blog.util.Config;
 
 @SuppressWarnings("serial")
 public class UserServlet extends HttpServlet {
@@ -63,6 +64,10 @@ public class UserServlet extends HttpServlet {
 				.getParameter("brithday") : "";
 		String description = req.getParameter("description") != null ? req
 				.getParameter("description") : "";
+		String styleUrl = req.getParameter("styleUrl");
+		if (styleUrl != null && !"".equals(styleUrl.trim())) {
+			Config.style_url = styleUrl;
+		}
 		UserDao userDao = new UserDao();
 		User user = new User();
 		if (operation.trim().equals(Operation.modify.toString())) {// 修改信息
