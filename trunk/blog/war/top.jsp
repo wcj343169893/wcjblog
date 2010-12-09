@@ -23,7 +23,7 @@
 				<a href="/">主页</a>
 			</li>
 			<li>
-				<a>搜索</a>
+				<a href="/search.jsp">搜索</a>
 			</li>
 			<li>
 				<a href="/leaveMessage.jsp">网站留言</a>
