@@ -104,6 +104,7 @@ public class UserDao {
 					u.setEmail(user.getEmail());
 					u.setNotice(user.getNotice());
 					u.setUrl(user.getUrl());
+					u.setStyle(user.getStyle());
 					u.setDescription(user.getDescription());
 				}
 				flag = true;

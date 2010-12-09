@@ -48,9 +48,9 @@
 					<td>
 						<%List<String> styleList=Config.style_urls; 
 						%>
-						<select name="styleUrl">
+						<select name="style">
 						<%for(String s :styleList){ %>
-							<option value="<%=s %>" <% if(Config.style_url.equals(s)){out.print("selected");} %>><%=s %></option>
+							<option value="<%=s %>" <% if(s.equals(user.getStyle())){out.print("selected");} %>><%=s %></option>
 						<%} %>
 						</select>
 					</td>

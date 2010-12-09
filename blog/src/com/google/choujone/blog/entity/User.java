@@ -38,6 +38,8 @@ public class User implements Serializable {
 	private String address = "";// 地址
 	@Persistent
 	private String description = "";// 自我描述
+	@Persistent
+	private String style;// 博客前台样式
 
 	public Long getId() {
 		return id;
@@ -125,6 +127,18 @@ public class User implements Serializable {
 
 	public void setNotice(String notice) {
 		this.notice = notice;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
