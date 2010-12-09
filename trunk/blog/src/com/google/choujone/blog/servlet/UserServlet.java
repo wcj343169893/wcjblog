@@ -64,10 +64,8 @@ public class UserServlet extends HttpServlet {
 				.getParameter("brithday") : "";
 		String description = req.getParameter("description") != null ? req
 				.getParameter("description") : "";
-		String styleUrl = req.getParameter("styleUrl");
-		if (styleUrl != null && !"".equals(styleUrl.trim())) {
-			Config.style_url = styleUrl;
-		}
+		String style = req.getParameter("style") != null ? req
+				.getParameter("style") : "";
 		UserDao userDao = new UserDao();
 		User user = new User();
 		if (operation.trim().equals(Operation.modify.toString())) {// 修改信息
@@ -81,6 +79,7 @@ public class UserServlet extends HttpServlet {
 			user.setAddress(address);
 			user.setBrithday(brithday);
 			user.setDescription(description);
+			user.setStyle(style);
 			userDao.operationUser(Operation.modify, user);
 			req.setAttribute("user", user);
 			req.getRequestDispatcher("/admin/setting.jsp").forward(req, resp);

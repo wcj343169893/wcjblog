@@ -3,12 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="com.google.choujone.blog.entity.User"%>
 <%@page import="com.google.choujone.blog.util.Config"%><script type="text/javascript" src="/js/common.js"></script>
-<%@page import="com.google.choujone.blog.dao.UserDao"%><link href="<%=Config.style_url %>" type="text/css" rel="stylesheet" />
+<%@page import="com.google.choujone.blog.dao.UserDao"%>
 <script type="text/javascript" src="/js/jquery.js"></script>
 <%
 	UserDao userDao=new UserDao();
 	User blog_user= userDao.getUserDetail();
 %>
+<link href="<%=blog_user.getStyle() %>" type="text/css" rel="stylesheet" />
 <div class="top">
 	<div class="top-title">
 		<a href="/"><%=blog_user.getpTitle()%></a>
