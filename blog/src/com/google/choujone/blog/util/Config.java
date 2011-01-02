@@ -9,5 +9,6 @@ public class Config {
 	static{
 		style_urls.add("/css/style.css");
 		style_urls.add("/css/style_guitar.css");
+		style_urls.add("/css/718375968.css");
 	}
 }
