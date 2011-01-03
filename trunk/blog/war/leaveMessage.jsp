@@ -43,7 +43,7 @@
 <!-- 左边结束 -->
 <!-- 右边开始 -->
 <div class="right">
-	<div style="font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif; font-size: 14px; color: #ffd247; padding: 0 0 10px 20px;">
+	<div class="right-title">
 		留言列表
 	</div>
 	<%
