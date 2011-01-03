@@ -47,6 +47,9 @@ public class ReplyServlet extends HttpServlet {
 				.getParameter("op") : "";// 获取操作
 		String content = req.getParameter("content");// 文章信息
 		String name = req.getParameter("name");// 署名
+		if (name==null || "".equals(name.trim())) {
+			name="匿名";
+		}
 		String id = req.getParameter("id") != null ? req.getParameter("id")
 				: "";// 回复
 		String bid = req.getParameter("bid") != null ? req.getParameter("bid")
@@ -75,7 +78,7 @@ public class ReplyServlet extends HttpServlet {
 				resp.sendRedirect("/leaveMessage.jsp");
 			}
 		} else if (operation.trim().equals(Operation.lists.toString())) {// 评论列表
-			System.out.println("请求一下");
+			System.out.println("请求一下");//功能未完成
 			req.setAttribute("reply", reply);
 		}
 	}

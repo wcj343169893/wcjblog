@@ -17,11 +17,11 @@ a {
 }
 
 a:HOVER {
-	color: #ffd247;
+	
 }
 
 .left {
-	margin-top: 190px;
+	margin-top: 100px;
 	margin-bottom: 10px;
 	width: 250px;
 	float: left;
@@ -54,10 +54,11 @@ a:HOVER {
 
 .top {
 	padding-top: 50px;
+	background-image: url("/images/718375968/46932_w.png");
 }
 
 .top .top-title {
-	margin-top: 20px;
+	margin-top: 100px;
 	margin-left: 50px;
 	padding: 5px 5px 5px 5px;
 	font-size: 16px;
@@ -83,10 +84,28 @@ a:HOVER {
 
 .right {
 	padding: 10px 10px 10px 10px;
-	margin: 200px 10px 10px 10px;
+	margin: 110px 10px 10px 10px;
 	width: 680px;
 	border: 1px solid #E89DBC;
 	float: left;
+	background-color: #FEE7F1;
+}
+
+.right-title {
+	PADDING-LEFT: 10px;
+	PADDING-BOTTOM: 0px;
+	margin-top: -10px;
+	margin-left:-10px;
+	margin-right:-10px;
+	LINE-HEIGHT: 23px;
+	PADDING-TOP: 0px;
+	HEIGHT: 23px;
+	border-bottom: 1px solid #E89DBC;
+	font-size: 14px;
+	background-image: url("/images/718375968/style.png");
+	background-position: 0px 305px;
+	font-weight: bold;
+	COLOR: white;
 }
 
 .footer {
@@ -135,23 +154,19 @@ a:HOVER {
 }
 
 .vito-content-title A:link {
-	COLOR:#EE3592;
-	TEXT-DECORATION: none
+	COLOR: #EE3592;
 }
 
 .vito-content-title A:active {
-	COLOR: #F9E0EB
-	TEXT-DECORATION: none
+	COLOR: #EE3592;
 }
 
 .vito-content-title A:visited {
-	COLOR: #F9E0EB
-	TEXT-DECORATION: none
+	COLOR: #EE3592;
 }
 
 .vito-content-title A:hover {
-	COLOR:#EE3592;
-	TEXT-DECORATION: none
+	COLOR: red;
 }
 
 .vito-content-date {
@@ -255,9 +270,10 @@ a:HOVER {
 	margin: 10px 0 30px 0;
 	padding: 2px 0 0 0;
 	font-size: 12px;
-	color: gray;
+	color: #A5A5A5;
 	height: 20px;
 	text-align: left;
+	height: 20px;
 }
 
 .post-tags {
@@ -265,19 +281,23 @@ a:HOVER {
 	margin: 2px 0 2px 0px;
 	padding: 2px 0 0 0;
 	font-size: 12px;
-	color: gray;
 	height: 20px;
 	text-align: left;
+	color: #A5A5A5;
 }
 
 .vito-prenext {
-	PADDING-RIGHT: 200px;
+	PADDING-RIGHT: 0px;
 	PADDING-LEFT: 0px;
 	PADDING-BOTTOM: 10px;
 	MARGIN: 0px auto;
 	PADDING-TOP: 10px;
 	HEIGHT: 15px;
 	TEXT-ALIGN: center;
+}
+
+.vito-prenext a {
+	color: #EE3592;
 }
 
 .vito-left-title {
@@ -290,7 +310,7 @@ a:HOVER {
 	PADDING-TOP: 0px;
 	HEIGHT: 23px;
 	border: 1px solid #E89DBC;
-	border-bottom:0px;
+	border-bottom: 0px;
 	font-size: 14px;
 	background-image: url("/images/718375968/style.png");
 	background-position: 0px 305px;
@@ -324,7 +344,7 @@ a:HOVER {
 }
 
 .vito-left-contentul ul LI:HOVER {
-	background-color: #EDEDED;
+	background-color: #FBDFEB;
 }
 
 .vito-contentbd {
@@ -367,19 +387,15 @@ a:HOVER {
 }
 
 .quote {
-	BORDER-RIGHT: #c1c1c1 1px dotted;
 	PADDING-RIGHT: 10px;
-	BORDER-TOP: #c1c1c1 1px dotted;
 	PADDING-LEFT: 10px;
 	PADDING-BOTTOM: 10px;
-	BORDER-LEFT: #c1c1c1 1px dotted;
-	COLOR: #ccc;
 	PADDING-TOP: 0px;
-	BORDER-BOTTOM: #c1c1c1 1px dotted;
+	background-color: #F3D8E1;
+	border: 1px dotted #E89DBC;
 }
 
 .quote-title {
-	COLOR: #ffd247;
 	LINE-HEIGHT: 25px;
 }
 
@@ -404,12 +420,14 @@ a:HOVER {
 
 .vito-postcomment-title {
 	margin-top: 10px;
-	COLOR: white;
 	LINE-HEIGHT: 23px;
 	HEIGHT: 23px;
 	border: 1px solid #E89DBC;
 	font-size: 14px;
 	background-image: url("/images/718375968/style.png");
 	background-position: 0px 305px;
-	font-weight: bold;
+}
+
+.vito-postcomment-title a {
+	color: #EE3592;
 }

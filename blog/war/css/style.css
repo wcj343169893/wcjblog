@@ -90,7 +90,12 @@ a:HOVER {
 	border: 1px solid #E6E6E6;
 	background-color: #F5F5F5;
 }
-
+.right-title {
+	font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #ffd247;
+	padding: 0 0 10px 20px;
+}
 .footer {
 	width: 980px;
 	height: 75px;
