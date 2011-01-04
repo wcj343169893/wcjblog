@@ -135,7 +135,7 @@
 						    <blockquote>
 								<div class="quote quote3">
 									<div class="quote-title">
-										choujone 于 <%=reply.getReplyTime() %>回复
+										<%=blog_user.getName()%> 于 <%=reply.getReplyTime() %>回复
 									</div>
 									<%=reply.getReplyMessage() %>
 								</div>
