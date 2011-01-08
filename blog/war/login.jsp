@@ -16,7 +16,7 @@
 %>
 <title><%=blog_user.getpTitle()%>  --  登录</title>
 </head>
-<body>
+<body onload="document.forms.loginform.name.focus()">
 <div class="main">
 <!-- 顶部开始 -->
 <jsp:include page="top.jsp"></jsp:include>
@@ -30,7 +30,7 @@
 		登录后台 <% if(request.getAttribute("error")!= null){out.print(request.getAttribute("error"));} %>
 	</div>
 	<div class="login">
-		<form action="/user" method="post">
+		<form action="/user" method="post" id="loginform" name="loginform">
 			用户名：<input type="text" value="" name="name" size="20" maxlength="20"><br><br>
 			密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password" size="20" maxlength="20"><br><br>
 			<div align="center"><input type="submit" value="登录"></div> 
