@@ -1,27 +1,27 @@
-<!-- Indices written at Tue, 4 Jan 2011 13:14:15 UTC -->
+<!-- Indices written at Sat, 8 Jan 2011 05:35:09 UTC -->
 
 <datastore-indexes>
 
-    <!-- Used 12 times in query history -->
+    <!-- Used 86 times in query history -->
     <datastore-index kind="Blog" ancestor="false" source="auto">
         <property name="isVisible" direction="asc"/>
         <property name="replyCount" direction="desc"/>
         <property name="count" direction="desc"/>
     </datastore-index>
 
-    <!-- Used 12 times in query history -->
+    <!-- Used 86 times in query history -->
     <datastore-index kind="Reply" ancestor="false" source="auto">
         <property name="bid" direction="asc"/>
         <property name="sdTime" direction="desc"/>
     </datastore-index>
 
-    <!-- Used 4 times in query history -->
+    <!-- Used 33 times in query history -->
     <datastore-index kind="Blog" ancestor="false" source="auto">
         <property name="isVisible" direction="asc"/>
         <property name="sdTime" direction="desc"/>
     </datastore-index>
 
-    <!-- Used 2 times in query history -->
+    <!-- Used 50 times in query history -->
     <datastore-index kind="Blog" ancestor="false" source="auto">
         <property name="isVisible" direction="asc"/>
         <property name="__key__" direction="desc"/>

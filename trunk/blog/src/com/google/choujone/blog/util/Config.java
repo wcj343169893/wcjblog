@@ -10,5 +10,7 @@ public class Config {
 		style_urls.add("/css/style.css");
 		style_urls.add("/css/style_guitar.css");
 		style_urls.add("/css/718375968.css");
+		style_urls.add("/css/547847084.css");
+		style_urls.add("/css/584063249.css");
 	}
 }
