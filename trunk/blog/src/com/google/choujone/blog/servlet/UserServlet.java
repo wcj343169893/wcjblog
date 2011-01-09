@@ -2,6 +2,7 @@ package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
 
+import javax.jdo.annotations.Persistent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +67,17 @@ public class UserServlet extends HttpServlet {
 				.getParameter("description") : "";
 		String style = req.getParameter("style") != null ? req
 				.getParameter("style") : "";
+
+		Integer isWeather = Integer.parseInt(req.getParameter("isWeather") != null ? req.getParameter("isWeather") : "0");// 是否显示天气
+		Integer isCalendars= Integer.parseInt(req.getParameter("isCalendars") != null ? req.getParameter("isCalendars") : "0");// 是否显示日历
+		Integer isHotBlog= Integer.parseInt(req.getParameter("isHotBlog") != null ? req.getParameter("isHotBlog") : "0");// 是否显示热门文章
+		
+		Integer isNewReply= Integer.parseInt(req.getParameter("isNewReply") != null ? req.getParameter("isNewReply") : "0");// 是否显示最新评论
+		Integer isLeaveMessage= Integer.parseInt(req.getParameter("isLeaveMessage") != null ? req.getParameter("isLeaveMessage") : "0");// 是否显示留言
+		
+		Integer isStatistics= Integer.parseInt(req.getParameter("isStatistics") != null ? req.getParameter("isStatistics") : "0");// 是否显示统计
+		Integer isFriends= Integer.parseInt(req.getParameter("isFriends") != null ? req.getParameter("isFriends") : "0");// 是否显示友情链接
+		Integer isInfo= Integer.parseInt(req.getParameter("isInfo") != null ? req.getParameter("isInfo") : "0");// 是否显示个人资料
 		UserDao userDao = new UserDao();
 		User user = new User();
 		if (operation.trim().equals(Operation.modify.toString())) {// 修改信息
@@ -80,6 +92,16 @@ public class UserServlet extends HttpServlet {
 			user.setBrithday(brithday);
 			user.setDescription(description);
 			user.setStyle(style);
+			
+			user.setIsWeather(isWeather);
+			user.setIsCalendars(isCalendars);
+			user.setIsHotBlog(isHotBlog);
+			user.setIsNewReply(isNewReply);
+			user.setIsLeaveMessage(isLeaveMessage);
+			user.setIsStatistics(isStatistics);
+			user.setIsFriends(isFriends);
+			user.setIsInfo(isInfo);
+			
 			userDao.operationUser(Operation.modify, user);
 			req.setAttribute("user", user);
 			req.getRequestDispatcher("/admin/setting.jsp").forward(req, resp);

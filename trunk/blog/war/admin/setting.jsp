@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <%@page import="com.google.choujone.blog.entity.User"%>
 <%@page import="com.google.choujone.blog.dao.UserDao"%>
 <%@page import="java.util.List"%>
@@ -23,6 +22,7 @@
 	<div id="container">
 		<form action="/user" method="post">
 			<input type="hidden" name="op" value="modify">
+			<div>博客设置</div>
 			<table cellpadding="0" cellspacing="0" class="setting">
 				<tr>
 					<td class="title">博客标题</td>
@@ -83,6 +83,74 @@
 					<td class="title">自我描述</td>
 					<td>
 						<textarea rows="10" cols="70" name="description"><%=user.getDescription() %></textarea>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<div>博客系统设置</div>
+			<table cellpadding="0" cellspacing="0" class="blogsetting">
+				<tr>
+					<td class="title">
+						天气
+					</td>
+					<td>
+						<input type="radio" name="isWeather" value="0" id="isWeatherYes" <%=user.getIsWeather()==null || user.getIsWeather()==0?"checked":"" %>><label for="isWeatherYes">显示</label>
+						<input type="radio" name="isWeather" value="1" id="isWeatherNo" <%=user.getIsWeather()!=null && user.getIsWeather()==1?"checked":"" %>><label for="isWeatherNo">隐藏</label>
+					</td>
+					<td class="title">
+						日历
+					</td>
+					<td>
+						<input type="radio" name="isCalendars" value="0" id="isCalendarsYes" <%=user.getIsCalendars()==null || user.getIsCalendars()==0?"checked":"" %>><label for="isCalendarsYes">显示</label>
+						<input type="radio" name="isCalendars" value="1" id="isCalendarsNo" <%=user.getIsCalendars()!=null && user.getIsCalendars()==1?"checked":"" %>><label for="isCalendarsNo">隐藏</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="title">
+						热门文章
+					</td>
+					<td>
+						<input type="radio" name="isHotBlog" value="0" id="isHotBlogYes" <%=user.getIsHotBlog()==null || user.getIsHotBlog()==0?"checked":"" %>><label for="isHotBlogYes">显示</label>
+						<input type="radio" name="isHotBlog" value="1" id="isHotBlogNo" <%=user.getIsHotBlog()!=null && user.getIsHotBlog()==1?"checked":"" %>><label for="isHotBlogNo">隐藏</label>
+					</td>
+					<td class="title">
+						最新评论
+					</td>
+					<td>
+						<input type="radio" name="isNewReply" value="0" id="isNewReplyYes" <%=user.getIsNewReply()==null || user.getIsNewReply()==0?"checked":"" %>><label for="isNewReplyYes">显示</label>
+						<input type="radio" name="isNewReply" value="1" id="isNewReplyNo" <%=user.getIsNewReply()!=null && user.getIsNewReply()==1?"checked":"" %>><label for="isNewReplyNo">隐藏</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="title">
+						留言
+					</td>
+					<td>
+						<input type="radio" name="isLeaveMessage" value="0" id="isLeaveMessageYes" <%=user.getIsLeaveMessage()==null || user.getIsLeaveMessage()==0?"checked":"" %>><label for="isLeaveMessageYes">显示</label>
+						<input type="radio" name="isLeaveMessage" value="1" id="isLeaveMessageNo" <%=user.getIsLeaveMessage()!=null && user.getIsLeaveMessage()==1?"checked":"" %>><label for="isLeaveMessageNo">隐藏</label>
+					</td>
+					<td class="title">
+						统计
+					</td>
+					<td>
+						<input type="radio" name="isStatistics" value="0" id="isStatisticsYes" <%=user.getIsStatistics()==null || user.getIsStatistics()==0?"checked":"" %>><label for="isStatisticsYes">显示</label>
+						<input type="radio" name="isStatistics" value="1" id="isStatisticsNo" <%=user.getIsStatistics()!=null && user.getIsStatistics()==1?"checked":"" %>><label for="isStatisticsNo">隐藏</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="title">
+						友情链接
+					</td>
+					<td>
+						<input type="radio" name="isFriends" value="0" id="isFriendsYes" <%=user.getIsFriends()==null || user.getIsFriends()==0?"checked":"" %>><label for="isFriendsYes">显示</label>
+						<input type="radio" name="isFriends" value="1" id="isFriendsNo" <%=user.getIsFriends()!=null && user.getIsFriends()==1?"checked":"" %>><label for="isFriendsNo">隐藏</label>
+					</td>
+					<td class="title">
+						个人资料
+					</td>
+					<td>
+						<input type="radio" name="isInfo" value="0" id="isInfoYes" <%=user.getIsInfo()==null || user.getIsInfo()==0?"checked":"" %>><label for="isInfoYes">显示</label>
+						<input type="radio" name="isInfo" value="1" id="isInfoNo" <%=user.getIsInfo()!=null && user.getIsInfo()==1?"checked":"" %>><label for="isInfoNo">隐藏</label>
 					</td>
 				</tr>
 			</table>

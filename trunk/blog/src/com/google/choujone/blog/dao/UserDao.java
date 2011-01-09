@@ -105,6 +105,16 @@ public class UserDao {
 					u.setNotice(user.getNotice());
 					u.setUrl(user.getUrl());
 					u.setStyle(user.getStyle());
+					
+					u.setIsWeather(user.getIsWeather());
+					u.setIsCalendars(user.getIsCalendars());
+					u.setIsHotBlog(user.getIsHotBlog());
+					u.setIsNewReply(user.getIsNewReply());
+					u.setIsLeaveMessage(user.getIsLeaveMessage());
+					u.setIsStatistics(user.getIsStatistics());
+					u.setIsFriends(user.getIsFriends());
+					u.setIsInfo(user.getIsInfo());
+					
 					u.setDescription(user.getDescription());
 				}
 				flag = true;

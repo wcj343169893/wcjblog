@@ -15,18 +15,50 @@
 <%@page import="com.google.choujone.blog.entity.Friends"%>
 <%@page import="com.google.choujone.blog.util.CalendarUtil"%>
 <%@page import="java.util.Date"%>
-<div class="left">
-		<%	
-			//CacheSingleton cacheSingleton=CacheSingleton.getInstance();
-			//cacheSingleton.init(new HashMap());
-			//Cache cache =	cacheSingleton.getCache();
+
+<%@page import="com.google.choujone.blog.dao.UserDao"%>
+<%@page import="com.google.choujone.blog.entity.User"%>
+<%@page import="java.util.ArrayList"%><div class="left">
+<%
+	UserDao userDao=new UserDao();
+	User blog_user= userDao.getUserDetail();
+	ReplyDao replyDao=new ReplyDao();
+	List<Reply> replyList=new ArrayList<Reply>();
+	List<Blog> blog_hot = new ArrayList<Blog>();
+	BlogDao bd=new BlogDao();
+	//CacheSingleton cacheSingleton=CacheSingleton.getInstance();
+	//cacheSingleton.init(new HashMap());
+	//Cache cache =	cacheSingleton.getCache();
 		%>
+	<%if(blog_user.getIsInfo()==null || blog_user.getIsInfo()==0){ %>
 	<div class="vito-left-title">
-		天气预报	<br>
+		个人资料
 	</div>
-	<div class="vito-left-contentul">
-	<iframe src="http://m.weather.com.cn/m/pn12/weather.htm?id=101040100T " width="230" height="110" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
+	<div class="vito-left-contentul" style="text-align: center;">
+		<ul class="vito-right-contentul">
+			<li><img alt="" src="/images/myself.jpg" title="<%=blog_user.getDescription() %>"></li>
+			<li><%=blog_user.getName() %></li>
+			<li><%=blog_user.getCtitle() %></li>
+		</ul>
 	</div>
+	<%} %>
+	<%if(blog_user.getNotice()!=null &&!"".equals(blog_user.getNotice().trim())){ %>
+		<div class="vito-left-title">
+			博客公告
+		</div>
+		<div class="vito-left-contentul" style="text-align: center;">
+			<%=blog_user.getNotice() %>
+		</div>
+	<%} %>
+	<%if(blog_user.getIsWeather()==null || blog_user.getIsWeather()==0){%>
+		<div class="vito-left-title">
+			天气预报
+		</div>
+		<div class="vito-left-contentul">
+		<iframe src="http://m.weather.com.cn/m/pn12/weather.htm?id=101040100T " width="230" height="110" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
+		</div>
+	<%} %>
+	<%if(blog_user.getIsCalendars()==null || blog_user.getIsCalendars()==0){%>
 	<div class="vito-left-title">
 		日历		
 	</div>
@@ -41,18 +73,14 @@
 			}
 		checkCal('','');
 	</script>
-	
 	</div>
+	<%} %>
+	<%if(blog_user.getIsHotBlog()==null || blog_user.getIsHotBlog()==0){%>	
 	<div class="vito-left-title">
 		热门文章	
 	</div>
 		<%
-		List<Blog> blog_hot = null;
-		BlogDao bd=new BlogDao();
-		if(blog_hot == null){
 			blog_hot=bd.getBlogList_hot(8);
-			//cache.put("newBlogs",blog_new);
-		}
 		%>
 	<div class="vito-left-contentul">
 		<ul class="vito-right-contentul">
@@ -63,12 +91,13 @@
 			<%}} %>
 		</ul>
 	</div>
+		<%} %>
+	<%if(blog_user.getIsNewReply()==null || blog_user.getIsNewReply()==0){%>
 	<div class="vito-left-title">
 		最新评论	
 	</div>
 	<%
-		ReplyDao replyDao=new ReplyDao();
-		List<Reply> replyList=replyDao.getReplyList(8);
+		replyList=replyDao.getReplyList(8);
 	%>
 	<div class="vito-left-contentul">
 		<ul class="vito-right-contentul">
@@ -79,6 +108,8 @@
 			<%}} %>
 		</ul>
 	</div>
+		<%} %>
+	<%if(blog_user.getIsLeaveMessage()==null || blog_user.getIsLeaveMessage()==0){%>
 	<div class="vito-left-title">
 		最新留言	
 	</div>
@@ -92,6 +123,8 @@
 			<%}} %>
 		</ul>
 	</div>
+		<%} %>
+	<%if(blog_user.getIsStatistics()==null || blog_user.getIsStatistics()==0){%>
 	<div class="vito-left-title">
 		站点统计	
 	</div>
@@ -112,6 +145,8 @@
 			</li>
 		</ul>
 	</div>
+		<%} %>
+	<%if(blog_user.getIsFriends()==null || blog_user.getIsFriends()==0){%>
 	<div class="vito-left-title">
 		友情链接
 	</div>
@@ -131,4 +166,5 @@
 			<%} %>
 		</ul>
 	</div>
+	<%} %>
 </div>

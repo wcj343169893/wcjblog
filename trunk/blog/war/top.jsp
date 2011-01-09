@@ -12,10 +12,11 @@
 <link href="<%=blog_user.getStyle() %>" type="text/css" rel="stylesheet" />
 <div class="top">
 	<div class="top-title">
-		<a href="/"><%=blog_user.getpTitle()%></a>
+		<a href="/" title="<%=blog_user.getCtitle() %> "><%=blog_user.getpTitle()%></a>
 		<%if(blog_user.getCtitle()!= null  && !"" .equals(blog_user.getCtitle().trim())){ %> 
-			| <%=blog_user.getCtitle() %>  
 		<%} %>
+		<br/>
+	<a href="<%=blog_user.getUrl() %>"><%=blog_user.getUrl() %></a>
 	</div>
 	<div class="top-menu">
 		<ul>
