@@ -138,7 +138,22 @@ a:HOVER {
 #container {
 	margin: 10px 30px 30px 30px;
 }
-
+#container .blogsetting {
+	width: 100%;
+	border-top:1px solid #E6E6E6;
+	border-left: 1px solid #E6E6E6;
+	border-right: 1px solid #E6E6E6;
+}
+#container .blogsetting .title{
+	text-align: left;
+	padding-left: 20px;
+	width: 200px;
+}
+#container .blogsetting td {
+	padding-top: 20px;
+	padding-bottom:10px;
+	border-bottom: 1px solid #E6E6E6;
+}
 #container .setting {
 	width: 100%;
 	border-top:1px solid #E6E6E6;
@@ -153,6 +168,7 @@ a:HOVER {
 	padding-left: 20px;
 	width: 200px;
 }
+
 
 #container .setting td {
 	padding-top: 20px;

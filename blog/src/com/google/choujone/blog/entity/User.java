@@ -40,6 +40,22 @@ public class User implements Serializable {
 	private String description = "";// 自我描述
 	@Persistent
 	private String style;// 博客前台样式
+	@Persistent
+	private Integer isWeather;// 是否显示天气
+	@Persistent
+	private Integer isCalendars;// 是否显示日历
+	@Persistent
+	private Integer isHotBlog;// 是否显示热门文章
+	@Persistent
+	private Integer isNewReply;// 是否显示最新评论
+	@Persistent
+	private Integer isLeaveMessage;// 是否显示留言
+	@Persistent
+	private Integer isStatistics;// 是否显示统计
+	@Persistent
+	private Integer isFriends;// 是否显示友情链接
+	@Persistent
+	private Integer isInfo;// 是否显示个人资料
 
 	public Long getId() {
 		return id;
@@ -139,6 +155,70 @@ public class User implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Integer getIsWeather() {
+		return isWeather;
+	}
+
+	public void setIsWeather(Integer isWeather) {
+		this.isWeather = isWeather;
+	}
+
+	public Integer getIsCalendars() {
+		return isCalendars;
+	}
+
+	public void setIsCalendars(Integer isCalendars) {
+		this.isCalendars = isCalendars;
+	}
+
+	public Integer getIsHotBlog() {
+		return isHotBlog;
+	}
+
+	public void setIsHotBlog(Integer isHotBlog) {
+		this.isHotBlog = isHotBlog;
+	}
+
+	public Integer getIsNewReply() {
+		return isNewReply;
+	}
+
+	public void setIsNewReply(Integer isNewReply) {
+		this.isNewReply = isNewReply;
+	}
+
+	public Integer getIsLeaveMessage() {
+		return isLeaveMessage;
+	}
+
+	public void setIsLeaveMessage(Integer isLeaveMessage) {
+		this.isLeaveMessage = isLeaveMessage;
+	}
+
+	public Integer getIsStatistics() {
+		return isStatistics;
+	}
+
+	public void setIsStatistics(Integer isStatistics) {
+		this.isStatistics = isStatistics;
+	}
+
+	public Integer getIsFriends() {
+		return isFriends;
+	}
+
+	public void setIsFriends(Integer isFriends) {
+		this.isFriends = isFriends;
+	}
+
+	public Integer getIsInfo() {
+		return isInfo;
+	}
+
+	public void setIsInfo(Integer isInfo) {
+		this.isInfo = isInfo;
 	}
 
 }
