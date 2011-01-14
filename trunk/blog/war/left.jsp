@@ -18,7 +18,9 @@
 
 <%@page import="com.google.choujone.blog.dao.UserDao"%>
 <%@page import="com.google.choujone.blog.entity.User"%>
-<%@page import="java.util.ArrayList"%><div class="left">
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.google.choujone.blog.dao.BlogTypeDao"%>
+<%@page import="com.google.choujone.blog.entity.BlogType"%><div class="left">
 <%
 	UserDao userDao=new UserDao();
 	User blog_user= userDao.getUserDetail();
@@ -73,6 +75,36 @@
 			}
 		checkCal('','');
 	</script>
+	</div>
+	<%} %>
+	<% if(blog_user.getIsType()==null || blog_user.getIsType()==0){ %>
+	<div class="vito-left-title">
+		文章分类
+	</div>
+	<div class="vito-left-contentul">
+		<%
+			BlogTypeDao btd=new BlogTypeDao();
+			List<BlogType> btList=	btd.getBlogTypeList();
+		%>
+		<ul class="vito-right-contentul">
+			<li title="全部文章">全部文章(<%=bd.getCount(null) %>)</li>
+			<%for(BlogType bt : btList){ %>
+			<li title="<%=bt.getInfo() %>"><a href="/?tid=<%=bt.getId() %>"><%=bt.getName()%>(<%=bd.getCount(bt.getId()) %>)</a></li>
+			<%} %>
+		</ul>
+	</div>
+	<%} %>
+	<% if(blog_user.getIsTags()==null || blog_user.getIsTags()==0){ %>
+	<div class="vito-left-title">
+		TAGS
+	</div>
+	<div class="vito-left-contentul">
+		<div class="tags">
+			<%Map<String, Integer> tagsMap =bd.getTags();
+			for(String s : tagsMap.keySet()){ %>
+			<a href="/" style="font-size: <%=tagsMap.get(s)+12 %>px"><%=s %>(<%=tagsMap.get(s) %>)</a>
+			<%} %>
+		</div>
 	</div>
 	<%} %>
 	<%if(blog_user.getIsHotBlog()==null || blog_user.getIsHotBlog()==0){%>	

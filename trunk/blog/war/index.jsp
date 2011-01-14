@@ -65,18 +65,19 @@
 <%
 	BlogDao blogDao = new BlogDao();
 	int p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
+	Long tid=request.getParameter("tid")!= null ? Long.valueOf(request.getParameter("tid").toString()) : null;
 	Pages pages=new Pages();
 	pages.setPageNo(p);
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
-	List<Blog> blogs = blogDao.getBlogListByPage(pages);
+	List<Blog> blogs = blogDao.getBlogListByPage(pages,tid);
 %>
 <div class="vito-prenext">
 	共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
 	<%if(p > 1){ %>
-		<a href="/index.jsp?p=<%=p-1 %>">上一页</a>&nbsp;&nbsp;
+		<a href="/index.jsp?p=<%=p-1 %>&tid=<%=tid %>">上一页</a>&nbsp;&nbsp;
 	<%} %>
 	<%if(p < pages.getPageTotal()){ %>
-		<a href="/index.jsp?p=<%=p + 1 %>">下一页</a>&nbsp;&nbsp;
+		<a href="/index.jsp?p=<%=p + 1 %>&tid=<%=tid %>">下一页</a>&nbsp;&nbsp;
 	<%} %>
 </div>
 <%

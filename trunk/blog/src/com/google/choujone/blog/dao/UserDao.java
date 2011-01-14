@@ -114,6 +114,8 @@ public class UserDao {
 					u.setIsStatistics(user.getIsStatistics());
 					u.setIsFriends(user.getIsFriends());
 					u.setIsInfo(user.getIsInfo());
+					u.setIsTags(user.getIsTags());
+					u.setIsType(user.getIsType());
 					
 					u.setDescription(user.getDescription());
 				}

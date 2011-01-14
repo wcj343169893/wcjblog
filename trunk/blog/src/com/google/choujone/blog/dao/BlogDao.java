@@ -1,14 +1,13 @@
 package com.google.choujone.blog.dao;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.jdo.Extent;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
@@ -176,17 +175,24 @@ public class BlogDao {
 	 * @param pages
 	 * @return
 	 */
-	public List<Blog> getBlogListByPage(Pages pages) {
+	public List<Blog> getBlogListByPage(Pages pages, Long tid) {
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 		List<Blog> blogs = null;
 		try {
+			String filter = "select count(id) from " + Blog.class.getName()
+					+ " where isVisible==0 ";
+			if (tid != null && tid > 0) {
+				filter += "&& tid == " + tid;
+			}
 			// 查询总条数
-			Query q = pm.newQuery("select count(id) from "
-					+ Blog.class.getName() + " where isVisible==0 ");
+			Query q = pm.newQuery(filter);
 			Object obj = q.execute();
 			pages.setRecTotal(Integer.parseInt(obj.toString()));
-
-			Query query = pm.newQuery(Blog.class, " isVisible==0");
+			filter = " isVisible==0 ";
+			if (tid != null && tid > 0) {
+				filter += "&& tid == " + tid;
+			}
+			Query query = pm.newQuery(Blog.class, filter);
 			query.setOrdering("sdTime desc");
 			query.setRange(pages.getFirstRec(), pages.getPageNo()
 					* pages.getPageSize());
@@ -372,6 +378,77 @@ public class BlogDao {
 		}
 		closePM();
 		return counts;
+	}
+
+	/**
+	 * 根据博客类型查询博客数量
+	 * 
+	 * @param tid
+	 *            博客类型编号
+	 * @return
+	 */
+	public Integer getCount(Long tid) {
+		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+		Query q = null;
+		String filter = " select count(id) from " + Blog.class.getName();
+		if (tid != null && tid > 0) {
+			filter += " where isVisible==0  && tid == " + tid;
+		}
+		q = pm.newQuery(filter);
+		Object obj = q.execute();
+		return Integer.parseInt(obj.toString());
+	}
+
+	/**
+	 * 得到所有的tag，以及它包含的文章数目
+	 * 
+	 * @return
+	 */
+	public Map<String, Integer> getTags() {
+		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+		Map<String, Integer> tagsMap = new HashMap<String, Integer>();
+		Query q = null;
+		String filter = "select tag from " + Blog.class.getName()
+				+ " where isVisible==0";
+		q = pm.newQuery(filter);
+		List<String> tags = (List<String>) q.execute();
+		if (tags != null) {
+			for (int i = 0; i < tags.size(); i++) {
+				String[] tag = tags.get(i).split(" ");
+				for (int j = 0; j < tag.length; j++) {
+					Integer size = 1;
+					if (tagsMap.containsKey(tag[j])) {
+						size = tagsMap.get(tag[j]) + 1;
+						tagsMap.remove(tag[j]);
+					}
+					tagsMap.put(tag[j], size);
+				}
+			}
+		}
+		// 对map排序 排了 但是无用
+		List<Map.Entry<String, Integer>> infoIds = new ArrayList<Map.Entry<String, Integer>>(
+				tagsMap.entrySet());
+		// 排序前
+		// for (int i = 0; i < infoIds.size(); i++) {
+		// String id = infoIds.get(i).toString();
+		// System.out.println(id);
+		// }
+		// 排序
+		Collections.sort(infoIds, new Comparator<Map.Entry<String, Integer>>() {
+			public int compare(Map.Entry<String, Integer> o1,
+					Map.Entry<String, Integer> o2) {
+				return (o2.getValue() - o1.getValue());
+			}
+		});
+		// System.out.println("排序后");
+		// 排序后
+		tagsMap.clear();
+		for (int i = 0; i < infoIds.size(); i++) {
+			// String id = infoIds.get(i).toString();
+			tagsMap.put(infoIds.get(i).getKey(), infoIds.get(i).getValue());
+			// System.out.println(id);
+		}
+		return tagsMap;
 	}
 
 	/**

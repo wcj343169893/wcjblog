@@ -78,6 +78,8 @@ public class UserServlet extends HttpServlet {
 		Integer isStatistics= Integer.parseInt(req.getParameter("isStatistics") != null ? req.getParameter("isStatistics") : "0");// 是否显示统计
 		Integer isFriends= Integer.parseInt(req.getParameter("isFriends") != null ? req.getParameter("isFriends") : "0");// 是否显示友情链接
 		Integer isInfo= Integer.parseInt(req.getParameter("isInfo") != null ? req.getParameter("isInfo") : "0");// 是否显示个人资料
+		Integer isTags= Integer.parseInt(req.getParameter("isTags") != null ? req.getParameter("isTags") : "0");// 是否显示tags
+		Integer isType= Integer.parseInt(req.getParameter("isType") != null ? req.getParameter("isType") : "0");// 是否显示文章类型
 		UserDao userDao = new UserDao();
 		User user = new User();
 		if (operation.trim().equals(Operation.modify.toString())) {// 修改信息
@@ -101,6 +103,8 @@ public class UserServlet extends HttpServlet {
 			user.setIsStatistics(isStatistics);
 			user.setIsFriends(isFriends);
 			user.setIsInfo(isInfo);
+			user.setIsTags(isTags);
+			user.setIsType(isType);
 			
 			userDao.operationUser(Operation.modify, user);
 			req.setAttribute("user", user);

@@ -441,3 +441,14 @@ a:HOVER {
 .vito-postcomment-title a {
 	color: #686868;
 }
+.tags a{
+	display: inline-block;
+	font-family: 宋体;
+	font-size: 12px;
+	line-height: 24px;
+	margin-left: 5px;
+	text-decoration: none;
+	white-space: nowrap;
+	width: auto;
+	word-break: normal;
+}
