@@ -153,6 +153,22 @@
 						<input type="radio" name="isInfo" value="1" id="isInfoNo" <%=user.getIsInfo()!=null && user.getIsInfo()==1?"checked":"" %>><label for="isInfoNo">隐藏</label>
 					</td>
 				</tr>
+				<tr>
+					<td class="title">
+						TAGS
+					</td>
+					<td>
+						<input type="radio" name="isTags" value="0" id="isTagsYes" <%=user.getIsTags()==null || user.getIsTags()==0?"checked":"" %>><label for="isTagsYes">显示</label>
+						<input type="radio" name="isTags" value="1" id="isTagsNo" <%=user.getIsTags()!=null && user.getIsTags()==1?"checked":"" %>><label for="isTagsNo">隐藏</label>
+					</td>
+					<td class="title">
+						文章分类
+					</td>
+					<td>
+						<input type="radio" name="isType" value="0" id="isTypeYes" <%=user.getIsType()==null || user.getIsType()==0?"checked":"" %>><label for="isTypeYes">显示</label>
+						<input type="radio" name="isType" value="1" id="isTypeNo" <%=user.getIsType()!=null && user.getIsType()==1?"checked":"" %>><label for="isTypeNo">隐藏</label>
+					</td>
+				</tr>
 			</table>
 			<br>
 			<table>

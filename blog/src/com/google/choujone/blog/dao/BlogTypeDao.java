@@ -8,7 +8,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import com.google.choujone.blog.common.Operation;
-import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.BlogType;
 import com.google.choujone.blog.util.PMF;
 

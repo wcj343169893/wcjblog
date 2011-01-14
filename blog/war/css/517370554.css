@@ -2,9 +2,10 @@
 
 body {
 	font-size: 12px;
-	background-image: url("/images/nav_top.jpg");
+	background-image: url("/images/517370554/59699_top.jpg");
 	background-repeat: repeat-x;
-	background-color: #F5F5F5;
+	background-color:#000000;
+	color: black;
 }
 
 IMG {
@@ -16,16 +17,14 @@ a {
 }
 
 a:HOVER {
-	color: #ffd247;
+	
 }
 
 .left {
-	margin-top: 10px;
+	margin-top: 50px;
 	margin-bottom: 10px;
 	width: 250px;
 	float: left;
-	border: 1px solid #E6E6E6;
-	background-color: #F5F5F5;
 }
 
 #calendars {
@@ -54,19 +53,24 @@ a:HOVER {
 }
 
 .top {
-	
+	padding-top: 50px;
+	background-image: url("/images/517370554/59703_w.png");
+	background-position: 10px;
 }
 
 .top .top-title {
-	margin-top: 20px;
-	margin-left: 50px;
+	margin-top: 100px;
+	margin-left: 20px;
 	padding: 5px 5px 5px 5px;
 	font-size: 16px;
 	font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif;
 }
 
 .top .top-menu {
+	margin-left: -20px;
 	margin-top: 14px;
+	width: 350px;
+	font-weight: bold;
 }
 
 .top ul li {
@@ -78,25 +82,38 @@ a:HOVER {
 
 .main {
 	width: 980px;
-	margin-left: -490px;
-	padding-left: 50%;
+	margin-left: 30px;
+	
 }
 
 .right {
 	padding: 10px 10px 10px 10px;
-	margin: 10px 10px 10px 10px;
+	margin: 60px 10px 10px 10px;
 	width: 680px;
+	border: 1px solid #E89DBC;
 	float: left;
-	border: 1px solid #E6E6E6;
-	background-color: #F5F5F5;
+	background-color: #FEE7F1;
 }
+
 .right-title {
-	font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif;
+	PADDING-LEFT: 10px;
+	PADDING-BOTTOM: 0px;
+	margin-top: -10px;
+	margin-left:-10px;
+	margin-right:-10px;
+	LINE-HEIGHT: 23px;
+	PADDING-TOP: 0px;
+	HEIGHT: 23px;
+	border-bottom: 1px solid #E89DBC;
 	font-size: 14px;
-	color: #ffd247;
-	padding: 0 0 10px 20px;
+	background-image: url("/images/517370554/style.png");
+	background-position: 0px 305px;
+	font-weight: bold;
+	COLOR: white;
 }
+
 .footer {
+	color:#999999;
 	width: 980px;
 	height: 75px;
 	float: left;
@@ -120,11 +137,11 @@ a:HOVER {
 	PADDING-BOTTOM: 0px;
 	MARGIN: 0px;
 	PADDING-TOP: 0px;
-	border: 1px solid #E6E6E6;
+	border: 1px dotted #E89DBC;
 }
 
 .vito-content:HOVER {
-	background-color: #F5F5F5;
+	
 }
 
 .vito-content-title {
@@ -134,7 +151,7 @@ a:HOVER {
 	BACKGROUND: url(/images/article.png) no-repeat left center;
 	PADDING-BOTTOM: 0px;
 	MARGIN: 10px 0px 0px 20px;
-	COLOR: #ffd247;
+	COLOR: #EE3592;
 	PADDING-TOP: 0px;
 	FONT-FAMILY: 微软雅黑, Arial, Helvetica, sans-serif;
 	LETTER-SPACING: 1px;
@@ -142,23 +159,19 @@ a:HOVER {
 }
 
 .vito-content-title A:link {
-	COLOR: #ffd247;
-	TEXT-DECORATION: none
+	COLOR: #EE3592;
 }
 
 .vito-content-title A:active {
-	COLOR: #ffd247;
-	TEXT-DECORATION: none
+	COLOR: #EE3592;
 }
 
 .vito-content-title A:visited {
-	COLOR: #ffd247;
-	TEXT-DECORATION: none
+	COLOR: #EE3592;
 }
 
 .vito-content-title A:hover {
-	COLOR: #ffd247;
-	TEXT-DECORATION: none
+	COLOR: red;
 }
 
 .vito-content-date {
@@ -262,9 +275,10 @@ a:HOVER {
 	margin: 10px 0 30px 0;
 	padding: 2px 0 0 0;
 	font-size: 12px;
-	color: gray;
+	color: #A5A5A5;
 	height: 20px;
 	text-align: left;
+	height: 20px;
 }
 
 .post-tags {
@@ -272,9 +286,9 @@ a:HOVER {
 	margin: 2px 0 2px 0px;
 	padding: 2px 0 0 0;
 	font-size: 12px;
-	color: gray;
 	height: 20px;
 	text-align: left;
+	color: #A5A5A5;
 }
 
 .vito-prenext {
@@ -285,34 +299,39 @@ a:HOVER {
 	PADDING-TOP: 10px;
 	HEIGHT: 15px;
 	TEXT-ALIGN: center;
-	background-color: #E3EAFF;
+}
+
+.vito-prenext a {
+	color: #EE3592;
 }
 
 .vito-left-title {
 	PADDING-RIGHT: 0px;
 	PADDING-LEFT: 6px;
 	PADDING-BOTTOM: 0px;
-	MARGIN: 10px 10px 10px 5px;
-	WIDTH: 230px;
-	COLOR: #ffd247;
+	margin-top: 10px;
+	COLOR: #51A53D;
 	LINE-HEIGHT: 23px;
 	PADDING-TOP: 0px;
 	HEIGHT: 23px;
-	border: 1px solid #E6E6E6;
+	border: 1px solid #E89DBC;
+	border-bottom: 0px;
 	font-size: 14px;
-	background-color: #F5F5F5;
+	background-image: url("/images/517370554/style.png");
+	background-position: 0px 305px;
+	font-weight: bold;
+	COLOR: white;
 }
 
 .vito-left-contentul {
 	PADDING-RIGHT: 0px;
 	PADDING-LEFT: 6px;
 	PADDING-BOTTOM: 0px;
-	MARGIN: 10px 10px 10px 5px;
-	WIDTH: 230px;
 	LINE-HEIGHT: 23px;
 	PADDING-TOP: 0px;
-	border: 1px solid #E6E6E6;
+	border: 1px solid #E89DBC;
 	background-color: white;
+	color: black;
 }
 
 .vito-right-contentul {
@@ -330,7 +349,7 @@ a:HOVER {
 }
 
 .vito-left-contentul ul LI:HOVER {
-	background-color: #EDEDED;
+	background-color: #FBDFEB;
 }
 
 .vito-contentbd {
@@ -349,7 +368,7 @@ a:HOVER {
 }
 
 .vito-contentbd-input {
-	border: 1px solid #E6E6E6;
+	border: 1px solid #E89DBC;
 	PADDING-RIGHT: 0px;
 	PADDING-LEFT: 5px;
 	PADDING-BOTTOM: 0px;
@@ -365,32 +384,28 @@ a:HOVER {
 	PADDING-LEFT: 20px;
 	PADDING-BOTTOM: 10px;
 	PADDING-TOP: 10px;
-	border: 1px solid #E6E6E6;
 	margin-top: 10px;
 }
 
 .vito-postcommentlist:HOVER {
-	background-color: #F5F5F5;
+	
 }
 
 .quote {
-	BORDER-RIGHT: #c1c1c1 1px dotted;
 	PADDING-RIGHT: 10px;
-	BORDER-TOP: #c1c1c1 1px dotted;
 	PADDING-LEFT: 10px;
 	PADDING-BOTTOM: 10px;
-	BORDER-LEFT: #c1c1c1 1px dotted;
-	COLOR: #ccc;
 	PADDING-TOP: 0px;
-	BORDER-BOTTOM: #c1c1c1 1px dotted;
+	background-color: #F3D8E1;
+	border: 1px dotted #E89DBC;
 }
 
 .quote-title {
-	COLOR: #ffd247;
 	LINE-HEIGHT: 25px;
 }
 
 .login {
+	margin-top:30px;
 	width: 220px;
 	margin-left: 100px;
 }
@@ -407,6 +422,20 @@ a:HOVER {
 .vito-ct-id input {
 	margin-bottom: 5px;
 	margin-top: 5px;
+}
+
+.vito-postcomment-title {
+	margin-top: 10px;
+	LINE-HEIGHT: 23px;
+	HEIGHT: 23px;
+	border: 1px solid #E89DBC;
+	font-size: 14px;
+	background-image: url("/images/517370554/style.png");
+	background-position: 0px 305px;
+}
+
+.vito-postcomment-title a {
+	color: #EE3592;
 }
 .tags a{
 	display: inline-block;

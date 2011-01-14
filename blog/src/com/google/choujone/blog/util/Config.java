@@ -12,5 +12,6 @@ public class Config {
 		style_urls.add("/css/718375968.css");
 		style_urls.add("/css/547847084.css");
 		style_urls.add("/css/584063249.css");
+		style_urls.add("/css/517370554.css");
 	}
 }

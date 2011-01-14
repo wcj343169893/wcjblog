@@ -56,6 +56,10 @@ public class User implements Serializable {
 	private Integer isFriends;// 是否显示友情链接
 	@Persistent
 	private Integer isInfo;// 是否显示个人资料
+	@Persistent
+	private Integer isTags;// 是否显示tags
+	@Persistent
+	private Integer isType;// 是否显示文章类型
 
 	public Long getId() {
 		return id;
@@ -219,6 +223,22 @@ public class User implements Serializable {
 
 	public void setIsInfo(Integer isInfo) {
 		this.isInfo = isInfo;
+	}
+
+	public Integer getIsTags() {
+		return isTags;
+	}
+
+	public void setIsTags(Integer isTags) {
+		this.isTags = isTags;
+	}
+
+	public Integer getIsType() {
+		return isType;
+	}
+
+	public void setIsType(Integer isType) {
+		this.isType = isType;
 	}
 
 }
