@@ -65,7 +65,12 @@
 <%
 	BlogDao blogDao = new BlogDao();
 	int p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
-	Long tid=request.getParameter("tid")!= null ? Long.valueOf(request.getParameter("tid").toString()) : null;
+	Long tid=null;
+	try{
+		 tid=request.getParameter("tid") != null ? Long.valueOf(request.getParameter("tid").toString()) : null;
+	}catch(Exception e){
+		tid=null;
+	}
 	Pages pages=new Pages();
 	pages.setPageNo(p);
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
