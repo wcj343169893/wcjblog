@@ -17,6 +17,8 @@
 %>
 <title><%=blog_user.getpTitle()%>  --  网站留言板</title>
 <meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
+<meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
+<meta name="description" content="<%=blog_user.getBlogDescription() %>">
 <script type="text/javascript">
 
   var _gaq = _gaq || [];

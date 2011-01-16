@@ -117,6 +117,9 @@ public class UserDao {
 					u.setIsTags(user.getIsTags());
 					u.setIsType(user.getIsType());
 					
+					u.setBlogDescription(user.getBlogDescription());
+					u.setBlogKeyword(user.getBlogKeyword());
+					
 					u.setDescription(user.getDescription());
 				}
 				flag = true;

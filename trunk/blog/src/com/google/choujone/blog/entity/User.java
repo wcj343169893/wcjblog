@@ -39,6 +39,10 @@ public class User implements Serializable {
 	@Persistent
 	private String description = "";// 自我描述
 	@Persistent
+	private String blogDescription = "";// 博客描述
+	@Persistent
+	private String blogKeyword = "";// 博客关键字
+	@Persistent
 	private String style;// 博客前台样式
 	@Persistent
 	private Integer isWeather;// 是否显示天气
@@ -239,6 +243,22 @@ public class User implements Serializable {
 
 	public void setIsType(Integer isType) {
 		this.isType = isType;
+	}
+
+	public String getBlogDescription() {
+		return blogDescription;
+	}
+
+	public void setBlogDescription(String blogDescription) {
+		this.blogDescription = blogDescription;
+	}
+
+	public String getBlogKeyword() {
+		return blogKeyword;
+	}
+
+	public void setBlogKeyword(String blogKeyword) {
+		this.blogKeyword = blogKeyword;
 	}
 
 }
