@@ -80,6 +80,8 @@ public class UserServlet extends HttpServlet {
 		Integer isInfo= Integer.parseInt(req.getParameter("isInfo") != null ? req.getParameter("isInfo") : "0");// 是否显示个人资料
 		Integer isTags= Integer.parseInt(req.getParameter("isTags") != null ? req.getParameter("isTags") : "0");// 是否显示tags
 		Integer isType= Integer.parseInt(req.getParameter("isType") != null ? req.getParameter("isType") : "0");// 是否显示文章类型
+		String blogKeyword=req.getParameter("blogKeyword")!=null ?req.getParameter("blogKeyword"):"";//博客关键字
+		String blogDescription=req.getParameter("blogDescription")!=null ?req.getParameter("blogDescription"):"";//博客描述
 		UserDao userDao = new UserDao();
 		User user = new User();
 		if (operation.trim().equals(Operation.modify.toString())) {// 修改信息
@@ -105,6 +107,9 @@ public class UserServlet extends HttpServlet {
 			user.setIsInfo(isInfo);
 			user.setIsTags(isTags);
 			user.setIsType(isType);
+			
+			user.setBlogDescription(blogDescription);
+			user.setBlogKeyword(blogKeyword);
 			
 			userDao.operationUser(Operation.modify, user);
 			req.setAttribute("user", user);

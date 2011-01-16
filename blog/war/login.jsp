@@ -15,6 +15,8 @@
 	User blog_user= userDao.getUserDetail();
 %>
 <title><%=blog_user.getpTitle()%>  --  登录</title>
+<meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
+<meta name="description" content="<%=blog_user.getBlogDescription() %>">
 </head>
 <body onload="document.forms.loginform.name.focus()">
 <div class="main">

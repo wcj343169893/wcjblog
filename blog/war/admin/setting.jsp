@@ -169,6 +169,22 @@
 						<input type="radio" name="isType" value="1" id="isTypeNo" <%=user.getIsType()!=null && user.getIsType()==1?"checked":"" %>><label for="isTypeNo">隐藏</label>
 					</td>
 				</tr>
+				<tr>
+					<td class="title">
+						KEYWORDS
+					</td>
+					<td colspan="3">
+						<input name="blogKeyword" value="<%=user.getBlogKeyword() %>">
+					</td>
+				</tr>
+				<tr>
+					<td class="title">
+						DESCRIPTION
+					</td>
+					<td colspan="3">
+						<textarea rows="10" cols="70" name="blogDescription"><%=user.getBlogDescription() %></textarea>
+					</td>
+				</tr>
 			</table>
 			<br>
 			<table>
