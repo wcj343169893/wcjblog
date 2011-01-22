@@ -53,7 +53,7 @@
 		主人寄语
 	</div>
 	<div>
-		<%=blog_user.getPreMessage() %>
+		<%=blog_user.getPreMessage().getValue() %>
 	</div>
 	<%
 		int p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
