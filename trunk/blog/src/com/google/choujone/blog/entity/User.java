@@ -8,6 +8,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Text;
+
 /**
  * choujone'blog<br>
  * 功能描述：用户信息 2010-11-18
@@ -64,6 +66,8 @@ public class User implements Serializable {
 	private Integer isTags;// 是否显示tags
 	@Persistent
 	private Integer isType;// 是否显示文章类型
+	@Persistent
+	private Text preMessage = new Text("");// 留言寄语
 
 	public Long getId() {
 		return id;
@@ -259,6 +263,14 @@ public class User implements Serializable {
 
 	public void setBlogKeyword(String blogKeyword) {
 		this.blogKeyword = blogKeyword;
+	}
+
+	public Text getPreMessage() {
+		return preMessage;
+	}
+
+	public void setPreMessage(Text preMessage) {
+		this.preMessage = preMessage;
 	}
 
 }

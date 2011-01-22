@@ -42,7 +42,7 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%=blog_user.getpTitle() %> -- <%=blog.getTitle() %></title>
+<title><%=blog.getTitle() %> -- <%=blog_user.getpTitle() %></title>
 <meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
 <meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
 <meta name="description" content="<%=blog_user.getBlogDescription() %>">
@@ -74,7 +74,7 @@
 <!-- 右边开始 -->
 <div class="right">
 	<div class="right-title">
-		文章详细
+		文章
 	</div>
 	<div class="vito-content-detail">
 	<div class="vito-prenext">
@@ -127,7 +127,7 @@
 			<div class="vito-postcommentlist">
 				<span class="vito-postcomment-one">
 					<span class="vito-postcomment-name" style="color: #8c8c8c">
-						<%=(i+1)*pages.getPageNo() %>&nbsp;|&nbsp; <%=reply.getName() %>
+						<%if((i+1)*pages.getPageNo()==1){out.print("沙发");}else if((i+1)*pages.getPageNo()==2){out.print("板凳");}else if((i+1)*pages.getPageNo()==3){out.print("平地");}else{out.print("第"+(i+1)*pages.getPageNo()+"楼");} %>&nbsp;|&nbsp; <%=reply.getName() %>
 						<span style="color: #979797"><%=reply.getSdTime() %> 说</span>
 					</span>
 					<br><br>
@@ -159,32 +159,37 @@
 					<a href="/blog_detail.jsp?p=<%=p + 1 %>&id=<%=blog.getId() %>">下一页</a>&nbsp;&nbsp;
 				<%} %>
 		</div>
+		<%}else{ %>
+		<div class="vito-prenext">
+			还没有人发表评论<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');$('#comment_name').focus();">来坐第一个沙发</a>
+		</div>
 		<%} %>
 	</div>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
-			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv')">点击这里 发表评论</a>
+			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');$('#comment_name').focus();">点击这里 发表评论</a>
 		</p>
 		<div id="commentDiv" style="display: none">
 			<form id="frmSumbit" target="_self" method="post" action="/reply">
 				<div class="vito-ct-id">
 					<input type="hidden" name="bid" value="<%=blog.getId() %>">
 					<input type="hidden" name="op" value="add">
-					<input type="text" name="name"
-						class="text vito-contentbd-input" value="" size="28"/>
-					<label for="inpName">
+					<input type="text" name="name" id="comment_name" class="text vito-contentbd-input" value="游客" size="28" style="color: gray;"
+					onclick="if(this.value=='游客'){this.value='';this.style.color='';}" 
+					onblur="if(this.value==''){this.value='游客';this.style.color='gray';}"/>
+					<label for="comment_name">
 						署名(*)
 					</label>
 				</div>
 				<div class="vito-ct-id">
-					<input type="text" name="email"
+					<input type="text" name="email" id="inpEmail"
 						class="text vito-contentbd-input" value="" size="28"/>
 					<label for="inpEmail">
 						邮箱
 					</label>
 				</div>
 				<div class="vito-ct-id">
-					<input type="text" name="url"
+					<input type="text" name="url" id="inpHomePage"
 						class="text vito-contentbd-input" size="28"/>
 					<label for="inpHomePage">
 						网站链接
