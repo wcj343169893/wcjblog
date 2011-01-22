@@ -15,7 +15,7 @@
 	UserDao userDao=new UserDao();
 	User blog_user= userDao.getUserDetail();
 %>
-<title><%=blog_user.getpTitle()%>  --  网站留言板</title>
+<title>留言板  --  <%=blog_user.getpTitle()%></title>
 <meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
 <meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
 <meta name="description" content="<%=blog_user.getBlogDescription() %>">
@@ -46,7 +46,14 @@
 <!-- 右边开始 -->
 <div class="right">
 	<div class="right-title">
-		留言列表
+		留言板
+	</div>
+	<div
+		style="font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif; font-size: 14px; color: #ffd247; padding: 0 0 10px 20px;">
+		主人寄语
+	</div>
+	<div>
+		<%=blog_user.getPreMessage() %>
 	</div>
 	<%
 		int p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
@@ -69,7 +76,7 @@
 	<div class="vito-postcommentlist">
 		<span class="vito-postcomment-one">
 			<span class="vito-postcomment-name" style="color: #8c8c8c">
-				<%=(i+1)*pages.getPageNo() %>&nbsp;|&nbsp; <%=reply.getName() %>
+				第<%=pages.getRecTotal()-(i+((pages.getPageNo()-1)*pages.getPageSize())) %>楼&nbsp;|&nbsp; <%=reply.getName() %>
 				<span style="color: #979797"><%=reply.getSdTime() %> 说</span>
 			</span>
 			<br><br>
@@ -90,7 +97,15 @@
 		<span class="vito-postcomment-reback"> </span>
 	</div>
 	<%} %>
-	
+		<div class="vito-prenext">
+	共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
+	<%if(p > 1){ %>
+		<a href="/leaveMessage.jsp?p=<%=p-1 %>">上一页</a>&nbsp;&nbsp;
+	<%} %>
+	<%if(p < pages.getPageTotal()){ %>
+		<a href="/leaveMessage.jsp?p=<%=p + 1 %>">下一页</a>&nbsp;&nbsp;
+	<%} %>
+</div>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
 			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv')">点击这里 发表评论</a>

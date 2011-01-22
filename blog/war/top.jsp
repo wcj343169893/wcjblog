@@ -27,7 +27,7 @@
 				<a href="/search.jsp">搜索</a>
 			</li>
 			<li>
-				<a href="/leaveMessage.jsp">网站留言</a>
+				<a href="/leaveMessage.jsp">留言板</a>
 			</li>
 			<li>
 				<a href="/admin">后台管理</a>

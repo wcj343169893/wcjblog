@@ -62,7 +62,7 @@
 <!-- 右边开始 -->
 <div class="right">
 	<div class="right-title">
-		文章列表
+		文章
 	</div>
 <%
 	BlogDao blogDao = new BlogDao();

@@ -12,6 +12,19 @@
 	User user=userDao.getUserDetail();
 %>
 <title><%=user.getpTitle() %> -- 博客设置   / 系统设置</title>
+<script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
+<script>
+	KE.show({
+		id : 'preMessage',
+		resizeMode : 1,
+		allowPreviewEmoticons : false,
+		allowUpload : false,
+		items : [
+		'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold', 'italic', 'underline',
+		'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+		'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+	});
+</script>
 </head>
 <body>
 <div class="main">
@@ -83,6 +96,15 @@
 					<td class="title">自我描述</td>
 					<td>
 						<textarea rows="10" cols="70" name="description"><%=user.getDescription() %></textarea>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<table class="preMessage">
+				<tr>
+					<td class="title">留言寄语
+					</td>
+					<td class="message"><textarea rows="10" cols="70" name="preMessage" id="preMessage"><%=user.getPreMessage() %></textarea>
 					</td>
 				</tr>
 			</table>

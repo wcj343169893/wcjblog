@@ -27,10 +27,12 @@ a:HOVER {
 	margin-left: 10px;
 	padding: 5px 5px 5px 5px;
 }
-.bord{
+
+.bord {
 	margin-left: 10px;
 	margin-right: 10px;
 }
+
 .headings {
 	margin-left: 10px;
 	margin-right: 10px;
@@ -78,7 +80,8 @@ a:HOVER {
 	height: 40px;
 	background-color: #E4F2FD;
 }
-.tools .tools-search{
+
+.tools .tools-search {
 	margin-left: 20px;
 	margin-top: 10px;
 	float: left;
@@ -138,41 +141,46 @@ a:HOVER {
 #container {
 	margin: 10px 30px 30px 30px;
 }
+
 #container .blogsetting {
 	width: 100%;
-	border-top:1px solid #E6E6E6;
+	border-top: 1px solid #E6E6E6;
 	border-left: 1px solid #E6E6E6;
 	border-right: 1px solid #E6E6E6;
 }
-#container .blogsetting .title{
-	text-align: left;
-	padding-left: 20px;
-	width: 200px;
-}
-#container .blogsetting td {
-	padding-top: 20px;
-	padding-bottom:10px;
-	border-bottom: 1px solid #E6E6E6;
-}
-#container .setting {
-	width: 100%;
-	border-top:1px solid #E6E6E6;
-	border-left: 1px solid #E6E6E6;
-	border-right: 1px solid #E6E6E6;
-}
-#container .setting input{
-	width: 500px;
-}
-#container .setting .title{
+
+#container .blogsetting .title {
 	text-align: left;
 	padding-left: 20px;
 	width: 200px;
 }
 
+#container .blogsetting td {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #E6E6E6;
+}
+
+#container .setting {
+	width: 100%;
+	border-top: 1px solid #E6E6E6;
+	border-left: 1px solid #E6E6E6;
+	border-right: 1px solid #E6E6E6;
+}
+
+#container .setting input {
+	width: 500px;
+}
+
+#container .setting .title {
+	text-align: left;
+	padding-left: 20px;
+	width: 200px;
+}
 
 #container .setting td {
 	padding-top: 20px;
-	padding-bottom:10px;
+	padding-bottom: 10px;
 	border-bottom: 1px solid #E6E6E6;
 }
 
@@ -204,18 +212,36 @@ a:HOVER {
 #container .container-title {
 	
 }
-.friends-new{
+
+.friends-new {
 	margin: 10px 10px 10px 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #E6E6E6;
 }
-.vito-middle{
+
+.vito-middle {
 	margin: 10px 10px 10px 10px;
 	height: 500px;
 	border: 1px solid #E6E6E6;
 }
-#addType{
+
+#addType {
 	width: 550px;
 }
-#typelist{
+
+#typelist {
+	
+}
+.preMessage{
+	width:100%;
+	border: 1px solid #E6E6E6;
+}
+.preMessage .title {
+	padding-left: 20px;
+	text-align: left;
+	width: 200px;
+}
+.preMessage .message {
+	padding-top: 20px;
+	padding-bottom: 10px;
 }

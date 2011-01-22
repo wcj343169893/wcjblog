@@ -71,7 +71,9 @@ public class ReplyDao {
 		return flag;
 	}
 
-	/**根据id编号数组删除回复
+	/**
+	 * 根据id编号数组删除回复
+	 * 
 	 * @param ids
 	 * @return
 	 */
@@ -114,6 +116,9 @@ public class ReplyDao {
 			Query query = pm.newQuery(Reply.class, " bid == " + bid);
 			query.setRange(pages.getFirstRec(), pages.getPageNo()
 					* pages.getPageSize());
+			if (bid < 0) {
+				query.setOrdering(" sdTime desc ");
+			}
 			replyList = (List<Reply>) query.execute();
 		} catch (Exception e) {
 			e.printStackTrace();

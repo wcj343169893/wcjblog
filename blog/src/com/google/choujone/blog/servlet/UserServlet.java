@@ -12,6 +12,7 @@ import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.User;
 import com.google.choujone.blog.util.Config;
+import com.google.choujone.blog.util.Tools;
 
 @SuppressWarnings("serial")
 public class UserServlet extends HttpServlet {
@@ -82,6 +83,7 @@ public class UserServlet extends HttpServlet {
 		Integer isType= Integer.parseInt(req.getParameter("isType") != null ? req.getParameter("isType") : "0");// 是否显示文章类型
 		String blogKeyword=req.getParameter("blogKeyword")!=null ?req.getParameter("blogKeyword"):"";//博客关键字
 		String blogDescription=req.getParameter("blogDescription")!=null ?req.getParameter("blogDescription"):"";//博客描述
+		String preMessage=req.getParameter("preMessage")!=null ?req.getParameter("preMessage"):"";//博客描述
 		UserDao userDao = new UserDao();
 		User user = new User();
 		if (operation.trim().equals(Operation.modify.toString())) {// 修改信息
@@ -107,6 +109,9 @@ public class UserServlet extends HttpServlet {
 			user.setIsInfo(isInfo);
 			user.setIsTags(isTags);
 			user.setIsType(isType);
+			
+			user.setPreMessage(new com.google.appengine.api.datastore.Text(Tools
+					.changeHTML(Tools.toChinese(preMessage))));
 			
 			user.setBlogDescription(blogDescription);
 			user.setBlogKeyword(blogKeyword);
