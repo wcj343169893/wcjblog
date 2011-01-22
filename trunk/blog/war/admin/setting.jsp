@@ -104,7 +104,7 @@
 				<tr>
 					<td class="title">留言寄语
 					</td>
-					<td class="message"><textarea rows="10" cols="70" name="preMessage" id="preMessage"><%=user.getPreMessage() %></textarea>
+					<td class="message"><textarea rows="10" cols="70" name="preMessage" id="preMessage"><%=user.getPreMessage().getValue() %></textarea>
 					</td>
 				</tr>
 			</table>
