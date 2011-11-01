@@ -17,6 +17,7 @@
 	<script type="text/javascript">
 		KE.show({
 			id : 'content',
+			imageUploadJson : "/kindeditor/jsp/upload.jsp",
 			fileManagerJson : '/kindeditor/jsp/file_manager_json.jsp',
 			allowFileManager : true,
 			afterCreate : function(id) {
@@ -60,7 +61,7 @@
 				关键字：
 			</div>
 			<input type="text" name="tag"><br>
-			<input type="checkbox" value="0" id="isVisible" name="isVisible"><label for="isVisible">发布</label> &nbsp;<input type="submit" value="保存">
+			<input type="checkbox" value="0" id="isVisible" name="isVisible"><label for="isVisible">发布</label> &nbsp;<input type="submit" value="保存">(提交快捷键: Ctrl + Enter)
 		</form>
 		<script type="text/javascript">
 				function tlist(){

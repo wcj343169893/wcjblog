@@ -14,8 +14,7 @@
 <title>上传</title>
 </head>
 <body>
-<form action="<%=blobstoreService.createUploadUrl("/uploadFile")%>" 
- method="post" enctype="multipart/form-data"> 
+<form action=fileUpload method="post" enctype="multipart/form-data"> 
  <input type="file" name="myfile"> 
  <input type="submit" value="Submit">
  </form> 

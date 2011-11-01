@@ -34,13 +34,17 @@
 				<a href="/admin/blog_list.jsp">文章</a>
 			</li>
 			<li>
+				<a href="/admin/blogType_list.jsp">文章分类</a>
+			</li>
+			<li>
 				<a href="/admin/friends_list.jsp">友情链接</a>
 			</li>
 			<li>
 				<a href="/admin/reply_list.jsp">评论</a>
 			</li>
+		
 			<li>
-				<a href="#">文件</a>
+				<a href="/admin/file_list.jsp">文件</a>
 			</li>
 			<li>
 				<a href="/admin/setting.jsp">设置</a>

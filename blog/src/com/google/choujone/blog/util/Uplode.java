@@ -66,7 +66,7 @@ public class Uplode {
 	 * 
 	 * @return
 	 */
-	private static final String getDateTime(String str) {
+	public static final String getDateTime(String str) {
 		SimpleDateFormat sdf = new SimpleDateFormat(str);
 		return sdf.format(new Date());
 	}

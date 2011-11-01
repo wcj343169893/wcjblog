@@ -19,6 +19,11 @@
 <meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
 <meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
 <meta name="description" content="<%=blog_user.getBlogDescription() %>">
+<%
+	if(blog_user.getBlogHead()!=null && !"".equals(blog_user.getBlogHead().trim())){
+		out.print(blog_user.getBlogHead());
+	}
+%>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];

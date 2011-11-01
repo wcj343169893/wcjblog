@@ -20,6 +20,7 @@
 		<script type="text/javascript">
 			KE.show({
 				id : 'content',
+				imageUploadJson : "/kindeditor/jsp/upload.jsp",
 				fileManagerJson : '/kindeditor/jsp/file_manager_json.jsp',
 				allowFileManager : true,
 				afterCreate : function(id) {

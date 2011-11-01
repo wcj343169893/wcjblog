@@ -17,6 +17,11 @@
 <title>登录  --  <%=blog_user.getpTitle()%></title>
 <meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
 <meta name="description" content="<%=blog_user.getBlogDescription() %>">
+<%
+	if(blog_user.getBlogHead()!=null && !"".equals(blog_user.getBlogHead().trim())){
+		out.print(blog_user.getBlogHead());
+	}
+%>
 </head>
 <body onload="document.forms.loginform.name.focus()">
 <div class="main">

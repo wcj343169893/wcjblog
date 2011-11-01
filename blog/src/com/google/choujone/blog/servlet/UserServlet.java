@@ -22,23 +22,23 @@ public class UserServlet extends HttpServlet {
 				.getParameter("op") : "";// 获取操作
 		UserDao userDao = new UserDao();
 		User user = new User();
-		// if (operation.trim().equals(Operation.delete.toString())) {// 删除
-		// // reply.setId(Long.valueOf(ids));
-		// // replyDao.operationReply(Operation.delete, reply);
-		// // resp.sendRedirect("/admin/reply_list.jsp");
-		// } else if (operation.trim().equals(Operation.modify.toString())) {//
-		// 加载用户信息
-		// user = userDao.getUserDetail();
-		// if (user == null) {
-		// userDao.operationUser(Operation.add, null);// 新增用户
-		// user = userDao.getUserDetail();
-		// }
-		// req.setAttribute("user", user);
-		// req.getRequestDispatcher("/admin/setting.jsp").forward(req, resp);
-		// }else{//注销
-		req.getSession().removeAttribute("login_user");
-		resp.sendRedirect("/");
-		// }
+		if (operation.trim().equals(Operation.delete.toString())) {// 删除
+			// reply.setId(Long.valueOf(ids));
+			// replyDao.operationReply(Operation.delete, reply);
+			// resp.sendRedirect("/admin/reply_list.jsp");
+		} else if (operation.trim().equals(Operation.modify.toString())) {
+			// 加载用户信息
+			user = userDao.getUserDetail();
+			if (user == null) {
+				userDao.operationUser(Operation.add, null);// 新增用户
+				user = userDao.getUserDetail();
+			}
+			req.setAttribute("user", user);
+			req.getRequestDispatcher("/admin/setting.jsp").forward(req, resp);
+		} else {// 注销
+			req.getSession().removeAttribute("login_user");
+			resp.sendRedirect("/");
+		}
 	}
 
 	@Override
@@ -69,21 +69,51 @@ public class UserServlet extends HttpServlet {
 		String style = req.getParameter("style") != null ? req
 				.getParameter("style") : "";
 
-		Integer isWeather = Integer.parseInt(req.getParameter("isWeather") != null ? req.getParameter("isWeather") : "0");// 是否显示天气
-		Integer isCalendars= Integer.parseInt(req.getParameter("isCalendars") != null ? req.getParameter("isCalendars") : "0");// 是否显示日历
-		Integer isHotBlog= Integer.parseInt(req.getParameter("isHotBlog") != null ? req.getParameter("isHotBlog") : "0");// 是否显示热门文章
-		
-		Integer isNewReply= Integer.parseInt(req.getParameter("isNewReply") != null ? req.getParameter("isNewReply") : "0");// 是否显示最新评论
-		Integer isLeaveMessage= Integer.parseInt(req.getParameter("isLeaveMessage") != null ? req.getParameter("isLeaveMessage") : "0");// 是否显示留言
-		
-		Integer isStatistics= Integer.parseInt(req.getParameter("isStatistics") != null ? req.getParameter("isStatistics") : "0");// 是否显示统计
-		Integer isFriends= Integer.parseInt(req.getParameter("isFriends") != null ? req.getParameter("isFriends") : "0");// 是否显示友情链接
-		Integer isInfo= Integer.parseInt(req.getParameter("isInfo") != null ? req.getParameter("isInfo") : "0");// 是否显示个人资料
-		Integer isTags= Integer.parseInt(req.getParameter("isTags") != null ? req.getParameter("isTags") : "0");// 是否显示tags
-		Integer isType= Integer.parseInt(req.getParameter("isType") != null ? req.getParameter("isType") : "0");// 是否显示文章类型
-		String blogKeyword=req.getParameter("blogKeyword")!=null ?req.getParameter("blogKeyword"):"";//博客关键字
-		String blogDescription=req.getParameter("blogDescription")!=null ?req.getParameter("blogDescription"):"";//博客描述
-		String preMessage=req.getParameter("preMessage")!=null ?req.getParameter("preMessage"):"";//博客描述
+		Integer isWeather = Integer
+				.parseInt(req.getParameter("isWeather") != null ? req
+						.getParameter("isWeather") : "0");// 是否显示天气
+		Integer isCalendars = Integer
+				.parseInt(req.getParameter("isCalendars") != null ? req
+						.getParameter("isCalendars") : "0");// 是否显示日历
+		Integer isHotBlog = Integer
+				.parseInt(req.getParameter("isHotBlog") != null ? req
+						.getParameter("isHotBlog") : "0");// 是否显示热门文章
+
+		Integer isNewReply = Integer
+				.parseInt(req.getParameter("isNewReply") != null ? req
+						.getParameter("isNewReply") : "0");// 是否显示最新评论
+		Integer isLeaveMessage = Integer.parseInt(req
+				.getParameter("isLeaveMessage") != null ? req
+				.getParameter("isLeaveMessage") : "0");// 是否显示留言
+
+		Integer isStatistics = Integer.parseInt(req
+				.getParameter("isStatistics") != null ? req
+				.getParameter("isStatistics") : "0");// 是否显示统计
+		Integer isFriends = Integer
+				.parseInt(req.getParameter("isFriends") != null ? req
+						.getParameter("isFriends") : "0");// 是否显示友情链接
+		Integer isInfo = Integer
+				.parseInt(req.getParameter("isInfo") != null ? req
+						.getParameter("isInfo") : "0");// 是否显示个人资料
+		Integer isTags = Integer
+				.parseInt(req.getParameter("isTags") != null ? req
+						.getParameter("isTags") : "0");// 是否显示tags
+		Integer isType = Integer
+				.parseInt(req.getParameter("isType") != null ? req
+						.getParameter("isType") : "0");// 是否显示文章类型
+		String blogKeyword = req.getParameter("blogKeyword") != null ? req
+				.getParameter("blogKeyword") : "";// 博客关键字
+		String blogDescription = req.getParameter("blogDescription") != null ? req
+				.getParameter("blogDescription")
+				: "";// 博客描述
+		String preMessage = req.getParameter("preMessage") != null ? req
+				.getParameter("preMessage") : "";// 博客描述
+		// 2011-10-28 添加顶部和底部代码
+		String blogHead = req.getParameter("blogHead") != null ? req
+				.getParameter("blogHead") : ""; // 博客顶部 声明
+		String blogFoot = req.getParameter("blogFoot") != null ? req
+				.getParameter("blogFoot") : ""; // 博客 底部声明
+
 		UserDao userDao = new UserDao();
 		User user = new User();
 		if (operation.trim().equals(Operation.modify.toString())) {// 修改信息
@@ -98,7 +128,7 @@ public class UserServlet extends HttpServlet {
 			user.setBrithday(brithday);
 			user.setDescription(description);
 			user.setStyle(style);
-			
+
 			user.setIsWeather(isWeather);
 			user.setIsCalendars(isCalendars);
 			user.setIsHotBlog(isHotBlog);
@@ -109,13 +139,16 @@ public class UserServlet extends HttpServlet {
 			user.setIsInfo(isInfo);
 			user.setIsTags(isTags);
 			user.setIsType(isType);
-			
-			user.setPreMessage(new com.google.appengine.api.datastore.Text(Tools
-					.changeHTML(Tools.toChinese(preMessage))));
-			
+
+			user.setPreMessage(new com.google.appengine.api.datastore.Text(
+					Tools.changeHTML(Tools.toChinese(preMessage))));
+
 			user.setBlogDescription(blogDescription);
 			user.setBlogKeyword(blogKeyword);
-			
+			// 2011-10-28 添加顶部和底部代码
+			user.setBlogHead(blogHead);
+			user.setBlogFoot(blogFoot);
+
 			userDao.operationUser(Operation.modify, user);
 			req.setAttribute("user", user);
 			req.getRequestDispatcher("/admin/setting.jsp").forward(req, resp);

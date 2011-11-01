@@ -1,7 +1,12 @@
 package com.google.choujone.blog.util;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.appengine.api.datastore.Blob;
 
 public class Tools {
 	/**
@@ -86,5 +91,15 @@ public class Tools {
 	public static String changeTime(Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		return format.format(date);
+	}
+
+	public static void blob2Img(Blob blob, HttpServletResponse resp) {
+		resp.setContentType("image/jpeg");
+		try {
+			resp.getOutputStream().write(blob.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

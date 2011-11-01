@@ -40,6 +40,9 @@ public class UploadFileServlet extends HttpServlet {
 		} else {
 			resp.sendRedirect("/uploadFile?blob-key=" + blobKey.getKeyString());
 		}
+		
+//		FileUploadServlet fileupload=new FileUploadServlet();
+//		fileupload.doPost(req, resp);
 	}
 
 	/**

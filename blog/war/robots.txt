@@ -1,0 +1,3 @@
+# Robots For choujone
+User-agent: *
+Disallow: /admin/

@@ -16,9 +16,10 @@
  */
 
 //文件保存目录路径
-String savePath = pageContext.getServletContext().getRealPath("/") + "attached/";
+String savePath = pageContext.getServletContext().getRealPath("/") + "/attached/";
 //文件保存目录URL
 String saveUrl  = request.getContextPath() + "/attached/";
+System.out.println(savePath+"  "+saveUrl);
 //定义允许上传的文件扩展名
 String[] fileTypes = new String[]{"gif", "jpg", "jpeg", "png", "bmp"};
 //最大文件大小

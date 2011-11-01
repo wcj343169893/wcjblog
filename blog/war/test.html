@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>左侧菜单</title>
+<link href="http://zijiren.net/css/css.css" type="text/css" rel="stylesheet">
+<link href="http://zijiren.net/css/all.css" type="text/css" rel="stylesheet">
+<script src="http://zijiren.net/js/jquery.min.js" language="javascript" type="text/javascript"></script>
+<script>
+$(document).ready(function() {
+$(".nav li").hover(function() {
+$(this).find("div").stop().animate({'left':'-271px'},200); // move down - hide
+$(this).find("span").stop().animate({'left':'0px'}, 200); // move down - hide
+}, function() {
+$(this).find("div").stop().animate({'left':'0px'}, 200); // move down - hide
+$(this).find("span").stop().animate({'left':'271px'}, 200); // move down - hide
+});
+}) 
+</script>
+</head>
+<body>
+<div class="new_left">
+ <div class="nav">
+    <ul id="nav_">
+      <li id="nav_about_bg" class="nav_about_bg"><div style="left: 0px;"></div><span style="left: 271px;"><a href="newslist-0-1.html"></a></span></li>
+      <li class="nav_news_bg"><div style="left: 0px;"></div><span style="left: 271px;"><a href="newslist-1-1.html"></a></span></li>
+      <li class="nav_showcase_bg"><div style="left: 0px;"></div><span style="left: 271px;"><a href="newslist-2-1.html"></a></span></li>
+      <li class="nav_contact_bg"><div style="left: 0px;"></div><span style="left: 271px;"><a href="newslist-3-1.html"></a></span></li>        
+      </ul>   
+  </div>
+</div>
+</body>
+</html>

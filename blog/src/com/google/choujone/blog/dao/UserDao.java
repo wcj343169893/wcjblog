@@ -50,7 +50,7 @@ public class UserDao {
 			List<User> users = (List<User>) query.execute(name);
 			if (users != null && users.size() > 0) {
 				user = users.get(0);
-			}else{
+			} else {
 				user = new User();
 				Date dt = new Date(System.currentTimeMillis());
 				user.setId(dt.getTime());
@@ -105,7 +105,7 @@ public class UserDao {
 					u.setNotice(user.getNotice());
 					u.setUrl(user.getUrl());
 					u.setStyle(user.getStyle());
-					
+
 					u.setIsWeather(user.getIsWeather());
 					u.setIsCalendars(user.getIsCalendars());
 					u.setIsHotBlog(user.getIsHotBlog());
@@ -116,13 +116,16 @@ public class UserDao {
 					u.setIsInfo(user.getIsInfo());
 					u.setIsTags(user.getIsTags());
 					u.setIsType(user.getIsType());
-					
+
 					u.setPreMessage(user.getPreMessage());
-					
+
 					u.setBlogDescription(user.getBlogDescription());
 					u.setBlogKeyword(user.getBlogKeyword());
-					
+
 					u.setDescription(user.getDescription());
+					// 2011-10-28 添加顶部和底部代码
+					u.setBlogHead(user.getBlogHead());
+					u.setBlogFoot(user.getBlogFoot());
 				}
 				flag = true;
 			}

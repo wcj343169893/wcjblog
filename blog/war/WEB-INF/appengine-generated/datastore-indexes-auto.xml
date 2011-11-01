@@ -1,15 +1,15 @@
-<!-- Indices written at Sat, 22 Jan 2011 15:53:34 UTC -->
+<!-- Indices written at Tue, 1 Nov 2011 06:44:51 UTC -->
 
 <datastore-indexes>
 
-    <!-- Used 3 times in query history -->
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Blog" ancestor="false" source="auto">
         <property name="isVisible" direction="asc"/>
         <property name="replyCount" direction="desc"/>
         <property name="count" direction="desc"/>
     </datastore-index>
 
-    <!-- Used 4 times in query history -->
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Reply" ancestor="false" source="auto">
         <property name="bid" direction="asc"/>
         <property name="sdTime" direction="desc"/>
