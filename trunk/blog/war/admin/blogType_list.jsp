@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>文章分类列表</title>
 </head>
 <body>
-
+<div class="main">
+	<jsp:include page="/admin/menu.jsp"></jsp:include>	
+	<div class="address">
+			管理文章分类
+	</div>
+</div>
 </body>
 </html>

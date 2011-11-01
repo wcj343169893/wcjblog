@@ -207,6 +207,22 @@
 						<textarea rows="10" cols="70" name="blogDescription"><%=user.getBlogDescription() %></textarea>
 					</td>
 				</tr>
+				<tr>
+					<td class="title">
+						顶部代码
+					</td>
+					<td colspan="3">
+						<textarea rows="10" cols="70" name="blogHead"><%=user.getBlogHead() %></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="title">
+						底部代码声明及统计
+					</td>
+					<td colspan="3">
+						<textarea rows="10" cols="70" name="blogFoot"><%=user.getBlogFoot() %></textarea>
+					</td>
+				</tr>
 			</table>
 			<br>
 			<table>

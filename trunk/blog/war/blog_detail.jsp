@@ -43,6 +43,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=blog.getTitle() %> -- <%=blog_user.getpTitle() %></title>
+<%
+	if(blog_user.getBlogHead()!=null && !"".equals(blog_user.getBlogHead().trim())){
+		out.print(blog_user.getBlogHead());
+	}
+%>
 <meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
 <meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
 <meta name="description" content="<%=blog_user.getBlogDescription() %>">

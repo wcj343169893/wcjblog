@@ -45,6 +45,10 @@ public class User implements Serializable {
 	@Persistent
 	private String blogKeyword = "";// 博客关键字
 	@Persistent
+	private String blogHead = "";// 博客顶部代码
+	@Persistent
+	private String blogFoot = "";// 博客底部代码
+	@Persistent
 	private String style;// 博客前台样式
 	@Persistent
 	private Integer isWeather;// 是否显示天气
@@ -271,6 +275,22 @@ public class User implements Serializable {
 
 	public void setPreMessage(Text preMessage) {
 		this.preMessage = preMessage;
+	}
+
+	public String getBlogHead() {
+		return blogHead;
+	}
+
+	public void setBlogHead(String blogHead) {
+		this.blogHead = blogHead;
+	}
+
+	public String getBlogFoot() {
+		return blogFoot;
+	}
+
+	public void setBlogFoot(String blogFoot) {
+		this.blogFoot = blogFoot;
 	}
 
 }

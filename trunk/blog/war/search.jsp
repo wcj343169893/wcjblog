@@ -17,6 +17,11 @@ String title=user.getpTitle();
 <meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
 <meta name="keywords" content="<%=user.getBlogKeyword() %>">
 <meta name="description" content="<%=user.getBlogDescription() %>">
+<%
+	if(user.getBlogHead()!=null && !"".equals(user.getBlogHead().trim())){
+		out.print(user.getBlogHead());
+	}
+%>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
