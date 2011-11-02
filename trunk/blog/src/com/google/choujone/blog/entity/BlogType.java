@@ -8,8 +8,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 /**
  * choujone'blog<br>
- * 功能描述：博客类型
- * 2010-11-18
+ * 功能描述：博客类型 2010-11-18
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class BlogType {
@@ -20,6 +19,8 @@ public class BlogType {
 	private String name = "";
 	@Persistent
 	private String info = "";
+	@Persistent
+	private Long parentId = -1L;// 父级编号,如果没有则默认为-1L
 
 	public Long getId() {
 		return id;
@@ -43,6 +44,14 @@ public class BlogType {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
 }

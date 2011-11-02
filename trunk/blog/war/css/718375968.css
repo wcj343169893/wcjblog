@@ -319,12 +319,11 @@ a:HOVER {
 }
 
 .vito-left-contentul {
-	PADDING-RIGHT: 0px;
-	PADDING-LEFT: 6px;
-	PADDING-BOTTOM: 0px;
-	LINE-HEIGHT: 23px;
-	PADDING-TOP: 0px;
-	border: 1px solid #E89DBC;
+	padding-right: 0px;
+	padding-left: 6px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	border: 1px solid #e89dbc;
 	background-color: white;
 	color: black;
 }

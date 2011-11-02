@@ -21,6 +21,9 @@ public class BlogTypeDao {
 			try {
 				Date dt = new Date(System.currentTimeMillis());
 				blogType.setId(dt.getTime());
+				if (blogType.getParentId() < 0) {
+					blogType.setParentId(null);
+				}
 				pm.makePersistent(blogType);
 				flag = true;
 			} catch (Exception e) {
@@ -45,6 +48,9 @@ public class BlogTypeDao {
 						.getObjectById(BlogType.class, blogType.getId());
 				bt.setInfo(blogType.getInfo());
 				bt.setName(blogType.getName());
+				if (blogType.getParentId() >= 0L) {
+					bt.setParentId(blogType.getParentId());
+				}
 				// pm.flush();
 				flag = true;
 			} catch (Exception e) {
@@ -64,6 +70,31 @@ public class BlogTypeDao {
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 		try {
 			Query query = pm.newQuery(BlogType.class);
+			blogTypeList = (List<BlogType>) query.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return blogTypeList;
+	}
+
+	/**
+	 * 根据分类父级编号查询
+	 * 
+	 * @param parentId
+	 * @return
+	 */
+	public List<BlogType> getBlogTypeList(Long parentId) {
+		List<BlogType> blogTypeList = new ArrayList<BlogType>();
+		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+		try {
+			String filter = "";
+			Query query = null;
+			if (parentId != null && parentId > 0) {
+				filter = " parentId== " + parentId;
+				query = pm.newQuery(BlogType.class, filter);
+			} else {
+				query = pm.newQuery(BlogType.class);
+			}
 			blogTypeList = (List<BlogType>) query.execute();
 		} catch (Exception e) {
 			e.printStackTrace();

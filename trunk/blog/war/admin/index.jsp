@@ -3,7 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@page import="com.google.choujone.blog.entity.User"%>
-<%@page import="com.google.choujone.blog.dao.UserDao"%><html>
+<%@page import="com.google.choujone.blog.dao.UserDao"%>
+<%@page import="com.google.choujone.blog.dao.DataFileDao"%>
+<%@page import="java.util.List"%>
+<%@page import="com.google.choujone.blog.entity.DataFile"%>
+<%@page import="com.google.choujone.blog.common.Pages"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/css/3d.css" type="text/css" rel="stylesheet" />
@@ -11,6 +15,12 @@
 <%
 	UserDao userDao=new UserDao();
 	User blog_user= userDao.getUserDetail();
+	DataFileDao dfDao=new DataFileDao();
+	int p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
+	Pages pages=new Pages();
+	pages.setPageNo(p);
+	pages.setPageSize(24);
+	List<DataFile> dataFileList=dfDao.getDataFileListByPage(pages);
 %>
 <title><%=blog_user.getpTitle()%> -- 后台管理</title>
 </head>
@@ -20,6 +30,12 @@
 		<div class="vito-middle">
 			<div id="screen">
 				<div id="command">
+					<%if(p > 1){ %>
+						<a href="/admin/index.jsp?p=<%=p-1 %>">上一页</a>&nbsp;&nbsp;
+					<%} %>
+					<%if(p < pages.getPageTotal()){ %>
+						<a href="/admin/index.jsp?p=<%=p + 1 %>">下一页</a>&nbsp;&nbsp;
+					<%} %>
 					<br>
 					可以选择下面的方块来选择图片
 					<div id="bar"></div>
@@ -31,15 +47,9 @@
 setTimeout(function() {
 	m3D.init(
 		[ 
-			{ src: 'duck.jpg', url: 'http://yooyoor.appspot.com/blog_initBlogInfo.action?article.articleId=16', title: '点击进入', color: '#fff' },
-			{ src: 'juan.jpg' },
-			{ src: 'me.jpg' },
-			{ src: 'metoo.jpg' },
-			
-			{ src: 'mumengmei.jpg' },
-			{ src: 'qinqin.gif' },
-			{ src: 'tiantian.jpg' },
-			{ src: 'xiaoyan.jpg' }
+			<%for (DataFile df:dataFileList){%>
+			{ src: '<%=df.getId()%>_<%=df.getFilename()%>', url: '', title: '<%=df.getFilename()%>', color: '#fff' },
+			<%}%>
 		]
 	);
 }, 500);

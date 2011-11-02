@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.BlogTypeDao;
 import com.google.choujone.blog.entity.BlogType;
+import com.google.choujone.blog.util.Tools;
 
 @SuppressWarnings("serial")
 public class BlogTypeServlet extends HttpServlet {
@@ -32,14 +33,21 @@ public class BlogTypeServlet extends HttpServlet {
 				.getParameter("info") : "";
 		String operation = req.getParameter("opera") != null ? req
 				.getParameter("opera") : "";
+		String parentId = req.getParameter("pid") != null ? req
+				.getParameter("pid") : "-1";
 		String t = req.getParameter("t") != null
 				&& !"".equals(req.getParameter("t").trim()) ? req
 				.getParameter("t") : "0";// 获取博文原来的类型
+		String url = req.getParameter("url") != null ? req.getParameter("url")
+				: "";// 修改后跳转地址
+
 		boolean flag = false;
 		btd = new BlogTypeDao();
 		BlogType bt = new BlogType();
 		bt.setInfo(info);
 		bt.setName(tname);
+		bt.setParentId(Long.parseLong(parentId));// 设置上级编号
+
 		if (Operation.add.toString().equals(operation.trim())) {// 新增
 			flag = btd.operationBlogType(Operation.add, bt);
 		} else if (Operation.modify.toString().equals(operation.trim())) {// 修改
@@ -59,12 +67,23 @@ public class BlogTypeServlet extends HttpServlet {
 			bt.setId(tid);
 			flag = btd.operationBlogType(Operation.delete, bt);
 		}
-		resp.setContentType("text/html;charset=utf-8");
-		resp.setCharacterEncoding("UTF-8");
-		resp.setHeader("Cache-Control", "no-cache");
-		PrintWriter out = resp.getWriter();
-		out.println(flag);
-		out.close();
+		if (url != null && !"".equals(url.trim())) {
+			if (url.trim().equals("1")) {
+				url = "/admin/blogType_list.jsp";
+			} else if (url.trim().equals("2")) {
+				url = "/admin/blogType_update.jsp?id="+t;
+			} else if (url.trim().equals("3")) {
+				url = "/admin/blogType_add.jsp";
+			}
+			req.getRequestDispatcher(url).forward(req, resp);
+		} else {
+			resp.setContentType("text/html;charset=utf-8");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setHeader("Cache-Control", "no-cache");
+			PrintWriter out = resp.getWriter();
+			out.println(flag);
+			out.close();
+		}
 	}
 
 	/*
@@ -97,17 +116,18 @@ public class BlogTypeServlet extends HttpServlet {
 			List<BlogType> blogTypeList = btd.getBlogTypeList();
 			String type_str = "<select name=\"tid\" id=\"tids\">";
 			if (blogTypeList != null && blogTypeList.size() > 0) {
-				for (BlogType blogType : blogTypeList) {
-					type_str += "<option value=\"";
-					type_str += blogType.getId();
-					type_str += "\"";
-					if (tid.equals(blogType.getId())) {
-						type_str += " selected";
-					}
-					type_str += ">";
-					type_str += blogType.getName();
-					type_str += "</option>";
-				}
+//				for (BlogType blogType : blogTypeList) {
+//					type_str += "<option value=\"";
+//					type_str += blogType.getId();
+//					type_str += "\"";
+//					if (tid.equals(blogType.getId())) {
+//						type_str += " selected";
+//					}
+//					type_str += ">";
+//					type_str += blogType.getName();
+//					type_str += "</option>";
+//				}
+				type_str+=Tools.blogTypeList2Str(blogTypeList, tid);
 			}
 			type_str += "</select>&nbsp;";
 			type_str += "<a href=\"javascript:void(0)\" onclick=\"showOrHideDiv('addType')\">增加</a>&nbsp;";
@@ -118,7 +138,8 @@ public class BlogTypeServlet extends HttpServlet {
 			BlogType bt = btd.getBlogTypeById(tid);
 			if (bt != null) {
 				StringBuffer sb = new StringBuffer();
-				sb.append("<strong>修改：</strong>&nbsp;<input type=\"hidden\" id=\"modifytid\" value=\"");
+				sb
+						.append("<strong>修改：</strong>&nbsp;<input type=\"hidden\" id=\"modifytid\" value=\"");
 				sb.append(bt.getId());
 				sb.append("\" > ");
 				sb

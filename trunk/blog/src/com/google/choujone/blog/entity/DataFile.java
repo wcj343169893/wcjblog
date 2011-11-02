@@ -22,9 +22,11 @@ public class DataFile {
 	@Persistent
 	private Date postDate;
 	@Persistent
-	private String description;
+	private String description="";
 	@Persistent
 	private Blob fileData;
+	@Persistent
+	private Integer isShow=0;// 是否推荐
 
 	public Long getId() {
 		return id;
@@ -72,6 +74,14 @@ public class DataFile {
 
 	public void setSize(long size) {
 		this.size = size;
+	}
+
+	public Integer getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(Integer isShow) {
+		this.isShow = isShow;
 	}
 
 }

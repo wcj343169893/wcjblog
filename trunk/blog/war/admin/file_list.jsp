@@ -54,7 +54,13 @@
 		<table cellpadding="0" cellspacing="0">
 			<tr>
 				<th class="vito-content-check"><input type="checkbox" id="input_check_all" onclick="allCheckFlag(this)"/></th>
-				<th width="300px">标题</th>
+				<th>图片</th>
+				<th width="300px">filename</th>
+				<th>size</th>
+				<th>postDate</th>
+				<th>description</th>
+				<th>isShow</th>
+				<th >操作</th>
 			</tr>
 			<%if(files!= null && files.size()>0){
 				for(int i=0;i<files.size();i++){
@@ -62,8 +68,14 @@
 			<tr>
 				<td class="vito-content-check"><input type="checkbox" id="rid_<%=file.getId() %>" class="input_check_single" onclick="singleDeleteFlag(this)" name="deleteFlag" value="<%=file.getId() %>"/></td>
 				<td>
-					<img alt="" src="/file/<%=file.getId() %>_<%=file.getFilename() %>" height="100px;">
+					<img alt="" src="/file/<%=file.getId() %>_<%=file.getFilename() %>" height="100px;" width="100px">
 				</td>
+				<td><%=file.getFilename() %></td>
+				<td><%=file.getSize()/1024 %>KB</td>
+				<td><%=Tools.changeTime(file.getPostDate()) %></td>
+				<td><%=file.getDescription() %></td>
+				<td><%=file.getIsShow() %></td>
+				<td></td>
 			</tr>
 			<%}} %>
 		</table>

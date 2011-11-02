@@ -109,6 +109,8 @@ public class FileUploadServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		resp.setContentType("text/html");
+		//分页获取连接
+		
 		StringBuffer buff = new StringBuffer();
 		buff.append("<div>");
 		buff.append("Post method is not supported!");

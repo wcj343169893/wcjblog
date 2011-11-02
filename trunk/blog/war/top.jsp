@@ -10,6 +10,7 @@
 	User blog_user= userDao.getUserDetail();
 %>
 <link href="<%=blog_user.getStyle() %>" type="text/css" rel="stylesheet" />
+<link href="/css/jquery.treeview.css" type="text/css" rel="stylesheet" />
 <div class="top">
 	<div class="top-title">
 		<a href="/" title="<%=blog_user.getCtitle() %> "><%=blog_user.getpTitle()%></a>
