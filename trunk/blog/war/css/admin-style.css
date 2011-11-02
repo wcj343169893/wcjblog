@@ -249,7 +249,7 @@ a:HOVER {
 /**分类***/
 .child{
 	display:block;
-	background: url("../images/backborad/child.png") no-repeat;
+	background: url("../images/backBorad/child.png") no-repeat;
 	width: 16px;
 	height: 16px;
 	float: left;
@@ -257,21 +257,21 @@ a:HOVER {
 }
 .newChild{
 	display:block;
-	background: url("../images/backborad/new.png") no-repeat;
+	background: url("../images/backBorad/new.png") no-repeat;
 	width: 16px;
 	height: 16px;
 	float: left;margin-left: 5px;
 }
 .edit{
 	display:block;
-	background: url("../images/backborad/edit.png") no-repeat;
+	background: url("../images/backBorad/edit.png") no-repeat;
 	width: 16px;
 	height: 16px;
 	float: left;margin-left: 5px;
 }
 .delete{
 	display:block;
-	background: url("../images/backborad/delete.png") no-repeat;
+	background: url("../images/backBorad/delete.png") no-repeat;
 	width: 16px;
 	height: 16px;
 	float: left;margin-left: 5px;

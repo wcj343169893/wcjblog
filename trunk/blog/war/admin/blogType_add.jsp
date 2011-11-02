@@ -17,7 +17,7 @@
 			新增文章分类
 	</div>
 	<%
-		Long pid=Long.parseLong(request.getParameter("pid")!=null ?request.getParameter("pid") : null);
+		Long pid=Long.parseLong(request.getParameter("pid")!=null ?request.getParameter("pid") : "-1");
 		BlogTypeDao btDao=new BlogTypeDao();
 		List<BlogType> blogTypeList=btDao.getBlogTypeList(-1L);
 		List<BlogType> blogTypeList_children=null;
