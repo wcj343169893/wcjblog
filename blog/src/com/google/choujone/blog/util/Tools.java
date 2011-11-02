@@ -2,11 +2,14 @@ package com.google.choujone.blog.util;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.Blob;
+import com.google.choujone.blog.entity.BlogType;
 
 public class Tools {
 	/**
@@ -90,7 +93,10 @@ public class Tools {
 	 */
 	public static String changeTime(Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-		return format.format(date);
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.HOUR_OF_DAY, 8);
+		return format.format(calendar.getTime());
 	}
 
 	public static void blob2Img(Blob blob, HttpServletResponse resp) {
@@ -101,5 +107,75 @@ public class Tools {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 把map数组转换成下拉列表
+	 * 
+	 * @param blogTypeList
+	 *            文章类型所有列表
+	 * @param id
+	 *            默认需要选中的编号
+	 * @return
+	 */
+	public static String blogTypeList2Str(List<BlogType> blogTypeList, Long id) {
+		StringBuffer sb = new StringBuffer();
+		for (BlogType blogType : blogTypeList) {
+			if (blogType.getParentId() == null || blogType.getParentId() == 0) {
+				String selected = "";
+				if (id != null && blogType.getId().equals(id)) {
+					selected = "selected";
+				}
+				sb.append("<option value=\"" + blogType.getId() + "\" "
+						+ selected + ">" + blogType.getName() + "</option>");
+				for (BlogType bt_c : blogTypeList) {
+					// System.out.println(bt_c.getParentId()+"  "+
+					// blogType.getId());
+					if (bt_c.getParentId() != null
+							&& bt_c.getParentId().equals(blogType.getId())) {
+						selected = "";
+						if (id != null && bt_c.getId().equals(id)) {
+							selected = "selected";
+						}
+						sb.append("<option value=\"" + bt_c.getId() + "\" "
+								+ selected + "> ├" + bt_c.getName()
+								+ "</option>");
+					}
+				}
+			}
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * @param blogTypeList
+	 * @return
+	 */
+	public static String blogTypeList2Str(List<BlogType> blogTypeList) {
+		StringBuffer sb = new StringBuffer();
+		for (BlogType blogType : blogTypeList) {
+			// <li title="<%=bt.getInfo() %>"><a
+			// href="/?tid=<%=bt.getId() %>"><%=bt.getName()%>(<%=bd.getCount(bt.getId())
+			// %>)</a></li>
+			if (blogType.getParentId() == null || blogType.getParentId() == 0) {
+				sb.append("<li title=\"" + blogType.getInfo()
+						+ "\"><a href=/?tid=" + blogType.getId() + ">"
+						+ blogType.getName() + "</a>");
+				sb.append("<ul>");
+				for (BlogType bt_c : blogTypeList) {
+					// System.out.println(bt_c.getParentId()+"  "+
+					// blogType.getId());
+					if (bt_c.getParentId() != null
+							&& bt_c.getParentId().equals(blogType.getId())) {
+						sb.append("<li title=\"" + bt_c.getInfo()
+								+ "\"><a href=/?tid=" + bt_c.getId() + ">"
+								+ bt_c.getName() + "</a></li>");
+					}
+				}
+				sb.append("</ul>");
+				sb.append("</li>");
+			}
+		}
+		return sb.toString();
 	}
 }

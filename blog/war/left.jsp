@@ -20,7 +20,8 @@
 <%@page import="com.google.choujone.blog.entity.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.google.choujone.blog.dao.BlogTypeDao"%>
-<%@page import="com.google.choujone.blog.entity.BlogType"%><div class="left">
+<%@page import="com.google.choujone.blog.entity.BlogType"%>
+<%@page import="com.google.choujone.blog.util.Tools"%><div class="left">
 <%
 	UserDao userDao=new UserDao();
 	User blog_user= userDao.getUserDetail();
@@ -81,18 +82,29 @@
 	<div class="vito-left-title">
 		文章分类
 	</div>
+	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/js/jquery.treeview.js"></script>
 	<div class="vito-left-contentul">
 		<%
 			BlogTypeDao btd=new BlogTypeDao();
 			List<BlogType> btList=	btd.getBlogTypeList();
 		%>
-		<ul class="vito-right-contentul">
+		<ul id="blogType">
 			<li title="全部文章">全部文章(<%=bd.getCount(null) %>)</li>
-			<%for(BlogType bt : btList){ %>
-			<li title="<%=bt.getInfo() %>"><a href="/?tid=<%=bt.getId() %>"><%=bt.getName()%>(<%=bd.getCount(bt.getId()) %>)</a></li>
+			<%if(btList!=null){ %>
+				<%=Tools.blogTypeList2Str(btList) %>
 			<%} %>
 		</ul>
 	</div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#blogType").treeview({
+			persist: "location",
+			collapsed: true,
+			unique: true
+		});
+		});
+	</script>
 	<%} %>
 	<% if(blog_user.getIsTags()==null || blog_user.getIsTags()==0){ %>
 	<div class="vito-left-title">

@@ -18,7 +18,7 @@
 		KE.show({
 			id : 'content',
 			imageUploadJson : "/kindeditor/jsp/upload.jsp",
-			fileManagerJson : '/kindeditor/jsp/file_manager_json.jsp',
+			fileManagerJson : '/kindeditor/jsp/file_manager.jsp',
 			allowFileManager : true,
 			afterCreate : function(id) {
 				KE.event.ctrl(document, 13, function() {
