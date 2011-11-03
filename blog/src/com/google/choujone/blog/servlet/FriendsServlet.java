@@ -21,11 +21,20 @@ public class FriendsServlet extends HttpServlet {
 				.getParameter("op") : "";// 获取操作
 		Long id = req.getParameter("id") != null ? Tools.strTolong(req
 				.getParameter("id")) : -1L;// 获取编号
+		String ids = req.getParameter("ids");// 友情链接id数组
 		FriendsDao friendsDao = new FriendsDao();
 		Friends friends = new Friends();
 		if (operation.trim().equals(Operation.delete.toString())) {// 删除
-			friends.setId(id);
-			friendsDao.operationFriends(Operation.delete, friends);
+			if (ids != null) {
+				String[] id_str = ids.split(",");
+				for (int i = 0; i < id_str.length; i++) {
+					Long bid = Long.valueOf(id_str[i].trim());
+					if (bid > 0) {
+						friends.setId(bid);
+						friendsDao.operationFriends(Operation.delete, friends);
+					}
+				}
+			}
 			req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
 					resp);
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 加载修改

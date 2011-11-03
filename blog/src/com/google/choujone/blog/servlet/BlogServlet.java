@@ -17,7 +17,8 @@ import com.google.choujone.blog.util.Tools;
 public class BlogServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String operation = req.getParameter("op");// 获取操作
+		String operation = req.getParameter("op") != null ? req
+				.getParameter("op") : "";// 获取操作
 		String id = req.getParameter("id");// 博客id
 		String ids = req.getParameter("ids");// 博客id数组
 		String isVisible = req.getParameter("isVisible");// 是否显示
@@ -43,13 +44,16 @@ public class BlogServlet extends HttpServlet {
 			blog = blogDao.getBlogById(Tools.strTolong(id));
 			req.setAttribute("blog", blog);
 			req.getRequestDispatcher("/admin/blog_edit.jsp").forward(req, resp);
+		} else {// 显示文章
+			req.getRequestDispatcher("/blog_detail.jsp").forward(req, resp);
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String operation = req.getParameter("op");// 获取操作
+		String operation = req.getParameter("op") != null ? req
+				.getParameter("op") : "";// 获取操作
 		String title = req.getParameter("title");// 标题
 		String content = req.getParameter("content");// 文章信息
 		String tag = req.getParameter("tag");// 关键字

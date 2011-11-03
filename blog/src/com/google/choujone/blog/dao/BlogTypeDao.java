@@ -89,7 +89,7 @@ public class BlogTypeDao {
 		try {
 			String filter = "";
 			Query query = null;
-			if (parentId != null && parentId > 0) {
+			if (parentId != null ) {
 				filter = " parentId== " + parentId;
 				query = pm.newQuery(BlogType.class, filter);
 			} else {

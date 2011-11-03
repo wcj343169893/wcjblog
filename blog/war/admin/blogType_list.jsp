@@ -17,7 +17,7 @@
 			管理分类（<a href="blogType_add.jsp">新增分类</a>）
 	</div>
 	<%
-		Long parentId=Long.parseLong(request.getParameter("pid")!=null ?request.getParameter("pid") : "-1");
+		Long parentId=Long.parseLong(request.getParameter("pid")!=null ?request.getParameter("pid") : "0");
 		BlogTypeDao btDao=new BlogTypeDao();
 		List<BlogType> blogTypeList=btDao.getBlogTypeList(parentId);
 		BlogType blogType=null;
@@ -36,6 +36,10 @@
 		<span class="tools-left">
 		</span>
 		<span class="tools-right">
+		<%if(blogType!=null) {%>
+				<a href="/admin/blogType_list.jsp?pid=<%=blogType.getParentId() %>">返回上一级</a>
+			<%}else{ %>
+			<%} %>
 		</span>
 	</div>
 	<div class="vito-content">	

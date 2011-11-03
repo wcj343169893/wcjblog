@@ -101,7 +101,7 @@ for(int i=0;i<blogs.size();i++){
 %>
 <div class="vito-content">
 	<div class="vito-content-title">
-		<a href="/blog_detail.jsp?id=<%=blog.getId() %>">
+		<a href="/blog?id=<%=blog.getId() %>">
 			<%=blog.getTitle() %>
 		</a>
 	</div>
