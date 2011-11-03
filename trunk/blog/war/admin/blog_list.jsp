@@ -72,7 +72,7 @@
 				Blog blog=blogs.get(i); %>
 			<tr>
 				<td class="vito-content-check"><input type="checkbox" id="rid_<%=blog.getId() %>" class="input_check_single" onclick="singleDeleteFlag(this)" name="deleteFlag" value="<%=blog.getId() %>"/></td>
-				<td class="vito-title">&nbsp;&nbsp;<a href="/blog?id=<%=blog.getId() %>&op=modify" title='修改   "<%=blog.getTitle() %>"'>[ 编辑 ]</a> &nbsp;  <a href="/blog_detail.jsp?id=<%=blog.getId() %>" target="_blank" title='查看  "<%=blog.getTitle() %>"'><%=blog.getTitle() %></a></td>
+				<td class="vito-title">&nbsp;&nbsp;<a href="/blog?id=<%=blog.getId() %>&op=modify" title='修改   "<%=blog.getTitle() %>"'>[ 编辑 ]</a> &nbsp;  <a href="/blog?id=<%=blog.getId() %>" target="_blank" title='查看  "<%=blog.getTitle() %>"'><%=blog.getTitle() %></a></td>
 				<td><%=blog.getContent(10).getValue() %></td>
 				<td><%=typeMaps.get(blog.getTid())%></td>
 				<td><%=blog.getReplyCount() %>/<%=blog.getCount() %></td>

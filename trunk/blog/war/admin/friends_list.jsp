@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>友情链接</title>
+<script type="text/javascript" src="/js/jquery.js"></script>
 </head>
 <body>
 <div class="main">
@@ -45,7 +46,7 @@
 	</div>
 	<div class="tools">
 		<span class="tools-left">
-			<input type="button" onclick="alert('删除中....')" value="删除">
+			<input type="button" value="删除" onclick="deletes('/friends')">
 		</span>
 		<span class="tools-right">
 			共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
@@ -61,8 +62,8 @@
 	<div class="vito-content">	
 		<table cellpadding="0" cellspacing="0">
 			<tr>
-				<th class="vito-content-check"><input type="checkbox"/></th>
-				<th width="100px;">姓名</th>
+				<th class="vito-content-check"><input type="checkbox" id="input_check_all" onclick="allCheckFlag(this)"/></th>
+				<th width="300px;">姓名</th>
 				<th>链接</th>
 				<th>描述</th>
 				<th>创建时间 </th>
@@ -71,7 +72,7 @@
 				for(int i=0;i<friendsList.size();i++){
 				Friends friends=friendsList.get(i); %>
 			<tr>
-				<td class="vito-content-check"><input type="checkbox" value="<%=friends.getId() %>"/></td>
+				<td class="vito-content-check"><input type="checkbox" id="rid_<%=friends.getId() %>" class="input_check_single" onclick="singleDeleteFlag(this)" name="deleteFlag" value="<%=friends.getId() %>"/></td>
 				<td class="vito-title"> <a href="/friends?op=modify&id=<%=friends.getId() %>">[修改]</a> <%=friends.getName() %> </td>
 				<td><a href="<%=friends.getUrl() %>" title='查看  "<%=friends.getName() %>"' target="_bank"><%=friends.getUrl() %></a> </td>
 				<td><%=friends.getDescription()%></td>
