@@ -21,26 +21,37 @@
 	UserDao userDao=new UserDao();
 	User user=userDao.getUserDetail();
 	User login_user=(User)request.getSession().getAttribute("login_user");
-	String title=user.getpTitle();
+	String title=user!=null ? user.getpTitle():"";
 	userDao.closePM();
+	Long tid=null;
+	try{
+		 tid=request.getParameter("tid") != null ? Long.valueOf(request.getParameter("tid").toString()) : null;
+	}catch(Exception e){
+		tid=null;
+	}
+	
 	//查询所有的分类
 	BlogTypeDao btd=new BlogTypeDao();
 	List<BlogType> blogTypeList = new ArrayList<BlogType>();
 	blogTypeList=btd.getBlogTypeList();
 	Map<Long,String> typeMaps=new HashMap<Long,String>();
+	
 	for(int i=0;i<blogTypeList.size();i++){
 		typeMaps.put(blogTypeList.get(i).getId(),blogTypeList.get(i).getName());
+		if(blogTypeList.get(i).getId().equals(tid)){
+			title=blogTypeList.get(i).getName()+"_"+title;
+		}
 	}
 %>
 <title><%=title %></title>
 <%
-	if(user.getBlogHead()!=null && !"".equals(user.getBlogHead())){
+	if(user!=null && user.getBlogHead()!=null && !"".equals(user.getBlogHead())){
 		out.print(user.getBlogHead());
 	}
 %>
 <meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
-<meta name="keywords" content="<%=user.getBlogKeyword() %>">
-<meta name="description" content="<%=user.getBlogDescription() %>">
+<meta name="keywords" content="<%=user!=null ? user.getBlogKeyword():"" %>">
+<meta name="description" content="<%=user!=null ? user.getBlogDescription():"" %>">
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -72,12 +83,7 @@
 <%
 	BlogDao blogDao = new BlogDao();
 	Integer p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
-	Long tid=null;
-	try{
-		 tid=request.getParameter("tid") != null ? Long.valueOf(request.getParameter("tid").toString()) : null;
-	}catch(Exception e){
-		tid=null;
-	}
+	
 	Pages pages=new Pages();
 	pages.setPageNo(p);
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
@@ -95,6 +101,7 @@
 	<%} %>
 </div>
 <%
+if(blogs!=null && blogs.size()>0){
 for(int i=0;i<blogs.size();i++){
 	Blog blog=blogs.get(i);
 	if(blog.getIsVisible() == 0 ){
@@ -115,7 +122,7 @@ for(int i=0;i<blogs.size();i++){
 			Tags:<%=blog.getTag() %>
 		</font>
 		<font class="post-footer">
-			发布:<%=user.getName() %> | 
+			发布:<%=user!=null ? user.getName():"" %> | 
 			分类:<%=typeMaps.get(blog.getTid())%> | 
 			评论:<%=blog.getReplyCount() %> | 
 			浏览:<%=blog.getCount() %>
@@ -126,7 +133,13 @@ for(int i=0;i<blogs.size();i++){
 	</div>
 </div><br>
 <%}	
-} %>
+} }else{%>
+<div class="vito-content">
+	<div class="vito-content-title">
+			暂无内容
+	</div>
+</div>
+<%} %>
 <div class="vito-prenext">
 	共<%=pages.getRecTotal() %>  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页
 	<%if(p > 1){ %>

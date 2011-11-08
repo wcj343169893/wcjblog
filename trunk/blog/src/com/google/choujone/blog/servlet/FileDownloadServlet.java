@@ -36,23 +36,17 @@ public class FileDownloadServlet extends HttpServlet {
 			ind = filename.indexOf("_");
 			String id = filename.substring(0, ind);
 			filename = filename.substring(ind + 1);
-
-			DataFile df = null;
-			if (id != null) {
-				df = service.get(Long.valueOf(id), true);
-			}
-
-			if (df != null && df.getFilename().equals(filename)) {
-				resp.getOutputStream().write(df.getFileData().getBytes());
-			}
+			//下面这段代码，是因为google限制了流量，限制了数据库访问量 ，所以禁止显示图片
+			/**
+			 * DataFile df = null; if (id != null) { df =
+			 * service.get(Long.valueOf(id), true); }
+			 * 
+			 * if (df != null && df.getFilename().equals(filename)) {
+			 * resp.getOutputStream().write(df.getFileData().getBytes()); }
+			 * */
 		} catch (Exception e) {
-//			resp.setContentType("text/html;charset=utf-8");
-//			resp.setCharacterEncoding("UTF-8");
-//			resp.setHeader("Cache-Control", "no-cache");
-//			PrintWriter out = resp.getWriter();
-//			out.println("/images/error.gif");
-//			out.close();
-			resp.sendRedirect("/images/error.gif");
+			// resp.sendRedirect("/images/error.gif");
 		}
+		resp.sendRedirect("/images/error.gif");
 	}
 }

@@ -26,6 +26,8 @@ public class UserDao {
 			List<User> users = (List<User>) query.execute();
 			if (users != null && users.size() > 0) {
 				user = users.get(0);
+			} else {
+				Create();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,20 +53,26 @@ public class UserDao {
 			if (users != null && users.size() > 0) {
 				user = users.get(0);
 			} else {
-				user = new User();
-				Date dt = new Date(System.currentTimeMillis());
-				user.setId(dt.getTime());
-				user.setName("choujone");
-				user.setPassword("123456");
-				user.setpTitle("文朝军的博客");
-				user.setCtitle("这是我写的第一个小博客");// 子标题
-				user.setEmail("wcj343169893@163.com");
-				user.setDescription("我目前是一个Java程序员");
-				pm.makePersistent(user);
+				pm.makePersistent(Create());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return user;
+	}
+
+	// 默认创建一个用户
+	private User Create() {
+		user = new User();
+		Date dt = new Date(System.currentTimeMillis());
+		user.setId(dt.getTime());
+		user.setName("choujone");
+		user.setPassword("123456");
+		user.setpTitle("文朝军的博客");
+		user.setCtitle("这是我写的第一个小博客");// 子标题
+		user.setEmail("wcj343169893@163.com");
+		user.setDescription("我目前是一个Java程序员");
+		
 		return user;
 	}
 

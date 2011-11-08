@@ -42,7 +42,7 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%=blog.getTitle() %> -- <%=blog_user.getpTitle() %></title>
+<title><%=blog.getTitle() %>_<%=bt.getName()%>_<%=blog_user.getpTitle() %></title>
 <%
 	if(blog_user.getBlogHead()!=null && !"".equals(blog_user.getBlogHead().trim())){
 		out.print(blog_user.getBlogHead());

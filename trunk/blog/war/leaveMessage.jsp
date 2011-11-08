@@ -15,7 +15,7 @@
 	UserDao userDao=new UserDao();
 	User blog_user= userDao.getUserDetail();
 %>
-<title>留言板  --  <%=blog_user.getpTitle()%></title>
+<title>留言板 _<%=blog_user.getpTitle()%></title>
 <meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
 <meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
 <meta name="description" content="<%=blog_user.getBlogDescription() %>">
