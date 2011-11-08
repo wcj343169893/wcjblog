@@ -1,4 +1,5 @@
 
+<%@page import="org.apache.commons.fileupload.FileUploadBase.FileUploadIOException"%>
 <%@page import="com.google.choujone.blog.util.Uplode"%><%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,java.io.*"%>
@@ -15,7 +16,7 @@
 <%
 	boolean verbose = false;
 	long serialVersionUID = -3372121303184986833L;
-	int MAX_FILE_SIZE = 1024 * 1024 * 2;// 2MB
+	int MAX_FILE_SIZE = 1024 * 1024 * 1;// 1MB
 	int MAX_FILES = 5;
 	byte[] data = new byte[MAX_FILE_SIZE];
 	byte[] buffer = new byte[1024];// 1kb
@@ -84,7 +85,14 @@
 				df.setFilename(filename);
 				df.setSize(size);
 				df.setPostDate(new Date(System.currentTimeMillis()));
-
+				
+				StringBuffer custom_info=new StringBuffer();
+	            custom_info.append("RemoteAddr"+":"+request.getRemoteAddr()+"</br>");
+	            custom_info.append("Content-Length"+":"+request.getHeader("Content-Length")+"</br>");
+	            custom_info.append("Accept-Charset"+":"+request.getHeader("Accept-Charset")+"</br>");
+	            custom_info.append("Accept-Language"+":"+request.getHeader("Accept-Language")+"</br>");
+				
+				df.setDescription(custom_info.toString());
 				service.add(df);
 				url = path + "/file/" + df.getId() + "_"
 						+ df.getFilename();
@@ -94,8 +102,18 @@
 			obj.put("error", 0);
 			obj.put("url", url);
 			out.print(obj.toJSONString());
+		}catch (FileUploadBase.FileUploadIOException e) {
+			out.println(getError("上传文件不能大于"+MAX_FILE_SIZE/1024/1024+"M。"));
 		} catch (Exception e) {
-			out.print("error");
+			out.println(getError("上传出错啦。"));
 		}
 	}
+%>
+<%!
+private String getError(String message) {
+	JSONObject obj = new JSONObject();
+	obj.put("error", 1);
+	obj.put("message", message);
+	return obj.toJSONString();
+}
 %>

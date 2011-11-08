@@ -20,7 +20,7 @@
 		Long id=Long.parseLong(request.getParameter("id")!=null ?request.getParameter("id") : "-1");
 		BlogTypeDao btDao=new BlogTypeDao();
 		BlogType bt=btDao.getBlogTypeById(id);
-		List<BlogType> blogTypeList=btDao.getBlogTypeList(-1L);
+		List<BlogType> blogTypeList=btDao.getBlogTypeList(0L);
 		List<BlogType> blogTypeList_children=null;
 	%>
 		<div id="container">

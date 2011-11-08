@@ -46,8 +46,9 @@
 		<table cellpadding="0" cellspacing="0">
 			<tr>
 				<th class="vito-content-check"><input type="checkbox" id="input_check_all" onclick="allCheckFlag(this)"/></th>
-				<th>上级id</th>
+				<th width="200px">上级id</th>
 				<th width="300px">分类名</th>
+				<th>介绍</th>
 				<th width="300px">操作</th>
 			</tr>
 			<% if(blogTypeList!=null && blogTypeList.size()>0){ %>
@@ -56,6 +57,7 @@
 						<td class="vito-content-check"><input type="checkbox" id="rid_<%=bt.getId() %>" class="input_check_single" onclick="singleDeleteFlag(this)" name="deleteFlag" value="<%=bt.getId() %>"/></td>
 						<td><%=bt.getParentId() %></td>
 						<td><%=bt.getName() %></td>
+						<td><%=bt.getInfo() %></td>
 						<td>
 							<a href="/admin/blogType_list.jsp?pid=<%=bt.getId() %>" class="child" title="子分类">&nbsp;</a>   
 							<a href="/admin/blogType_add.jsp?pid=<%=bt.getId() %>" class="newChild" title="添加子分类">&nbsp;</a>   
