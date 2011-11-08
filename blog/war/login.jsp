@@ -14,7 +14,7 @@
 	UserDao userDao=new UserDao();
 	User blog_user= userDao.getUserDetail();
 %>
-<title>登录  --  <%=blog_user.getpTitle()%></title>
+<title>登录_<%=blog_user.getpTitle()%></title>
 <meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
 <meta name="description" content="<%=blog_user.getBlogDescription() %>">
 <%
