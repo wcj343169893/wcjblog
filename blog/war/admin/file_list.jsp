@@ -54,6 +54,7 @@
 		<table cellpadding="0" cellspacing="0">
 			<tr>
 				<th class="vito-content-check"><input type="checkbox" id="input_check_all" onclick="allCheckFlag(this)"/></th>
+				<th>编号</th>
 				<th>图片</th>
 				<th width="300px">filename</th>
 				<th>size</th>
@@ -67,6 +68,7 @@
 				DataFile file=files.get(i); %>
 			<tr>
 				<td class="vito-content-check"><input type="checkbox" id="rid_<%=file.getId() %>" class="input_check_single" onclick="singleDeleteFlag(this)" name="deleteFlag" value="<%=file.getId() %>"/></td>
+				<td><%=file.getId() %></td>
 				<td>
 					<img alt="" src="/file/<%=file.getId() %>_<%=file.getFilename() %>" height="100px;" width="100px">
 				</td>

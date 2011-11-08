@@ -89,6 +89,14 @@ public class FileUploadServlet extends HttpServlet {
 					df.setSize(size);
 					df.setPostDate(new Date(System.currentTimeMillis()));
 
+					StringBuffer custom_info=new StringBuffer();
+		            custom_info.append("RemoteAddr"+":"+req.getRemoteAddr()+"</br>");
+		            custom_info.append("Content-Length"+":"+req.getHeader("Content-Length")+"</br>");
+		            custom_info.append("Accept-Charset"+":"+req.getHeader("Accept-Charset")+"</br>");
+		            custom_info.append("Accept-Language"+":"+req.getHeader("Accept-Language")+"</br>");
+					
+					df.setDescription(custom_info.toString());
+					
 					service.add(df);
 					appendFile(df, buff, path);
 				}

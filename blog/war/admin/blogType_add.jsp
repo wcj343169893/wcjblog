@@ -19,7 +19,7 @@
 	<%
 		Long pid=Long.parseLong(request.getParameter("pid")!=null ?request.getParameter("pid") : "-1");
 		BlogTypeDao btDao=new BlogTypeDao();
-		List<BlogType> blogTypeList=btDao.getBlogTypeList(-1L);
+		List<BlogType> blogTypeList=btDao.getBlogTypeList(0L);
 		List<BlogType> blogTypeList_children=null;
 	%>
 		<div id="container">
