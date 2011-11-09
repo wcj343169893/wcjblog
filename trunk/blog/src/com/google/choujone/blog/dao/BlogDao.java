@@ -347,8 +347,10 @@ public class BlogDao {
 	 * @return
 	 */
 	public Map<String, Integer> getCount() {
-		Map<String, Integer> counts = new HashMap<String, Integer>();
-		if (MyCache.cache.get("blogDao_getCount") == null) {
+		Map<String, Integer> counts = (Map<String, Integer>) MyCache.cache
+				.get("blogDao_getCount");
+		if (counts == null) {
+			counts = new HashMap<String, Integer>();
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				Query q = pm.newQuery(Blog.class, " isVisible==0 ");
@@ -379,9 +381,6 @@ public class BlogDao {
 				e.printStackTrace();
 			}
 			closePM();
-		} else {
-			counts = (Map<String, Integer>) MyCache.cache
-					.get("blogDao_getCount");
 		}
 		return counts;
 	}
