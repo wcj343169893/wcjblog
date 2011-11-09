@@ -37,7 +37,7 @@
 	</div>
 	<div class="tools">
 		<span class="tools-left">
-			<input type="button" value="删除" onclick="alert('想删我？？没门！！')">
+			<input type="button" value="删除" onclick="deletes('/fileUpload')">
 		</span>
 		<span class="tools-right">
 			共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
