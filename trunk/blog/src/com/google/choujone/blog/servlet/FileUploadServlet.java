@@ -16,6 +16,7 @@ import org.apache.commons.fileupload.FileUploadBase.FileUploadIOException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.google.appengine.api.datastore.Blob;
+import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.DataFileDao;
 import com.google.choujone.blog.entity.DataFile;
 
@@ -29,7 +30,7 @@ public class FileUploadServlet extends HttpServlet {
 	public static final int MAX_FILES = 5;
 	private byte[] data = new byte[MAX_FILE_SIZE];
 	private byte[] buffer = new byte[1024];// 1kb
-	private DataFileDao service = new DataFileDao();
+	private DataFileDao dfDao = new DataFileDao();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -89,15 +90,19 @@ public class FileUploadServlet extends HttpServlet {
 					df.setSize(size);
 					df.setPostDate(new Date(System.currentTimeMillis()));
 
-					StringBuffer custom_info=new StringBuffer();
-		            custom_info.append("RemoteAddr"+":"+req.getRemoteAddr()+"</br>");
-		            custom_info.append("Content-Length"+":"+req.getHeader("Content-Length")+"</br>");
-		            custom_info.append("Accept-Charset"+":"+req.getHeader("Accept-Charset")+"</br>");
-		            custom_info.append("Accept-Language"+":"+req.getHeader("Accept-Language")+"</br>");
-					
+					StringBuffer custom_info = new StringBuffer();
+					custom_info.append("RemoteAddr" + ":" + req.getRemoteAddr()
+							+ "</br>");
+					custom_info.append("Content-Length" + ":"
+							+ req.getHeader("Content-Length") + "</br>");
+					custom_info.append("Accept-Charset" + ":"
+							+ req.getHeader("Accept-Charset") + "</br>");
+					custom_info.append("Accept-Language" + ":"
+							+ req.getHeader("Accept-Language") + "</br>");
+
 					df.setDescription(custom_info.toString());
-					
-					service.add(df);
+
+					dfDao.add(df);
 					appendFile(df, buff, path);
 				}
 
@@ -116,14 +121,29 @@ public class FileUploadServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		resp.setContentType("text/html");
-		//分页获取连接
-		
-		StringBuffer buff = new StringBuffer();
-		buff.append("<div>");
-		buff.append("Post method is not supported!");
-		buff.append("</div>");
-		resp.getOutputStream().write(buff.toString().getBytes());
+		// resp.setContentType("text/html");
+		// //分页获取连接
+		//		
+		// StringBuffer buff = new StringBuffer();
+		// buff.append("<div>");
+		// buff.append("Post method is not supported!");
+		// buff.append("</div>");
+		// resp.getOutputStream().write(buff.toString().getBytes());
+		String operation = req.getParameter("op") != null ? req
+				.getParameter("op") : "";// 获取操作
+		String ids = req.getParameter("ids");// 文件id
+		if (operation.trim().equals(Operation.delete.toString())) {// 删除
+			if (ids != null) {
+				String[] id_str = ids.split(",");
+				for (int i = 0; i < id_str.length; i++) {
+					Long fid = Long.valueOf(id_str[i].trim());
+					if (fid > 0) {
+						dfDao.delete(fid);
+					}
+				}
+			}
+		}
+		resp.sendRedirect("/admin/file_list.jsp");
 	}
 
 	private void appendFile(DataFile df, StringBuffer buff, String path) {
