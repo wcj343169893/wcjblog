@@ -15,6 +15,7 @@ import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
 import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Reply;
+import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
 import com.google.choujone.blog.util.Tools;
 
@@ -347,36 +348,41 @@ public class BlogDao {
 	 */
 	public Map<String, Integer> getCount() {
 		Map<String, Integer> counts = new HashMap<String, Integer>();
-		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
-		try {
-			Query q = pm.newQuery(Blog.class, " isVisible==0 ");
-			List<Blog> blogs = (List<Blog>) q.execute();
-			int blogcount = blogs.size();
-			int scancount = 0;
-			int replycount = 0;
-			for (int i = 0; i < blogcount; i++) {
-				Blog b = blogs.get(i);
-				scancount += b.getCount();
-				replycount += b.getReplyCount();
+		if (MyCache.cache.get("blogDao_getCount") == null) {
+			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			try {
+				Query q = pm.newQuery(Blog.class, " isVisible==0 ");
+				List<Blog> blogs = (List<Blog>) q.execute();
+				int blogcount = blogs.size();
+				int scancount = 0;
+				int replycount = 0;
+				for (int i = 0; i < blogcount; i++) {
+					Blog b = blogs.get(i);
+					scancount += b.getCount();
+					replycount += b.getReplyCount();
+				}
+				// 查询文章总数
+				counts.put("blogcount", blogcount);
+				// 查询浏览总数
+				counts.put("scancount", scancount);
+				// 查询评论
+				counts.put("replycount", replycount);
+
+				// 查询留言
+				String filter = " select count(id) from "
+						+ Reply.class.getName() + " where bid == -1L";
+				q = pm.newQuery(filter);
+				Object obj = q.execute();
+				counts.put("messagecount", Integer.parseInt(obj.toString()));
+				MyCache.cache.put("blogDao_getCount", counts);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			// 查询文章总数
-			counts.put("blogcount", blogcount);
-			// 查询浏览总数
-			counts.put("scancount", scancount);
-			// 查询评论
-			counts.put("replycount", replycount);
-
-			// 查询留言
-			String filter = " select count(id) from " + Reply.class.getName()
-					+ " where bid == -1L";
-			q = pm.newQuery(filter);
-			Object obj = q.execute();
-			counts.put("messagecount", Integer.parseInt(obj.toString()));
-
-		} catch (Exception e) {
-			e.printStackTrace();
+			closePM();
+		} else {
+			counts = (Map<String, Integer>) MyCache.cache
+					.get("blogDao_getCount");
 		}
-		closePM();
 		return counts;
 	}
 

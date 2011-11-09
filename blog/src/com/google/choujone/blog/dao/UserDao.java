@@ -9,6 +9,7 @@ import javax.jdo.Query;
 
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.entity.User;
+import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
 
 /**
@@ -20,17 +21,22 @@ public class UserDao {
 	private User user;
 
 	public User getUserDetail() {
-		try {
-			pm = PMF.get().getPersistenceManager();
-			Query query = pm.newQuery(User.class);
-			List<User> users = (List<User>) query.execute();
-			if (users != null && users.size() > 0) {
-				user = users.get(0);
-			} else {
-				Create();
+		user = (User) MyCache.cache.get("userDao_getUserDetail");
+		if (user == null) {
+			try {
+				pm = PMF.get().getPersistenceManager();
+				Query query = pm.newQuery(User.class);
+				List<User> users = (List<User>) query.execute();
+				if (users != null && users.size() > 0) {
+					user = users.get(0);
+				} else {
+					Create();
+				}
+				// 把用户信息存入缓存中
+				MyCache.cache.put("userDao_getUserDetail", user);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return user;
 	}
@@ -72,7 +78,7 @@ public class UserDao {
 		user.setCtitle("这是我写的第一个小博客");// 子标题
 		user.setEmail("wcj343169893@163.com");
 		user.setDescription("我目前是一个Java程序员");
-		
+
 		return user;
 	}
 
