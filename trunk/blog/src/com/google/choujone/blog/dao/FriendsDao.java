@@ -9,6 +9,7 @@ import javax.jdo.Query;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
 import com.google.choujone.blog.entity.Friends;
+import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
 
 /**
@@ -65,7 +66,7 @@ public class FriendsDao {
 
 	public Friends getFriendsById(Long id) {
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
-		return (Friends) pm.getObjectById(Friends.class,id);
+		return (Friends) pm.getObjectById(Friends.class, id);
 	}
 
 	/**
@@ -75,20 +76,23 @@ public class FriendsDao {
 	 * @return
 	 */
 	public List<Friends> getFriendsByPage(Pages pages) {
-		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
-		List<Friends> friends = null;
-		try {
-			// 查询总条数
-			Query q = pm.newQuery("select count(id) from "
-					+ Friends.class.getName());
-			Object obj = q.execute();
-			pages.setRecTotal(Integer.parseInt(obj.toString()));
-			Query query = pm.newQuery(Friends.class);
-			query.setOrdering("sdTime desc");
-			query.setRange(pages.getFirstRec(), pages.getPageNo()
-					* pages.getPageSize());
-			friends = (List<Friends>) query.execute();
-		} catch (Exception e) {
+		List<Friends> friends=(List<Friends>)MyCache.cache.get("friendsDao_getFriendsByPage");
+		if (friends == null) {
+			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			try {
+				// 查询总条数
+				Query q = pm.newQuery("select count(id) from "
+						+ Friends.class.getName());
+				Object obj = q.execute();
+				pages.setRecTotal(Integer.parseInt(obj.toString()));
+				Query query = pm.newQuery(Friends.class);
+				query.setOrdering("sdTime desc");
+				query.setRange(pages.getFirstRec(), pages.getPageNo()
+						* pages.getPageSize());
+				friends = (List<Friends>) query.execute();
+				MyCache.cache.put("friendsDao_getFriendsByPage", friends);
+			} catch (Exception e) {
+			}
 		}
 		return friends;
 	}

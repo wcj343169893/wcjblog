@@ -10,6 +10,7 @@ import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
 import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Reply;
+import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
 import com.google.choujone.blog.util.Tools;
 
@@ -135,20 +136,26 @@ public class ReplyDao {
 	 */
 	public List<Reply> getReplyList(Long bid, Pages pages) {
 		List<Reply> replyList = null;
-		try {
-			pm = PMF.get().getPersistenceManager();
-			Query q = pm.newQuery("select count(id) from "
-					+ Reply.class.getName() + " where bid == " + bid);
-			Object obj = q.execute();
-			pages.setRecTotal(Integer.parseInt(obj.toString()));
+		if (MyCache.cache.get("replyDao_getReplyList") == null) {
+			try {
+				pm = PMF.get().getPersistenceManager();
+				Query q = pm.newQuery("select count(id) from "
+						+ Reply.class.getName() + " where bid == " + bid);
+				Object obj = q.execute();
+				pages.setRecTotal(Integer.parseInt(obj.toString()));
 
-			Query query = pm.newQuery(Reply.class, " bid == " + bid);
-			query.setOrdering(" sdTime desc");
-			query.setRange(pages.getFirstRec(), pages.getPageNo()
-					* pages.getPageSize());
-			replyList = (List<Reply>) query.execute();
-		} catch (Exception e) {
-			e.printStackTrace();
+				Query query = pm.newQuery(Reply.class, " bid == " + bid);
+				query.setOrdering(" sdTime desc");
+				query.setRange(pages.getFirstRec(), pages.getPageNo()
+						* pages.getPageSize());
+				replyList = (List<Reply>) query.execute();
+				MyCache.cache.put("replyDao_getReplyList", replyList);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			replyList = (List<Reply>) MyCache.cache
+					.get("replyDao_getReplyList");
 		}
 		return replyList;
 	}
@@ -185,15 +192,19 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyList(int count) {
-		List<Reply> replyList = null;
-		try {
-			pm = PMF.get().getPersistenceManager();
-			Query query = pm.newQuery(Reply.class, " bid != -1L ");
-			query.setRange(0, count);
-			query.setOrdering(" bid desc");
-			replyList = (List<Reply>) query.execute();
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<Reply> replyList = (List<Reply>) MyCache.cache
+				.get("replyDao_getReplyList");
+		if (replyList == null) {
+			try {
+				pm = PMF.get().getPersistenceManager();
+				Query query = pm.newQuery(Reply.class, " bid != -1L ");
+				query.setRange(0, count);
+				query.setOrdering(" bid desc");
+				replyList = (List<Reply>) query.execute();
+				MyCache.cache.put("replyDao_getReplyList", replyList);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return replyList;
 	}
