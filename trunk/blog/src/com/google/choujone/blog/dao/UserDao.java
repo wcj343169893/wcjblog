@@ -138,6 +138,7 @@ public class UserDao {
 			flag = false;
 			e.printStackTrace();
 		}
+		MyCache.cache.put("userDao_getUserDetail", user);
 		closePM();
 		return flag;
 	}
@@ -147,8 +148,6 @@ public class UserDao {
 	 * 
 	 */
 	public void closePM() {
-		if (this.pm != null && !this.pm.isClosed()) {
-			this.pm.close();
-		}
+		PMF.closePm(this.pm);
 	}
 }

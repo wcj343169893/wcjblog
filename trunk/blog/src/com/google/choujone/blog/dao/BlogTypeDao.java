@@ -68,13 +68,13 @@ public class BlogTypeDao {
 	 */
 	public List<BlogType> getBlogTypeList() {
 		key = "blogTypeDao_getBlogTypeList";
-		List<BlogType> blogTypeList = (List<BlogType>) MyCache.cache.get(key);
+		List<BlogType> blogTypeList =  MyCache.get(key);
 		if (blogTypeList == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				Query query = pm.newQuery(BlogType.class);
 				blogTypeList = (List<BlogType>) query.execute();
-				MyCache.cache.put(key, blogTypeList);
+				MyCache.put(key, blogTypeList);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -90,7 +90,7 @@ public class BlogTypeDao {
 	 */
 	public List<BlogType> getBlogTypeList(Long parentId) {
 		key = "blogTypeDao_getBlogTypeList_" + parentId;
-		List<BlogType> blogTypeList = (List<BlogType>) MyCache.cache.get(key);
+		List<BlogType> blogTypeList =MyCache.get(key);
 		if (blogTypeList == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -103,7 +103,7 @@ public class BlogTypeDao {
 					query = pm.newQuery(BlogType.class);
 				}
 				blogTypeList = (List<BlogType>) query.execute();
-				MyCache.cache.put(key, blogTypeList);
+				MyCache.put(key, blogTypeList);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -137,6 +137,6 @@ public class BlogTypeDao {
 	 * 关闭链接（不能在显示数据前关闭链接，不然报错）
 	 */
 	public void closePM() {
-		this.pm.close();
+		PMF.closePm(this.pm);
 	}
 }
