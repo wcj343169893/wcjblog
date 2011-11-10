@@ -16,7 +16,7 @@ import com.google.choujone.blog.util.PMF;
  * 友情链接操作类
  */
 public class FriendsDao {
-	PersistenceManager pm;
+	PersistenceManager pm;String key = "";//缓存key
 
 	/**
 	 * 增加，删除，修改

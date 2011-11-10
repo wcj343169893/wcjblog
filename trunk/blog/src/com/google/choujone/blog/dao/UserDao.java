@@ -94,16 +94,7 @@ public class UserDao {
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 		try {
 			if (operation.equals(Operation.add)) {// 增加用户信息只运行一次
-				user = new User();
-				Date dt = new Date(System.currentTimeMillis());
-				user.setId(dt.getTime());
-				user.setName("choujone");
-				user.setPassword("123456");
-				user.setpTitle("文朝军的博客");
-				user.setCtitle("这是我写的第一个小博客");// 子标题
-				user.setEmail("wcj343169893@163.com");
-				user.setDescription("我目前是一个Java程序员");
-				pm.makePersistent(user);
+				pm.makePersistent(Create());
 				flag = true;
 			} else if (operation.equals(Operation.modify)) {// 修改
 				Query query = pm.newQuery(User.class);
