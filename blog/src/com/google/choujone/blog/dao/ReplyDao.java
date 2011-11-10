@@ -8,7 +8,6 @@ import javax.jdo.Query;
 
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
-import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Reply;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
@@ -20,7 +19,7 @@ import com.google.choujone.blog.util.Tools;
  */
 public class ReplyDao {
 	PersistenceManager pm;
-
+	String key = "";//缓存key
 	/**
 	 * 发布,回复
 	 * 
@@ -106,23 +105,27 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyListByBid(Long bid, Pages pages) {
-		List<Reply> replyList = null;
-		try {
-			pm = PMF.get().getPersistenceManager();
-			Query q = pm.newQuery("select count(id) from "
-					+ Reply.class.getName() + " where bid == " + bid);
-			Object obj = q.execute();
-			pages.setRecTotal(Integer.parseInt(obj.toString()));
+		key = "replyDao_bid_" + bid + "_" + pages.getPageNo();
+		List<Reply> replyList = (List<Reply>) MyCache.cache.get(key);
+		if (replyList == null) {
+			try {
+				pm = PMF.get().getPersistenceManager();
+				Query q = pm.newQuery("select count(id) from "
+						+ Reply.class.getName() + " where bid == " + bid);
+				Object obj = q.execute();
+				pages.setRecTotal(Integer.parseInt(obj.toString()));
 
-			Query query = pm.newQuery(Reply.class, " bid == " + bid);
-			query.setRange(pages.getFirstRec(), pages.getPageNo()
-					* pages.getPageSize());
-			if (bid < 0) {
-				query.setOrdering(" sdTime desc ");
+				Query query = pm.newQuery(Reply.class, " bid == " + bid);
+				query.setRange(pages.getFirstRec(), pages.getPageNo()
+						* pages.getPageSize());
+				if (bid < 0) {
+					query.setOrdering(" sdTime desc ");
+				}
+				replyList = (List<Reply>) query.execute();
+				MyCache.cache.put(key, replyList);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			replyList = (List<Reply>) query.execute();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return replyList;
 	}
@@ -135,8 +138,12 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyList(Long bid, Pages pages) {
-		List<Reply> replyList = null;
-		if (MyCache.cache.get("replyDao_getReplyList") == null) {
+		key = "replyDao_getReplyList_" + bid + "_" + pages.getPageNo()
+				+ pages.getPageSize() + pages.getPageTotal()
+				+ pages.getFirstRec() + pages.getOrderBy()
+				+ pages.getRecTotal() + pages.getSort();
+		List<Reply> replyList = (List<Reply>) MyCache.cache.get(key);
+		if (replyList == null) {
 			try {
 				pm = PMF.get().getPersistenceManager();
 				Query q = pm.newQuery("select count(id) from "
@@ -149,13 +156,10 @@ public class ReplyDao {
 				query.setRange(pages.getFirstRec(), pages.getPageNo()
 						* pages.getPageSize());
 				replyList = (List<Reply>) query.execute();
-				MyCache.cache.put("replyDao_getReplyList", replyList);
+				MyCache.cache.put(key, replyList);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else {
-			replyList = (List<Reply>) MyCache.cache
-					.get("replyDao_getReplyList");
 		}
 		return replyList;
 	}
@@ -167,20 +171,27 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyList(Pages pages) {
-		List<Reply> replyList = null;
-		try {
-			pm = PMF.get().getPersistenceManager();
-			Query q = pm.newQuery("select count(id) from "
-					+ Reply.class.getName());
-			Object obj = q.execute();
-			pages.setRecTotal(Integer.parseInt(obj.toString()));
+		key = "replyDao_getReplyList_null_" + pages.getPageNo()
+				+ pages.getPageSize() + pages.getPageTotal()
+				+ pages.getFirstRec() + pages.getOrderBy()
+				+ pages.getRecTotal() + pages.getSort();
+		List<Reply> replyList = (List<Reply>) MyCache.cache.get(key);
+		if (replyList == null) {
+			try {
+				pm = PMF.get().getPersistenceManager();
+				Query q = pm.newQuery("select count(id) from "
+						+ Reply.class.getName());
+				Object obj = q.execute();
+				pages.setRecTotal(Integer.parseInt(obj.toString()));
 
-			Query query = pm.newQuery(Reply.class);
-			query.setOrdering(" sdTime desc");
-			query.setRange(pages.getFirstRec(), pages.getPageNo()
-					* pages.getPageSize());
-			replyList = (List<Reply>) query.execute();
-		} catch (Exception e) {
+				Query query = pm.newQuery(Reply.class);
+				query.setOrdering(" sdTime desc");
+				query.setRange(pages.getFirstRec(), pages.getPageNo()
+						* pages.getPageSize());
+				replyList = (List<Reply>) query.execute();
+				MyCache.cache.put(key, replyList);
+			} catch (Exception e) {
+			}
 		}
 		return replyList;
 	}
@@ -192,8 +203,8 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyList(int count) {
-		List<Reply> replyList = (List<Reply>) MyCache.cache
-				.get("replyDao_getReplyList");
+		key = "replyDao_getReplyList_" + count;
+		List<Reply> replyList = (List<Reply>) MyCache.cache.get(key);
 		if (replyList == null) {
 			try {
 				pm = PMF.get().getPersistenceManager();
@@ -201,7 +212,7 @@ public class ReplyDao {
 				query.setRange(0, count);
 				query.setOrdering(" bid desc");
 				replyList = (List<Reply>) query.execute();
-				MyCache.cache.put("replyDao_getReplyList", replyList);
+				MyCache.cache.put(key, replyList);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
