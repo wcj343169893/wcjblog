@@ -1,5 +1,7 @@
 package com.google.choujone.blog.entity;
 
+import java.io.Serializable;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -11,7 +13,8 @@ import javax.jdo.annotations.PrimaryKey;
  * 功能描述：博客类型 2010-11-18
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class BlogType {
+public class BlogType implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long id = -1L;

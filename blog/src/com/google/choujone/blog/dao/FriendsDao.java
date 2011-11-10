@@ -1,7 +1,9 @@
 package com.google.choujone.blog.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -16,7 +18,8 @@ import com.google.choujone.blog.util.PMF;
  * 友情链接操作类
  */
 public class FriendsDao {
-	PersistenceManager pm;String key = "";//缓存key
+	PersistenceManager pm;
+	String key = "";// 缓存key
 
 	/**
 	 * 增加，删除，修改
@@ -75,8 +78,10 @@ public class FriendsDao {
 	 * @param pages
 	 * @return
 	 */
+	@SuppressWarnings( { "unchecked" })
 	public List<Friends> getFriendsByPage(Pages pages) {
-		List<Friends> friends=(List<Friends>)MyCache.cache.get("friendsDao_getFriendsByPage");
+		String key = "friendsDao_getFriendsByPage";
+		List<Friends> friends = MyCache.get(key);
 		if (friends == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -90,8 +95,9 @@ public class FriendsDao {
 				query.setRange(pages.getFirstRec(), pages.getPageNo()
 						* pages.getPageSize());
 				friends = (List<Friends>) query.execute();
-				MyCache.cache.put("friendsDao_getFriendsByPage", friends);
+				MyCache.put(key, friends);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		return friends;
@@ -101,6 +107,6 @@ public class FriendsDao {
 	 * 关闭链接（不能在显示数据前关闭链接，不然报错）
 	 */
 	public void closePM() {
-		this.pm.close();
+		PMF.closePm(this.pm);
 	}
 }

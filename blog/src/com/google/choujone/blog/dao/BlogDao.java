@@ -26,7 +26,8 @@ import com.google.choujone.blog.util.Tools;
  */
 public class BlogDao {
 	PersistenceManager pm;
-	String key = "";//缓存key
+	String key = "";// 缓存key
+
 	/**
 	 * 增加，删除，修改
 	 * 
@@ -36,6 +37,7 @@ public class BlogDao {
 	 */
 	public boolean operationBlog(Operation operation, Blog blog) {
 		boolean flag = false;
+		Blog b = null;
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 		if (operation.equals(Operation.add)) {// 新增
 			try {
@@ -57,7 +59,7 @@ public class BlogDao {
 				// }
 				// pm.deletePersistent(pm.getObjectById(Blog.class,
 				// blog.getId()));
-				Blog b = pm.getObjectById(Blog.class, blog.getId());
+				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setIsVisible(blog.getIsVisible());
 				flag = true;
 			} catch (Exception e) {
@@ -65,7 +67,7 @@ public class BlogDao {
 			}
 		} else if (operation.equals(Operation.modify)) {// 修改
 			try {
-				Blog b = pm.getObjectById(Blog.class, blog.getId());
+				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setContent(blog.getContent());
 				b.setTag(blog.getTag());
 				b.setTitle(blog.getTitle());
@@ -78,7 +80,7 @@ public class BlogDao {
 			}
 		} else if (operation.equals(Operation.readTimes)) {// 增加阅读次数
 			try {
-				Blog b = pm.getObjectById(Blog.class, blog.getId());
+				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setCount(b.getCount() + 1);
 				flag = true;
 			} catch (Exception e) {
@@ -86,13 +88,17 @@ public class BlogDao {
 			}
 		} else if (operation.equals(Operation.replyTimes)) {// 增加回复次数
 			try {
-				Blog b = pm.getObjectById(Blog.class, blog.getId());
+				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setReplyCount(b.getReplyCount() + 1);
 				flag = true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		// 更新缓存中的内容
+		key = "blogDao_getBlogsByPage_null_null_1_10";
+		MyCache.updateList(key, b);
+		MyCache.cache.put("blogDao_id_" + b.getId(), b);
 		closePM();
 		return flag;
 	}
@@ -146,14 +152,14 @@ public class BlogDao {
 	 */
 	public List<Blog> getBlogList() {
 		key = "blogDao_getBlogList";
-		List<Blog> blogs = (List<Blog>) MyCache.cache.get(key);
+		List<Blog> blogs = MyCache.get(key);
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				Query query = pm.newQuery(Blog.class);
 				query.setOrdering("sdTime desc");
 				blogs = (List<Blog>) query.execute();
-				MyCache.cache.put(key, blogs);
+				MyCache.put(key, blogs);
 			} catch (Exception e) {
 			}
 		}
@@ -169,7 +175,7 @@ public class BlogDao {
 	 */
 	public List<Blog> getBlogList_hot(int count) {
 		key = "blogDao_getBlogList_hot_" + count;
-		List<Blog> blogs = (List<Blog>) MyCache.cache.get(key);
+		List<Blog> blogs = MyCache.get(key);
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -177,7 +183,7 @@ public class BlogDao {
 				query.setRange(0, count);
 				query.setOrdering("replyCount desc , count desc");
 				blogs = (List<Blog>) query.execute();
-				MyCache.cache.put(key, blogs);
+				MyCache.put(key, blogs);
 			} catch (Exception e) {
 			}
 		}
@@ -191,11 +197,9 @@ public class BlogDao {
 	 * @return
 	 */
 	public List<Blog> getBlogListByPage(Pages pages, Long tid) {
-		key = "blogDao_getBlogsByPage_" + tid + "_null_"
-				+ pages.getPageNo() + "_" + pages.getPageSize() + "_"
-				+ pages.getOrderBy() + "_" + pages.getPageTotal() + "_"
-				+ pages.getRecTotal() + "_" + pages.getSort();
-		List<Blog> blogs = (List<Blog>) MyCache.cache.get(key);
+		key = "blogDao_getBlogsByPage_" + tid + "_null_" + pages.getPageNo()
+				+ "_" + pages.getPageSize();
+		List<Blog> blogs = MyCache.get(key);
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -217,7 +221,7 @@ public class BlogDao {
 				query.setRange(pages.getFirstRec(), pages.getPageNo()
 						* pages.getPageSize());
 				blogs = (List<Blog>) query.execute();
-				MyCache.cache.put(key, blogs);
+				MyCache.put(key, blogs);
 			} catch (Exception e) {
 			}
 		}
@@ -232,11 +236,9 @@ public class BlogDao {
 	 * @return
 	 */
 	public List<Blog> getBlogListByPage(Pages pages, String time) {
-		key = "blogDao_getBlogsByPage_null_" + time + "_"
-				+ pages.getPageNo() + "_" + pages.getPageSize() + "_"
-				+ pages.getOrderBy() + "_" + pages.getPageTotal() + "_"
-				+ pages.getRecTotal() + "_" + pages.getSort();
-		List<Blog> blogs = (List<Blog>) MyCache.cache.get(key);
+		key = "blogDao_getBlogsByPage_null_" + time + "_" + pages.getPageNo()
+				+ "_" + pages.getPageSize();
+		List<Blog> blogs = MyCache.get(key);
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -246,7 +248,7 @@ public class BlogDao {
 				String filter = " isVisible==0 && name >= " + time + "%";
 				Query query = pm.newQuery(Blog.class);
 				blogs = (List<Blog>) query.execute();
-				MyCache.cache.put(key, blogs);
+				MyCache.put(key, blogs);
 				// if (time != null && !"".equals(time.trim())) {
 				// filter += " && sdTime == date";
 				// }
@@ -296,11 +298,9 @@ public class BlogDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Blog> getBlogsByPage(Pages pages) {
-		key = "blogDao_getBlogsByPage_null_null" + pages.getPageNo()
-				+ "_" + pages.getPageSize() + "_" + pages.getOrderBy() + "_"
-				+ pages.getPageTotal() + "_" + pages.getRecTotal() + "_"
-				+ pages.getSort();
-		List<Blog> blogs = (List<Blog>) MyCache.cache.get(key);
+		key = "blogDao_getBlogsByPage_null_null_" + pages.getPageNo() + "_"
+				+ pages.getPageSize();
+		List<Blog> blogs = MyCache.get(key);
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -315,7 +315,7 @@ public class BlogDao {
 				query.setRange(pages.getFirstRec(), pages.getPageNo()
 						* pages.getPageSize());
 				blogs = (List<Blog>) query.execute();
-				MyCache.cache.put(key, blogs);
+				MyCache.put(key, blogs);
 			} catch (Exception e) {
 			}
 		}
@@ -516,6 +516,6 @@ public class BlogDao {
 	 * 关闭链接（不能在显示数据前关闭链接，不然报错）
 	 */
 	public void closePM() {
-		this.pm.close();
+		PMF.closePm(this.pm);
 	}
 }

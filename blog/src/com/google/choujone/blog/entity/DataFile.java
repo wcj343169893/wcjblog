@@ -1,5 +1,6 @@
 package com.google.choujone.blog.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -11,7 +12,8 @@ import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.datastore.Blob;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class DataFile {
+public class DataFile implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long id;

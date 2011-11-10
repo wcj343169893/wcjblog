@@ -63,9 +63,9 @@ public class DataFileDao {
 	 * @return
 	 */
 	public List<DataFile> getDataFileListByPage(Pages pages) {
-		key = "dataFile_getDataFileListByPage_" + pages.getPageNo()
-				+ pages.getPageSize() + pages.getPageTotal();
-		List<DataFile> dataFiles = (List<DataFile>) MyCache.cache.get(key);
+		key = "dataFile_getDataFileListByPage_" + pages.getPageNo() + "_"
+				+ pages.getPageSize();
+		List<DataFile> dataFiles = MyCache.get(key);
 		if (dataFiles == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -81,7 +81,7 @@ public class DataFileDao {
 				query.setRange(pages.getFirstRec(), pages.getPageNo()
 						* pages.getPageSize());
 				dataFiles = (List<DataFile>) query.execute();
-				MyCache.cache.put(key, dataFiles);
+				MyCache.put(key, dataFiles);
 			} catch (Exception e) {
 			}
 		}
@@ -92,6 +92,6 @@ public class DataFileDao {
 	 * 关闭链接（不能在显示数据前关闭链接，不然报错）
 	 */
 	public void closePM() {
-		this.pm.close();
+		PMF.closePm(this.pm);
 	}
 }

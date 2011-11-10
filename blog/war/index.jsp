@@ -73,7 +73,7 @@
 <jsp:include page="top.jsp"></jsp:include>
 <!-- 顶部结束 -->
 <!-- 左边开始 -->
-<jsp:include page="left.jsp"></jsp:include>
+<jsp:include page="left.jsp" flush="true"></jsp:include>
 <!-- 左边结束 -->
 <!-- 右边开始 -->
 <div class="right">
