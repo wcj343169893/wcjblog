@@ -13,6 +13,7 @@ import com.google.choujone.blog.util.PMF;
 public class DataFileDao {
 	PersistenceManager pm;
 	String key = "";
+	String page_key="";
 
 	public void add(DataFile df) {
 		pm = PMF.get().getPersistenceManager();
@@ -66,6 +67,10 @@ public class DataFileDao {
 		key = "dataFile_getDataFileListByPage_" + pages.getPageNo() + "_"
 				+ pages.getPageSize();
 		List<DataFile> dataFiles = MyCache.get(key);
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
 		if (dataFiles == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -82,9 +87,11 @@ public class DataFileDao {
 						* pages.getPageSize());
 				dataFiles = (List<DataFile>) query.execute();
 				MyCache.put(key, dataFiles);
+				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 			}
 		}
+		pages.setRecTotal(page.getRecTotal());
 		return dataFiles;
 	}
 

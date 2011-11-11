@@ -1,9 +1,7 @@
 package com.google.choujone.blog.dao;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -20,6 +18,7 @@ import com.google.choujone.blog.util.PMF;
 public class FriendsDao {
 	PersistenceManager pm;
 	String key = "";// 缓存key
+	String page_key = "";//
 
 	/**
 	 * 增加，删除，修改
@@ -82,6 +81,10 @@ public class FriendsDao {
 	public List<Friends> getFriendsByPage(Pages pages) {
 		String key = "friendsDao_getFriendsByPage";
 		List<Friends> friends = MyCache.get(key);
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
 		if (friends == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -96,10 +99,12 @@ public class FriendsDao {
 						* pages.getPageSize());
 				friends = (List<Friends>) query.execute();
 				MyCache.put(key, friends);
+				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		pages.setRecTotal(page.getRecTotal());
 		return friends;
 	}
 

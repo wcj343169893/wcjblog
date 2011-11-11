@@ -18,6 +18,7 @@ import com.google.choujone.blog.entity.Reply;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
 import com.google.choujone.blog.util.Tools;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 /**
  * 博客操作类
@@ -27,6 +28,7 @@ import com.google.choujone.blog.util.Tools;
 public class BlogDao {
 	PersistenceManager pm;
 	String key = "";// 缓存key
+	String page_key = "";// 分页
 
 	/**
 	 * 增加，删除，修改
@@ -48,6 +50,7 @@ public class BlogDao {
 			} catch (Exception e) {
 				flag = false;
 			}
+			b=blog;
 		} else if (operation.equals(Operation.delete)) {// 隐藏
 			try {
 				// Query query = pm.newQuery(Blog.class, " id == " +
@@ -197,9 +200,14 @@ public class BlogDao {
 	 * @return
 	 */
 	public List<Blog> getBlogListByPage(Pages pages, Long tid) {
-		key = "blogDao_getBlogsByPage_" + tid + "_null_" + pages.getPageNo()
+		key = "blogDao_getBlogListByPage_" + tid + "_null_" + pages.getPageNo()
 				+ "_" + pages.getPageSize();
 		List<Blog> blogs = MyCache.get(key);
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
+				
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -222,9 +230,11 @@ public class BlogDao {
 						* pages.getPageSize());
 				blogs = (List<Blog>) query.execute();
 				MyCache.put(key, blogs);
+				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 			}
 		}
+		pages.setRecTotal(page.getRecTotal());
 		return blogs;
 	}
 
@@ -239,6 +249,7 @@ public class BlogDao {
 		key = "blogDao_getBlogsByPage_null_" + time + "_" + pages.getPageNo()
 				+ "_" + pages.getPageSize();
 		List<Blog> blogs = MyCache.get(key);
+
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -301,6 +312,10 @@ public class BlogDao {
 		key = "blogDao_getBlogsByPage_null_null_" + pages.getPageNo() + "_"
 				+ pages.getPageSize();
 		List<Blog> blogs = MyCache.get(key);
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -316,9 +331,11 @@ public class BlogDao {
 						* pages.getPageSize());
 				blogs = (List<Blog>) query.execute();
 				MyCache.put(key, blogs);
+				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 			}
 		}
+		pages.setRecTotal(page.getRecTotal());
 		return blogs;
 	}
 
