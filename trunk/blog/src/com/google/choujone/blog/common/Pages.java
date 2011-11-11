@@ -1,7 +1,10 @@
 package com.google.choujone.blog.common;
 
+import java.io.Serializable;
+
 @SuppressWarnings("unchecked")
-public class Pages {
+public class Pages implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String orderBy = "";
 	private String sort = "asc";
 	private int pageNo = 1; // 实际页号
@@ -11,6 +14,7 @@ public class Pages {
 
 	public Pages() {
 	}
+
 
 	public Pages(int pageSize) {
 		this.pageSize = pageSize;

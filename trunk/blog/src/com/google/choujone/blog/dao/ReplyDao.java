@@ -21,6 +21,7 @@ import com.google.choujone.blog.util.Tools;
 public class ReplyDao {
 	PersistenceManager pm;
 	String key = "";// 缓存key
+	String page_key = "";//
 
 	/**
 	 * 发布,回复
@@ -109,6 +110,10 @@ public class ReplyDao {
 	public List<Reply> getReplyListByBid(Long bid, Pages pages) {
 		key = "replyDao_bid_" + bid + "_" + pages.getPageNo();
 		List<Reply> replyList = MyCache.get(key);
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
 		if (replyList == null) {
 			try {
 				pm = PMF.get().getPersistenceManager();
@@ -125,10 +130,12 @@ public class ReplyDao {
 				}
 				replyList = (List<Reply>) query.execute();
 				MyCache.put(key, replyList);
+				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		pages.setRecTotal(page.getRecTotal());
 		return replyList;
 	}
 
@@ -140,9 +147,13 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyList(Long bid, Pages pages) {
-		key = "replyDao_getReplyList_" + bid + "_" + pages.getPageNo()+"_"
+		key = "replyDao_getReplyList_" + bid + "_" + pages.getPageNo() + "_"
 				+ pages.getPageSize();
 		List<Reply> replyList = MyCache.get(key);
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
 		if (replyList == null) {
 			replyList = new ArrayList<Reply>();
 			try {
@@ -158,10 +169,12 @@ public class ReplyDao {
 						* pages.getPageSize());
 				replyList = (List<Reply>) query.execute();
 				MyCache.put(key, replyList);
+				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		pages.setRecTotal(page.getRecTotal());
 		return replyList;
 	}
 
@@ -172,9 +185,13 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyList(Pages pages) {
-		key = "replyDao_getReplyList_null_" + pages.getPageNo()+"_"
+		key = "replyDao_getReplyList_null_" + pages.getPageNo() + "_"
 				+ pages.getPageSize();
 		List<Reply> replyList = MyCache.get(key);
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
 		if (replyList == null) {
 			try {
 				pm = PMF.get().getPersistenceManager();
@@ -189,9 +206,11 @@ public class ReplyDao {
 						* pages.getPageSize());
 				replyList = (List<Reply>) query.execute();
 				MyCache.put(key, replyList);
+				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 			}
 		}
+		pages.setRecTotal(page.getRecTotal());
 		return replyList;
 	}
 
