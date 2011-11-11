@@ -18,7 +18,6 @@ import com.google.choujone.blog.entity.Reply;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
 import com.google.choujone.blog.util.Tools;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 /**
  * 博客操作类
@@ -346,7 +345,7 @@ public class BlogDao {
 	 * @return
 	 */
 	public Blog getPreBlog(Long id) {
-		Blog blog = (Blog) MyCache.cache.get("blogDao_id_" + id);
+		Blog blog = (Blog) MyCache.cache.get("blogDao_pre_id_" + id);
 		if (blog == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -359,7 +358,7 @@ public class BlogDao {
 				if (blogs != null && blogs.size() > 0) {
 					blog = blogs.get(0);
 				}
-				MyCache.cache.put("blogDao_id_" + id, blog);
+				MyCache.cache.put("blogDao_pre_id_" + id, blog);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("查询上一条出错");
@@ -375,7 +374,7 @@ public class BlogDao {
 	 * @return
 	 */
 	public Blog getNextBlog(Long id) {
-		Blog blog = (Blog) MyCache.cache.get("blogDao_id_" + id);
+		Blog blog = (Blog) MyCache.cache.get("blogDao_next_id_" + id);
 		if (blog == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -392,7 +391,7 @@ public class BlogDao {
 				if (blogs != null && blogs.size() > 0) {
 					blog = blogs.get(0);
 				}
-				MyCache.cache.put("blogDao_id_" + id, blog);
+				MyCache.cache.put("blogDao_next_id_" + id, blog);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("查询下一条出错");
