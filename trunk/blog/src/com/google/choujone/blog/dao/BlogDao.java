@@ -49,7 +49,7 @@ public class BlogDao {
 			} catch (Exception e) {
 				flag = false;
 			}
-			b=blog;
+			b = blog;
 		} else if (operation.equals(Operation.delete)) {// 隐藏
 			try {
 				// Query query = pm.newQuery(Blog.class, " id == " +
@@ -183,7 +183,7 @@ public class BlogDao {
 			try {
 				Query query = pm.newQuery(Blog.class, " isVisible==0");
 				query.setRange(0, count);
-				query.setOrdering("replyCount desc , count desc");
+				query.setOrdering(" count desc");
 				blogs = (List<Blog>) query.execute();
 				MyCache.put(key, blogs);
 			} catch (Exception e) {
@@ -206,7 +206,7 @@ public class BlogDao {
 		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
 				.get(page_key)
 				: pages;
-				
+
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -491,11 +491,13 @@ public class BlogDao {
 					String[] tag = tags.get(i).split(" ");
 					for (int j = 0; j < tag.length; j++) {
 						Integer size = 1;
-						if (tagsMap.containsKey(tag[j])) {
-							size = tagsMap.get(tag[j]) + 1;
-							tagsMap.remove(tag[j]);
+						if (tag[j] != null && !"".equals(tag[j].trim())) {
+							if (tagsMap.containsKey(tag[j])) {
+								size = tagsMap.get(tag[j]) + 1;
+								tagsMap.remove(tag[j]);
+							}
+							tagsMap.put(tag[j], size);
 						}
-						tagsMap.put(tag[j], size);
 					}
 				}
 			}
