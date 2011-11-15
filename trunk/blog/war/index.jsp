@@ -38,7 +38,7 @@
 	
 	for(int i=0;i<blogTypeList.size();i++){
 		typeMaps.put(blogTypeList.get(i).getId(),blogTypeList.get(i).getName());
-		if(blogTypeList.get(i).getId().equals(tid)){
+		if(tid!=null && blogTypeList.get(i).getId().equals(tid)){
 			title=blogTypeList.get(i).getName()+"_"+title;
 		}
 	}

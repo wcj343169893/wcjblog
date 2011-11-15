@@ -94,7 +94,7 @@ public class UserDao {
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 		try {
 			if (operation.equals(Operation.add)) {// 增加用户信息只运行一次
-				pm.makePersistent(Create());
+				pm.makePersistent(user);
 				flag = true;
 			} else if (operation.equals(Operation.modify)) {// 修改
 				Query query = pm.newQuery(User.class);
