@@ -29,9 +29,6 @@
 	List<Reply> replyList=new ArrayList<Reply>();
 	List<Blog> blog_hot = new ArrayList<Blog>();
 	BlogDao bd=new BlogDao();
-	//CacheSingleton cacheSingleton=CacheSingleton.getInstance();
-	//cacheSingleton.init(new HashMap());
-	//Cache cache =	cacheSingleton.getCache();
 		%>
 	<%if(blog_user.getIsInfo()==null || blog_user.getIsInfo()==0){ %>
 	<div class="vito-left-title">
@@ -114,7 +111,7 @@
 		<div class="tags">
 			<%Map<String, Integer> tagsMap =bd.getTags();
 			for(String s : tagsMap.keySet()){ %>
-			<a href="/" style="font-size: <%=tagsMap.get(s)+12 %>px"><%=s %>(<%=tagsMap.get(s) %>)</a>
+			<a href="javascript:void(0)" style="font-size: <%=tagsMap.get(s)+12 %>px"><%=s %>(<%=tagsMap.get(s) %>)</a>
 			<%} %>
 		</div>
 	</div>

@@ -2,7 +2,6 @@ package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
 
-import javax.jdo.annotations.Persistent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.User;
-import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.Tools;
 
 @SuppressWarnings("serial")
@@ -27,14 +25,23 @@ public class UserServlet extends HttpServlet {
 			// replyDao.operationReply(Operation.delete, reply);
 			// resp.sendRedirect("/admin/reply_list.jsp");
 		} else if (operation.trim().equals(Operation.modify.toString())) {
-			// 加载用户信息
-			user = userDao.getUserDetail();
-			if (user == null) {
-				userDao.operationUser(Operation.add, null);// 新增用户
+			// 判断用户是否登录
+			User user_login = (User) req.getSession()
+					.getAttribute("login_user");
+			if (user_login == null) {
+				resp.sendRedirect("/login.jsp");
+				return;
+			} else {
+				// 加载用户信息
 				user = userDao.getUserDetail();
+				if (user == null) {
+					userDao.operationUser(Operation.add, null);// 新增用户
+					user = userDao.getUserDetail();
+				}
+				req.setAttribute("user", user);
+				req.getRequestDispatcher("/admin/setting.jsp").forward(req,
+						resp);
 			}
-			req.setAttribute("user", user);
-			req.getRequestDispatcher("/admin/setting.jsp").forward(req, resp);
 		} else {// 注销
 			req.getSession().removeAttribute("login_user");
 			resp.sendRedirect("/");
@@ -117,41 +124,63 @@ public class UserServlet extends HttpServlet {
 		UserDao userDao = new UserDao();
 		User user = new User();
 		if (operation.trim().equals(Operation.modify.toString())) {// 修改信息
+			// 判断用户是否登录
+			User user_login = (User) req.getSession()
+					.getAttribute("login_user");
+			if (user_login == null) {
+				resp.sendRedirect("/login.jsp");
+				return;
+			} else {
+				user.setpTitle(pTitle);
+				user.setName(name);
+				user.setCtitle(ctitle);
+				user.setNotice(notice);
+				user.setEmail(email);
+				user.setPassword(password);
+				user.setUrl(url);
+				user.setAddress(address);
+				user.setBrithday(brithday);
+				user.setDescription(description);
+				user.setStyle(style);
+
+				user.setIsWeather(isWeather);
+				user.setIsCalendars(isCalendars);
+				user.setIsHotBlog(isHotBlog);
+				user.setIsNewReply(isNewReply);
+				user.setIsLeaveMessage(isLeaveMessage);
+				user.setIsStatistics(isStatistics);
+				user.setIsFriends(isFriends);
+				user.setIsInfo(isInfo);
+				user.setIsTags(isTags);
+				user.setIsType(isType);
+
+				user.setPreMessage(new com.google.appengine.api.datastore.Text(
+						Tools.changeHTML(Tools.toChinese(preMessage))));
+
+				user.setBlogDescription(blogDescription);
+				user.setBlogKeyword(blogKeyword);
+				// 2011-10-28 添加顶部和底部代码
+				user.setBlogHead(blogHead);
+				user.setBlogFoot(blogFoot);
+
+				userDao.operationUser(Operation.modify, user);
+				req.setAttribute("user", user);
+				req.getRequestDispatcher("/admin/setting.jsp").forward(req,
+						resp);
+			}
+		} else if (operation.trim().equals(Operation.add.toString())) {
+			//初次安装使用 创建用户信息
 			user.setpTitle(pTitle);
-			user.setName(name);
-			user.setCtitle(ctitle);
-			user.setNotice(notice);
-			user.setEmail(email);
-			user.setPassword(password);
 			user.setUrl(url);
-			user.setAddress(address);
-			user.setBrithday(brithday);
-			user.setDescription(description);
 			user.setStyle(style);
-
-			user.setIsWeather(isWeather);
-			user.setIsCalendars(isCalendars);
-			user.setIsHotBlog(isHotBlog);
-			user.setIsNewReply(isNewReply);
-			user.setIsLeaveMessage(isLeaveMessage);
-			user.setIsStatistics(isStatistics);
-			user.setIsFriends(isFriends);
-			user.setIsInfo(isInfo);
-			user.setIsTags(isTags);
-			user.setIsType(isType);
-
-			user.setPreMessage(new com.google.appengine.api.datastore.Text(
-					Tools.changeHTML(Tools.toChinese(preMessage))));
-
-			user.setBlogDescription(blogDescription);
-			user.setBlogKeyword(blogKeyword);
-			// 2011-10-28 添加顶部和底部代码
-			user.setBlogHead(blogHead);
-			user.setBlogFoot(blogFoot);
-
-			userDao.operationUser(Operation.modify, user);
+			user.setName(name);
+			user.setPassword(password);
+			
+			userDao.operationUser(Operation.add, user);
 			req.setAttribute("user", user);
-			req.getRequestDispatcher("/admin/setting.jsp").forward(req, resp);
+			req.getRequestDispatcher("/index.jsp").forward(req,
+					resp);
+			
 		} else {// 登录
 			if (name != null && !"".equals(name.trim())) {
 				if (password != null && !"".equals(password.trim())) {
