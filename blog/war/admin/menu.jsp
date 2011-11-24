@@ -52,6 +52,9 @@
 			<li>
 				<a href="">清理所有缓存</a>
 			</li>
+			<li>
+				<a href="/admin/adPlace_list.jsp">广告</a>
+			</li>
 		</ul>
 	</div>
 </div>
