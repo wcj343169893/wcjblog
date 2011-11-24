@@ -37,6 +37,10 @@
 		<servlet-class>com.google.choujone.blog.servlet.FileDownloadServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Ad</servlet-name>
+		<servlet-class>com.google.choujone.blog.servlet.AdServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>UploadFile</servlet-name>
 		<servlet-class>com.google.choujone.blog.servlet.UploadFileServlet</servlet-class>
 		<init-param>
@@ -79,6 +83,10 @@
 	<servlet-mapping>
 		<servlet-name>File</servlet-name>
 		<url-pattern>/file/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Ad</servlet-name>
+		<url-pattern>/ad/*</url-pattern>
 	</servlet-mapping>
 	<filter>   
 		<filter-name>SetCharacterEncoding</filter-name>   
