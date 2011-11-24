@@ -2,7 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="com.google.choujone.blog.util.Config"%>
-<html>
+<%@page import="com.google.choujone.blog.dao.UserDao"%>
+<%@page import="com.google.choujone.blog.entity.User"%><html>
+<%
+UserDao userDao=new UserDao();
+User user=userDao.getUserDetail();
+if(user!=null){
+	response.sendRedirect("/index.jsp");
+	return;
+}
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,37 +25,8 @@
 <div class="content">
 	<div id="container">
 		<form action="/user" method="post">
-			<input type="hidden" name="op" value="modify">
+			<input type="hidden" name="op" value="add">
 			<div>博客设置</div>
-			<table cellpadding="0" cellspacing="0" class="setting">
-				<tr>
-					<td class="title">博客标题</td>
-					<td>
-						<input type="text" name="pTitle" value="">
-					</td>
-				</tr>
-				<tr>
-					<td class="title">博客访问地址</td>
-					<td>
-					<%
-						
-					%>
-						<input type="text" name="url" value="<%=request.getLocalAddr() %>">
-					</td>
-				</tr>
-				<tr>
-					<td class="title">博客风格</td>
-					<td>
-						<%List<String> styleList=Config.style_urls; 
-						%>
-						<select name="style">
-						<%for(String s :styleList){ %>
-							<option value="<%=s %>"><%=s %></option>
-						<%} %>
-						</select>
-					</td>
-				</tr>
-			</table>
 			<br>
 			<table>
 				<tr>

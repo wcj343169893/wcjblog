@@ -28,5 +28,9 @@ public enum Operation {
 	/**
 	 * 回复次数
 	 */
-	replyTimes
+	replyTimes,
+	/**
+	 * 清理缓存
+	 * */
+	clearCache
 }

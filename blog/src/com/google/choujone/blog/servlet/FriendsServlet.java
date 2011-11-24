@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.FriendsDao;
 import com.google.choujone.blog.entity.Friends;
+import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.Tools;
 
 @SuppressWarnings("serial")
@@ -40,6 +41,11 @@ public class FriendsServlet extends HttpServlet {
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 加载修改
 			friends = friendsDao.getFriendsById(id);
 			req.setAttribute("friends", friends);
+			req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
+					resp);
+		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
+			String key = "friendsDao_getFriendsByPage";
+			MyCache.clear(key);
 			req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
 					resp);
 		}

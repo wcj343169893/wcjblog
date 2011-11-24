@@ -49,6 +49,9 @@
 			<li>
 				<a href="/admin/setting.jsp">设置</a>
 			</li>
+			<li>
+				<a href="">清理所有缓存</a>
+			</li>
 		</ul>
 	</div>
 </div>

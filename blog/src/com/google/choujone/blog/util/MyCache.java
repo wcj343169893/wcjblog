@@ -78,6 +78,18 @@ public class MyCache {
 	}
 
 	/**
+	 * 清除缓存中的数据
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static boolean clear(String key) {
+		boolean flag = false;
+		cache.put(key, null);
+		return flag;
+	}
+
+	/**
 	 * 取值
 	 * 
 	 * @param <T>
@@ -109,16 +121,21 @@ public class MyCache {
 			return;
 		}
 		List<T> list = get(key);
-		List<T> newList=new ArrayList<T>();
+		List<T> newList = new ArrayList<T>();
+		boolean isExists = false;
 		if (list != null && list.size() > 0) {
 			Long entiti_id = getId(entity);// 需要更新的内容
 			for (T t : list) {
 				Long id = getId(t);
 				if (id.equals(entiti_id)) {
 					newList.add(entity);
-				}else{
+					isExists = true;
+				} else {
 					newList.add(t);
 				}
+			}
+			if (!isExists) {
+				newList.add(entity);
 			}
 		}
 		put(key, newList);// 放到缓存当中

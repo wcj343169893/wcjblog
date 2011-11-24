@@ -61,7 +61,10 @@ public class FriendsDao {
 				flag = true;
 			} catch (Exception e) {
 			}
-		}
+		}// 更新缓存中的内容
+		key = "friendsDao_getFriendsByPage";
+		MyCache.updateList(key, friends);
+		MyCache.cache.put("blogDao_id_" + friends.getId(), friends);
 		closePM();
 		return flag;
 	}
