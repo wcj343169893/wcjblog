@@ -60,15 +60,21 @@
 				<th>回复时间</th>
 			</tr>
 			<%if(replyList!= null && replyList.size()>0){
-				for(int i=0;i<replyList.size();i++){
-				Reply reply=replyList.get(i); %>
+				a:for(int i=0;i<replyList.size();i++){
+				Reply reply=replyList.get(i); 
+				Blog b=null;
+				if(reply.getBid()>0){
+					b=blogDao.getBlogById(reply.getBid());
+					if(b==null){
+						break a;
+					}
+				}
+				%>
 			<tr>
 				<td class="vito-content-check"><input type="checkbox" id="rid_<%=reply.getId() %>" class="input_check_single" onclick="singleDeleteFlag(this)" name="deleteFlag" value="<%=reply.getId() %>" /></td>
 				<td class="vito-title"><label for="rid_<%=reply.getId() %>"><%=reply.getId() %></label></td>
 				<td class="vito-title">
-				<% if(reply.getBid()>0){
-					Blog b=blogDao.getBlogById(reply.getBid());
-					%>
+				<% if(reply.getBid()>0 && b!=null){%>
 					<a href="/blog_detail.jsp?id=<%=b.getId() %>" target="_blank" title='查看  <%=b.getTitle() %>'><%=b.getTitle() %></a>
 				<%}else{ %>
 					<a href="/leaveMessage.jsp" target="_blank" title='查看  网站留言'>网站留言</a>

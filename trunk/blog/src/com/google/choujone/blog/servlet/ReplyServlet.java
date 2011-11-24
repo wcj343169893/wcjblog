@@ -28,7 +28,7 @@ public class ReplyServlet extends HttpServlet {
 		ReplyDao replyDao = new ReplyDao();
 		Reply reply = new Reply();
 		if (operation.trim().equals(Operation.delete.toString())) {// 删除
-			//reply.setId(Long.valueOf(ids));
+			// reply.setId(Long.valueOf(ids));
 			replyDao.deleteReply(ids);
 			resp.sendRedirect("/admin/reply_list.jsp");
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 加载修改(页面直接用url请求)
@@ -37,6 +37,8 @@ public class ReplyServlet extends HttpServlet {
 			reply.setReplyTime(Tools.changeTime(new Date()));
 			replyDao.operationReply(Operation.modify, reply);
 			resp.sendRedirect("/admin/reply_list.jsp");
+		} else if (operation.trim().equals(Operation.clearCache.toString())) {//清理缓存
+			
 		}
 	}
 
@@ -47,8 +49,8 @@ public class ReplyServlet extends HttpServlet {
 				.getParameter("op") : "";// 获取操作
 		String content = req.getParameter("content");// 文章信息
 		String name = req.getParameter("name");// 署名
-		if (name==null || "".equals(name.trim())) {
-			name="匿名";
+		if (name == null || "".equals(name.trim())) {
+			name = "匿名";
 		}
 		String id = req.getParameter("id") != null ? req.getParameter("id")
 				: "";// 回复
@@ -67,18 +69,19 @@ public class ReplyServlet extends HttpServlet {
 			reply.setBid(Tools.strTolong(bid));
 			reply.setContent(content);
 			replyDao.operationReply(Operation.add, reply);
-			if (reply.getBid()>0) {
-				BlogDao blogDao=new BlogDao();
-				blogDao.operationBlog(Operation.replyTimes, new Blog(reply.getBid()));
+			if (reply.getBid() > 0) {
+				BlogDao blogDao = new BlogDao();
+				blogDao.operationBlog(Operation.replyTimes, new Blog(reply
+						.getBid()));
 			}
-			
+
 			if (reply.getBid() > 0) {
 				resp.sendRedirect("/blog_detail.jsp?id=" + reply.getBid());
 			} else {
 				resp.sendRedirect("/leaveMessage.jsp");
 			}
 		} else if (operation.trim().equals(Operation.lists.toString())) {// 评论列表
-			System.out.println("请求一下");//功能未完成
+			System.out.println("请求一下");// 功能未完成
 			req.setAttribute("reply", reply);
 		}
 	}

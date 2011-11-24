@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.User;
+import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.Tools;
 
 @SuppressWarnings("serial")
@@ -170,9 +171,10 @@ public class UserServlet extends HttpServlet {
 			}
 		} else if (operation.trim().equals(Operation.add.toString())) {
 			//初次安装使用 创建用户信息
-			user.setpTitle(pTitle);
+			user.setpTitle("java博客");
+			url=req.getServerName();
 			user.setUrl(url);
-			user.setStyle(style);
+			user.setStyle(Config.style_url);//设置默认样式
 			user.setName(name);
 			user.setPassword(password);
 			

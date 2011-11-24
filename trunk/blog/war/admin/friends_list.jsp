@@ -15,6 +15,7 @@
 	<jsp:include page="/admin/menu.jsp"></jsp:include>	
 	<div class="address">
 			管理朋友(<a href="javascript:void(0);" onclick="showOrHideDiv('friends-new')">新建</a>) 
+			<a href="javascript:void(0);" onclick="clearCache('/friends')">清理缓存</a>
 	</div>
 			<%
 				Friends	fri=(Friends)request.getAttribute("friends");
