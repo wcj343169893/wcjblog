@@ -72,6 +72,9 @@ public class User implements Serializable {
 	private Integer isType;// 是否显示文章类型
 	@Persistent
 	private Text preMessage = new Text("");// 留言寄语
+	@Persistent
+	private Integer isUpload;//是否允许上传
+	
 
 	public Long getId() {
 		return id;
@@ -291,6 +294,14 @@ public class User implements Serializable {
 
 	public void setBlogFoot(String blogFoot) {
 		this.blogFoot = blogFoot;
+	}
+
+	public Integer getIsUpload() {
+		return isUpload;
+	}
+
+	public void setIsUpload(Integer isUpload) {
+		this.isUpload = isUpload;
 	}
 
 }
