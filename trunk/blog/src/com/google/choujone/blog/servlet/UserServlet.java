@@ -94,6 +94,10 @@ public class UserServlet extends HttpServlet {
 				.getParameter("isLeaveMessage") != null ? req
 				.getParameter("isLeaveMessage") : "0");// 是否显示留言
 
+		Integer isUpload = Integer
+				.parseInt(req.getParameter("isUpload") != null ? req
+						.getParameter("isUpload") : "0");// 是否允许上传图片
+
 		Integer isStatistics = Integer.parseInt(req
 				.getParameter("isStatistics") != null ? req
 				.getParameter("isStatistics") : "0");// 是否显示统计
@@ -164,25 +168,25 @@ public class UserServlet extends HttpServlet {
 				user.setBlogHead(blogHead);
 				user.setBlogFoot(blogFoot);
 
+				user.setIsUpload(isUpload);
 				userDao.operationUser(Operation.modify, user);
 				req.setAttribute("user", user);
 				req.getRequestDispatcher("/admin/setting.jsp").forward(req,
 						resp);
 			}
 		} else if (operation.trim().equals(Operation.add.toString())) {
-			//初次安装使用 创建用户信息
+			// 初次安装使用 创建用户信息
 			user.setpTitle("java博客");
-			url=req.getServerName();
+			url = req.getServerName();
 			user.setUrl(url);
-			user.setStyle(Config.style_url);//设置默认样式
+			user.setStyle(Config.style_url);// 设置默认样式
 			user.setName(name);
 			user.setPassword(password);
-			
+
 			userDao.operationUser(Operation.add, user);
 			req.setAttribute("user", user);
-			req.getRequestDispatcher("/index.jsp").forward(req,
-					resp);
-			
+			req.getRequestDispatcher("/index.jsp").forward(req, resp);
+
 		} else {// 登录
 			if (name != null && !"".equals(name.trim())) {
 				if (password != null && !"".equals(password.trim())) {

@@ -113,6 +113,19 @@
 			<table cellpadding="0" cellspacing="0" class="blogsetting">
 				<tr>
 					<td class="title">
+						上传图片
+					</td>
+					<td>
+						<input type="radio" name="isUpload" value="0" id="isUploadYes" <%=user.getIsUpload()==null || user.getIsUpload()==0?"checked":"" %>><label for="isUploadYes">允许</label>
+						<input type="radio" name="isUpload" value="1" id="isUploadNo" <%=user.getIsUpload()!=null && user.getIsUpload()==1?"checked":"" %>><label for="isUploadNo">禁止</label>
+					</td>
+					<td class="title">
+					</td>
+					<td>
+					</td>
+				</tr>
+				<tr>
+					<td class="title">
 						天气
 					</td>
 					<td>

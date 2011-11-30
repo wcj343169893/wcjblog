@@ -131,6 +131,8 @@ public class UserDao {
 					// 2011-10-28 添加顶部和底部代码
 					u.setBlogHead(user.getBlogHead());
 					u.setBlogFoot(user.getBlogFoot());
+					
+					u.setIsUpload(user.getIsUpload());
 				}
 				flag = true;
 			}
