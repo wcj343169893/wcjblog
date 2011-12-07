@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.choujone.blog.util.Spider;
+
 public class AdServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -18,6 +20,7 @@ public class AdServlet extends HttpServlet {
 		resp.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = resp.getWriter();
 		String code = "";
+		Spider.getUrl();
 		try {
 
 			String url = req.getRequestURI();
