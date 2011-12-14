@@ -78,39 +78,14 @@
 <!-- 左边结束 -->
 <!-- 右边开始 -->
 <div class="right">
-	<div class="right-title">
-		文章
-	</div>
+	<div class="right-title">文章</div>
 	<div class="vito-content-detail">
-	<div class="vito-prenext">
-	<%if(preBlog!=null){ %>
-		<span style="float: left; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=preBlog.getId() %>">&laquo; <%=preBlog.getTitle(20) %></a></span>
-	<%} %>
-	<%if(nextBlog!=null){ %>
-		<span style="float: right; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=nextBlog.getId() %>"><%=nextBlog.getTitle(20) %>&raquo;</a></span>
-	<%} %>
-	</div>
-	<div class="vito-content-title">
-		<%=blog.getTitle() %>
-	</div>
-	<div class="vito-content-date">
-		<%=blog.getSdTime() %>
-	</div>
-	<div class="vito-detail-content-body">
-		<%=blog.getContent().getValue() %>
-	<br><br>
-	<font class="post-tags">
-		Tags:<%=blog.getTag() %>
-	</font>
-	<font class="post-footer">
-			发布:<%=blog_user.getName() %> | 
-			分类:<%=bt.getName()%> | 
-			评论:<%=blog.getReplyCount() %> | 
-			浏览:<%=blog.getCount() %> 
-				<%if(login_user!=null){	%> 
-				| <a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a> 
-			<%} %>
-	</font>
+	<div class="vito-prenext"><%if(preBlog!=null){ %><span style="float: left; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=preBlog.getId() %>">&laquo; <%=preBlog.getTitle(20) %></a></span><%} %><%if(nextBlog!=null){ %><span style="float: right; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=nextBlog.getId() %>"><%=nextBlog.getTitle(20) %>&raquo;</a></span><%} %></div>
+	<div class="vito-content-title"><%=blog.getTitle() %></div>
+	<div class="vito-content-date"><%=blog.getSdTime() %></div>
+	<div class="vito-detail-content-body"><%=blog.getContent().getValue() %><br><br>
+	<font class="post-tags">Tags:<%=blog.getTag() %></font>
+	<font class="post-footer">发布:<%=blog_user.getName() %>|分类:<%=bt.getName()%>|评论:<%=blog.getReplyCount() %>|浏览:<%=blog.getCount() %><%if(login_user!=null){	%>|<a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a><%} %></font>
 	</div>
 	<!-- 直接查询评论 -->
 			<%
@@ -121,9 +96,7 @@
 				List<Reply> replyList=	replyDao.getReplyListByBid(blog.getId(),pages);
 			%>
 	<div
-		style="font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif; font-size: 14px; color: #ffd247; padding: 0 0 10px 20px;">
-		评论列表
-	</div>
+		style="font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif; font-size: 14px; color: #ffd247; padding: 0 0 10px 20px;">评论列表</div>
 	<div class="vito-postcommentlist">
 	<%if(replyList!= null && replyList.size()>0){ %>
 		<div id="comment">
@@ -133,7 +106,7 @@
 				<span class="vito-postcomment-one">
 					<span class="vito-postcomment-name" style="color: #8c8c8c">
 						<%if((i+1)*pages.getPageNo()==1){out.print("沙发");}else if((i+1)*pages.getPageNo()==2){out.print("板凳");}else if((i+1)*pages.getPageNo()==3){out.print("平地");}else{out.print("第"+(i+1)*pages.getPageNo()+"楼");} %>&nbsp;|&nbsp; <%=reply.getName() %>
-						<span style="color: #979797"><%=reply.getSdTime() %> 说</span>
+						<span style="color: #979797"><%=reply.getSdTime() %>说</span>
 					</span>
 					<br><br>
 					<span class="vito-postcomment-content">
@@ -141,9 +114,7 @@
 						<%if(reply.getReplyMessage() != null && !"".equals(reply.getReplyMessage().trim())){ %>
 						    <blockquote>
 								<div class="quote quote3">
-									<div class="quote-title">
-										<%=blog_user.getName()%> 于 <%=reply.getReplyTime() %>回复
-									</div>
+									<div class="quote-title"><%=blog_user.getName()%>于 <%=reply.getReplyTime() %>回复</div>
 									<%=reply.getReplyMessage() %>
 								</div>
 							</blockquote>
@@ -155,19 +126,9 @@
 			<%} %>
 		</div>
 		<br>
-		<div class="vito-prenext">
-		共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
-				<%if(p > 1){ %>
-					<a href="/blog_detail.jsp?p=<%=p-1 %>&id=<%=blog.getId() %>">上一页</a>&nbsp;&nbsp;
-				<%} %>
-				<%if(p < pages.getPageTotal()){ %>
-					<a href="/blog_detail.jsp?p=<%=p + 1 %>&id=<%=blog.getId() %>">下一页</a>&nbsp;&nbsp;
-				<%} %>
-		</div>
+		<div class="vito-prenext">共<%=pages.getRecTotal() %>第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %>页<%if(p > 1){ %><a href="/blog_detail.jsp?p=<%=p-1 %>&id=<%=blog.getId() %>">上一页</a><%} %><%if(p < pages.getPageTotal()){ %><a href="/blog_detail.jsp?p=<%=p + 1 %>&id=<%=blog.getId() %>">下一页</a><%} %></div>
 		<%}else{ %>
-		<div class="vito-prenext">
-			还没有人发表评论<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');$('#comment_name').focus();">来坐第一个沙发</a>
-		</div>
+		<div class="vito-prenext">还没有人发表评论<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');$('#comment_name').focus();">来坐第一个沙发</a></div>
 		<%} %>
 	</div>
 	<div class="vito-contentbd" id="divCommentPost">
@@ -182,23 +143,17 @@
 					<input type="text" name="name" id="comment_name" class="text vito-contentbd-input" value="游客" size="28" style="color: gray;"
 					onclick="if(this.value=='游客'){this.value='';this.style.color='';}" 
 					onblur="if(this.value==''){this.value='游客';this.style.color='gray';}"/>
-					<label for="comment_name">
-						署名(*)
-					</label>
+					<label for="comment_name">署名(*)</label>
 				</div>
 				<div class="vito-ct-id">
 					<input type="text" name="email" id="inpEmail"
 						class="text vito-contentbd-input" value="" size="28"/>
-					<label for="inpEmail">
-						邮箱
-					</label>
+					<label for="inpEmail">邮箱</label>
 				</div>
 				<div class="vito-ct-id">
 					<input type="text" name="url" id="inpHomePage"
 						class="text vito-contentbd-input" size="28"/>
-					<label for="inpHomePage">
-						网站链接
-					</label>
+					<label for="inpHomePage">网站链接</label>
 				</div>
 					<div id="content-div"></div>
 				<p>
@@ -206,9 +161,7 @@
 				</p>
 			</form>
 		</div>
-		<p class="postbottom">
-			◎欢迎参与讨论，请在这里发表您的看法、交流您的观点。
-		</p>
+		<p class="postbottom">◎欢迎参与讨论，请在这里发表您的看法、交流您的观点。</p>
 	</div>
 </div>
 </div>

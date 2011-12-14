@@ -31,9 +31,7 @@
 	BlogDao bd=new BlogDao();
 		%>
 	<%if(blog_user.getIsInfo()==null || blog_user.getIsInfo()==0){ %>
-	<div class="vito-left-title">
-		个人资料
-	</div>
+	<div class="vito-left-title">个人资料</div>
 	<div class="vito-left-contentul" style="text-align: center;">
 		<ul class="vito-right-contentul">
 			<li><img alt="" src="/images/myself.jpg" title="<%=blog_user.getDescription() %>"></li>
@@ -43,25 +41,19 @@
 	</div>
 	<%} %>
 	<%if(blog_user.getNotice()!=null &&!"".equals(blog_user.getNotice().trim())){ %>
-		<div class="vito-left-title">
-			博客公告
-		</div>
+		<div class="vito-left-title">博客公告</div>
 		<div class="vito-left-contentul" style="text-align: center;">
 			<%=blog_user.getNotice() %>
 		</div>
 	<%} %>
 	<%if(blog_user.getIsWeather()==null || blog_user.getIsWeather()==0){%>
-		<div class="vito-left-title">
-			天气预报
-		</div>
+		<div class="vito-left-title">天气预报</div>
 		<div class="vito-left-contentul">
 		<iframe src="http://m.weather.com.cn/m/pn12/weather.htm?id=101040100T " width="230" height="110" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
 		</div>
 	<%} %>
 	<%if(blog_user.getIsCalendars()==null || blog_user.getIsCalendars()==0){%>
-	<div class="vito-left-title">
-		日历		
-	</div>
+	<div class="vito-left-title">日历</div>
 	<div class="vito-left-contentul">
 		<div id="calendars">
 		</div>
@@ -76,9 +68,7 @@
 	</div>
 	<%} %>
 	<% if(blog_user.getIsType()==null || blog_user.getIsType()==0){ %>
-	<div class="vito-left-title">
-		文章分类
-	</div>
+	<div class="vito-left-title">文章分类</div>
 	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 	<script type="text/javascript" src="/js/jquery.treeview.js"></script>
 	<div class="vito-left-contentul">
@@ -104,22 +94,13 @@
 	</script>
 	<%} %>
 	<% if(blog_user.getIsTags()==null || blog_user.getIsTags()==0){ %>
-	<div class="vito-left-title">
-		TAGS
-	</div>
+	<div class="vito-left-title">TAGS</div>
 	<div class="vito-left-contentul">
-		<div class="tags">
-			<%Map<String, Integer> tagsMap =bd.getTags();
-			for(String s : tagsMap.keySet()){ %>
-			<a href="javascript:void(0)" style="font-size: <%=tagsMap.get(s)+12 %>px"><%=s %>(<%=tagsMap.get(s) %>)</a>
-			<%} %>
-		</div>
+		<div class="tags"><%Map<String, Integer> tagsMap =bd.getTags();for(String s : tagsMap.keySet()){ %><a href="javascript:void(0)" style="font-size: <%=tagsMap.get(s)+12 %>px"><%=s %>(<%=tagsMap.get(s) %>)</a><%} %></div>
 	</div>
 	<%} %>
 	<%if(blog_user.getIsHotBlog()==null || blog_user.getIsHotBlog()==0){%>	
-	<div class="vito-left-title">
-		热门文章	
-	</div>
+	<div class="vito-left-title">热门文章</div>
 		<%
 			blog_hot=bd.getBlogList_hot(8);
 		%>
@@ -134,9 +115,7 @@
 	</div>
 		<%} %>
 	<%if(blog_user.getIsNewReply()==null || blog_user.getIsNewReply()==0){%>
-	<div class="vito-left-title">
-		最新评论	
-	</div>
+	<div class="vito-left-title">最新评论</div>
 	<%
 		replyList=replyDao.getReplyList(8);
 	%>
@@ -151,9 +130,7 @@
 	</div>
 		<%} %>
 	<%if(blog_user.getIsLeaveMessage()==null || blog_user.getIsLeaveMessage()==0){%>
-	<div class="vito-left-title">
-		最新留言	
-	</div>
+	<div class="vito-left-title">最新留言</div>
 	<%replyList=replyDao.getReplyList(-1L,new Pages(8)); %>
 	<div class="vito-left-contentul">
 		<ul class="vito-right-contentul">
@@ -166,31 +143,19 @@
 	</div>
 		<%} %>
 	<%if(blog_user.getIsStatistics()==null || blog_user.getIsStatistics()==0){%>
-	<div class="vito-left-title">
-		站点统计	
-	</div>
+	<div class="vito-left-title">站点统计</div>
 	<div class="vito-left-contentul">
 	<%	Map<String, Integer> counts = bd.getCount(); %>
 		<ul class="vito-right-contentul">
-			<li>
-				文章总数：<%=counts.get("blogcount") %>
-			</li>
-			<li>
-				评论总数：<%=counts.get("replycount") %>
-			</li>
-			<li>
-				浏览总数：<%=counts.get("scancount") %>
-			</li>
-			<li>
-				留言总数：<%=counts.get("messagecount") %>
-			</li>
+			<li>文章总数：<%=counts.get("blogcount") %></li>
+			<li>评论总数：<%=counts.get("replycount") %></li>
+			<li>浏览总数：<%=counts.get("scancount") %></li>
+			<li>留言总数：<%=counts.get("messagecount") %></li>
 		</ul>
 	</div>
 		<%} %>
 	<%if(blog_user.getIsFriends()==null || blog_user.getIsFriends()==0){%>
-	<div class="vito-left-title">
-		友情链接
-	</div>
+	<div class="vito-left-title">友情链接</div>
 	<%
 		FriendsDao fd=new FriendsDao();
 		List<Friends> friendsList=fd.getFriendsByPage(new Pages(10));
@@ -201,9 +166,7 @@
 				for(int i=0;i<friendsList.size();i++){
 					Friends f=friendsList.get(i);
 			%>
-			<li title="<%=f.getDescription() %>">
-				<a href="<%=f.getUrl() %>" target="_bank" title="<%=f.getDescription() %>"><%=f.getName() %></a>
-			</li>
+			<li title="<%=f.getDescription() %>"><a href="<%=f.getUrl() %>" target="_bank" title="<%=f.getDescription() %>"><%=f.getName() %></a></li>
 			<%} %>
 		</ul>
 	</div>

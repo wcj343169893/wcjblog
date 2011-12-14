@@ -77,9 +77,7 @@
 <!-- 左边结束 -->
 <!-- 右边开始 -->
 <div class="right">
-	<div class="right-title">
-		文章
-	</div>
+	<div class="right-title">文章</div>
 <%
 	BlogDao blogDao = new BlogDao();
 	Integer p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
@@ -89,17 +87,7 @@
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
 	List<Blog> blogs = blogDao.getBlogListByPage(pages,tid);
 %>
-<div class="vito-prenext">
-	共<%=pages.getRecTotal() %>&nbsp;&nbsp;  
-	第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 
-	页&nbsp;&nbsp;
-	<%if(p > 1){ %>
-		<a href="/index.jsp?p=<%=p-1 %>&tid=<%=tid %>">上一页</a>&nbsp;&nbsp;
-	<%} %>
-	<%if(p < pages.getPageTotal()){ %>
-		<a href="/index.jsp?p=<%=p + 1 %>&tid=<%=tid %>">下一页</a>&nbsp;&nbsp;
-	<%} %>
-</div>
+<div class="vito-prenext">共<%=pages.getRecTotal() %>页 第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %>页<%if(p > 1){ %>	<a href="/index.jsp?p=<%=p-1 %>&tid=<%=tid %>">上一页</a><%} %><%if(p < pages.getPageTotal()){ %><a href="/index.jsp?p=<%=p + 1 %>&tid=<%=tid %>">下一页</a><%} %></div>
 <%
 if(blogs!=null && blogs.size()>0){
 for(int i=0;i<blogs.size();i++){
@@ -108,47 +96,21 @@ for(int i=0;i<blogs.size();i++){
 %>
 <div class="vito-content">
 	<div class="vito-content-title">
-		<a href="/blog?id=<%=blog.getId() %>">
-			<%=blog.getTitle() %>
-		</a>
+		<a href="/blog?id=<%=blog.getId() %>"><%=blog.getTitle() %></a>
 	</div>
-	<div class="vito-content-date">
-		<%=blog.getSdTime() %>
-	</div>
-	<div class="vito-content-body">
-		<%=blog.getContent(50).getValue() %>
-		<br><br>
-		<font class="post-tags">
-			Tags:<%=blog.getTag() %>
-		</font>
-		<font class="post-footer">
-			发布:<%=user!=null ? user.getName():"" %> | 
-			分类:<%=typeMaps.get(blog.getTid())%> | 
-			评论:<%=blog.getReplyCount() %> | 
-			浏览:<%=blog.getCount() %>
-			<%if(login_user!=null){	%> 
-				| <a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a> 
-			<%} %>
-		</font>
+	<div class="vito-content-date"><%=blog.getSdTime() %></div>
+	<div class="vito-content-body"><%=blog.getContent(50).getValue() %><br><br>
+		<font class="post-tags">Tags:<%=blog.getTag() %></font>
+		<font class="post-footer">发布:<%=user!=null ? user.getName():"" %>|分类:<%=typeMaps.get(blog.getTid())%>|评论:<%=blog.getReplyCount() %>|浏览:<%=blog.getCount() %><%if(login_user!=null){	%>|<a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a><%} %></font>
 	</div>
 </div><br>
 <%}	
 } }else{%>
 <div class="vito-content">
-	<div class="vito-content-title">
-			暂无内容
-	</div>
+	<div class="vito-content-title">暂无内容</div>
 </div>
 <%} %>
-<div class="vito-prenext">
-	共<%=pages.getRecTotal() %>  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页
-	<%if(p > 1){ %>
-		<a href="/index.jsp?p=<%=p-1 %>">上一页</a>
-	<%} %>
-	<%if(p < pages.getPageTotal()){ %>
-		<a href="/index.jsp?p=<%=p + 1 %>">下一页</a>
-	<%} %>
-</div>
+<div class="vito-prenext">共<%=pages.getRecTotal() %>页 第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %>页<%if(p > 1){ %>	<a href="/index.jsp?p=<%=p-1 %>">上一页</a><%} %><%if(p < pages.getPageTotal()){ %><a href="/index.jsp?p=<%=p + 1 %>">下一页</a><%} %></div>
 
 <%blogDao.closePM();//关闭查询链接 %>
 </div>
