@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<%@page import="com.google.choujone.blog.dao.UserDao"%>
-<%@page import="com.google.choujone.blog.entity.*"%><html>
+    pageEncoding="UTF-8"%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.UserDao,com.google.choujone.blog.entity.*"%><html>
 <head>
 <link rel="stylesheet" href="/css/search.css" type="text/css" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,29 +8,8 @@ UserDao userDao=new UserDao();
 User user=userDao.getUserDetail();
 User login_user=(User)request.getSession().getAttribute("login_user");
 String title=user.getpTitle();
-%>
-<title>搜索_<%=title %></title>
-<meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
-<meta name="keywords" content="<%=user.getBlogKeyword() %>">
-<meta name="description" content="<%=user.getBlogDescription() %>">
-<%
-	if(user.getBlogHead()!=null && !"".equals(user.getBlogHead().trim())){
-		out.print(user.getBlogHead());
-	}
-%>
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-20148773-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+%><title>搜索_<%=title %></title>
+	<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body>
 <div class="main">
