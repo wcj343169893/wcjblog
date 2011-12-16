@@ -1,72 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<%@page import="com.google.choujone.blog.dao.BlogDao"%>
-<%@page import="com.google.choujone.blog.entity.Blog"%>
-<%@page import="com.google.choujone.blog.util.Tools"%>
-<%@page import="com.google.choujone.blog.dao.ReplyDao"%>
-<%@page import="com.google.choujone.blog.common.Pages"%>
-<%@page import="java.util.List"%>
-<%@page import="com.google.choujone.blog.entity.Reply"%>
-<%@page import="com.google.choujone.blog.entity.User"%>
-<%@page import="com.google.choujone.blog.dao.UserDao"%>
-<%@page import="com.google.choujone.blog.common.Operation"%>
-<%@page import="com.google.choujone.blog.dao.BlogTypeDao"%>
-<%@page import="com.google.choujone.blog.entity.BlogType"%><html>
-<%
-	String id=request.getParameter("id");
-	if(id!=null && !"".equals(id.trim())){
-	BlogDao blogDao=new BlogDao();
-	Blog blog=blogDao.getBlogById(Tools.strTolong(id));
-	if(blog == null){
-%>
-<head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.BlogDao,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.entity.User,com.google.choujone.blog.dao.UserDao,com.google.choujone.blog.common.Operation,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType"%>
+<html><%
+	String id = request.getParameter("id");
+	if (id != null && !"".equals(id.trim())) {
+		BlogDao blogDao = new BlogDao();
+		Blog blog = blogDao.getBlogById(Tools.strTolong(id));
+		if (blog == null) {
+%><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>访问的文章不存在</title>
+	<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body>
 <div class="notices">访问的文章不存在</div>
-</body>
-<%
-}else{
-	blogDao.operationBlog(Operation.readTimes,blog);
-	Blog preBlog=blogDao.getPreBlog(blog.getId());
-	Blog nextBlog=blogDao.getNextBlog(blog.getId());
-	User login_user=(User)request.getSession().getAttribute("login_user");//获取登录信息
-	UserDao userDao=new UserDao();
-	//查询所有的分类
-	BlogTypeDao btd=new BlogTypeDao();
-	BlogType bt=btd.getBlogTypeById(blog.getTid());
-	User blog_user= userDao.getUserDetail();
-%>
-<head>
+</body><%
+	} else {
+			blogDao.operationBlog(Operation.readTimes, blog);
+			Blog preBlog = blogDao.getPreBlog(blog.getId());
+			Blog nextBlog = blogDao.getNextBlog(blog.getId());
+			User login_user = (User) request.getSession().getAttribute(
+					"login_user");//获取登录信息
+			UserDao userDao = new UserDao();
+			//查询所有的分类
+			BlogTypeDao btd = new BlogTypeDao();
+			BlogType bt = btd.getBlogTypeById(blog.getTid());
+			User blog_user = userDao.getUserDetail();
+%><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%=blog.getTitle() %>_<%=bt.getName()%>_<%=blog_user.getpTitle() %></title>
-<%
-	if(blog_user.getBlogHead()!=null && !"".equals(blog_user.getBlogHead().trim())){
-		out.print(blog_user.getBlogHead());
-	}
-%>
-<meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
-<meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
-<meta name="description" content="<%=blog_user.getBlogDescription() %>">
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-20148773-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-<script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
-<script type="text/javascript" src="/js/content.js"></script>
-<script type="text/javascript" src="/js/jquery.js"></script>
+<title><%=blog.getTitle()%>_<%=bt.getName()%>_<%=blog_user.getpTitle()%></title><%
+	if (blog_user.getBlogHead() != null
+					&& !"".equals(blog_user.getBlogHead().trim())) {
+				out.print(blog_user.getBlogHead());
+			}
+%>	<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body>
 <div class="main">
@@ -80,56 +47,105 @@
 <div class="right">
 	<div class="right-title">文章</div>
 	<div class="vito-content-detail">
-	<div class="vito-prenext"><%if(preBlog!=null){ %><span style="float: left; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=preBlog.getId() %>">&laquo; <%=preBlog.getTitle(20) %></a></span><%} %><%if(nextBlog!=null){ %><span style="float: right; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=nextBlog.getId() %>"><%=nextBlog.getTitle(20) %>&raquo;</a></span><%} %></div>
-	<div class="vito-content-title"><%=blog.getTitle() %></div>
-	<div class="vito-content-date"><%=blog.getSdTime() %></div>
-	<div class="vito-detail-content-body"><%=blog.getContent().getValue() %><br><br>
-	<font class="post-tags">Tags:<%=blog.getTag() %></font>
-	<font class="post-footer">发布:<%=blog_user.getName() %>|分类:<%=bt.getName()%>|评论:<%=blog.getReplyCount() %>|浏览:<%=blog.getCount() %><%if(login_user!=null){	%>|<a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a><%} %></font>
+	<div class="vito-prenext"><%
+		if (preBlog != null) {
+	%><span style="float: left; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=preBlog.getId()%>">&laquo; <%=preBlog.getTitle(20)%></a></span><%
+ 	}
+ %><%
+ 	if (nextBlog != null) {
+ %><span style="float: right; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=nextBlog.getId()%>"><%=nextBlog.getTitle(20)%>&raquo;</a></span><%
+ 	}
+ %></div>
+	<div class="vito-content-title"><%=blog.getTitle()%></div>
+	<div class="vito-content-date"><%=blog.getSdTime()%></div>
+	<div class="vito-detail-content-body"><%=blog.getContent().getValue()%><br><br>
+	<font class="post-tags">Tags:<%=blog.getTag()%></font>
+	<font class="post-footer">发布:<%=blog_user.getName()%>|分类:<%=bt.getName()%>|评论:<%=blog.getReplyCount()%>|浏览:<%=blog.getCount()%><%
+		if (login_user != null) {
+	%>|<a href="/blog?id=<%=blog.getId()%>&op=modify">修改</a><%
+		}
+	%></font>
 	</div>
 	<!-- 直接查询评论 -->
 			<%
-			int p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
-				ReplyDao replyDao=new ReplyDao();
-				Pages pages=new Pages();
-				pages.setPageNo(p);
-				List<Reply> replyList=	replyDao.getReplyListByBid(blog.getId(),pages);
+				int p = request.getParameter("p") != null ? Integer
+								.parseInt(request.getParameter("p").toString()) : 1;
+						ReplyDao replyDao = new ReplyDao();
+						Pages pages = new Pages();
+						pages.setPageNo(p);
+						List<Reply> replyList = replyDao.getReplyListByBid(blog
+								.getId(), pages);
 			%>
 	<div
 		style="font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif; font-size: 14px; color: #ffd247; padding: 0 0 10px 20px;">评论列表</div>
 	<div class="vito-postcommentlist">
-	<%if(replyList!= null && replyList.size()>0){ %>
+	<%
+		if (replyList != null && replyList.size() > 0) {
+	%>
 		<div id="comment">
-			<%for(int i=0;i<replyList.size();i++){
-				Reply reply=replyList.get(i); %>
+			<%
+				for (int i = 0; i < replyList.size(); i++) {
+								Reply reply = replyList.get(i);
+			%>
 			<div class="vito-postcommentlist">
 				<span class="vito-postcomment-one">
 					<span class="vito-postcomment-name" style="color: #8c8c8c">
-						<%if((i+1)*pages.getPageNo()==1){out.print("沙发");}else if((i+1)*pages.getPageNo()==2){out.print("板凳");}else if((i+1)*pages.getPageNo()==3){out.print("平地");}else{out.print("第"+(i+1)*pages.getPageNo()+"楼");} %>&nbsp;|&nbsp; <%=reply.getName() %>
-						<span style="color: #979797"><%=reply.getSdTime() %>说</span>
+						<%
+							if ((i + 1) * pages.getPageNo() == 1) {
+												out.print("沙发");
+											} else if ((i + 1) * pages.getPageNo() == 2) {
+												out.print("板凳");
+											} else if ((i + 1) * pages.getPageNo() == 3) {
+												out.print("平地");
+											} else {
+												out.print("第" + (i + 1) * pages.getPageNo()
+														+ "楼");
+											}
+						%>&nbsp;|&nbsp; <%=reply.getName()%>
+						<span style="color: #979797"><%=reply.getSdTime()%>说</span>
 					</span>
 					<br><br>
 					<span class="vito-postcomment-content">
-						<%=reply.getContent() %>
-						<%if(reply.getReplyMessage() != null && !"".equals(reply.getReplyMessage().trim())){ %>
+						<%=reply.getContent()%>
+						<%
+							if (reply.getReplyMessage() != null
+													&& !"".equals(reply.getReplyMessage()
+															.trim())) {
+						%>
 						    <blockquote>
 								<div class="quote quote3">
-									<div class="quote-title"><%=blog_user.getName()%>于 <%=reply.getReplyTime() %>回复</div>
-									<%=reply.getReplyMessage() %>
+									<div class="quote-title"><%=blog_user.getName()%>于 <%=reply.getReplyTime()%>回复</div>
+									<%=reply.getReplyMessage()%>
 								</div>
 							</blockquote>
-							<%} %>
+							<%
+								}
+							%>
 						</span>
 					</span>
 				<span class="vito-postcomment-reback"> </span>
 			</div>
-			<%} %>
+			<%
+				}
+			%>
 		</div>
 		<br>
-		<div class="vito-prenext">共<%=pages.getRecTotal() %>第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %>页<%if(p > 1){ %><a href="/blog_detail.jsp?p=<%=p-1 %>&id=<%=blog.getId() %>">上一页</a><%} %><%if(p < pages.getPageTotal()){ %><a href="/blog_detail.jsp?p=<%=p + 1 %>&id=<%=blog.getId() %>">下一页</a><%} %></div>
-		<%}else{ %>
+		<div class="vito-prenext">共<%=pages.getRecTotal()%>第<%=pages.getPageNo()%>/<%=pages.getPageTotal()%>页<%
+			if (p > 1) {
+		%><a href="/blog_detail.jsp?p=<%=p - 1%>&id=<%=blog.getId()%>">上一页</a><%
+			}
+		%><%
+			if (p < pages.getPageTotal()) {
+		%><a href="/blog_detail.jsp?p=<%=p + 1%>&id=<%=blog.getId()%>">下一页</a><%
+			}
+		%></div>
+		<%
+			} else {
+		%>
 		<div class="vito-prenext">还没有人发表评论<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');$('#comment_name').focus();">来坐第一个沙发</a></div>
-		<%} %>
+		<%
+			}
+		%>
 	</div>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
@@ -138,7 +154,8 @@
 		<div id="commentDiv" style="display: none">
 			<form id="frmSumbit" target="_self" method="post" action="/reply">
 				<div class="vito-ct-id">
-					<input type="hidden" name="bid" value="<%=blog.getId() %>">
+					<input type="hidden" name="bid" value="<%=blog.getId()%>">
+					<input type="hidden" name="p" value="<%=p %>">
 					<input type="hidden" name="op" value="add">
 					<input type="text" name="name" id="comment_name" class="text vito-contentbd-input" value="游客" size="28" style="color: gray;"
 					onclick="if(this.value=='游客'){this.value='';this.style.color='';}" 
@@ -168,6 +185,8 @@
 <!-- 右边结束 -->
 <jsp:include page="footer.jsp"></jsp:include>
 </div>
-</body>
-<%} }%>
+</body><%
+	}
+	}
+%>
 </html>

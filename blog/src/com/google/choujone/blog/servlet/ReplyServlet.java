@@ -13,6 +13,7 @@ import com.google.choujone.blog.dao.BlogDao;
 import com.google.choujone.blog.dao.ReplyDao;
 import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Reply;
+import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.Tools;
 
 @SuppressWarnings("serial")
@@ -37,8 +38,8 @@ public class ReplyServlet extends HttpServlet {
 			reply.setReplyTime(Tools.changeTime(new Date()));
 			replyDao.operationReply(Operation.modify, reply);
 			resp.sendRedirect("/admin/reply_list.jsp");
-		} else if (operation.trim().equals(Operation.clearCache.toString())) {//清理缓存
-			
+		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
+
 		}
 	}
 
@@ -59,6 +60,7 @@ public class ReplyServlet extends HttpServlet {
 		String email = req.getParameter("email");// email
 		String url = req.getParameter("url");// email
 		String repyMsg = req.getParameter("msg");
+		String p = req.getParameter("p") != null ? req.getParameter("p") : "1";
 		ReplyDao replyDao = new ReplyDao();
 		Reply reply = new Reply();
 		if (operation.trim().equals(Operation.add.toString())) {// 新增
@@ -79,7 +81,10 @@ public class ReplyServlet extends HttpServlet {
 				resp.sendRedirect("/blog_detail.jsp?id=" + reply.getBid());
 			} else {
 				resp.sendRedirect("/leaveMessage.jsp");
+				bid = "-1";
 			}
+			String key = "replyDao_bid_" + bid + "_" + p;
+			MyCache.clear(key);
 		} else if (operation.trim().equals(Operation.lists.toString())) {// 评论列表
 			System.out.println("请求一下");// 功能未完成
 			req.setAttribute("reply", reply);

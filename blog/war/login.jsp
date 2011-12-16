@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<%@page import="com.google.choujone.blog.entity.Reply"%>
-<%@page import="com.google.choujone.blog.dao.ReplyDao"%>
-<%@page import="com.google.choujone.blog.common.Pages"%>
-<%@page import="java.util.List"%>
 <%@page import="com.google.choujone.blog.entity.User"%>
-<%@page import="com.google.choujone.blog.dao.UserDao"%><html>
+<%@page import="com.google.choujone.blog.dao.UserDao"%>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
@@ -15,13 +11,7 @@
 	User blog_user= userDao.getUserDetail();
 %>
 <title>登录_<%=blog_user.getpTitle()%></title>
-<meta name="keywords" content="<%=blog_user.getBlogKeyword() %>">
-<meta name="description" content="<%=blog_user.getBlogDescription() %>">
-<%
-	if(blog_user.getBlogHead()!=null && !"".equals(blog_user.getBlogHead().trim())){
-		out.print(blog_user.getBlogHead());
-	}
-%>
+	<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body onload="document.forms.loginform.name.focus()">
 <div class="main">
