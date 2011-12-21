@@ -22,7 +22,9 @@ public class ReplyServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String operation = req.getParameter("op") != null ? req
 				.getParameter("op") : "";// 获取操作
-		String ids = req.getParameter("ids");// 博客id
+		String bid = req.getParameter("bid");//博客编号
+		String p = req.getParameter("p");// 页码
+		String ids = req.getParameter("ids");// 评论编号列表
 		String id = req.getParameter("id") != null ? req.getParameter("id")
 				: "";// 回复
 		String repyMsg = req.getParameter("msg");
@@ -31,16 +33,22 @@ public class ReplyServlet extends HttpServlet {
 		if (operation.trim().equals(Operation.delete.toString())) {// 删除
 			// reply.setId(Long.valueOf(ids));
 			replyDao.deleteReply(ids);
-			resp.sendRedirect("/admin/reply_list.jsp");
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 加载修改(页面直接用url请求)
 			reply.setId(Tools.strTolong(id));
 			reply.setReplyMessage(repyMsg);
 			reply.setReplyTime(Tools.changeTime(new Date()));
 			replyDao.operationReply(Operation.modify, reply);
-			resp.sendRedirect("/admin/reply_list.jsp");
+//			resp.sendRedirect("/admin/reply_list.jsp");
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
 
 		}
+		//清理缓存
+		String key = "replyDao_bid_" + bid + "_"+p ;//更新前台
+		MyCache.clear(key);
+		key = "replyDao_getReplyList_null_"+p;//更新后台
+		MyCache.clear(key);
+//		MyCache.updateList(key, reply);
+		resp.sendRedirect("/admin/reply_list.jsp");
 	}
 
 	@Override

@@ -69,12 +69,13 @@
 						break a;
 					}
 				}
+				long blogid=-1L;
 				%>
 			<tr>
 				<td class="vito-content-check"><input type="checkbox" id="rid_<%=reply.getId() %>" class="input_check_single" onclick="singleDeleteFlag(this)" name="deleteFlag" value="<%=reply.getId() %>" /></td>
 				<td class="vito-title"><label for="rid_<%=reply.getId() %>"><%=reply.getId() %></label></td>
 				<td class="vito-title">
-				<% if(reply.getBid()>0 && b!=null){%>
+				<% if(reply.getBid()>0 && b!=null){blogid=b.getId();%>
 					<a href="/blog_detail.jsp?id=<%=b.getId() %>" target="_blank" title='查看  <%=b.getTitle() %>'><%=b.getTitle() %></a>
 				<%}else{ %>
 					<a href="/leaveMessage.jsp" target="_blank" title='查看  网站留言'>网站留言</a>
@@ -85,7 +86,7 @@
 				<td ondblclick="showOrHideDiv('div-msg-<%=i %>')">
 					<%=reply.getReplyMessage()%>
 					<div id="div-msg-<%=i %>" style="display: none;">
-						<input type="text" value="<%=reply.getReplyMessage()%>" id="msg-<%=i %>" onkeydown="responseEnter(event,'<%=reply.getId() %>','msg-<%=i %>')"><input type="button" onclick="replys('<%=reply.getId() %>','msg-<%=i %>')" value="回复">
+						<input type="text" value="<%=reply.getReplyMessage()%>" id="msg-<%=i %>" onkeydown="responseEnter(event,'<%=reply.getId() %>','<%=blogid %>','<%=p %>','msg-<%=i %>')"><input type="button" onclick="replys('<%=reply.getId() %>','<%=blogid %>','<%=p %>','msg-<%=i %>')" value="回复">
 					</div>
 				</td>
 				<td><%=reply.getSdTime() %> </td>
@@ -95,14 +96,14 @@
 		</table>
 	</div>
 	<script type="text/javascript">
-		function replys(id,msg){
+		function replys(id,bid,p,msg){
 				var message=	document.getElementById(msg).value;
-				to("/reply?op=modify&id="+id+"&msg="+message);
+				to("/reply?op=modify&id="+id+"&msg="+message+"&bid="+bid+"&p="+p);
 			}
-		function responseEnter(e,id,msg) {
+		function responseEnter(e,id,bid,p,msg) {
             var key = window.event ? e.keyCode : e.which;
             if (key == 13) {
-            	replys(id,msg);
+            	replys(id,bid,p,msg);
             }
         }
 	</script>

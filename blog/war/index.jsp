@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="com.google.choujone.blog.dao.BlogDao,java.util.List,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.common.Pages,com.google.choujone.blog.dao.UserDao,com.google.choujone.blog.entity.User,com.google.choujone.blog.common.Operation,java.text.SimpleDateFormat,java.util.Date,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType,java.util.ArrayList,java.util.Map,java.util.HashMap"%><html>
+<%@page import="com.google.choujone.blog.dao.BlogDao,java.util.List,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.common.Pages,com.google.choujone.blog.dao.UserDao,com.google.choujone.blog.entity.User,com.google.choujone.blog.common.Operation,java.text.SimpleDateFormat,java.util.Date,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType,java.util.ArrayList,java.util.Map,java.util.HashMap"%>
+<%@page import="com.google.choujone.blog.util.Tools"%><html>
 <head><%
 	UserDao userDao=new UserDao();
 	User user=userDao.getUserDetail();
@@ -63,7 +64,7 @@ for(int i=0;i<blogs.size();i++){
 	<div class="vito-content-date"><%=blog.getSdTime() %></div>
 	<div class="vito-content-body"><%=blog.getContent(50).getValue() %><br><br>
 		<font class="post-tags">Tags:<%=blog.getTag() %></font>
-		<font class="post-footer">发布:<%=user!=null ? user.getName():"" %>|分类:<%=typeMaps.get(blog.getTid())%>|评论:<%=blog.getReplyCount() %>|浏览:<%=blog.getCount() %><%if(login_user!=null){	%>|<a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a><%} %></font>
+		<font class="post-footer">发布:<%=user!=null ? user.getName():"" %>|分类:<%=typeMaps.get(blog.getTid())%>|评论:<%=blog.getReplyCount() %>|浏览:<%=blog.getCount() %><%if(Tools.isLogin(request)){	%>|<a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a><%} %></font>
 	</div>
 </div><br><%}	
 } }else{%>

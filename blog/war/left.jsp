@@ -68,7 +68,7 @@
 		<ul class="vito-right-contentul">
 			<%if(blog_hot!= null){ for(int i=0;i<blog_hot.size();i++){ 
 				Blog b=blog_hot.get(i);
-			%><li title="<%=b.getSdTime() %>"><a href="/blog_detail.jsp?id=<%=b.getId() %>"><%=b.getTitle() %></a></li><%}} %>
+			%><li title="<%=b.getSdTime() %>"><a href="/blog?id=<%=b.getId() %>"><%=b.getTitle() %></a></li><%}} %>
 		</ul>
 	</div><%}if(blog_user.getIsNewReply()==null || blog_user.getIsNewReply()==0){%>
 	<div class="vito-left-title">最新评论</div><%
@@ -78,7 +78,7 @@
 		<ul class="vito-right-contentul">
 			<%if(replyList!= null){ for(int i=0;i<replyList.size();i++){ 
 					Reply r=replyList.get(i);
-			%><li title="post by <%=r.getName() %>  <%=r.getSdTime() %>"><a href="/blog_detail.jsp?id=<%=r.getBid() %>"><%=r.getContent() %></a></li><%}} %>
+			%><li title="post by <%=r.getName() %>  <%=r.getSdTime() %>"><a href="/blog?id=<%=r.getBid() %>"><%=r.getContent() %></a></li><%}} %>
 		</ul>
 	</div><%}if(blog_user.getIsLeaveMessage()==null || blog_user.getIsLeaveMessage()==0){%>
 	<div class="vito-left-title">最新留言</div><%replyList=replyDao.getReplyList(-1L,new Pages(8)); %>

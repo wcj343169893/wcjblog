@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="com.google.choujone.blog.entity.Reply,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.User,com.google.choujone.blog.dao.UserDao"%><html>
+<%@page import="com.google.choujone.blog.entity.Reply,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.User,com.google.choujone.blog.dao.UserDao"%>
+<%@page import="com.google.appengine.api.users.UserService"%>
+<%@page import="com.google.appengine.api.users.UserServiceFactory"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
@@ -9,6 +11,7 @@
 	User blog_user= userDao.getUserDetail();
 %><title>留言板 _<%=blog_user.getpTitle()%></title>
 	<jsp:include page="head.jsp"></jsp:include>
+<script type="text/javascript" src="/js/content.js"></script>
 </head>
 <body>
 <div class="main">
@@ -88,31 +91,34 @@
 		<div id="commentDiv" style="display: none;">
 			<form id="frmSumbit" name="frmSumbit" target="_self" method="post" action="/reply">
 				<div class="vito-ct-id">
+				<%
+				     	UserService userService = UserServiceFactory.getUserService();
+						String gustName="游客";
+						String gustEmail="";
+						String gustURL="";
+				     	if (userService.isUserLoggedIn()){
+				     		gustName=userService.getCurrentUser().getNickname();
+				     		gustEmail=userService.getCurrentUser().getEmail();
+				     		gustURL=userService.getCurrentUser().getAuthDomain();
+				     	}
+				   	%>
 					<input type="hidden" name="op" value="add">
 					<input type="text" name="name"
-						class="text vito-contentbd-input" value="" size="28"/>
-					<label for="inpName">
-						署名(*)
-					</label>
+						class="text vito-contentbd-input" value="<%=gustName %>" size="28"/>
+					<label for="inpName">署名(*)</label><%if (!userService.isUserLoggedIn()){%><a href="<%=userService.createLoginURL(request.getRequestURI())%>" >google账号登陆</a><%} %>
 				</div>
 				<div class="vito-ct-id">
 					<input type="text" name="email"
-						class="text vito-contentbd-input" value="" size="28"/>
-					<label for="inpEmail">
-						邮箱
-					</label>
+						class="text vito-contentbd-input" value="<%=gustEmail %>" size="28"/>
+					<label for="inpEmail">邮箱</label>
 				</div>
 				<div class="vito-ct-id">
-					<input type="text" name="url"
+					<input type="text" name="url" value="<%=gustURL %>"
 						class="text vito-contentbd-input" size="28"/>
-					<label for="inpHomePage">
-						网站链接
-					</label>
+					<label for="inpHomePage">网站链接</label>
 				</div>
 					<div id="content-div"></div>
-				<p>
-					<input type="submit" value="提交"/>
-				</p>
+				<p><input type="submit" value="提交"/></p>
 			</form>
 		</div>
 		<p class="postbottom">
