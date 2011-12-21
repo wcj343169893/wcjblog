@@ -3,7 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="com.google.choujone.blog.entity.User"%>
 <%@page import="com.google.choujone.blog.dao.UserDao"%>
-<html>
+
+<%@page import="com.google.appengine.api.users.UserService"%>
+<%@page import="com.google.appengine.api.users.UserServiceFactory"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
@@ -27,11 +29,23 @@
 		登录后台 <% if(request.getAttribute("error")!= null){out.print(request.getAttribute("error"));} %>
 	</div>
 	<div class="login">
+	 	<%
+	     	UserService userService = UserServiceFactory.getUserService();
+	     	if (!userService.isUserLoggedIn()) {
+	   %>
 		<form action="/user" method="post" id="loginform" name="loginform">
 			用户名：<input type="text" value="" name="name" size="20" maxlength="20"><br><br>
 			密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password" size="20" maxlength="20"><br><br>
 			<div align="center"><input type="submit" value="登录"></div> 
 		</form>
+	      <a href="<%=userService.createLoginURL(request.getRequestURI())%>" >google账号登陆</a>
+	   <% 
+	     } else { 
+	     %>
+	      欢迎 <%if(userService.isUserAdmin()){out.print("管理员");}%><%= userService.getCurrentUser().getNickname() %>!<br/><br/><a href="<%=userService.createLogoutURL(request.getRequestURI())%>">退出</a>
+	   <%
+	   }
+	   %>
 	</div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

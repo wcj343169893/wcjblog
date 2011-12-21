@@ -6,10 +6,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.Blob;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.choujone.blog.entity.BlogType;
+import com.google.choujone.blog.entity.User;
 
 public class Tools {
 	/**
@@ -93,7 +99,7 @@ public class Tools {
 	 */
 	public static String changeTime(Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-		Calendar calendar=Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.add(Calendar.HOUR_OF_DAY, 8);
 		return format.format(calendar.getTime());
@@ -177,5 +183,25 @@ public class Tools {
 			}
 		}
 		return sb.toString();
+	}
+
+	public static boolean isLogin(ServletRequest request) {
+		boolean isLogin = false;
+		try {
+			HttpServletRequest req = (HttpServletRequest) request;
+			User user = (User) req.getSession().getAttribute("login_user");
+			if (user == null) {// 判断是不是网站用户登陆
+				UserService us = UserServiceFactory.getUserService();
+				if (!us.isUserLoggedIn() || !us.isUserAdmin()) {
+					isLogin = false;
+				} else {
+					isLogin = true;
+				}
+			} else {
+				isLogin = true;
+			}
+		} catch (Exception e) {
+		}
+		return isLogin;
 	}
 }

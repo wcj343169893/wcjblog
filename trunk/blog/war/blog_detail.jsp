@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.BlogDao,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.entity.User,com.google.choujone.blog.dao.UserDao,com.google.choujone.blog.common.Operation,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType"%>
-<html><%
+
+<%@page import="com.google.appengine.api.users.UserService"%>
+<%@page import="com.google.appengine.api.users.UserServiceFactory"%><html><%
 	String id = request.getParameter("id");
 	if (id != null && !"".equals(id.trim())) {
 		BlogDao blogDao = new BlogDao();
@@ -34,6 +36,7 @@
 				out.print(blog_user.getBlogHead());
 			}
 %>	<jsp:include page="head.jsp"></jsp:include>
+<script type="text/javascript" src="/js/content.js"></script>
 </head>
 <body>
 <div class="main">
@@ -49,11 +52,11 @@
 	<div class="vito-content-detail">
 	<div class="vito-prenext"><%
 		if (preBlog != null) {
-	%><span style="float: left; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=preBlog.getId()%>">&laquo; <%=preBlog.getTitle(20)%></a></span><%
+	%><span style="float: left; margin: 0 0 0 20px;"><a class="l" href="/blog?id=<%=preBlog.getId()%>">&laquo; <%=preBlog.getTitle(20)%></a></span><%
  	}
  %><%
  	if (nextBlog != null) {
- %><span style="float: right; margin: 0 0 0 20px;"><a class="l" href="/blog_detail.jsp?id=<%=nextBlog.getId()%>"><%=nextBlog.getTitle(20)%>&raquo;</a></span><%
+ %><span style="float: right; margin: 0 0 0 20px;"><a class="l" href="/blog?id=<%=nextBlog.getId()%>"><%=nextBlog.getTitle(20)%>&raquo;</a></span><%
  	}
  %></div>
 	<div class="vito-content-title"><%=blog.getTitle()%></div>
@@ -132,11 +135,11 @@
 		<br>
 		<div class="vito-prenext">共<%=pages.getRecTotal()%>第<%=pages.getPageNo()%>/<%=pages.getPageTotal()%>页<%
 			if (p > 1) {
-		%><a href="/blog_detail.jsp?p=<%=p - 1%>&id=<%=blog.getId()%>">上一页</a><%
+		%><a href="/blog?p=<%=p - 1%>&id=<%=blog.getId()%>">上一页</a><%
 			}
 		%><%
 			if (p < pages.getPageTotal()) {
-		%><a href="/blog_detail.jsp?p=<%=p + 1%>&id=<%=blog.getId()%>">下一页</a><%
+		%><a href="/blog?p=<%=p + 1%>&id=<%=blog.getId()%>">下一页</a><%
 			}
 		%></div>
 		<%
@@ -157,18 +160,30 @@
 					<input type="hidden" name="bid" value="<%=blog.getId()%>">
 					<input type="hidden" name="p" value="<%=p %>">
 					<input type="hidden" name="op" value="add">
-					<input type="text" name="name" id="comment_name" class="text vito-contentbd-input" value="游客" size="28" style="color: gray;"
-					onclick="if(this.value=='游客'){this.value='';this.style.color='';}" 
-					onblur="if(this.value==''){this.value='游客';this.style.color='gray';}"/>
-					<label for="comment_name">署名(*)</label>
+					<%
+				     	UserService userService = UserServiceFactory.getUserService();
+						String gustName="游客";
+						String gustEmail="";
+						String gustURL="";
+				     	if (userService.isUserLoggedIn()){
+				     		gustName=userService.getCurrentUser().getNickname();
+				     		gustEmail=userService.getCurrentUser().getEmail();
+				     		gustURL=userService.getCurrentUser().getAuthDomain();
+				     	}
+				   	%>
+					<input type="text" name="name" id="comment_name" class="text vito-contentbd-input" value="<%=gustName %>" size="28" style="color: gray;"
+					onclick="if(this.value=='<%=gustName %>'){this.value='';this.style.color='';}" 
+					onblur="if(this.value==''){this.value='<%=gustName %>';this.style.color='gray';}"/>
+					<label for="comment_name">署名(*)</label><%if (!userService.isUserLoggedIn()){%><a href="<%=userService.createLoginURL("/blog?id="+id)%>" >google账号登陆</a><%} %>
+					
 				</div>
 				<div class="vito-ct-id">
 					<input type="text" name="email" id="inpEmail"
-						class="text vito-contentbd-input" value="" size="28"/>
+						class="text vito-contentbd-input" value="<%=gustEmail %>" size="28"/>
 					<label for="inpEmail">邮箱</label>
 				</div>
 				<div class="vito-ct-id">
-					<input type="text" name="url" id="inpHomePage"
+					<input type="text" name="url" id="inpHomePage" value="<%=gustURL %>"
 						class="text vito-contentbd-input" size="28"/>
 					<label for="inpHomePage">网站链接</label>
 				</div>
