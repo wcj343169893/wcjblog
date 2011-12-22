@@ -39,6 +39,7 @@
 <script type="text/javascript" src="/js/content.js"></script>
 </head>
 <body>
+<jsp:include page="top_member.jsp"></jsp:include>
 <div class="main">
 <!-- 顶部开始 -->
 <jsp:include page="top.jsp"></jsp:include>
@@ -104,7 +105,9 @@
 												out.print("第" + (i + 1) * pages.getPageNo()
 														+ "楼");
 											}
-						%>&nbsp;|&nbsp; <%=reply.getName()%>
+						String url=reply.getUrl()!=null && !"".equals(reply.getUrl().trim()) ?reply.getUrl(): blog_user.getUrl();
+						url=url.indexOf("http://")!=-1?url:"http://"+url;
+						%>|<a href="<%=url %>"><%=reply.getName()%></a>
 						<span style="color: #979797"><%=reply.getSdTime()%>说</span>
 					</span>
 					<br><br>

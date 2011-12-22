@@ -16,6 +16,7 @@
 	<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body onload="document.forms.loginform.name.focus()">
+<jsp:include page="top_member.jsp"></jsp:include>
 <div class="main">
 <!-- 顶部开始 -->
 <jsp:include page="top.jsp"></jsp:include>
@@ -34,15 +35,23 @@
 	     	if (!userService.isUserLoggedIn()) {
 	   %>
 		<form action="/user" method="post" id="loginform" name="loginform">
-			用户名：<input type="text" value="" name="name" size="20" maxlength="20"><br><br>
-			密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password" size="20" maxlength="20"><br><br>
-			<div align="center"><input type="submit" value="登录"></div> 
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td class="l_title">用户名：</td><td><input type="text" value="" name="name" size="20" maxlength="20"></td>
+			</tr>
+			<tr>
+				<td class="l_title">密码：</td><td><input type="password" name="password" size="20" maxlength="20"></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td><input type="submit" value="登录"><a href="<%=userService.createLoginURL(request.getRequestURI())%>" >google账号登陆</a></td>
+			</tr>
+			<tr>
+		</table>
 		</form>
-	      <a href="<%=userService.createLoginURL(request.getRequestURI())%>" >google账号登陆</a>
 	   <% 
 	     } else { 
 	     %>
-	      欢迎 <%if(userService.isUserAdmin()){out.print("管理员");}%><%= userService.getCurrentUser().getNickname() %>!<br/><br/><a href="<%=userService.createLogoutURL(request.getRequestURI())%>">退出</a>
+	      欢迎 <%if(userService.isUserAdmin()){out.print("管理员");}%><%= userService.getCurrentUser().getNickname() %>!<a href="<%=userService.createLogoutURL(request.getRequestURI())%>">退出</a>
 	   <%
 	   }
 	   %>

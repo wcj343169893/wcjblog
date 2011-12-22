@@ -29,9 +29,7 @@ public class UserServlet extends HttpServlet {
 			// resp.sendRedirect("/admin/reply_list.jsp");
 		} else if (operation.trim().equals(Operation.modify.toString())) {
 			// 判断用户是否登录
-			User user_login = (User) req.getSession()
-					.getAttribute("login_user");
-			if (user_login == null) {
+			if (!Tools.isLogin(req)) {
 				resp.sendRedirect("/login.jsp");
 				return;
 			} else {
@@ -134,9 +132,7 @@ public class UserServlet extends HttpServlet {
 		User user = new User();
 		if (operation.trim().equals(Operation.modify.toString())) {// 修改信息
 			// 判断用户是否登录
-			User user_login = (User) req.getSession()
-					.getAttribute("login_user");
-			if (user_login == null) {
+			if (!Tools.isLogin(req)) {
 				resp.sendRedirect("/login.jsp");
 				return;
 			} else {
