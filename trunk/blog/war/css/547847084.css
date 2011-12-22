@@ -443,7 +443,7 @@ a:HOVER {
 }
 
 /**登录状态*/
-#nav_wrap {
+#nav_wrap {position: fixed;
 	width: 100%;
 	height: 25px;
 	background: url("/images/mini_bg.png") repeat-x;
