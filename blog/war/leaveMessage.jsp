@@ -14,6 +14,7 @@
 <script type="text/javascript" src="/js/content.js"></script>
 </head>
 <body>
+<jsp:include page="top_member.jsp"></jsp:include>
 <div class="main">
 <!-- 顶部开始 -->
 <jsp:include page="top.jsp"></jsp:include>
