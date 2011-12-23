@@ -28,5 +28,16 @@
 		   <%
 		   }
 		   %>
+		   <span id="qqLoginBtn"></span>
+		   <script type="text/javascript">
+			QC.Login.insertButton({
+				btnId : 'qqLoginBtn',
+				size : 'B_S',
+				clientId : '100237063',
+				scope : '',
+				redirectURI : 'www.choujone.com/login_success.jsp' // 回调地址，可选
+				,'btnMode':'showUserAfterLogin'
+			});
+			</script>
 	</div>
 </div>

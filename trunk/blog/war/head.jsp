@@ -25,3 +25,4 @@
 <script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc.js"></script>
