@@ -165,7 +165,7 @@ public class Tools {
 			// %>)</a></li>
 			if (blogType.getParentId() == null || blogType.getParentId() == 0) {
 				sb.append("<li title=\"" + blogType.getInfo()
-						+ "\"><a href=/?tid=" + blogType.getId() + ">"
+						+ "\"><a href='javascript:void(0)'>"
 						+ blogType.getName() + "</a>");
 				sb.append("<ul>");
 				for (BlogType bt_c : blogTypeList) {
