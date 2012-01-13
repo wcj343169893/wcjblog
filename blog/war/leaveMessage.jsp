@@ -24,16 +24,9 @@
 <!-- 左边结束 -->
 <!-- 右边开始 -->
 <div class="right">
-	<div class="right-title">
-		留言板
-	</div>
-	<div
-		style="font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif; font-size: 14px; color: #ffd247; padding: 0 0 10px 20px;">
-		主人寄语
-	</div>
-	<div>
-		<%=blog_user.getPreMessage().getValue() %>
-	</div>
+	<div class="right-title">留言板</div>
+	<div style="font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif; font-size: 14px; color: #ffd247; padding: 0 0 10px 20px;">主人寄语</div>
+	<div><%=blog_user.getPreMessage().getValue() %></div>
 	<%
 		int p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
 		ReplyDao replyDao=new ReplyDao();

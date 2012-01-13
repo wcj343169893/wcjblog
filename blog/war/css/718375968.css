@@ -91,6 +91,7 @@ a:HOVER {
 	border: 1px solid #E89DBC;
 	float: left;
 	background-color: #FEE7F1;
+	overflow: hidden;
 }
 
 .right-title {
