@@ -6,6 +6,8 @@ KE.init({
 });
 KE.event.ready(function(){
 	var textarea = document.createElement('textarea');
+	var default_content=document.getElementById("vito-content-title");
+	textarea.innerHTML=default_content? "我觉得“"+default_content.innerHTML+"”":"  ";
 	textarea.id = editor_id;
 	textarea.name = "content";
 	document.getElementById('content-div').appendChild(textarea);

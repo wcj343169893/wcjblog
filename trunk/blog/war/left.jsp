@@ -21,7 +21,7 @@
 		</div><%} if(blog_user.getIsWeather()==null || blog_user.getIsWeather()==0){%>
 		<div class="vito-left-title">天气预报</div>
 		<div class="vito-left-contentul">
-		<iframe src="http://m.weather.com.cn/m/pn12/weather.htm?id=101040100T " width="230" height="110" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
+		<iframe src="http://m.weather.com.cn/m/pn12/weather.htm?id=101040100T" width="230" height="110" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
 		</div><%}if(blog_user.getIsCalendars()==null || blog_user.getIsCalendars()==0){%>
 	<div class="vito-left-title">日历</div>
 	<div class="vito-left-contentul">
