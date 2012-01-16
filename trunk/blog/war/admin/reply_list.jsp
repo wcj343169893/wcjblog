@@ -81,7 +81,8 @@
 					<a href="/leaveMessage.jsp" target="_blank" title='查看  网站留言'>网站留言</a>
 				<%} %>
 				</td>
-				<td title="EMAIL:<%=reply.getEmail() %>  URL:<%=reply.getUrl() %>"><%=reply.getName()%></td>
+				<td><%=reply.getName()%><div class="explain"><table><tr><td>NAME</td><td><%=reply.getName()%></td></tr><tr><td>EMAIL</td><td><%=reply.getEmail() %></td></tr><tr><td>URL</td><td><%=reply.getUrl() %></td></tr><tr><td>其他信息</td><td><%=reply.getVisiter() %></td></tr></table></div>
+				</td>
 				<td><%=reply.getContent()%></td>
 				<td ondblclick="showOrHideDiv('div-msg-<%=i %>')">
 					<%=reply.getReplyMessage()%>
@@ -106,6 +107,18 @@
             	replys(id,bid,p,msg);
             }
         }
+		jQuery(function($) {
+				$(".explain").each(function(index, domEle) {
+					$(this).parent().hover(
+							  function () {
+								  $(domEle).show();
+							  },
+							  function () {
+								  $(domEle).hide();
+							  }
+							);
+					});
+			});
 	</script>
 	<jsp:include page="/admin/bottom.jsp"></jsp:include>
 </div>

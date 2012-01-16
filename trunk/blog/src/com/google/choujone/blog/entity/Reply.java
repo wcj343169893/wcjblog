@@ -13,7 +13,7 @@ import javax.jdo.annotations.PrimaryKey;
  * 功能描述：回复 2010-11-18
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class Reply implements Serializable{
+public class Reply implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -34,6 +34,8 @@ public class Reply implements Serializable{
 	private String replyMessage = "";// 我的回复
 	@Persistent
 	private String replyTime = "";// 我回复时间
+	@Persistent
+	private String visiter = "";// 访问者的信息
 
 	public Long getId() {
 		return id;
@@ -105,6 +107,18 @@ public class Reply implements Serializable{
 
 	public void setSdTime(String sdTime) {
 		this.sdTime = sdTime;
+	}
+
+	public String getVisiter() {
+		return visiter;
+	}
+
+	public void setVisiter(String visiter) {
+		this.visiter = visiter;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
