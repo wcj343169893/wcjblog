@@ -1,13 +1,17 @@
 package com.google.choujone.blog.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -203,5 +207,60 @@ public class Tools {
 		} catch (Exception e) {
 		}
 		return isLogin;
+	}
+
+	/**
+	 * 获取客户端IP地址
+	 */
+	public static String getIpAddr(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
+	}
+
+	/**
+	 * 根据IP地址获取地理位置，如：北京市
+	 */
+	public static String getAddressByIP(String ip) {
+		String addressStr = "";
+		try {
+			URL url = new URL("http://www.ip138.com/ips.asp?ip=" + ip);
+			URLConnection conn = url.openConnection();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					conn.getInputStream(), "GBK"));
+			String line = null;
+			StringBuffer result = new StringBuffer();
+			while ((line = reader.readLine()) != null) {
+				result.append(line);
+			}
+			reader.close();
+			addressStr = result.toString();
+			addressStr = addressStr.substring(addressStr.indexOf("主数据：") + 4,
+					addressStr.indexOf("</li><li>参考数据"));
+			char[] address = addressStr.toCharArray();
+			for (int i = 0; i < address.length; i++) {
+				char c = address[i];
+				if (i != 0 && !Character.isLetter(c)) { // 判断是否汉字，不含中午特殊符号
+					addressStr = addressStr.substring(0, i);
+					break;
+				}
+			}
+		} catch (StringIndexOutOfBoundsException indexOut) {
+			System.out.println("下标越界：" + ip);
+			addressStr = ip; // 获取失败，返回IP
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return addressStr;
 	}
 }

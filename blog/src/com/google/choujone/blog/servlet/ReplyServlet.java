@@ -22,7 +22,7 @@ public class ReplyServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String operation = req.getParameter("op") != null ? req
 				.getParameter("op") : "";// 获取操作
-		String bid = req.getParameter("bid");//博客编号
+		String bid = req.getParameter("bid");// 博客编号
 		String p = req.getParameter("p");// 页码
 		String ids = req.getParameter("ids");// 评论编号列表
 		String id = req.getParameter("id") != null ? req.getParameter("id")
@@ -38,16 +38,16 @@ public class ReplyServlet extends HttpServlet {
 			reply.setReplyMessage(repyMsg);
 			reply.setReplyTime(Tools.changeTime(new Date()));
 			replyDao.operationReply(Operation.modify, reply);
-//			resp.sendRedirect("/admin/reply_list.jsp");
+			// resp.sendRedirect("/admin/reply_list.jsp");
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
 
 		}
-		//清理缓存
-		String key = "replyDao_bid_" + bid + "_"+p ;//更新前台
+		// 清理缓存
+		String key = "replyDao_bid_" + bid + "_" + p;// 更新前台
 		MyCache.clear(key);
-		key = "replyDao_getReplyList_null_"+p;//更新后台
+		key = "replyDao_getReplyList_null_" + p;// 更新后台
 		MyCache.clear(key);
-//		MyCache.updateList(key, reply);
+		// MyCache.updateList(key, reply);
 		resp.sendRedirect("/admin/reply_list.jsp");
 	}
 
@@ -78,13 +78,16 @@ public class ReplyServlet extends HttpServlet {
 			reply.setUrl(url);
 			reply.setBid(Tools.strTolong(bid));
 			reply.setContent(content);
+			// 获取到留言者的信息
+			reply.setVisiter(req.getRemoteAddr() + ";"
+					+ Tools.getAddressByIP(Tools.getIpAddr(req)) + ";"
+					+ req.getHeader("user-agent"));
 			replyDao.operationReply(Operation.add, reply);
 			if (reply.getBid() > 0) {
 				BlogDao blogDao = new BlogDao();
 				blogDao.operationBlog(Operation.replyTimes, new Blog(reply
 						.getBid()));
 			}
-
 			if (reply.getBid() > 0) {
 				resp.sendRedirect("/blog_detail.jsp?id=" + reply.getBid());
 			} else {
