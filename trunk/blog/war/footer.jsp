@@ -5,3 +5,4 @@
 	%>
 	<div class="content">Powered By choujone 版权所有.Some Rights Reserved <%=user.getBlogFoot() %></div>
 </div>
+<div class="clear"></div>
