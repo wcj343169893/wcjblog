@@ -471,3 +471,7 @@ a:HOVER {
 	padding-right: 10px;
 	padding-top: 5px;
 }
+
+.clear {
+	clear: both;
+}
