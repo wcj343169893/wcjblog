@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -107,6 +108,16 @@ public class Tools {
 		calendar.setTime(date);
 		calendar.add(Calendar.HOUR_OF_DAY, 8);
 		return format.format(calendar.getTime());
+	}
+
+	public static Date changeTime(String date) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		Date d = new Date();
+		try {
+			d = format.parse(date);
+		} catch (ParseException e) {
+		}
+		return d;
 	}
 
 	public static void blob2Img(Blob blob, HttpServletResponse resp) {

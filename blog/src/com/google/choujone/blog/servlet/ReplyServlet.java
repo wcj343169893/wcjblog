@@ -13,6 +13,7 @@ import com.google.choujone.blog.dao.BlogDao;
 import com.google.choujone.blog.dao.ReplyDao;
 import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Reply;
+import com.google.choujone.blog.util.Mail;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.Tools;
 
@@ -39,7 +40,6 @@ public class ReplyServlet extends HttpServlet {
 			reply.setReplyTime(Tools.changeTime(new Date()));
 			replyDao.operationReply(Operation.modify, reply);
 			// resp.sendRedirect("/admin/reply_list.jsp");
-			//清理id 缓存
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
 
 		}
@@ -101,6 +101,8 @@ public class ReplyServlet extends HttpServlet {
 			//清理后台缓存
 			key="replyDao_getReplyList_all_"+1;
 			MyCache.clear(key);
+			//发送 邮件到邮箱
+			Mail.send(bid,content);
 		} else if (operation.trim().equals(Operation.lists.toString())) {// 评论列表
 			System.out.println("请求一下");// 功能未完成
 			req.setAttribute("reply", reply);
