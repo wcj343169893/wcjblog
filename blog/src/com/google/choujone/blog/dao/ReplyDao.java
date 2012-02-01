@@ -185,7 +185,7 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyList(Pages pages) {
-		key = "replyDao_getReplyList_null_" + pages.getPageNo();
+		key = "replyDao_getReplyList_all_" + pages.getPageNo();
 		List<Reply> replyList = MyCache.get(key);
 		page_key = key + "_pages";
 		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache

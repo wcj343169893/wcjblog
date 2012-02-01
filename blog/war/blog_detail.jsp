@@ -98,16 +98,12 @@
 				<span class="vito-postcomment-one">
 					<span class="vito-postcomment-name" style="color: #8c8c8c">
 						<%
-							if ((i + 1) * pages.getPageNo() == 1) {
-												out.print("沙发");
-											} else if ((i + 1) * pages.getPageNo() == 2) {
-												out.print("板凳");
-											} else if ((i + 1) * pages.getPageNo() == 3) {
-												out.print("平地");
-											} else {
-												out.print("第" + (i + 1) * pages.getPageNo()
-														+ "楼");
-											}
+							int louceng=(pages.getPageNo()-1)*pages.getPageSize()+i+1;
+							if (louceng == 1) {out.print("沙发");} 
+							else if (louceng == 2) {out.print("板凳");} 
+							else if (louceng == 3) {out.print("平地");
+							} else {out.print("第" + louceng+ "楼");}
+						
 						String url=reply.getUrl()!=null && !"".equals(reply.getUrl().trim()) ?reply.getUrl(): blog_user.getUrl();
 						url=url.indexOf("http://")!=-1?url:"http://"+url;
 						%>|<a href="<%=url %>"><%=reply.getName()%></a>

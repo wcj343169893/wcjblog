@@ -39,13 +39,14 @@ public class ReplyServlet extends HttpServlet {
 			reply.setReplyTime(Tools.changeTime(new Date()));
 			replyDao.operationReply(Operation.modify, reply);
 			// resp.sendRedirect("/admin/reply_list.jsp");
+			//清理id 缓存
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
 
 		}
 		// 清理缓存
 		String key = "replyDao_bid_" + bid + "_" + p;// 更新前台
 		MyCache.clear(key);
-		key = "replyDao_getReplyList_null_" + p;// 更新后台
+		key = "replyDao_getReplyList_all_" + p;// 更新后台
 		MyCache.clear(key);
 		// MyCache.updateList(key, reply);
 		resp.sendRedirect("/admin/reply_list.jsp");
@@ -94,7 +95,11 @@ public class ReplyServlet extends HttpServlet {
 				resp.sendRedirect("/leaveMessage.jsp");
 				bid = "-1";
 			}
+			//清理前台缓存
 			String key = "replyDao_bid_" + bid + "_" + p;
+			MyCache.clear(key);
+			//清理后台缓存
+			key="replyDao_getReplyList_all_"+1;
 			MyCache.clear(key);
 		} else if (operation.trim().equals(Operation.lists.toString())) {// 评论列表
 			System.out.println("请求一下");// 功能未完成
