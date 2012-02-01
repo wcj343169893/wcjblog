@@ -99,8 +99,11 @@ public class BlogDao {
 		}
 		// 更新缓存中的内容
 		key = "blogDao_getBlogsByPage_null_null_1_10";
-		MyCache.updateList(key, b);
-		MyCache.cache.put("blogDao_id_" + b.getId(), b);
+//		MyCache.updateList(key, b);
+//		MyCache.cache.put("blogDao_id_" + b.getId(), b);
+		MyCache.clear(key);
+		key = "blogDao_getBlogListByPage_null_null_1_10";
+		MyCache.clear(key);
 		closePM();
 		return flag;
 	}
@@ -207,7 +210,7 @@ public class BlogDao {
 				.get(page_key)
 				: pages;
 
-		if (blogs == null) {
+		if (blogs == null || page == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				String filter = "select count(id) from " + Blog.class.getName()
