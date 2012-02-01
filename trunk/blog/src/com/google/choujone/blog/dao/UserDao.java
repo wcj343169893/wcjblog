@@ -9,6 +9,7 @@ import javax.jdo.Query;
 
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.entity.User;
+import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
 
@@ -92,6 +93,7 @@ public class UserDao {
 	public boolean operationUser(Operation operation, User user) {
 		boolean flag = false;
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+		User u = user;
 		try {
 			if (operation.equals(Operation.add)) {// 增加用户信息只运行一次
 				pm.makePersistent(user);
@@ -100,7 +102,7 @@ public class UserDao {
 				Query query = pm.newQuery(User.class);
 				List<User> users = (List<User>) query.execute();
 				if (users != null && users.size() > 0) {
-					User u = users.get(0);
+					u = users.get(0);
 					u.setName(user.getName());
 					u.setPassword(user.getPassword());
 					u.setBrithday(user.getBrithday());
@@ -131,8 +133,10 @@ public class UserDao {
 					// 2011-10-28 添加顶部和底部代码
 					u.setBlogHead(user.getBlogHead());
 					u.setBlogFoot(user.getBlogFoot());
-					
+
 					u.setIsUpload(user.getIsUpload());
+					//更新静态设置
+					Config.blog_user=u;
 				}
 				flag = true;
 			}
@@ -140,7 +144,7 @@ public class UserDao {
 			flag = false;
 			e.printStackTrace();
 		}
-		MyCache.cache.put("userDao_getUserDetail", user);
+		MyCache.cache.put("userDao_getUserDetail", u);
 		closePM();
 		return flag;
 	}
