@@ -58,12 +58,17 @@ if(blogs!=null && blogs.size()>0){
 for(int i=0;i<blogs.size();i++){
 	Blog blog=blogs.get(i);
 	if(blog.getIsVisible() == 0 ){
+		String link=user.getUrl()+"/blog?id="+blog.getId();
 %><div class="vito-content">
 	<div class="vito-content-title">
-		<a href="/blog?id=<%=blog.getId() %>"><%=blog.getTitle() %></a>
+		<a href="<%=link %>"><%=blog.getTitle() %></a>
+	</div>
+	<div class="vito-content-rc">
+		<img alt="<%=link %>" src="http://chart.cli.im/chart?chs=150x150&cht=qr&chl=<%=link %>%0A<%=blog.getTitle() %>" style="border: none" title="<%=blog.getTitle() %>">
 	</div>
 	<div class="vito-content-date"><%=blog.getSdTime() %></div>
-	<div class="vito-content-body"><%=blog.getContent(50).getValue() %><br><br>
+	<div class="vito-content-body"><%=blog.getContent(50).getValue() %>
+	<br><br>
 		<font class="post-tags">Tags:<%=blog.getTag() %></font>
 		<font class="post-footer">发布:<%=user!=null ? user.getName():"" %>|分类:<%=typeMaps.get(blog.getTid())%>|评论:<%=blog.getReplyCount() %>|浏览:<%=blog.getCount() %><%if(Tools.isLogin(request)){	%>|<a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a><%} %></font>
 	</div>
