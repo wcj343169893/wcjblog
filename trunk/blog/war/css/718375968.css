@@ -80,8 +80,7 @@ a:HOVER {
 
 .main {
 	width: 980px;
-	margin-left: -490px;
-	padding-left: 50%;
+	margin: 0 auto;
 }
 
 .right {
@@ -130,12 +129,12 @@ a:HOVER {
 }
 
 .vito-content {
-	PADDING-RIGHT: 0px;
-	PADDING-LEFT: 0px;
-	PADDING-BOTTOM: 0px;
-	MARGIN: 0px;
-	PADDING-TOP: 0px;
-	border: 1px dotted #E89DBC;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
+	padding-top: 0px;
+	border: 1px dotted #e89dbc;
 }
 
 .vito-content:HOVER {
@@ -157,115 +156,116 @@ a:HOVER {
 }
 
 .vito-content-title A:link {
-	COLOR: #EE3592;
+	color: #ee3592;
 }
 
 .vito-content-title A:active {
-	COLOR: #EE3592;
+	color: #ee3592;
 }
 
 .vito-content-title A:visited {
-	COLOR: #EE3592;
+	color: #ee3592;
 }
 
 .vito-content-title A:hover {
-	COLOR: red;
+	color: red;
 }
 
 .vito-content-date {
-	PADDING-RIGHT: 0px;
-	DISPLAY: inline-block;
-	PADDING-LEFT: 47px;
-	FONT-SIZE: 10px;
-	PADDING-BOTTOM: 0px;
-	PADDING-TOP: 5px;
+	padding-right: 0px;
+	display: inline-block;
+	padding-left: 47px;
+	font-size: 10px;
+	padding-bottom: 0px;
+	padding-top: 5px;
 }
 
 .vito-content-body {
-	PADDING-RIGHT: 20px;
-	PADDING-LEFT: 20px;
-	PADDING-BOTTOM: 0px;
-	LINE-HEIGHT: 20px;
-	PADDING-TOP: 20px;
-	TEXT-ALIGN: justify;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-bottom: 0px;
+	line-height: 20px;
+	padding-top: 20px;
+	text-align: justify;
+	height: 80px;
 }
 
 .vito-detail-content-body {
-	PADDING-RIGHT: 20px;
-	PADDING-LEFT: 20px;
-	PADDING-BOTTOM: 0px;
-	LINE-HEIGHT: 20px;
-	PADDING-TOP: 20px;
-	TEXT-ALIGN: justify;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-bottom: 0px;
+	line-height: 20px;
+	padding-top: 20px;
+	text-align: justify;
 }
 
 .vito-content-body P {
-	PADDING-RIGHT: 10px;
-	PADDING-LEFT: 0px;
-	PADDING-BOTTOM: 10px;
-	PADDING-TOP: 0px
+	padding-right: 10px;
+	padding-left: 0px;
+	padding-bottom: 10px;
+	padding-top: 0px
 }
 
 .vito-content-body IMG {
-	BORDER-RIGHT: gray 1px solid;
-	PADDING-RIGHT: 5px;
-	BORDER-TOP: gray 1px solid;
-	PADDING-LEFT: 5px;
-	BACKGROUND: #646464;
-	PADDING-BOTTOM: 5px;
-	BORDER-LEFT: gray 1px solid;
-	PADDING-TOP: 5px;
-	BORDER-BOTTOM: gray 1px solid;
+	border-right: gray 1px solid;
+	padding-right: 5px;
+	border-top: gray 1px solid;
+	padding-left: 5px;
+	background: #646464;
+	padding-bottom: 5px;
+	border-left: gray 1px solid;
+	padding-top: 5px;
+	border-bottom: gray 1px solid;
 }
 
 .vito-content-readmore {
-	PADDING-RIGHT: 0px;
-	PADDING-LEFT: 20px;
-	FONT-SIZE: 15px;
-	FLOAT: left;
-	PADDING-BOTTOM: 0px;
-	MARGIN: 15px 0px 0px 20px;
-	PADDING-TOP: 0px;
-	FONT-FAMILY: 微软雅黑, "Arial Unicode MS", sans-serif;
+	padding-right: 0px;
+	padding-left: 20px;
+	font-size: 15px;
+	float: left;
+	padding-bottom: 0px;
+	margin: 15px 0px 0px 20px;
+	padding-top: 0px;
+	font-family: 微软雅黑, "Arial Unicode MS", sans-serif;
 }
 
 .vito-content-readmore A:link {
-	COLOR: #c1c1c1;
-	TEXT-DECORATION: none
+	color: #c1c1c1;
+	text-decoration: none
 }
 
 .vito-content-readmore A:active {
-	COLOR: #c1c1c1;
-	TEXT-DECORATION: none
+	color: #c1c1c1;
+	text-decoration: none
 }
 
 .vito-content-readmore A:visited {
-	COLOR: #c1c1c1;
-	TEXT-DECORATION: none
+	color: #c1c1c1;
+	text-decoration: none
 }
 
 .vito-content-readmore A:hover {
-	COLOR: #ffd247;
-	TEXT-DECORATION: none
+	color: #ffd247;
+	text-decoration: none
 }
 
 .vito-content-taball {
-	PADDING-RIGHT: 0px;
-	PADDING-LEFT: 0px;
-	PADDING-BOTTOM: 5px;
-	MARGIN: 0px;
-	PADDING-TOP: 10px;
-	HEIGHT: 35px;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-bottom: 5px;
+	margin: 0px;
+	padding-top: 10px;
+	height: 35px;
 }
 
 .vito-content-body-tab {
-	PADDING-RIGHT: 0px;
-	PADDING-LEFT: 15px;
-	FONT-WEIGHT: normal;
-	FONT-SIZE: 12px;
-	PADDING-BOTTOM: 0px;
-	MARGIN: 5px 0px 0px 20px;
-	PADDING-TOP: 0px;
+	padding-right: 0px;
+	padding-left: 15px;
+	font-weight: normal;
+	font-size: 12px;
+	padding-bottom: 0px;
+	margin: 5px 0px 0px 20px;
+	padding-top: 0px;
 }
 
 .post-footer {
@@ -474,4 +474,10 @@ a:HOVER {
 
 .clear {
 	clear: both;
+}
+.vito-content-rc{
+	margin-top: -35px;
+	float: right;
+	margin-left: 10px;
+	margin-right: 5px;
 }
