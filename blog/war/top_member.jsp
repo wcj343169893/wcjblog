@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><%@page import="com.google.choujone.blog.entity.User"%><%@page import="com.google.choujone.blog.dao.UserDao"%>
+    pageEncoding="UTF-8"%><%@page import="com.google.choujone.blog.entity.User,com.google.appengine.api.users.UserService,com.google.appengine.api.users.UserServiceFactory,com.google.choujone.blog.util.Config"%><div id="nav_wrap">
 <%
-	UserDao userDao=new UserDao();
-	User blog_user= userDao.getUserDetail();
+	User blog_user=Config.blog_user;
 %>
-
-<%@page import="com.google.appengine.api.users.UserService"%>
-<%@page import="com.google.appengine.api.users.UserServiceFactory"%>
-<div id="nav_wrap">
-	<div id="top_member">
-			<%
+	<div id="top_member"><%
 		     	UserService userService = UserServiceFactory.getUserService();
 				String  url  =  request.getRequestURI();  
 				if(url.indexOf("blog_detail.jsp")!=-1){

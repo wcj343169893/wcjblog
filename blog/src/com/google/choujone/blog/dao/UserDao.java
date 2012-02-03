@@ -12,6 +12,7 @@ import com.google.choujone.blog.entity.User;
 import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
+import com.google.choujone.blog.util.Tools;
 
 /**
  * choujone'blog<br>
@@ -125,7 +126,7 @@ public class UserDao {
 					u.setIsType(user.getIsType());
 
 					u.setPreMessage(user.getPreMessage());
-
+					u.setMenu(user.getMenu());
 					u.setBlogDescription(user.getBlogDescription());
 					u.setBlogKeyword(user.getBlogKeyword());
 
@@ -135,8 +136,11 @@ public class UserDao {
 					u.setBlogFoot(user.getBlogFoot());
 
 					u.setIsUpload(user.getIsUpload());
-					//更新静态设置
-					Config.blog_user=u;
+					// 更新静态设置
+					Config.blog_user = u;
+					// 更新导航
+					Config.menus = Tools.split(u.getMenu(), ";", ",");
+
 				}
 				flag = true;
 			}

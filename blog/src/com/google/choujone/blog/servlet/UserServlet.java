@@ -115,6 +115,8 @@ public class UserServlet extends HttpServlet {
 		Integer isType = Integer
 				.parseInt(req.getParameter("isType") != null ? req
 						.getParameter("isType") : "0");// 是否显示文章类型
+		String blogMenu = req.getParameter("blogMenu") != null ? req
+				.getParameter("blogMenu") : "";// 博客menu
 		String blogKeyword = req.getParameter("blogKeyword") != null ? req
 				.getParameter("blogKeyword") : "";// 博客关键字
 		String blogDescription = req.getParameter("blogDescription") != null ? req
@@ -161,6 +163,8 @@ public class UserServlet extends HttpServlet {
 
 				user.setPreMessage(new com.google.appengine.api.datastore.Text(
 						Tools.changeHTML(Tools.toChinese(preMessage))));
+				user.setMenu(new com.google.appengine.api.datastore.Text(
+						Tools.changeHTML(Tools.toChinese(blogMenu))));
 
 				user.setBlogDescription(blogDescription);
 				user.setBlogKeyword(blogKeyword);
@@ -170,9 +174,9 @@ public class UserServlet extends HttpServlet {
 
 				user.setIsUpload(isUpload);
 				userDao.operationUser(Operation.modify, user);
-				req.setAttribute("user", user);
-				req.getRequestDispatcher("/admin/setting.jsp").forward(req,
-						resp);
+//				req.setAttribute("user", user);
+//				req.getRequestDispatcher("/admin/setting.jsp").forward(req,resp);
+				resp.sendRedirect("/admin/setting.jsp");
 			}
 		} else if (operation.trim().equals(Operation.add.toString())) {
 			// 初次安装使用 创建用户信息
@@ -184,8 +188,9 @@ public class UserServlet extends HttpServlet {
 			user.setPassword(password);
 
 			userDao.operationUser(Operation.add, user);
-			req.setAttribute("user", user);
-			req.getRequestDispatcher("/index.jsp").forward(req, resp);
+//			req.setAttribute("user", user);
+//			req.getRequestDispatcher("/index.jsp").forward(req, resp);
+			resp.sendRedirect("/admin/setting.jsp");
 
 		} else {// 登录
 			if (name != null && !"".equals(name.trim())) {

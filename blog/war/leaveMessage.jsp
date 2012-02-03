@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="com.google.choujone.blog.entity.Reply,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.User,com.google.choujone.blog.dao.UserDao"%>
 <%@page import="com.google.appengine.api.users.UserService"%>
-<%@page import="com.google.appengine.api.users.UserServiceFactory"%><html>
+<%@page import="com.google.appengine.api.users.UserServiceFactory"%>
+<%@page import="com.google.choujone.blog.util.Config"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 	User login_user=(User)request.getSession().getAttribute("login_user");//获取登录信息
-	UserDao userDao=new UserDao();
-	User blog_user= userDao.getUserDetail();
+	User blog_user=Config.blog_user;
 %><title>留言板 _<%=blog_user.getpTitle()%></title>
 	<jsp:include page="head.jsp"></jsp:include>
 <script type="text/javascript" src="/js/content.js"></script>

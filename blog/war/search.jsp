@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.UserDao,com.google.choujone.blog.entity.*"%><html>
+    pageEncoding="UTF-8"%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.util.Config,com.google.choujone.blog.entity.*"%><html>
 <head>
 <link rel="stylesheet" href="/css/search.css" type="text/css" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-UserDao userDao=new UserDao();
-User user=userDao.getUserDetail();
+User user=Config.blog_user;
 User login_user=(User)request.getSession().getAttribute("login_user");
 String title=user.getpTitle();
 %><title>搜索_<%=title %></title>

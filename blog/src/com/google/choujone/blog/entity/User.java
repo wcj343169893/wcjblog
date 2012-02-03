@@ -73,8 +73,9 @@ public class User implements Serializable {
 	@Persistent
 	private Text preMessage = new Text("");// 留言寄语
 	@Persistent
-	private Integer isUpload;//是否允许上传
-	
+	private Integer isUpload;// 是否允许上传
+	@Persistent
+	private Text menu = new Text("");// 网站菜单
 
 	public Long getId() {
 		return id;
@@ -302,6 +303,14 @@ public class User implements Serializable {
 
 	public void setIsUpload(Integer isUpload) {
 		this.isUpload = isUpload;
+	}
+
+	public Text getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Text menu) {
+		this.menu = menu;
 	}
 
 }
