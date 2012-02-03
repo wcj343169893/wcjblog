@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.BlogDao,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.entity.User,com.google.choujone.blog.dao.UserDao,com.google.choujone.blog.common.Operation,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.BlogDao,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config,com.google.choujone.blog.common.Operation,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType"%>
 
 <%@page import="com.google.appengine.api.users.UserService"%>
 <%@page import="com.google.appengine.api.users.UserServiceFactory"%><html><%
@@ -23,11 +23,10 @@
 			Blog nextBlog = blogDao.getNextBlog(blog.getId());
 			User login_user = (User) request.getSession().getAttribute(
 					"login_user");//获取登录信息
-			UserDao userDao = new UserDao();
 			//查询所有的分类
 			BlogTypeDao btd = new BlogTypeDao();
 			BlogType bt = btd.getBlogTypeById(blog.getTid());
-			User blog_user = userDao.getUserDetail();
+			User blog_user =Config.blog_user;
 %><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=blog.getTitle()%>_<%=bt.getName()%>_<%=blog_user.getpTitle()%></title><%

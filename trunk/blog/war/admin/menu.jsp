@@ -5,6 +5,7 @@
 <%@page import="com.google.choujone.blog.entity.User"%>
 <%@page import="com.google.choujone.blog.dao.UserDao"%>
 <%@page import="com.google.choujone.blog.common.Operation"%><link href="/css/admin-style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" charset="utf-8" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <%
 	UserDao userDao=new UserDao();

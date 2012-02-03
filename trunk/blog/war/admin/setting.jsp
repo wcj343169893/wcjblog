@@ -2,14 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="com.google.choujone.blog.entity.User"%>
-<%@page import="com.google.choujone.blog.dao.UserDao"%>
 <%@page import="java.util.List"%>
-<%@page import="com.google.choujone.blog.util.Config"%><html>
+<%@page import="com.google.choujone.blog.util.Config"%>
+<%@page import="com.google.choujone.blog.entity.Menu"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	UserDao userDao = new UserDao();
-	User user=userDao.getUserDetail();
+	User user=Config.blog_user;
 %>
 <title><%=user.getpTitle() %> -- 博客设置   / 系统设置</title>
 <script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
@@ -33,7 +32,7 @@
 			博客设置   / 系统设置
 	</div>
 	<div id="container">
-		<form action="/user" method="post">
+		<form action="/user" method="post" onsubmit="make_m()">
 			<input type="hidden" name="op" value="modify">
 			<div>博客设置</div>
 			<table cellpadding="0" cellspacing="0" class="setting">
@@ -206,6 +205,29 @@
 				</tr>
 				<tr>
 					<td class="title">
+						网站导航
+					</td>
+					<td colspan="3" id="td_menu">
+						<input value="<%=user.getMenu()!=null?user.getMenu().getValue():"" %>" name="blogMenu" size="100" id="menus" type="hidden"/>
+					<%
+						List<Menu> menus=Config.menus;
+					%>
+						<input value="新增" type="button" onclick="add_m()">
+						<input value="全部删除" type="button" onclick="del_m('')">
+						<input value="转换" type="hidden" onclick="make_m()">
+						<%
+						int index=1;
+						for (Menu m : menus) {%>
+						<div id="menu_<%=index %>" class="d_menu">
+							<input value="<%=m.getTitle() %>" class="menu_title">
+							<input value="<%=m.getUrl() %>" class="menu_url">
+							<input value="删除" type="button" onclick="del_m('menu_<%=index %>')">
+						</div>
+						<%index++;} %>
+					</td>
+				</tr>
+				<tr>
+					<td class="title">
 						KEYWORDS
 					</td>
 					<td colspan="3">
@@ -217,7 +239,7 @@
 						DESCRIPTION
 					</td>
 					<td colspan="3">
-						<textarea rows="10" cols="70" name="blogDescription"><%=user.getBlogDescription() %></textarea>
+						<textarea rows="10" cols="70" name="blogDescription"><%=user.getBlogDescription()%></textarea>
 					</td>
 				</tr>
 				<tr>

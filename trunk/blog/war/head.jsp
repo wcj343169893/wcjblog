@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><%@page import="com.google.choujone.blog.entity.User,com.google.choujone.blog.dao.UserDao"%><%
-    	UserDao userDao = new UserDao();
-			User blog_user = userDao.getUserDetail();
+    pageEncoding="UTF-8"%><%@page import="com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config"%><%
+			User blog_user = Config.blog_user;
 			if (blog_user != null && blog_user.getBlogHead() != null
 					&& !"".equals(blog_user.getBlogHead())) {
 				out.print(blog_user.getBlogHead());

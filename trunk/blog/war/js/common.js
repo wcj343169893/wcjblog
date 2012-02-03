@@ -72,3 +72,26 @@ function del(url) {
 		to(url);
 	}
 }
+function del_m(id){
+	if(id!=""){
+		$("#"+id).remove();
+	}else{
+		$(".d_menu").remove();
+	}
+}
+function add_m(){
+	var no=new Date().getTime();
+	$("#td_menu").append("<div id='menu_"+no+"' class='d_menu'><input value='' class='menu_title'/> <input value='' class='menu_url'/> <input value='删除' type='button' onclick=del_m('menu_"+no+"')> </div>");
+}
+function make_m(){
+	var menus="";
+	$(".d_menu").each(function(index, domEle){
+		var title=$(domEle).children(".menu_title");
+		var url=$(domEle).children(".menu_url");
+		if(title.val()!="" && url.val()!=""){
+			menus=menus+title.val()+","+url.val()+";";
+		}
+	});
+	menus=menus.substring(0,menus.length-1);
+	$("#menus").val(menus);
+}

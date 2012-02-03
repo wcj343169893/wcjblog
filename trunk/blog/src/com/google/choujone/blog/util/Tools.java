@@ -8,18 +8,23 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.Blob;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.choujone.blog.entity.BlogType;
+import com.google.choujone.blog.entity.Menu;
 import com.google.choujone.blog.entity.User;
 
 public class Tools {
@@ -273,5 +278,47 @@ public class Tools {
 			e.printStackTrace();
 		}
 		return addressStr;
+	}
+
+	/**
+	 * 字符串转为数组
+	 * 
+	 * @param str
+	 *            源字符串
+	 * @param str1
+	 *            分割字符串1
+	 * @param str2
+	 *            分割字符串2
+	 * @return
+	 */
+	public static List<Menu> split(Text str, String str1, String str2) {
+		List<Menu> list = new ArrayList<Menu>();
+		Menu menu = new Menu();
+		if (str != null) {
+			String menus = str.getValue();
+			if (Tools.isNotNull(menus)) {
+				String[] strs = menus.split(str1);
+				for (String string : strs) {
+					if (Tools.isNotNull(string)) {
+						menu = new Menu();
+						String[] str2s = string.split(str2);
+						menu.setTitle(str2s[0]);
+						menu.setUrl(str2s[1]);
+						list.add(menu);
+					}
+				}
+			}
+		}
+		return list;
+	}
+
+	/**
+	 * 判断字符串是否为空
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isNotNull(String str) {
+		return str != null && !"".equals(str.trim());
 	}
 }
