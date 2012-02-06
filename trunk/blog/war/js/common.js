@@ -95,3 +95,10 @@ function make_m(){
 	menus=menus.substring(0,menus.length-1);
 	$("#menus").val(menus);
 }
+function bd_sub(){
+	var content=$("#content").val();
+	if(content==null || ""==jQuery.trim(content)){
+		alert("请输入评论内容");
+		return false;
+	}
+}

@@ -58,6 +58,7 @@ public class ReplyServlet extends HttpServlet {
 		String operation = req.getParameter("op") != null ? req
 				.getParameter("op") : "";// 获取操作
 		String content = req.getParameter("content");// 文章信息
+		
 		String name = req.getParameter("name");// 署名
 		if (name == null || "".equals(name.trim())) {
 			name = "匿名";
@@ -68,11 +69,22 @@ public class ReplyServlet extends HttpServlet {
 				: "";// 文章id
 		String email = req.getParameter("email");// email
 		String url = req.getParameter("url");// email
-		String repyMsg = req.getParameter("msg");
+//		String repyMsg = req.getParameter("msg");
 		String p = req.getParameter("p") != null ? req.getParameter("p") : "1";
 		ReplyDao replyDao = new ReplyDao();
 		Reply reply = new Reply();
+		
 		if (operation.trim().equals(Operation.add.toString())) {// 新增
+			//判断内容是否为空
+			if(content==null || "".equals(content.trim())){
+				if (Tools.strTolong(bid) > 0) {
+					resp.sendRedirect("/blog_detail.jsp?id=" + Tools.strTolong(bid));
+				} else {
+					resp.sendRedirect("/leaveMessage.jsp");
+					bid = "-1";
+				}
+				return;
+			}
 			reply.setEmail(email);
 			reply.setSdTime(Tools.changeTime(new Date()));
 			reply.setName(name);

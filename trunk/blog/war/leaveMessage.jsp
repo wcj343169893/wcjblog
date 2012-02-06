@@ -83,7 +83,7 @@
 			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv')">点击这里 发表评论</a>
 		</p>
 		<div id="commentDiv" style="display: none;">
-			<form id="frmSumbit" name="frmSumbit" target="_self" method="post" action="/reply">
+			<form id="frmSumbit" name="frmSumbit" target="_self" method="post" action="/reply" onsubmit="return bd_sub()">
 				<div class="vito-ct-id">
 				<%
 				     	UserService userService = UserServiceFactory.getUserService();
