@@ -156,7 +156,7 @@
 			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');$('#comment_name').focus();">点击这里 发表评论</a>
 		</p>
 		<div id="commentDiv" style="display: none">
-			<form id="frmSumbit" target="_self" method="post" action="/reply">
+			<form id="frmSumbit" target="_self" method="post" action="/reply" onsubmit="return bd_sub()">
 				<div class="vito-ct-id">
 					<input type="hidden" name="bid" value="<%=blog.getId()%>">
 					<input type="hidden" name="p" value="<%=p %>">

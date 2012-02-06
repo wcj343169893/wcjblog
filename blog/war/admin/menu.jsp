@@ -56,6 +56,9 @@
 			<li>
 				<a href="/admin/adPlace_list.jsp">广告</a>
 			</li>
+			<li>
+				<a href="/_ah/admin">admin console</a>
+			</li>
 		</ul>
 	</div>
 </div>
