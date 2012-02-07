@@ -29,8 +29,8 @@
 				size : 'B_S',
 				clientId : '100237063',
 				scope : '',
-				redirectURI : 'www.choujone.com/login_success.jsp' // 回调地址，可选
-				,'btnMode':'showUserAfterLogin'
+				//redirectURI : 'www.choujone.com/login_success.jsp', // 回调地址，可选
+				'btnMode':'showUserAfterLogin'
 			});
 			</script>
 	</div>

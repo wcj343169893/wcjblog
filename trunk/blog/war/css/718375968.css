@@ -481,3 +481,11 @@ a:HOVER {
 	margin-left: 10px;
 	margin-right: 5px;
 }
+.tags{
+	height: 220px;
+	overflow: hidden;
+}
+.more{
+	text-align: right;
+	margin: 5px;
+}

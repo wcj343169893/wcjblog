@@ -38,10 +38,10 @@
 	//获取openid
 	QC.Login.getMe(function(openId, accesToken, backData)
 	{
-		$("#qq_login").html("您的openid是："+openId+";\r\n accessToken是："+ accesToken);
-		QC.JSON("https://graph.qq.com/user/get_user_info",{"oauth_consumer_key":"100237063","openid":openId,"accessToken":accesToken},function(data){
-			alert(data);
-			});
+		//$("#qq_login").html("您的openid是："+openId+";\r\n accessToken是："+ accesToken);
+		//QC.JSON("https://graph.qq.com/user/get_user_info",{"oauth_consumer_key":"100237063","openid":openId,"accessToken":accesToken},function(data){
+			//alert(data);
+			//});
 	});
 	</script>
 	<span id="qq_login"></span>

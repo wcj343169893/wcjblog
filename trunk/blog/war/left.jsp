@@ -61,6 +61,7 @@
 	<div class="vito-left-title">TAGS</div>
 	<div class="vito-left-contentul">
 		<div class="tags"><%Map<String, Integer> tagsMap =bd.getTags();for(String s : tagsMap.keySet()){ %><a href="javascript:void(0)" style="font-size: <%=tagsMap.get(s)+12 %>px"><%=s %>(<%=tagsMap.get(s) %>)</a><%} %></div>
+		<div class="more"><a href="javascript:void(0)" title="更多" >更多</a></div>
 	</div><%}if(blog_user.getIsHotBlog()==null || blog_user.getIsHotBlog()==0){blog_hot=bd.getBlogList_hot(8);%>	
 	<div class="vito-left-title">热门文章</div>
 	<div class="vito-left-contentul">
@@ -109,3 +110,16 @@
 		</ul>
 	</div><%} %>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+			var preEle=$(".more a").parent().prev();
+			$(".more a").toggle(
+				function(){
+					$(preEle).css("overflow","visible");
+					$(preEle).height("auto");
+				},function(){
+					$(preEle).css("overflow","hidden");
+					$(preEle).height("220px");
+				});
+		});
+	</script>
