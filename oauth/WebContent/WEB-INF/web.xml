@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="Qqzone" version="2.5">
+  <display-name>Qqzone OAuth Demo</display-name>
+  <servlet>
+    <servlet-name>serv</servlet-name>
+    <servlet-class>org.dy.oauth.qq.demo.web.OauthQqzoneServlet</servlet-class>
+    <init-param>
+      <param-name>app-id</param-name>
+      <param-value>100237107</param-value>
+    </init-param>
+    <init-param>
+      <param-name>app-srt</param-name>
+      <param-value>35da43e7b085aa8648c7877cd3122118</param-value>
+    </init-param>
+    <init-param>
+      <param-name>callback-url</param-name>
+      <param-value>http://c.360ads.net/oauthqq/2</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>serv</servlet-name>
+    <url-pattern>/oauthqq/*</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>
