@@ -62,7 +62,7 @@ public class FriendsDao {
 			} catch (Exception e) {
 			}
 		}// 更新缓存中的内容
-		key = "friendsDao_getFriendsByPage";
+		key = "friendsDao_getFriendsByPage_1";
 		MyCache.updateList(key, friends);
 		MyCache.cache.put("blogDao_id_" + friends.getId(), friends);
 		closePM();
@@ -82,7 +82,7 @@ public class FriendsDao {
 	 */
 	@SuppressWarnings( { "unchecked" })
 	public List<Friends> getFriendsByPage(Pages pages) {
-		String key = "friendsDao_getFriendsByPage";
+		String key = "friendsDao_getFriendsByPage_"+pages.getPageNo();
 		List<Friends> friends = MyCache.get(key);
 		page_key = key + "_pages";
 		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
