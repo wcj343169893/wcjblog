@@ -71,7 +71,7 @@
 			%><li title="<%=b.getSdTime() %>"><a href="/blog?id=<%=b.getId() %>"><%=b.getTitle() %></a></li><%}} %>
 		</ul>
 	</div><%}if(blog_user.getIsNewReply()==null || blog_user.getIsNewReply()==0){%>
-	<div class="vito-left-title">最新评论</div><%
+	<div class="vito-left-title">最新留言</div><%
 		replyList=replyDao.getReplyList(8);
 	%>
 	<div class="vito-left-contentul">
