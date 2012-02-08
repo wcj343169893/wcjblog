@@ -225,9 +225,11 @@ public class ReplyDao {
 		if (replyList == null) {
 			try {
 				pm = PMF.get().getPersistenceManager();
-				Query query = pm.newQuery(Reply.class, " bid != -1L ");
+				Query query = pm.newQuery(Reply.class);
 				query.setRange(0, count);
-				query.setOrdering(" bid desc");
+				query.setOrdering(" sdTime desc");
+				//query.setFilter(" bid!=-1L");
+				//query.setOrdering(" bid desc");
 				replyList = (List<Reply>) query.execute();
 				MyCache.put(key, replyList);
 			} catch (Exception e) {
