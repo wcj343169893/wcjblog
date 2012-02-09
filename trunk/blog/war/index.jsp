@@ -76,7 +76,7 @@ for(int i=0;i<blogs.size();i++){
 <div class="vito-content">
 	<div class="vito-content-title">暂无内容</div>
 </div><%} %>
-<div class="vito-prenext">共<%=pages.getRecTotal() %>条 第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %>页<%if(p > 1){ %>	<a href="/index.jsp?p=<%=p-1 %>">上一页</a><%} %><%if(p < pages.getPageTotal()){ %><a href="/index.jsp?p=<%=p + 1 %>">下一页</a><%} %></div><%blogDao.closePM();//关闭查询链接 %>
+<div class="vito-prenext">共<%=pages.getRecTotal() %>条 第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %>页<%if(p > 1){ %>	<a href="/index.jsp?p=<%=p-1 %>&tid=<%=tid %>">上一页</a><%} %><%if(p < pages.getPageTotal()){ %><a href="/index.jsp?p=<%=p + 1 %>&tid=<%=tid %>">下一页</a><%} %></div><%blogDao.closePM();//关闭查询链接 %>
 </div>
 <!-- 右边结束 -->
 <jsp:include page="footer.jsp"></jsp:include>

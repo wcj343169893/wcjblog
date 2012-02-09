@@ -14,6 +14,19 @@ public class Config {
 	 * 网站用户信息
 	 * */
 	public static User blog_user = null;
+	public static String web_url = null;
+
+	public static String getWebUrl() {
+		String url = blog_user.getUrl();
+		if (url.indexOf("http://") == -1) {
+			url = "http://" + url;
+		}
+		if (url.substring(url.length()-1) != "/") {
+			url+="/";
+		}
+		return url;
+	}
+
 	public static List<Menu> menus = new ArrayList<Menu>();
 	static {
 		style_urls.add("/css/style.css");
