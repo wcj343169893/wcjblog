@@ -37,6 +37,10 @@
 		<servlet-class>com.google.choujone.blog.servlet.FileDownloadServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Rss</servlet-name>
+		<servlet-class>com.google.choujone.blog.servlet.RssServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>Ad</servlet-name>
 		<servlet-class>com.google.choujone.blog.servlet.AdServlet</servlet-class>
 	</servlet>
@@ -87,6 +91,10 @@
 	<servlet-mapping>
 		<servlet-name>Ad</servlet-name>
 		<url-pattern>/ad/*</url-pattern>
+	</servlet-mapping>
+		<servlet-mapping>
+		<servlet-name>Rss</servlet-name>
+		<url-pattern>/rss/*</url-pattern>
 	</servlet-mapping>
 	<filter>   
 		<filter-name>SetCharacterEncoding</filter-name>   

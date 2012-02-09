@@ -20,7 +20,7 @@ public class AdServlet extends HttpServlet {
 		resp.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = resp.getWriter();
 		String code = "";
-		Spider.getUrl();
+		//Spider.getUrl();
 		try {
 
 			String url = req.getRequestURI();

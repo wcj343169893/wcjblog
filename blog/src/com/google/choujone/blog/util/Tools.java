@@ -321,4 +321,34 @@ public class Tools {
 	public static boolean isNotNull(String str) {
 		return str != null && !"".equals(str.trim());
 	}
+
+	public static String escape(String s) {
+		StringBuffer stringbuffer = new StringBuffer();
+		int i = 0;
+		for (int j = s.length(); i < j; i++) {
+			char c = s.charAt(i);
+			switch (c) {
+			case 38: // '&'
+				stringbuffer.append("&amp;");
+				break;
+
+			case 60: // '<'
+				stringbuffer.append("&lt;");
+				break;
+
+			case 62: // '>'
+				stringbuffer.append("&gt;");
+				break;
+
+			case 34: // '"'
+				stringbuffer.append("&quot;");
+				break;
+
+			default:
+				stringbuffer.append(c);
+				break;
+			}
+		}
+		return stringbuffer.toString();
+	}
 }
