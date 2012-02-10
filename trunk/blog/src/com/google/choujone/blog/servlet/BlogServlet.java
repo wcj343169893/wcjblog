@@ -44,7 +44,14 @@ public class BlogServlet extends HttpServlet {
 			blog = blogDao.getBlogById(Tools.strTolong(id));
 			req.setAttribute("blog", blog);
 			req.getRequestDispatcher("/admin/blog_edit.jsp").forward(req, resp);
-		} else {// 显示文章
+		} else {
+			// 随机显示博客
+			if (id == null) {
+				// blogDao.getBlogList(" isVisible==0");
+				id = blogDao.getBlogByRand();
+				//req.getParameterMap().put("id", id);
+				req.setAttribute("id", id);
+			}// 显示某篇文章
 			req.getRequestDispatcher("/blog_detail.jsp").forward(req, resp);
 		}
 	}

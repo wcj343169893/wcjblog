@@ -62,9 +62,7 @@ for(int i=0;i<blogs.size();i++){
 	<div class="vito-content-title">
 		<a href="<%=link %>"><%=blog.getTitle() %></a>
 	</div>
-	<div class="vito-content-rc">
-		<img alt="<%=link %>" src="http://chart.cli.im/chart?chs=150x150&cht=qr&chl=<%=link %>%0A<%=blog.getTitle() %>" style="border: none" title="<%=blog.getTitle() %>">
-	</div>
+	<!-- <div class="vito-content-rc"><img alt="<%=link %>" src="http://chart.cli.im/chart?chs=150x150&cht=qr&chl=<%=link %>%0A<%=blog.getTitle() %>" style="border: none" title="<%=blog.getTitle() %>"></div>-->
 	<div class="vito-content-date"><%=blog.getSdTime() %></div>
 	<div class="vito-content-body"><%=blog.getContent(50).getValue() %>
 	<br><br>

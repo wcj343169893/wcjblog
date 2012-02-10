@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -99,8 +100,8 @@ public class BlogDao {
 		}
 		// 更新缓存中的内容
 		key = "blogDao_getBlogsByPage_null_null_1_10";
-//		MyCache.updateList(key, b);
-//		MyCache.cache.put("blogDao_id_" + b.getId(), b);
+		// MyCache.updateList(key, b);
+		// MyCache.cache.put("blogDao_id_" + b.getId(), b);
 		MyCache.clear(key);
 		key = "blogDao_getBlogListByPage_null_null_1_10";
 		MyCache.clear(key);
@@ -156,12 +157,29 @@ public class BlogDao {
 	 * 查询所有博客
 	 */
 	public List<Blog> getBlogList() {
-		key = "blogDao_getBlogList";
+		// key = "blogDao_getBlogList";
+		// List<Blog> blogs = MyCache.get(key);
+		// if (blogs == null) {
+		// pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+		// try {
+		// Query query = pm.newQuery(Blog.class);
+		// query.setOrdering("sdTime desc");
+		// blogs = (List<Blog>) query.execute();
+		// MyCache.put(key, blogs);
+		// } catch (Exception e) {
+		// }
+		// }
+		// return blogs;
+		return getBlogList(null);
+	}
+
+	public List<Blog> getBlogList(String filter) {
+		key = "blogDao_getBlogList_" + filter;
 		List<Blog> blogs = MyCache.get(key);
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
-				Query query = pm.newQuery(Blog.class);
+				Query query = pm.newQuery(Blog.class, filter);
 				query.setOrdering("sdTime desc");
 				blogs = (List<Blog>) query.execute();
 				MyCache.put(key, blogs);
@@ -404,6 +422,41 @@ public class BlogDao {
 	}
 
 	/**
+	 * 随机得到博客
+	 * 
+	 * @return
+	 */
+	public String getBlogByRand() {
+		// pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+		// Query q = pm.newQuery(Blog.class, " isVisible==0 ");
+		// q.setOrdering(" rand()");
+		// q.setRange(0, 1);
+		// 得到当前日期
+		List<Long> ids = getBlogIds(Tools.changeTime(new Date(), "yyyy_MM_dd"));
+		int size = ids.size();
+		Random random = new Random();
+
+		int id = Math.abs(random.nextInt() % size);
+
+		return Long.toString(ids.get(id));
+	}
+
+	public List<Long> getBlogIds(String date) {
+		key = "blogDao_getBlogIds_" + date;
+		List<Long> ids = MyCache.get(key);
+		if (ids == null) {
+			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			String filter = "select id from " + Blog.class.getName()
+					+ " where isVisible==0 ";
+			Query q = pm.newQuery(filter);
+			ids = (List<Long>) q.execute();
+			MyCache.put(key, ids);
+		}
+		return ids;
+
+	}
+
+	/**
 	 * 查询网站记录
 	 * 
 	 * @return
@@ -460,9 +513,10 @@ public class BlogDao {
 		if (count == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			Query q = null;
-			String filter = " select count(id) from " + Blog.class.getName();
+			String filter = " select count(id) from " + Blog.class.getName()
+					+ " where isVisible==0 ";
 			if (tid != null && tid > 0) {
-				filter += " where isVisible==0  && tid == " + tid;
+				filter += " && tid == " + tid;
 			}
 			q = pm.newQuery(filter);
 			Object obj = q.execute();
