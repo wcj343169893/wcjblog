@@ -47,9 +47,12 @@ public class BlogServlet extends HttpServlet {
 		} else {
 			// 随机显示博客
 			if (id == null) {
-				// blogDao.getBlogList(" isVisible==0");
-				id = blogDao.getBlogByRand();
-				//req.getParameterMap().put("id", id);
+				String url = req.getRequestURI();
+				String temp[] = url.split("/");
+				id = temp[temp.length - 1];// 获取博客
+				if (id == null || id.equals("blog")) {
+					id = blogDao.getBlogByRand();
+				}
 				req.setAttribute("id", id);
 			}// 显示某篇文章
 			req.getRequestDispatcher("/blog_detail.jsp").forward(req, resp);

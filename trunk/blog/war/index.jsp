@@ -57,7 +57,7 @@ if(blogs!=null && blogs.size()>0){
 for(int i=0;i<blogs.size();i++){
 	Blog blog=blogs.get(i);
 	if(blog.getIsVisible() == 0 ){
-		String link=user.getUrl()+"/blog?id="+blog.getId();
+		String link=user.getUrl()+"/blog/"+blog.getId();
 %><div class="vito-content">
 	<div class="vito-content-title">
 		<a href="<%=link %>"><%=blog.getTitle() %></a>
