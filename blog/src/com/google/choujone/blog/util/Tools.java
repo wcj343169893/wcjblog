@@ -108,11 +108,15 @@ public class Tools {
 	 * @返回值 String型值
 	 */
 	public static String changeTime(Date date) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		return changeTime(date, "yyyy年MM月dd日 HH:mm:ss");
+	}
+
+	public static String changeTime(Date date, String format) {
+		SimpleDateFormat simpleformat = new SimpleDateFormat(format);
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.add(Calendar.HOUR_OF_DAY, 8);
-		return format.format(calendar.getTime());
+		return simpleformat.format(calendar.getTime());
 	}
 
 	public static Date changeTime(String date) {
