@@ -54,7 +54,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Blog</servlet-name>
-		<url-pattern>/blog</url-pattern>
+		<url-pattern>/blog/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Reply</servlet-name>

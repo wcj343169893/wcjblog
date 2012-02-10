@@ -1,8 +1,8 @@
-<!-- Indices written at Fri, 10 Feb 2012 01:50:52 UTC -->
+<!-- Indices written at Fri, 10 Feb 2012 05:59:33 UTC -->
 
 <datastore-indexes>
 
-    <!-- Used 18 times in query history -->
+    <!-- Used 5 times in query history -->
     <datastore-index kind="Blog" ancestor="false" source="auto">
         <property name="isVisible" direction="asc"/>
         <property name="__key__" direction="desc"/>
