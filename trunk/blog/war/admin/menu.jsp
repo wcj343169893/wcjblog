@@ -43,7 +43,6 @@
 			<li>
 				<a href="/admin/reply_list.jsp">评论</a>
 			</li>
-		
 			<li>
 				<a href="/admin/file_list.jsp">文件</a>
 			</li>
@@ -57,7 +56,7 @@
 				<a href="/admin/adPlace_list.jsp">广告</a>
 			</li>
 			<li>
-				<a href="/_ah/admin">admin console</a>
+				<a href="/admin/spider.jsp">采集任务</a>
 			</li>
 		</ul>
 	</div>

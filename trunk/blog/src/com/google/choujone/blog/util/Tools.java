@@ -327,6 +327,9 @@ public class Tools {
 	}
 
 	public static String escape(String s) {
+		if (!isNotNull(s)) {
+			return "";
+		}
 		StringBuffer stringbuffer = new StringBuffer();
 		int i = 0;
 		for (int j = s.length(); i < j; i++) {

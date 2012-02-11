@@ -55,8 +55,7 @@
 				<span id="result"></span>
 			</div>
 			<!-- ajax 动态读取分类 -->
-			<div id="typelist">
-			</div>
+			<div id="typelist"></div>
 			<div class="container-tags">
 				关键字：
 			</div>

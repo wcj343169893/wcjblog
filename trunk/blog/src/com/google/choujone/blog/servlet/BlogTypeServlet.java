@@ -71,7 +71,7 @@ public class BlogTypeServlet extends HttpServlet {
 			if (url.trim().equals("1")) {
 				url = "/admin/blogType_list.jsp";
 			} else if (url.trim().equals("2")) {
-				url = "/admin/blogType_update.jsp?id="+t;
+				url = "/admin/blogType_update.jsp?id=" + t;
 			} else if (url.trim().equals("3")) {
 				url = "/admin/blogType_add.jsp";
 			}
@@ -101,7 +101,8 @@ public class BlogTypeServlet extends HttpServlet {
 				.getParameter("t") : "0";// 获取博文原来的类型
 		String operation = req.getParameter("opera") != null ? req
 				.getParameter("opera") : "";
-
+		String isOption = req.getParameter("isOption") != null ? req
+				.getParameter("isOption") : "1";// 是否显示功能链接
 		Long tid = 0L;
 		try {
 			tid = Long.valueOf(t);
@@ -114,26 +115,32 @@ public class BlogTypeServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		if (operation.equals(Operation.lists.toString())) {// 查询所有
 			List<BlogType> blogTypeList = btd.getBlogTypeList();
-			String type_str = "<select name=\"tid\" id=\"tids\">";
+			StringBuffer sb = new StringBuffer();
+			sb.append("<select name=\"tid\" id=\"tids\">");
 			if (blogTypeList != null && blogTypeList.size() > 0) {
-//				for (BlogType blogType : blogTypeList) {
-//					type_str += "<option value=\"";
-//					type_str += blogType.getId();
-//					type_str += "\"";
-//					if (tid.equals(blogType.getId())) {
-//						type_str += " selected";
-//					}
-//					type_str += ">";
-//					type_str += blogType.getName();
-//					type_str += "</option>";
-//				}
-				type_str+=Tools.blogTypeList2Str(blogTypeList, tid);
+				// for (BlogType blogType : blogTypeList) {
+				// type_str += "<option value=\"";
+				// type_str += blogType.getId();
+				// type_str += "\"";
+				// if (tid.equals(blogType.getId())) {
+				// type_str += " selected";
+				// }
+				// type_str += ">";
+				// type_str += blogType.getName();
+				// type_str += "</option>";
+				// }
+				sb.append(Tools.blogTypeList2Str(blogTypeList, tid));
 			}
-			type_str += "</select>&nbsp;";
-			type_str += "<a href=\"javascript:void(0)\" onclick=\"showOrHideDiv('addType')\">增加</a>&nbsp;";
-			type_str += "<a href=\"javascript:void(0)\" onclick=\"modifyType('modifyType','tids')\">修改</a>&nbsp;";
-			type_str += "<a href=\"javascript:void(0)\" onclick=\"deleteType('tids')\">删除</a>";
-			out.println(type_str);
+			sb.append("</select>&nbsp;");
+			if (isOption.equals("1")) {
+				sb
+						.append("<a href=\"javascript:void(0)\" onclick=\"showOrHideDiv('addType')\">增加</a>&nbsp;");
+				sb
+						.append("<a href=\"javascript:void(0)\" onclick=\"modifyType('modifyType','tids')\">修改</a>&nbsp;");
+				sb
+						.append("<a href=\"javascript:void(0)\" onclick=\"deleteType('tids')\">删除</a>");
+			}
+			out.println(sb.toString());
 		} else {// 根据id查询
 			BlogType bt = btd.getBlogTypeById(tid);
 			if (bt != null) {
