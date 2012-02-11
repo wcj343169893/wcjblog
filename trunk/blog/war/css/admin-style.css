@@ -209,12 +209,17 @@ a:HOVER {
 }
 
 #container .container-title-header {
-	width: 100px;
+	width: 120px;
 	text-align: right;
 	padding-right: 10px;
 	float: left;
 }
-
+#spider_setting .container-title-header {
+	width: 120px;
+	text-align: right;
+	padding-right: 10px;
+	float: left;
+}
 .friends-new {
 	margin: 10px 10px 10px 10px;
 	padding-bottom: 10px;
@@ -297,17 +302,7 @@ a:HOVER {
 	width: 250px;
 }
 
-.spider {
-	width: 500px;
-	display: none;
-	position: absolute;
-	left: 200px;
-	top: 100px;
-	background: #fff;
-	border: 2px solid #ccc;
-}
-
-#container .tabs div{
+#container .tabs div {
 	margin-bottom: 0px;
 	margin-top: 0px;
 }
@@ -315,16 +310,6 @@ a:HOVER {
 .spider .spider_title {
 	padding: 0 10px;
 	font-weight: bold;
-}
-
-#test_result {
-	position: absolute;
-	width: 400px;
-	border: 2px solid #ccc;
-	top: 110px;
-	left: 650px;
-	background-color: #fff;
-	display: none;
 }
 
 #test_result .result_title {
@@ -345,4 +330,18 @@ a:HOVER {
 #test_result .result_content .loading {
 	text-align: center;
 	margin: 10px;
+}
+
+.spider_btn {
+	padding: .4em 1em .4em 20px;
+	text-decoration: none;
+	position: relative;
+}
+
+.spider_btn span.ui-icon {
+	margin: 0 5px 0 0;
+	position: absolute;
+	left: .2em;
+	top: 50%;
+	margin-top: -8px;
 }

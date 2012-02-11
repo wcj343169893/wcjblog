@@ -10,6 +10,10 @@ public enum Operation {
 	 */
 	add,
 	/**
+	 * 加载修改项
+	 */
+	preModify,
+	/**
 	 * 修改
 	 */
 	modify,
@@ -40,5 +44,9 @@ public enum Operation {
 	/**
 	 *测试内容
 	 */
-	testContent
+	testContent,
+	/**
+	 * 开始
+	 */
+	start
 }
