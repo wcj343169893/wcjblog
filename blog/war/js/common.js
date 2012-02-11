@@ -3,6 +3,12 @@ function showOrHideDiv(divId) {
 	commentReplyDiv.style.display = commentReplyDiv.style.display == "none" ? "block"
 			: "none";
 }
+function closeDiv(id){
+	$("#"+id).hide();
+}
+function showDiv(id){
+	$("#"+id).show();
+}
 function to(url) {
 	window.location.href = url;
 }

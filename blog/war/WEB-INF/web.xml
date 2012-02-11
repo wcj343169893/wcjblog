@@ -45,6 +45,10 @@
 		<servlet-class>com.google.choujone.blog.servlet.AdServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Spider</servlet-name>
+		<servlet-class>com.google.choujone.blog.servlet.SpiderServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>UploadFile</servlet-name>
 		<servlet-class>com.google.choujone.blog.servlet.UploadFileServlet</servlet-class>
 		<init-param>
@@ -91,6 +95,10 @@
 	<servlet-mapping>
 		<servlet-name>Ad</servlet-name>
 		<url-pattern>/ad/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Spider</servlet-name>
+		<url-pattern>/spider/*</url-pattern>
 	</servlet-mapping>
 		<servlet-mapping>
 		<servlet-name>Rss</servlet-name>

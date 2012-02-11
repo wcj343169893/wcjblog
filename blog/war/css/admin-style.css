@@ -208,8 +208,11 @@ a:HOVER {
 	margin-bottom: 3px;
 }
 
-#container .container-title {
-	
+#container .container-title-header {
+	width: 100px;
+	text-align: right;
+	padding-right: 10px;
+	float: left;
 }
 
 .friends-new {
@@ -292,4 +295,54 @@ a:HOVER {
 	margin-left: 30px;
 	margin-top: -32px;
 	width: 250px;
+}
+
+.spider {
+	width: 500px;
+	display: none;
+	position: absolute;
+	left: 200px;
+	top: 100px;
+	background: #fff;
+	border: 2px solid #ccc;
+}
+
+#container .tabs div{
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+.spider .spider_title {
+	padding: 0 10px;
+	font-weight: bold;
+}
+
+#test_result {
+	position: absolute;
+	width: 400px;
+	border: 2px solid #ccc;
+	top: 110px;
+	left: 650px;
+	background-color: #fff;
+	display: none;
+}
+
+#test_result .result_title {
+	border-bottom: 2px solid #ccc;
+	padding: 10px;
+	background: #ccc;
+	font-weight: bold;
+}
+
+.f_r {
+	float: right;
+}
+
+#test_result .result_content {
+	padding: 10px;
+}
+
+#test_result .result_content .loading {
+	text-align: center;
+	margin: 10px;
 }

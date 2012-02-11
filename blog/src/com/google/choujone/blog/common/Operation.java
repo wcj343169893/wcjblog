@@ -32,5 +32,13 @@ public enum Operation {
 	/**
 	 * 清理缓存
 	 * */
-	clearCache
+	clearCache, 
+	/**
+	 * 测试列表
+	 */
+	testList, 
+	/**
+	 *测试内容
+	 */
+	testContent
 }

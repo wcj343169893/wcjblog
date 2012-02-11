@@ -44,7 +44,7 @@
 			<input type="button" value="删除" onclick="deletes('/blog')">
 		</span>
 		<span class="tools-right">
-			共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
+			共<%=pages.getRecTotal() %>条&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
 			<%if(p > 1){ %>
 				<a href="/admin/blog_list.jsp?p=<%=p-1 %>">上一页</a>&nbsp;&nbsp;
 			<%} %>

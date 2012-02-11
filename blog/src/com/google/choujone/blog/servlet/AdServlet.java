@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.choujone.blog.util.Spider;
+import com.google.choujone.blog.util.SpiderUtil;
 
 public class AdServlet extends HttpServlet {
 	@Override
