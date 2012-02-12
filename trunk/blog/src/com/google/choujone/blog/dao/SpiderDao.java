@@ -9,6 +9,7 @@ import javax.jdo.Query;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
 import com.google.choujone.blog.entity.AdPlace;
+import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Spider;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
@@ -62,7 +63,7 @@ public class SpiderDao {
 				flag = false;
 			}
 		}
-		key="adDao_getSpiderByPages_1";
+		key = "adDao_getSpiderByPages_1";
 		MyCache.clear(key);
 		closePM();
 		return flag;
@@ -103,6 +104,26 @@ public class SpiderDao {
 		}
 		pages.setRecTotal(page.getRecTotal());
 		return spiders;
+	}
+
+	/**
+	 * 根据编号查询采集任务
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Spider getSpiderById(Long id) {
+		key = "Spider_id_" + id;
+		Spider spider = (Spider) MyCache.cache.get(key);
+		if (spider == null) {
+			try {
+				pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+				spider = pm.getObjectById(Spider.class, id);
+				MyCache.cache.put(key, spider);
+			} catch (Exception e) {
+			}
+		}
+		return spider;
 	}
 
 	/**
