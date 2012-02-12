@@ -2,6 +2,7 @@ package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,11 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.Text;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.WebPage;
+import com.google.choujone.blog.dao.BlogDao;
 import com.google.choujone.blog.dao.SpiderDao;
+import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Spider;
 import com.google.choujone.blog.util.SpiderUtil;
+import com.google.choujone.blog.util.Tools;
 
 public class SpiderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +27,8 @@ public class SpiderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO 采集测试
+		String id = req.getParameter("id") != null ? req
+				.getParameter("id") : "-1L";
 		String operation = req.getParameter("opera") != null ? req
 				.getParameter("opera") : "";
 		// 采集名称
@@ -64,31 +71,27 @@ public class SpiderServlet extends HttpServlet {
 				.getParameter("spider_start") : "";
 
 		SpiderUtil spiderUtil = new SpiderUtil();
-		SpiderDao sd=new SpiderDao();
-		spiderUtil.setCharset(charset);
-		spiderUtil.setWeb_host(web_host);
+		SpiderDao sd = new SpiderDao();
 		resp.setContentType("text/html;charset=utf-8");
 		resp.setCharacterEncoding("UTF-8");
 		resp.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = resp.getWriter();
+		//设置编码
+		spiderUtil.setCharset(charset);
+		//设置域名
+		spiderUtil.setWeb_host(web_host);
+		// 设置list地址
+		spiderUtil.setListUrl(web_list_url);
+		// 设置list列表区域开始和结束
+		spiderUtil.setWeb_list_begin(web_list_begin);
+		spiderUtil.setWeb_list_end(web_list_end);
 		if (operation.equals(Operation.testList.toString())) {// 测试列表
-			// 设置list地址
-			spiderUtil.setListUrl(web_list_url);
-			// 设置list列表区域开始和结束
-			spiderUtil.setWeb_list_begin(web_list_begin);
-			spiderUtil.setWeb_list_end(web_list_end);
 			// 得到列表地址
 			List<String> urls = spiderUtil.getContentUrls();
 			for (String string : urls) {
 				out.println(string);
 			}
-
 		} else if (operation.equals(Operation.testContent.toString())) {// 测试内容
-			// 设置list地址
-			spiderUtil.setListUrl(web_list_url);
-			// 设置list列表区域开始和结束
-			spiderUtil.setWeb_list_begin(web_list_begin);
-			spiderUtil.setWeb_list_end(web_list_end);
 			// 得到列表之后，设置内容页的标题
 			spiderUtil.setWeb_content_title(web_content_title);
 			// 设置标签清理 为空代表清理所有
@@ -108,7 +111,7 @@ public class SpiderServlet extends HttpServlet {
 						+ webPage.getTitle());
 			}
 		} else if (operation.equals(Operation.add.toString())) {// 新增
-			Spider spider=new Spider();
+			Spider spider = new Spider();
 			spider.setCharset(charset);
 			spider.setWeb_host(web_host);
 			spider.setName(name);
@@ -122,33 +125,55 @@ public class SpiderServlet extends HttpServlet {
 			spider.setWeb_content_end(web_content_end);
 			spider.setClear_content_reg(clear_content_reg);
 			sd.operationSpider(Operation.add, spider);
-//			// 设置list地址
-//			spiderUtil.setListUrl(web_list_url);
-//			// 设置list列表区域开始和结束
-//			spiderUtil.setWeb_list_begin(web_list_begin);
-//			spiderUtil.setWeb_list_end(web_list_end);
-//			// 得到列表之后，设置内容页的标题
-//			spiderUtil.setWeb_content_title(web_content_title);
-//			// 设置标签清理 为空代表清理所有
-//			spiderUtil.setClear_title_reg(null);
-//			// 设置内容开始结束位置
-//			spiderUtil.setWeb_content_begin(web_content_begin);
-//			spiderUtil.setWeb_content_end(web_content_end);
-//			// 清理内容标签
-//			spiderUtil.setClear_content_reg(clear_content_reg.split(","));
-//			// 得到内容页面
-//			List<WebPage> webPages = spiderUtil.getWebPages();
+			// // 设置list地址
+			// spiderUtil.setListUrl(web_list_url);
+			// // 设置list列表区域开始和结束
+			// spiderUtil.setWeb_list_begin(web_list_begin);
+			// spiderUtil.setWeb_list_end(web_list_end);
+			// // 得到列表之后，设置内容页的标题
+			// spiderUtil.setWeb_content_title(web_content_title);
+			// // 设置标签清理 为空代表清理所有
+			// spiderUtil.setClear_title_reg(null);
+			// // 设置内容开始结束位置
+			// spiderUtil.setWeb_content_begin(web_content_begin);
+			// spiderUtil.setWeb_content_end(web_content_end);
+			// // 清理内容标签
+			// spiderUtil.setClear_content_reg(clear_content_reg.split(","));
+			// // 得到内容页面
+			// List<WebPage> webPages = spiderUtil.getWebPages();
 			// 保存到数据库
 
 			out.print("保存成功");
 		} else if (operation.equals(Operation.preModify.toString())) {// 加载修改
-			
+
 		} else if (operation.equals(Operation.modify.toString())) {// 修改
 
 		} else if (operation.equals(Operation.delete.toString())) {// 删除
-			
-		} else if (operation.equals(Operation.start.toString())) {// 开始运行
 
+		} else if (operation.equals(Operation.start.toString())) {// 开始运行
+			//得到spider
+			Long sid=Long.valueOf(id);
+			if (sid>0) {
+				Spider spider=sd.getSpiderById(sid);
+				// TODO 排除重复地址（内容页）
+				List<WebPage> webPageList=spiderUtil.run(spider);
+				BlogDao bd=new BlogDao();
+				Blog blog=null;
+				for (WebPage wp : webPageList) {
+					blog=new Blog();
+					blog.setTitle(wp.getTitle());
+					blog.setTid(Long.valueOf(spider.getTids()));
+					blog.setContent(new Text(wp.getContent()));
+					blog.setCount(0);
+					blog.setIsVisible(0);
+					blog.setSdTime(Tools.changeTime(new Date()));
+					bd.operationBlog(Operation.add, blog);
+				}
+				//创建运行线程（ access denied）
+//				SpiderThread st=new SpiderThread();
+//				st.setSpider(spider);
+				out.print("启动成功,任务即将在"+spider.getSpider_start()+"运行");
+			}
 		}
 		// out.write(web_host);
 	}

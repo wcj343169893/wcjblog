@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.choujone.blog.common.WebPage;
+import com.google.choujone.blog.entity.Spider;
 
 /**
  * choujone'blog<br>
@@ -289,6 +290,28 @@ public class SpiderUtil {
 		return webPage;
 	}
 
+	public List<WebPage> run(Spider spider) {
+		// 设置编码
+		this.setCharset(spider.getCharset());
+		// 设置域名
+		this.setWeb_host(spider.getWeb_host());
+		// 设置列表页地址
+		this.setListUrl(spider.getWeb_list_url());
+		// 设置list列表区域开始和结束
+		this.setWeb_list_begin(spider.getWeb_list_begin());
+		this.setWeb_list_end(spider.getWeb_list_end());
+		// 得到列表之后，设置内容页的标题
+		this.setWeb_content_title(spider.getWeb_content_title());
+		// 设置标签清理 为空代表清理所有
+		this.setClear_title_reg(null);
+		// 设置内容开始结束位置
+		this.setWeb_content_begin(spider.getWeb_content_begin());
+		this.setWeb_content_end(spider.getWeb_content_end());
+		// 清理内容标签
+		this.setClear_content_reg(spider.getClear_content_reg().split(","));
+		return getWebPages();
+	}
+
 	public static void main(String[] args) {
 		// Pattern p = Pattern
 		// .compile("(<a\\s+([^>h]|h(?!ref\\s))*href[\\s+]?=[\\s+]?('|\"))([^(\\s+|'|\")]*)([^>]*>)(.*?)</a>");
@@ -358,14 +381,15 @@ public class SpiderUtil {
 		spider.setWeb_content_begin("<div id=\"Zoom\">");
 		spider.setWeb_content_end("安装软件后,点击即可下载,谢谢大家支持，欢迎每天来");
 		// 清理内容标签
-		spider.setClear_content_reg(new String[] { "img", "p", "/p", "span",
+		spider.setClear_content_reg(new String[] { "img", "p", "/p", "span","br",
 				"/span" });
 		// 得到内容页面
 		List<WebPage> webPages = spider.getWebPages();
 		for (WebPage webPage : webPages) {
-			System.out.println("url:" + webPage.getUrl() + " \t title:"
-					+ webPage.getTitle() + "\t content:"
-					+ webPage.getContent().substring(0, 100));
+//			System.out.println("url:" + webPage.getUrl() + " \t title:"
+//					+ webPage.getTitle() + "\t content:"
+//					+ webPage.getContent().substring(0, 100));
+			System.out.println(webPage.getContent());
 		}
 	}
 

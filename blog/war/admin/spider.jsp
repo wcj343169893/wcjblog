@@ -68,7 +68,7 @@
 				<td><%=spider.getSpider_start() %></td>
 				<td><%=spider.getSumCount() %>/<%=spider.getCount() %></td>
 				<td><%=spider.getStart()!=0 ? "等待":"停止" %>/<%=spider.getIsVisible()!=0 ? "隐藏":"显示" %></td>
-				<td></td>
+				<td><a href="javascript:void(0)" class="start_spider" name="<%=spider.getId() %>">开始</a></td>
 			</tr><%}}else{ %>
 			<tr>
 				<td colspan="6">暂无内容</td>
@@ -77,11 +77,12 @@
 		</table>
 	</div>
 	<div id="spider_setting" class="spider" title="新增采集任务" style="margin: 0;">
+		<p class="validateTips">所有内容都必填</p>
 		<div class="">
 				<div class="container-title-header">名称：</div><input type="text" name="spider_name" id="spider_name">
 		</div>
 		<div class="">
-				<div class="container-title-header">运行时间：</div><input type="text" name="spider_start" id="spider_start"><input type="button" id="spider_start_btn" value="..."/>
+				<div class="container-title-header">运行时间：</div><input type="text" name="spider_start" id="spider_start">
 		</div>
 		<div class="">
 			<div class="container-title-header">文章分类：</div><div id="typelist"></div> 
@@ -115,7 +116,7 @@
 				<div class="container-title-header">列表页结束位置：</div><textarea rows="5" cols="50" name="web_list_end" id="web_list_end">align="center" bgcolor="#F4FAE2"</textarea>
 			</div>
 			<div>
-				<a href="javascript:void(0)" class="spider_btn ui-state-default ui-corner-all" onclick="test_list()"><span class="ui-icon ui-icon-newwin"></span>测试列表页</a>
+				<a href="javascript:void(0)" class="spider_btn ui-state-default ui-corner-all" id="test_list_btn"><span class="ui-icon ui-icon-newwin"></span>测试列表页</a>
 			</div>
 		</div>
 		<div id="web_content">
@@ -127,6 +128,7 @@
 				<input type="checkbox" value="p,/p" id="tag_p" checked class="web_content_tags"><label for="tag_p">P</label>
 				<input type="checkbox" value="span,/span" id="tag_span" checked class="web_content_tags"><label for="tag_span">SPAN</label>
 				<input type="checkbox" value="img" id="tag_img" checked class="web_content_tags"><label for="tag_img">IMG</label>
+				<input type="checkbox" value="br,/br" id="tag_br" checked class="web_content_tags"><label for="tag_br">BR</label>
 				<input type="checkbox" value="div,/div" id="tag_div" class="web_content_tags"><label for="tag_div">DIV</label>
 			</div>
 			<div>
@@ -136,7 +138,7 @@
 				<div class="container-title-header">内容结束位置：</div><textarea rows="5" cols="50" name="web_content_end" id="web_content_end">安装软件后,点击即可下载,谢谢大家支持，欢迎每天来</textarea>
 			</div>
 			<div>
-				<a href="javascript:void(0)" class="spider_btn ui-state-default ui-corner-all" onclick="test_content()"><span class="ui-icon ui-icon-newwin"></span>测试内容页</a>
+				<a href="javascript:void(0)" class="spider_btn ui-state-default ui-corner-all" id="test_content_btn"><span class="ui-icon ui-icon-newwin"></span>测试内容页</a>
 			</div>
 		</div>
 		</div>
@@ -146,46 +148,7 @@
 	</div>
 	
 	<script type="text/javascript">
-		$(function() {
-			tlist();
-		 	$(".tabs").tabs();
-			//$("#container").draggable();
-			// Dialog			
-			$('#spider_setting').dialog({
-				autoOpen: false,
-				width: 600,
-				buttons: {
-					"保存任务": function() { 
-					//检查选项是否都合法
-					begin();
-					$(this).dialog("close"); 
-				}, 
-				"取消任务": function() { 
-					$(this).dialog("close"); 
-				} 
-			}
-			});
-			$('#test_result').dialog({
-				autoOpen: false,
-				width: 500
-			});
-			
-			// Dialog Link
-			$('#newSpider').click(function(){
-				$('#spider_setting').dialog('open');
-				return false;
-			});
-			//$("#test_result").draggable();
-			//spider_title //当按下鼠标左键，激活拖拽功能
-			//result_title
-			 Calendar.setup({
-			        inputField : "spider_start",
-			        trigger    : "spider_start_btn",
-			        onSelect   : function() { this.hide() },
-			        showTime   : 12,
-			        dateFormat : "%Y-%m-%d %H:%M"
-			      });
-		});
+		
 	</script>
 	<jsp:include page="/admin/bottom.jsp"></jsp:include>
 </div>
