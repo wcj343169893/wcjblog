@@ -16,6 +16,8 @@ import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
 import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Reply;
+import com.google.choujone.blog.entity.Statistics;
+import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
 import com.google.choujone.blog.util.Tools;
@@ -29,6 +31,11 @@ public class BlogDao {
 	PersistenceManager pm;
 	String key = "";// 缓存key
 	String page_key = "";// 分页
+	Statistics statistics = Config.statistics;
+	/**
+	 * 博客下面的回复数量
+	 */
+	public static Map<Long, Integer> blog_reply_size = Config.blog_reply_size;
 
 	/**
 	 * 增加，删除，修改
@@ -47,6 +54,12 @@ public class BlogDao {
 				blog.setId(dt.getTime());
 				pm.makePersistent(blog);
 				flag = true;
+				if (blog.getIsVisible().equals(0)) {
+					statistics.setBlog_visible_size(statistics
+							.getBlog_visible_size() + 1);
+				}
+				statistics.setBlog_size(statistics.getBlog_size() + 1);
+				// statistics.get
 			} catch (Exception e) {
 				flag = false;
 			}
@@ -65,8 +78,15 @@ public class BlogDao {
 				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setIsVisible(blog.getIsVisible());
 				flag = true;
+				if (blog.getIsVisible().equals(0)) {
+					statistics.setBlog_visible_size(statistics
+							.getBlog_visible_size() + 1);
+				} else {
+					statistics.setBlog_visible_size(statistics
+							.getBlog_visible_size() - 1);
+				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		} else if (operation.equals(Operation.modify)) {// 修改
 			try {
@@ -86,6 +106,7 @@ public class BlogDao {
 				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setCount(b.getCount() + 1);
 				flag = true;
+				statistics.setScan_count(statistics.getScan_count() + 1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -94,17 +115,28 @@ public class BlogDao {
 				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setReplyCount(b.getReplyCount() + 1);
 				flag = true;
+				blog_reply_size
+						.put(
+								blog.getId(),
+								blog_reply_size.get(blog.getId()) != null
+										& blog_reply_size.get(blog.getId()) > 0 ? blog_reply_size
+										.get(blog.getId()) + 1
+										: 0);
+				Config.blog_reply_size=blog_reply_size;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		// 更新统计
+		UserDao ud = new UserDao();
+		ud.modifyStatistics(statistics);
 		// 更新缓存中的内容
-		key = "blogDao_getBlogsByPage_null_null_1_10";
+		// key = "blogDao_getBlogsByPage_null_null_1_10";
 		// MyCache.updateList(key, b);
 		// MyCache.cache.put("blogDao_id_" + b.getId(), b);
-		MyCache.clear(key);
-		key = "blogDao_getBlogListByPage_null_null_1_10";
-		MyCache.clear(key);
+		// MyCache.clear(key);
+		// key = "blogDao_getBlogListByPage_null_null_1_10";
+		// MyCache.clear(key);
 		closePM();
 		return flag;
 	}
@@ -142,14 +174,29 @@ public class BlogDao {
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 		Query query = pm.newQuery(Blog.class, " id == " + id);
 		List<Blog> blogs = (List<Blog>) query.execute();
+		Blog blog = null;
 		if (blogs.size() > 0) {
+			blog = blogs.get(0);
+			statistics.setScan_count(statistics.getScan_count()
+					- blog.getCount());
+			Config.blogType_blog_size_map = Tools.modifyMayOfStatis(
+					Config.blogType_blog_size_map, blog.getTid());
 			pm.deletePersistent(blogs.get(0));
+			statistics.setBlog_size(statistics.getBlog_size() - 1);
+			statistics
+					.setBlog_visible_size(statistics.getBlog_visible_size() - 1);
+			statistics.setBlogType_blog_size(Tools.map2str(Tools
+					.map2map2(Config.blogType_blog_size_map)));
 			flag = true;
 		}
 		if (flag) {
 			ReplyDao rd = new ReplyDao();
 			rd.operationReply(Operation.delete, reply);
+			statistics.setReply_size(statistics.getReply_size()
+					- blog.getReplyCount());
 		}
+		UserDao ud = new UserDao();
+		ud.modifyStatistics(statistics);
 		return flag;
 	}
 
@@ -221,7 +268,7 @@ public class BlogDao {
 	 */
 	public List<Blog> getBlogListByPage(Pages pages, Long tid) {
 		key = "blogDao_getBlogListByPage_" + tid + "_null_" + pages.getPageNo()
-				+ "_" + pages.getPageSize();
+				+ "_" + pages.getPageTotal();
 		List<Blog> blogs = MyCache.get(key);
 		page_key = key + "_pages";
 		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
@@ -231,15 +278,19 @@ public class BlogDao {
 		if (blogs == null || page == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
-				String filter = "select count(id) from " + Blog.class.getName()
-						+ " where isVisible==0 ";
+				// String filter = "select count(id) from " +
+				// Blog.class.getName()
+				// + " where isVisible==0 ";
+				pages.setRecTotal(Config.statistics.getBlog_visible_size());
 				if (tid != null && tid > 0) {
-					filter += "&& tid == " + tid;
+					// filter += "&& tid == " + tid;
+					pages.setRecTotal(Config.blogType_blog_size_map.get(tid));
 				}
+				String filter = "";
 				// 查询总条数
-				Query q = pm.newQuery(filter);
-				Object obj = q.execute();
-				pages.setRecTotal(Integer.parseInt(obj.toString()));
+				// Query q = pm.newQuery(filter);
+				// Object obj = q.execute();
+				// pages.setRecTotal(Integer.parseInt(obj.toString()));
 				filter = " isVisible==0 ";
 				if (tid != null && tid > 0) {
 					filter += "&& tid == " + tid;
@@ -252,6 +303,7 @@ public class BlogDao {
 				MyCache.put(key, blogs);
 				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		pages.setRecTotal(page.getRecTotal());
@@ -330,7 +382,7 @@ public class BlogDao {
 	@SuppressWarnings("unchecked")
 	public List<Blog> getBlogsByPage(Pages pages) {
 		key = "blogDao_getBlogsByPage_null_null_" + pages.getPageNo() + "_"
-				+ pages.getPageSize();
+				+ pages.getPageTotal();
 		List<Blog> blogs = MyCache.get(key);
 		page_key = key + "_pages";
 		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
@@ -340,10 +392,11 @@ public class BlogDao {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				// 查询总条数
-				Query q = pm.newQuery("select count(id) from "
-						+ Blog.class.getName());
-				Object obj = q.execute();
-				pages.setRecTotal(Integer.parseInt(obj.toString()));
+
+				// Query q = pm.newQuery("select count(id) from "
+				// + Blog.class.getName());
+				// Object obj = q.execute();
+				pages.setRecTotal(Config.statistics.getBlog_size());
 
 				Query query = pm.newQuery(Blog.class);
 				query.setOrdering("sdTime desc");
@@ -468,16 +521,27 @@ public class BlogDao {
 			counts = new HashMap<String, Integer>();
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
-				Query q = pm.newQuery(Blog.class, " isVisible==0 ");
+				Query q = pm.newQuery(Blog.class);
 				List<Blog> blogs = (List<Blog>) q.execute();
-				int blogcount = blogs.size();
+				int blogcount = 0;
 				int scancount = 0;
 				int replycount = 0;
-				for (int i = 0; i < blogcount; i++) {
+				int allcount = blogs.size();
+				int messagecount = 0;
+				Map<Long, Integer> bt_blog_size = new HashMap<Long, Integer>();
+				for (int i = 0; i < allcount; i++) {
 					Blog b = blogs.get(i);
-					scancount += b.getCount();
-					replycount += b.getReplyCount();
+					if (b.getIsVisible().equals(0)) {
+						scancount += b.getCount();
+						replycount += b.getReplyCount();
+						bt_blog_size.put(b.getTid(), bt_blog_size.get(b
+								.getTid()) != null ? bt_blog_size.get(b
+								.getTid()) + 1 : 1);
+					}
 				}
+				// counts.put("bt_blog_size",bt_blog_size);
+				// 查询所有文章
+				counts.put("allcount", allcount);
 				// 查询文章总数
 				counts.put("blogcount", blogcount);
 				// 查询浏览总数
@@ -490,8 +554,20 @@ public class BlogDao {
 						+ Reply.class.getName() + " where bid == -1L";
 				q = pm.newQuery(filter);
 				Object obj = q.execute();
-				counts.put("messagecount", Integer.parseInt(obj.toString()));
+				messagecount = Integer.parseInt(obj.toString());
+				counts.put("messagecount", messagecount);
 				MyCache.cache.put("blogDao_getCount", counts);
+				// 新增统计
+				Statistics s = new Statistics();
+				s.setId((new Date()).getTime());
+				s.setBlog_size(allcount);
+				s.setBlog_visible_size(blogcount);
+				s.setReply_size(replycount);
+				s.setScan_count(scancount);
+				s.setMessage_count(messagecount);
+				s.setBlogType_size(bt_blog_size.keySet().size());
+				// s.setBlogType_blog_size(bt_blog_size);
+				pm.makePersistent(s);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -322,8 +322,12 @@ public class Tools {
 	 * @param str
 	 * @return
 	 */
-	public static boolean isNotNull(String str) {
-		return str != null && !"".equals(str.trim());
+	public static boolean isNotNull(Object str) {
+		return str != null && !"".equals(str.toString().trim());
+	}
+
+	public static boolean isNotNull(Map map) {
+		return map != null && !map.isEmpty();
 	}
 
 	public static String escape(String s) {
@@ -357,5 +361,114 @@ public class Tools {
 			}
 		}
 		return stringbuffer.toString();
+	}
+
+	public static Map<Object, Object> str2map(String input) {
+		String regex = ",";
+		String regex2 = "=";
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		if (isNotNull(input)) {
+			String[] strs = input.split(regex);
+			for (int i = 0; i < strs.length; i++) {
+				if (isNotNull(strs[i])) {
+					String[] strs2 = strs[i].split(regex2);
+					map.put(strs2[0], strs2[1]);
+				}
+			}
+		}
+		return map;
+	}
+
+	public static String map2str(Map<Object, Object> map) {
+		String regex = ",";
+		String regex2 = "=";
+		StringBuffer sb = new StringBuffer();
+		if (isNotNull(map)) {
+			for (Object obj : map.keySet()) {
+				if (isNotNull(map.get(obj))) {
+					sb.append(obj + regex2 + map.get(obj));
+					sb.append(regex);
+				}
+			}
+		}
+		return sb.substring(0, sb.lastIndexOf(regex));
+	}
+
+	public static String map2str2(Map<Long, Integer> map) {
+		String regex = ",";
+		String regex2 = "=";
+		StringBuffer sb = new StringBuffer();
+		if (isNotNull(map)) {
+			for (Object obj : map.keySet()) {
+				if (isNotNull(map.get(obj))) {
+					sb.append(obj + regex2 + map.get(obj));
+					sb.append(regex);
+				}
+			}
+		}
+		return sb.substring(0, sb.lastIndexOf(regex));
+	}
+
+	public static Map<Long, Integer> map2map(Map<Object, Object> obj) {
+		Map<Long, Integer> map = new HashMap<Long, Integer>();
+		try {
+			for (Object key : obj.keySet()) {
+				map.put(Long.valueOf(key.toString()), Integer.parseInt(obj.get(
+						key).toString()));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return map;
+	}
+
+	public static Map<Object, Object> map2map2(Map<Long, Integer> obj) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		try {
+			for (Object key : obj.keySet()) {
+				map.put(key.toString(), obj.get(key).toString());
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return map;
+	}
+
+	/**
+	 * 修改統計map
+	 * 
+	 * @param map
+	 * @param tid
+	 * @return
+	 */
+	public static Map<Long, Integer> modifyMayOfStatis(Map<Long, Integer> map,
+			Long tid) {
+		try {
+			for (Long key : map.keySet()) {
+				if (key.equals(tid)) {
+					if (isNotNull(map.get(key))) {
+						map.put(key,
+								map.get(key) != null && map.get(key) > 0 ? map
+										.get(key) - 1 : 0);
+					}
+				}
+			}
+		} catch (Exception e) {
+		}
+		return map;
+	}
+
+	public static void main(String[] args) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("1328885416494", "4");
+		map.put("1328885416433", "67");
+		map.put("1328885413494", "54");
+		map.put("1328885416294", "55");
+		String str = Tools.map2str(map);
+		System.out.println("str:" + str);
+		map = Tools.str2map(str);
+		for (Object obj : map.keySet()) {
+			System.out.println("key:" + obj + "  value:" + map.get(obj));
+		}
 	}
 }

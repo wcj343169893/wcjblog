@@ -44,10 +44,10 @@ public class ReplyServlet extends HttpServlet {
 
 		}
 		// 清理缓存
-		String key = "replyDao_bid_" + bid + "_" + p;// 更新前台
-		MyCache.clear(key);
-		key = "replyDao_getReplyList_all_" + p;// 更新后台
-		MyCache.clear(key);
+//		String key = "replyDao_bid_" + bid + "_" + p;// 更新前台
+//		MyCache.clear(key);
+//		key = "replyDao_getReplyList_all_" + p;// 更新后台
+//		MyCache.clear(key);
 		// MyCache.updateList(key, reply);
 		resp.sendRedirect("/admin/reply_list.jsp");
 	}
@@ -108,11 +108,13 @@ public class ReplyServlet extends HttpServlet {
 				bid = "-1";
 			}
 			//清理前台缓存
-			String key = "replyDao_bid_" + bid + "_" + p;
-			MyCache.clear(key);
-			//清理后台缓存
-			key="replyDao_getReplyList_all_"+1;
-			MyCache.clear(key);
+//			String key = "replyDao_bid_" + bid + "_" + p;
+//			MyCache.clear(key);
+//			//清理后台缓存
+//			key="replyDao_getReplyList_all_"+1;
+//			MyCache.clear(key);
+			//更新统计
+			
 			//发送 邮件到邮箱
 			Mail.send(bid,content);
 		} else if (operation.trim().equals(Operation.lists.toString())) {// 评论列表

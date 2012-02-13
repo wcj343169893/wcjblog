@@ -301,7 +301,10 @@ a:HOVER {
 	display: none;
 	margin-left: 30px;
 	margin-top: -32px;
+	/*
 	width: 250px;
+	*/
+	border: 1px solid #CCC;
 }
 
 #container .tabs div {

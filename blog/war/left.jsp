@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><%@page import="com.google.choujone.blog.util.CacheSingleton,javax.cache.Cache,java.util.List,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.dao.BlogDao,java.util.Map,java.util.HashMap,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.common.Pages,com.google.choujone.blog.dao.FriendsDao,com.google.choujone.blog.entity.Friends,com.google.choujone.blog.util.CalendarUtil,java.util.Date,com.google.choujone.blog.util.Config,com.google.choujone.blog.entity.User,java.util.ArrayList,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType,com.google.choujone.blog.util.Tools"%><div class="left"><%
+    pageEncoding="UTF-8"%><%@page import="com.google.choujone.blog.util.CacheSingleton,javax.cache.Cache,java.util.List,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.dao.BlogDao,java.util.Map,java.util.HashMap,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.common.Pages,com.google.choujone.blog.dao.FriendsDao,com.google.choujone.blog.entity.Friends,com.google.choujone.blog.util.CalendarUtil,java.util.Date,com.google.choujone.blog.util.Config,com.google.choujone.blog.entity.User,java.util.ArrayList,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType,com.google.choujone.blog.util.Tools"%>
+<%@page import="com.google.choujone.blog.entity.Statistics"%><div class="left"><%
 	User blog_user= Config.blog_user;
 	ReplyDao replyDao=new ReplyDao();
 	List<Reply> replyList=new ArrayList<Reply>();
@@ -89,12 +90,12 @@
 		</ul>
 	</div><%}if(blog_user.getIsStatistics()==null || blog_user.getIsStatistics()==0){%>
 	<div class="vito-left-title">站点统计</div>
-	<div class="vito-left-contentul"><%	Map<String, Integer> counts = bd.getCount(); %>
+	<div class="vito-left-contentul"><%	Statistics statistics =Config.statistics;%>
 		<ul class="vito-right-contentul">
-			<li>文章总数：<%=counts.get("blogcount") %></li>
-			<li>评论总数：<%=counts.get("replycount") %></li>
-			<li>浏览总数：<%=counts.get("scancount") %></li>
-			<li>留言总数：<%=counts.get("messagecount") %></li>
+			<li>文章总数：<%=statistics.getBlog_visible_size() %></li>
+			<li>评论总数：<%=statistics.getReply_size() %></li>
+			<li>浏览总数：<%=statistics.getScan_count() %></li>
+			<li>留言总数：<%=statistics.getMessage_count() %></li>
 		</ul>
 	</div><%} if(blog_user.getIsFriends()==null || blog_user.getIsFriends()==0){%>
 	<div class="vito-left-title">友情链接</div><%

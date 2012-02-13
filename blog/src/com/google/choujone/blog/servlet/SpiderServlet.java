@@ -27,8 +27,8 @@ public class SpiderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO 采集测试
-		String id = req.getParameter("id") != null ? req
-				.getParameter("id") : "-1L";
+		String id = req.getParameter("id") != null ? req.getParameter("id")
+				: "-1L";
 		String operation = req.getParameter("opera") != null ? req
 				.getParameter("opera") : "";
 		// 采集名称
@@ -76,9 +76,9 @@ public class SpiderServlet extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = resp.getWriter();
-		//设置编码
+		// 设置编码
 		spiderUtil.setCharset(charset);
-		//设置域名
+		// 设置域名
 		spiderUtil.setWeb_host(web_host);
 		// 设置list地址
 		spiderUtil.setListUrl(web_list_url);
@@ -151,28 +151,37 @@ public class SpiderServlet extends HttpServlet {
 		} else if (operation.equals(Operation.delete.toString())) {// 删除
 
 		} else if (operation.equals(Operation.start.toString())) {// 开始运行
-			//得到spider
-			Long sid=Long.valueOf(id);
-			if (sid>0) {
-				Spider spider=sd.getSpiderById(sid);
+			// 得到spider
+			Long sid = Long.valueOf(id);
+			if (sid > 0) {
+				Spider spider = sd.getSpiderById(sid);
 				// TODO 排除重复地址（内容页）
-				List<WebPage> webPageList=spiderUtil.run(spider);
-				BlogDao bd=new BlogDao();
-				Blog blog=null;
-				for (WebPage wp : webPageList) {
-					blog=new Blog();
+				// 得到所有的博客
+				BlogDao bd = new BlogDao();
+				List<Blog> blogList = bd.getBlogList();
+				List<WebPage> webPageList = spiderUtil.run(spider);
+				Blog blog = null;
+				w: for (WebPage wp : webPageList) {
+					for (Blog b : blogList) {
+						if (b.getSource() != null
+								&& b.getSource().equals(wp.getUrl())) {
+							continue w;
+						}
+					}
+					blog = new Blog();
 					blog.setTitle(wp.getTitle());
 					blog.setTid(Long.valueOf(spider.getTids()));
 					blog.setContent(new Text(wp.getContent()));
 					blog.setCount(0);
 					blog.setIsVisible(0);
 					blog.setSdTime(Tools.changeTime(new Date()));
+					blog.setSource(wp.getUrl());
 					bd.operationBlog(Operation.add, blog);
 				}
-				//创建运行线程（ access denied）
-//				SpiderThread st=new SpiderThread();
-//				st.setSpider(spider);
-				out.print("启动成功,任务即将在"+spider.getSpider_start()+"运行");
+				// 创建运行线程（ access denied）
+				// SpiderThread st=new SpiderThread();
+				// st.setSpider(spider);
+				out.print("启动成功,任务即将在" + spider.getSpider_start() + "运行");
 			}
 		}
 		// out.write(web_host);
