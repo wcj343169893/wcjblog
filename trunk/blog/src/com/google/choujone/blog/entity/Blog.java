@@ -35,6 +35,8 @@ public class Blog implements Serializable {
 	private Integer isVisible = 0;// 是否发表
 	@Persistent
 	private String moTime = "";// 最后修改时间
+	@Persistent
+	private String source = "";// 内容来源
 
 	public Blog() {
 	}
@@ -92,7 +94,7 @@ public class Blog implements Serializable {
 			if (len <= 0 || len > val.length()) {
 				len = val.length();
 			}
-			String ending=str != null ? str : "...";
+			String ending = str != null ? str : "...";
 			return new Text(val.substring(0, len) + ending);
 		}
 		return new Text("");
@@ -156,6 +158,18 @@ public class Blog implements Serializable {
 
 	public void setMoTime(String moTime) {
 		this.moTime = moTime;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

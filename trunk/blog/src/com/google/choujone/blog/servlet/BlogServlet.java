@@ -83,6 +83,7 @@ public class BlogServlet extends HttpServlet {
 			blog.setCount(0);
 			blog.setReplyCount(0);
 			blog.setSdTime(Tools.changeTime(new Date()));
+			blog.setSource("后台发布");
 			blogDao.operationBlog(Operation.add, blog);
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 修改
 			blog.setId(Long.valueOf(ids));
