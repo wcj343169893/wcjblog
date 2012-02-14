@@ -119,7 +119,7 @@ public class BlogDao {
 						.put(
 								blog.getId(),
 								blog_reply_size.get(blog.getId()) != null
-										& blog_reply_size.get(blog.getId()) > 0 ? blog_reply_size
+										&& blog_reply_size.get(blog.getId()) > 0 ? blog_reply_size
 										.get(blog.getId()) + 1
 										: 0);
 				Config.blog_reply_size=blog_reply_size;
@@ -175,12 +175,14 @@ public class BlogDao {
 		Query query = pm.newQuery(Blog.class, " id == " + id);
 		List<Blog> blogs = (List<Blog>) query.execute();
 		Blog blog = null;
+		int repy_size=0;
 		if (blogs.size() > 0) {
 			blog = blogs.get(0);
 			statistics.setScan_count(statistics.getScan_count()
 					- blog.getCount());
 			Config.blogType_blog_size_map = Tools.modifyMayOfStatis(
 					Config.blogType_blog_size_map, blog.getTid());
+			repy_size= blog.getReplyCount();
 			pm.deletePersistent(blogs.get(0));
 			statistics.setBlog_size(statistics.getBlog_size() - 1);
 			statistics
@@ -193,7 +195,7 @@ public class BlogDao {
 			ReplyDao rd = new ReplyDao();
 			rd.operationReply(Operation.delete, reply);
 			statistics.setReply_size(statistics.getReply_size()
-					- blog.getReplyCount());
+					- repy_size);
 		}
 		UserDao ud = new UserDao();
 		ud.modifyStatistics(statistics);
@@ -267,25 +269,29 @@ public class BlogDao {
 	 * @return
 	 */
 	public List<Blog> getBlogListByPage(Pages pages, Long tid) {
+		pages.setRecTotal(Config.statistics.getBlog_visible_size());
+		if (tid != null && tid > 0) {
+			pages.setRecTotal(Config.blogType_blog_size_map.get(tid));
+		}
 		key = "blogDao_getBlogListByPage_" + tid + "_null_" + pages.getPageNo()
-				+ "_" + pages.getPageTotal();
+				+ "_" + pages.getRecTotal();
 		List<Blog> blogs = MyCache.get(key);
-		page_key = key + "_pages";
-		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
-				.get(page_key)
-				: pages;
+//		page_key = key + "_pages";
+//		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+//				.get(page_key)
+//				: pages;
 
-		if (blogs == null || page == null) {
+		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				// String filter = "select count(id) from " +
 				// Blog.class.getName()
 				// + " where isVisible==0 ";
-				pages.setRecTotal(Config.statistics.getBlog_visible_size());
-				if (tid != null && tid > 0) {
-					// filter += "&& tid == " + tid;
-					pages.setRecTotal(Config.blogType_blog_size_map.get(tid));
-				}
+//				pages.setRecTotal(Config.statistics.getBlog_visible_size());
+//				if (tid != null && tid > 0) {
+//					// filter += "&& tid == " + tid;
+//					pages.setRecTotal(Config.blogType_blog_size_map.get(tid));
+//				}
 				String filter = "";
 				// 查询总条数
 				// Query q = pm.newQuery(filter);
@@ -306,7 +312,7 @@ public class BlogDao {
 				e.printStackTrace();
 			}
 		}
-		pages.setRecTotal(page.getRecTotal());
+//		pages.setRecTotal(page.getRecTotal());
 		return blogs;
 	}
 
@@ -382,7 +388,7 @@ public class BlogDao {
 	@SuppressWarnings("unchecked")
 	public List<Blog> getBlogsByPage(Pages pages) {
 		key = "blogDao_getBlogsByPage_null_null_" + pages.getPageNo() + "_"
-				+ pages.getPageTotal();
+				+ statistics.getBlog_size();
 		List<Blog> blogs = MyCache.get(key);
 		page_key = key + "_pages";
 		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
@@ -564,7 +570,7 @@ public class BlogDao {
 				s.setBlog_visible_size(blogcount);
 				s.setReply_size(replycount);
 				s.setScan_count(scancount);
-				s.setMessage_count(messagecount);
+//				s.setMessage_count(messagecount);
 				s.setBlogType_size(bt_blog_size.keySet().size());
 				// s.setBlogType_blog_size(bt_blog_size);
 				pm.makePersistent(s);

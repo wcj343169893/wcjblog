@@ -39,6 +39,7 @@ public class BlogServlet extends HttpServlet {
 				blog.setIsVisible(Integer.parseInt(isVisible));
 				blogDao.operationBlog(Operation.delete, blog);
 			}
+			blogDao.closePM();
 			resp.sendRedirect("/admin/blog_list.jsp");
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 加载修改
 			blog = blogDao.getBlogById(Tools.strTolong(id));

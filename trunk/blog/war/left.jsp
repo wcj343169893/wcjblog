@@ -79,7 +79,7 @@
 		<ul class="vito-right-contentul">
 			<%if(replyList!= null){ for(int i=0;i<replyList.size();i++){ 
 					Reply r=replyList.get(i);
-			%><li title="post by <%=r.getName() %>  <%=r.getSdTime() %>"><a href="/blog?id=<%=r.getBid() %>"><%=r.getContent() %></a></li><%}} %>
+			%><li title="post by <%=r.getName() %>  <%=r.getSdTime() %>"><a href="/blog?id=<%=r.getBid() %>"><%=r.getContent(50,null) %></a></li><%}} %>
 		</ul>
 	</div><%}if(blog_user.getIsLeaveMessage()==null || blog_user.getIsLeaveMessage()==0){%>
 	<div class="vito-left-title">最新留言</div><%replyList=replyDao.getReplyList(-1L,new Pages(8)); %>
@@ -95,7 +95,7 @@
 			<li>文章总数：<%=statistics.getBlog_visible_size() %></li>
 			<li>评论总数：<%=statistics.getReply_size() %></li>
 			<li>浏览总数：<%=statistics.getScan_count() %></li>
-			<li>留言总数：<%=statistics.getMessage_count() %></li>
+			<li>留言总数：<%=Config.blog_reply_size.get(-1L) %></li>
 		</ul>
 	</div><%} if(blog_user.getIsFriends()==null || blog_user.getIsFriends()==0){%>
 	<div class="vito-left-title">友情链接</div><%
