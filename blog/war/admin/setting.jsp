@@ -12,22 +12,27 @@
 %>
 <title><%=user.getpTitle() %> -- 博客设置   / 系统设置</title>
 <script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/ui-lightness/jquery-ui.css" />
 <script>
 	KE.show({
 		id : 'preMessage',
 		resizeMode : 1,
-		allowPreviewEmoticons : false,
-		allowUpload : false,
+		imageUploadJson : "/kindeditor/jsp/upload.jsp",
+		fileManagerJson : '/kindeditor/jsp/file_manager.jsp',
+		allowFileManager : true,
+		allowPreviewEmoticons : true,
 		items : [
 		'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold', 'italic', 'underline',
 		'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
 		'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 	});
+	
 </script>
 </head>
 <body>
 <div class="main">
 	<jsp:include page="/admin/menu.jsp"></jsp:include>	
+	<script type="text/javascript" charset="utf-8" src="/js/jquery-ui.js"></script>
 	<div class="address">
 			博客设置   / 系统设置
 	</div>
@@ -185,6 +190,7 @@
 					<td>
 						<input type="radio" name="isInfo" value="0" id="isInfoYes" <%=user.getIsInfo()==null || user.getIsInfo()==0?"checked":"" %>><label for="isInfoYes">显示</label>
 						<input type="radio" name="isInfo" value="1" id="isInfoNo" <%=user.getIsInfo()!=null && user.getIsInfo()==1?"checked":"" %>><label for="isInfoNo">隐藏</label>
+						<a href="javascript:void(0)" id="use_avatar" class="spider_btn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>编辑头像</a>
 					</td>
 				</tr>
 				<tr>
@@ -279,6 +285,117 @@
 			<input type="reset" value="重置">
 		</div>
 		</form>
+	</div>
+	<script type="text/javascript">
+	$(function() {
+		$("#user_header").dialog({
+			autoOpen : false,
+			width : 560
+			});
+		$("#use_camera").click(function() {
+			useCamera();
+			hideLoading();
+		});
+		$("#use_avatar").click(function() {
+			$('#user_header').dialog('open');
+			$("#avatar_editor").html("");
+			hideLoading();
+		});
+	});
+		//允许上传的图片类型
+		var extensions = 'jpg,jpeg,gif,png';
+		//保存缩略图的地址.
+		var saveUrl = '';//保存缩略图的处理地址
+		//保存摄象头白摄图片的地址.
+		var cameraPostUrl = '';//保存摄像头拍摄的处理地址
+		//头像编辑器flash的地址.
+		var editorFlaPath = '/flash/AvatarEditor.swf';
+		function useCamera()
+		{
+			var content = '<embed height="464" width="514" ';
+			content +='flashvars="type=camera';
+			content +='&postUrl='+cameraPostUrl+'?&radom=1';
+			content += '&saveUrl='+saveUrl+'?radom=1" ';
+			content +='pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" ';
+			content +='allowscriptaccess="always" quality="high" ';
+			content +='src="'+editorFlaPath+'"/>';
+			$("#avatar_editor").html(content);
+		}
+		function buildAvatarEditor(pic_id,pic_path,post_type)
+		{
+			var content = '<embed height="464" width="514"'; 
+			content+='flashvars="type='+post_type;
+			content+='&photoUrl='+pic_path;
+			content+='&photoId='+pic_id;
+			content+='&postUrl='+cameraPostUrl+'?&radom=1';
+			content+='&saveUrl='+saveUrl+'?radom=1"';
+			content+=' pluginspage="http://www.macromedia.com/go/getflashplayer"';
+			content+=' type="application/x-shockwave-flash"';
+			content+=' allowscriptaccess="always" quality="high" src="'+editorFlaPath+'"/>';
+			$("#avatar_editor").html(content);
+		}
+			/**
+			  * 提供给FLASH的接口 ： 没有摄像头时的回调方法
+			  */
+			 function noCamera(){
+				 alert("俺没有camare ：）");
+			 }
+					
+			/**
+			 * 提供给FLASH的接口：编辑头像保存成功后的回调方法
+			 */
+			function avatarSaved(){
+				alert('保存成功，哈哈');
+				//window.location.href = '/';
+			}
+			
+			 /**
+			  * 提供给FLASH的接口：编辑头像保存失败的回调方法, msg 是失败信息，可以不返回给用户, 仅作调试使用.
+			  */
+			 function avatarError(msg){
+				 alert("上传失败了呀，哈哈");
+			 }
+
+			 function checkFile()
+			 {
+				 var path = document.getElementById('Filedata').value;
+				 var ext = getExt(path);
+				 var re = new RegExp("(^|\\s|,)" + ext + "($|\\s|,)", "ig");
+				  if(extensions != '' && (re.exec(extensions) == null || ext == '')) {
+				 alert('对不起，只能上传jpg,jpeg,gif,png类型的图片');
+				 return false;
+				 }
+				 showLoading();
+				 return true;
+			 }
+
+			 function getExt(path) {
+				return path.lastIndexOf('.') == -1 ? '' : path.substr(path.lastIndexOf('.') + 1, path.length).toLowerCase();
+			}
+              function	showLoading()
+			  {
+				  $("#loading_gif").show();
+			  }
+			  function hideLoading()
+			  {
+				 $("#loading_gif").hide();
+			  }
+			
+	
+	</script>
+	<div id="user_header" title="用户头像">
+		<div style="padding:10px 0;color:#666;">
+		你最好上传一张真人照片证明你是地球人，也可以  <a href="javascript:void(0)" id="use_camera" class="spider_btn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>使用摄像头</a>
+		</div>
+		<form enctype="multipart/form-data" method="post" name="upform" target="upload_target" action="upload.jsp" onsubmit="return checkFile()">
+			<input type="file" name="Filedata" id="Filedata"/>
+			<input style="margin-right:20px;" type="submit" name="" value="上传形象照"  />
+			<br>
+			<br>
+			<div style="display: none;text-align: center;" id="loading_gif"><img src="/images/loading.gif" align="middle" /></div>
+		</form>
+		<iframe src="about:blank" name="upload_target" style="display:none;"></iframe>
+		<div id="avatar_editor"></div>
 	</div>
 	<jsp:include page="/admin/bottom.jsp"></jsp:include>
 </div>

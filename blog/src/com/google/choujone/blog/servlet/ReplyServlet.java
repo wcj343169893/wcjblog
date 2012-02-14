@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.Text;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.BlogDao;
 import com.google.choujone.blog.dao.ReplyDao;
@@ -90,7 +91,8 @@ public class ReplyServlet extends HttpServlet {
 			reply.setName(name);
 			reply.setUrl(url);
 			reply.setBid(Tools.strTolong(bid));
-			reply.setContent(content);
+//			reply.setContent(content);
+			reply.setContent2(new Text(content));
 			// 获取到留言者的信息
 			reply.setVisiter(req.getRemoteAddr() + ";"
 					+ Tools.getAddressByIP(Tools.getIpAddr(req)) + ";"
@@ -100,8 +102,6 @@ public class ReplyServlet extends HttpServlet {
 				BlogDao blogDao = new BlogDao();
 				blogDao.operationBlog(Operation.replyTimes, new Blog(reply
 						.getBid()));
-			}
-			if (reply.getBid() > 0) {
 				resp.sendRedirect("/blog_detail.jsp?id=" + reply.getBid());
 			} else {
 				resp.sendRedirect("/leaveMessage.jsp");

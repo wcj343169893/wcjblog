@@ -58,6 +58,21 @@ public class SpiderDao {
 				b = pm.getObjectById(Spider.class, spider.getId());
 				b.setEdTime(Tools.changeTime(dt));// 修改时间
 				b.setName(spider.getName());
+				b.setCharset(spider.getCharset());
+				b.setClear_content_reg(spider.getClear_content_reg());
+				b.setCount(spider.getCount());
+				b.setIsVisible(spider.getIsVisible());
+				b.setSpider_start(spider.getSpider_start());
+				b.setStart(spider.getStart());
+				b.setSumCount(spider.getSumCount());
+				b.setTids(spider.getTids());
+				b.setWeb_content_begin(spider.getWeb_content_begin());
+				b.setWeb_content_end(spider.getWeb_content_end());
+				b.setWeb_content_title(spider.getWeb_content_title());
+				b.setWeb_host(spider.getWeb_host());
+				b.setWeb_list_begin(spider.getWeb_list_begin());
+				b.setWeb_list_end(spider.getWeb_list_end());
+				b.setWeb_list_url(spider.getWeb_list_url());
 				flag = true;
 			} catch (Exception e) {
 				flag = false;

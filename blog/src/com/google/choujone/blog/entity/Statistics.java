@@ -61,8 +61,7 @@ public class Statistics {
 	/**
 	 *留言总数
 	 */
-	@Persistent
-	private Integer message_count = 0;
+//	private Integer message_count = 0;
 
 	/**
 	 * 博客类型对应的条数
@@ -142,14 +141,6 @@ public class Statistics {
 
 	public void setScan_count(Integer scanCount) {
 		scan_count = scanCount;
-	}
-
-	public Integer getMessage_count() {
-		return message_count;
-	}
-
-	public void setMessage_count(Integer messageCount) {
-		message_count = messageCount;
 	}
 
 	public String getBlogType_blog_size() {

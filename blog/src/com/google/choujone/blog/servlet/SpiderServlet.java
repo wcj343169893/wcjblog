@@ -160,6 +160,7 @@ public class SpiderServlet extends HttpServlet {
 				BlogDao bd = new BlogDao();
 				List<Blog> blogList = bd.getBlogList();
 				List<WebPage> webPageList = spiderUtil.run(spider);
+				int count=0;
 				Blog blog = null;
 				w: for (WebPage wp : webPageList) {
 					for (Blog b : blogList) {
@@ -168,6 +169,7 @@ public class SpiderServlet extends HttpServlet {
 							continue w;
 						}
 					}
+					count++;
 					blog = new Blog();
 					blog.setTitle(wp.getTitle());
 					blog.setTid(Long.valueOf(spider.getTids()));
@@ -178,10 +180,15 @@ public class SpiderServlet extends HttpServlet {
 					blog.setSource(wp.getUrl());
 					bd.operationBlog(Operation.add, blog);
 				}
+				//修改spider的运行次数和采集到的总数
+				spider.setCount(spider.getCount()+1);
+				spider.setSumCount(spider.getSumCount()+count);
+				sd.operationSpider(Operation.modify, spider);
 				// 创建运行线程（ access denied）
 				// SpiderThread st=new SpiderThread();
 				// st.setSpider(spider);
-				out.print("启动成功,任务即将在" + spider.getSpider_start() + "运行");
+//				out.print("启动成功,任务即将在" + spider.getSpider_start() + "运行");
+				out.print("运行成功,共采集"+count+"条数据");
 			}
 		}
 		// out.write(web_host);

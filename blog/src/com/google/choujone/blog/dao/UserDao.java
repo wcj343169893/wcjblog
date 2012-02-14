@@ -201,17 +201,21 @@ public class UserDao {
 								.parseInt(bt_blog_size.get(b.getTid())
 										.toString()) + 1 : 1);
 						// 统计每篇博客的回复数量
-						blog_reply_size.put(b.getTid(), blog_reply_size
-								.get(b.getTid()) != null ? blog_reply_size
-								.get(b.getTid()) + 1 : 0);
+						// blog_reply_size.put(b.getTid(), blog_reply_size
+						// .get(b.getTid()) != null ? blog_reply_size
+						// .get(b.getTid()) + 1 : 0);
 					}
 				}
 				// 查询留言
-				String filter = " select count(id) from "
-						+ Reply.class.getName() + " where bid == -1L";
+				String filter = " select bid from " + Reply.class.getName();
 				q = pm.newQuery(filter);
-				Object obj = q.execute();
-				messagecount = Integer.parseInt(obj.toString());
+				List<Long> replyList = (List<Long>) q.execute();
+				for (Long key : replyList) {
+					blog_reply_size.put(key,
+							blog_reply_size.get(key) != null ? blog_reply_size
+									.get(key) + 1 : 1);
+				}
+				// messagecount = Integer.parseInt(obj.toString());
 				// 新增统计
 				s = new Statistics();
 				s.setId((new Date()).getTime());
@@ -224,7 +228,7 @@ public class UserDao {
 				// 浏览
 				s.setScan_count(scancount);
 				// 留言
-				s.setMessage_count(messagecount);
+//				s.setMessage_count(messagecount);
 				// 博客分类size
 				s.setBlogType_size(bt_blog_size.keySet().size());
 				// 分类博客size
@@ -238,7 +242,7 @@ public class UserDao {
 				// 友情链接size
 				filter = " select count(id) from " + Friends.class.getName();
 				q = pm.newQuery(filter);
-				obj = q.execute();
+				Object obj = q.execute();
 				s.setFriends_size(Integer.parseInt(obj.toString()));
 				// 采集任务size
 				filter = " select count(id) from " + Spider.class.getName();
@@ -268,10 +272,12 @@ public class UserDao {
 				s.setFriends_size(statistics.getFriends_size());
 				s.setReply_size(statistics.getReply_size());
 				s.setSpider_size(statistics.getSpider_size());
-				s.setMessage_count(statistics.getMessage_count());
+//				s.setMessage_count(statistics.getMessage_count());
 				s.setScan_count(statistics.getScan_count());
-				s.setBlogType_blog_size(Tools.map2str2(Config.blogType_blog_size_map));
-				s.setBlog_reply_size(new Text(Tools.map2str2(Config.blog_reply_size)));
+				s.setBlogType_blog_size(Tools
+						.map2str2(Config.blogType_blog_size_map));
+				s.setBlog_reply_size(new Text(Tools
+						.map2str2(Config.blog_reply_size)));
 				Config.statistics = s;
 			}
 		} catch (Exception e) {

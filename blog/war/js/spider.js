@@ -84,7 +84,7 @@ $(function() {
 	tlist();
 	$(".tabs").tabs();
 	// Dialog
-	var name = $("#spider_name"), spider_start = $("#spider_start"), web_host = $("#web_host"), web_list_url = $("#web_list_url"), web_list_begin = $("#web_list_begin"), web_list_end = $("#web_list_end"),
+	var name = $("#spider_name"), spider_start = $("#spider_start"), web_host = $("#web_host"), web_charSet = $("#web_charSet"), web_list_url = $("#web_list_url"), web_list_begin = $("#web_list_begin"), web_list_end = $("#web_list_end"),
 
 	web_content_title = $("#web_content_title"), web_content_begin = $("#web_content_begin"), web_content_end = $("#web_content_end"), password = $("#password"), allFields = $(
 			[]).add(name).add(spider_start).add(web_host).add(web_charSet).add(
