@@ -29,8 +29,51 @@ public class Mail {
 		try {
 			Message msg = new MimeMessage(session);
 			msg
-					.setFrom(new InternetAddress("wcj343169893@163.com",
-							"choujone"));
+			.setFrom(new InternetAddress("wcj343169893@163.com",
+			"choujone"));
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
+					blogUser.getEmail(), "administrator"));
+			if (bid == null || "-1".equals(bid.trim())) {
+				subject = "Leave a message";
+			}
+			Multipart mp = new MimeMultipart();
+			MimeBodyPart htmlPart = new MimeBodyPart();
+			htmlPart.setContent(msgBody, "text/html");
+			mp.addBodyPart(htmlPart);
+			// System.out.println(Charset.defaultCharset());
+//			subject = new String(subject.getBytes(), Charset.defaultCharset());
+			// subject=new Header(subject,"utf-8");
+			// subject=Header(subject,Charset.defaultCharset());
+			msg.setSubject(subject);
+			// msg.setText(msgBody);
+			msg.setContent(mp);
+			msg.setSentDate(Tools.changeTime(Tools.changeTime(new Date())));
+			// msg.setReplyTo(addresses)
+			Transport.send(msg);
+			
+		} catch (AddressException e) {
+			// ...
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// ...
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// 
+			e.printStackTrace();
+		}
+	}
+	public static void send(String bid, String content,String email) {
+		// mail.send_mail();
+		Properties props = new Properties();
+		Session session = Session.getDefaultInstance(props, null);
+		String msgBody = content;
+		String subject = "Blog " + bid + " reply";
+		User blogUser = Config.blog_user;
+		try {
+			Message msg = new MimeMessage(session);
+			msg
+					.setFrom(new InternetAddress(email,
+							""));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
 					blogUser.getEmail(), "administrator"));
 			if (bid == null || "-1".equals(bid.trim())) {
