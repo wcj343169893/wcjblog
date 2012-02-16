@@ -274,6 +274,7 @@ public class UserDao {
 				s.setSpider_size(statistics.getSpider_size());
 //				s.setMessage_count(statistics.getMessage_count());
 				s.setScan_count(statistics.getScan_count());
+				
 				s.setBlogType_blog_size(Tools
 						.map2str2(Config.blogType_blog_size_map));
 				s.setBlog_reply_size(new Text(Tools
@@ -282,6 +283,8 @@ public class UserDao {
 			}
 		} catch (Exception e) {
 			System.out.println("修改统计错误");
+		}finally{
+			closePM();
 		}
 	}
 

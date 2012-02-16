@@ -56,7 +56,12 @@ public class BlogServlet extends HttpServlet {
 				}
 				req.setAttribute("id", id);
 			}// 显示某篇文章
-			req.getRequestDispatcher("/blog_detail.jsp").forward(req, resp);
+			//如果id==-1
+			if (id.equals("-1")) {
+				resp.sendRedirect("/leaveMessage.jsp");
+			}else{
+				req.getRequestDispatcher("/blog_detail.jsp").forward(req, resp);
+			}
 		}
 	}
 

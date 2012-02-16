@@ -102,7 +102,7 @@ public class ReplyServlet extends HttpServlet {
 				BlogDao blogDao = new BlogDao();
 				blogDao.operationBlog(Operation.replyTimes, new Blog(reply
 						.getBid()));
-				resp.sendRedirect("/blog_detail.jsp?id=" + reply.getBid());
+				resp.sendRedirect("/blog?id=" + reply.getBid());
 			} else {
 				resp.sendRedirect("/leaveMessage.jsp");
 				bid = "-1";
