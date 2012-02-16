@@ -31,11 +31,11 @@ public class BlogDao {
 	PersistenceManager pm;
 	String key = "";// 缓存key
 	String page_key = "";// 分页
-	Statistics statistics = Config.statistics;
+//	Statistics statistics = Config.statistics;
 	/**
 	 * 博客下面的回复数量
 	 */
-	public static Map<Long, Integer> blog_reply_size = Config.blog_reply_size;
+//	public static Map<Long, Integer> blog_reply_size = Config.blog_reply_size;
 
 	/**
 	 * 增加，删除，修改
@@ -55,11 +55,11 @@ public class BlogDao {
 				pm.makePersistent(blog);
 				flag = true;
 				if (blog.getIsVisible().equals(0)) {
-					statistics.setBlog_visible_size(statistics
+					Config.statistics.setBlog_visible_size(Config.statistics
 							.getBlog_visible_size() + 1);
 				}
-				statistics.setBlog_size(statistics.getBlog_size() + 1);
-				// statistics.get
+				Config.statistics.setBlog_size(Config.statistics.getBlog_size() + 1);
+				// Config.statistics.get
 			} catch (Exception e) {
 				flag = false;
 			}
@@ -79,10 +79,10 @@ public class BlogDao {
 				b.setIsVisible(blog.getIsVisible());
 				flag = true;
 				if (blog.getIsVisible().equals(0)) {
-					statistics.setBlog_visible_size(statistics
+					Config.statistics.setBlog_visible_size(Config.statistics
 							.getBlog_visible_size() + 1);
 				} else {
-					statistics.setBlog_visible_size(statistics
+					Config.statistics.setBlog_visible_size(Config.statistics
 							.getBlog_visible_size() - 1);
 				}
 			} catch (Exception e) {
@@ -106,7 +106,7 @@ public class BlogDao {
 				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setCount(b.getCount() + 1);
 				flag = true;
-				statistics.setScan_count(statistics.getScan_count() + 1);
+				Config.statistics.setScan_count(Config.statistics.getScan_count() + 1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -115,21 +115,13 @@ public class BlogDao {
 				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setReplyCount(b.getReplyCount() + 1);
 				flag = true;
-				blog_reply_size
-						.put(
-								blog.getId(),
-								blog_reply_size.get(blog.getId()) != null
-										&& blog_reply_size.get(blog.getId()) > 0 ? blog_reply_size
-										.get(blog.getId()) + 1
-										: 0);
-				Config.blog_reply_size=blog_reply_size;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		// 更新统计
 		UserDao ud = new UserDao();
-		ud.modifyStatistics(statistics);
+		ud.modifyStatistics(Config.statistics);
 		// 更新缓存中的内容
 		// key = "blogDao_getBlogsByPage_null_null_1_10";
 		// MyCache.updateList(key, b);
@@ -178,27 +170,28 @@ public class BlogDao {
 		int repy_size=0;
 		if (blogs.size() > 0) {
 			blog = blogs.get(0);
-			statistics.setScan_count(statistics.getScan_count()
+			Config.statistics.setScan_count(Config.statistics.getScan_count()
 					- blog.getCount());
 			Config.blogType_blog_size_map = Tools.modifyMayOfStatis(
 					Config.blogType_blog_size_map, blog.getTid());
 			repy_size= blog.getReplyCount();
 			pm.deletePersistent(blogs.get(0));
-			statistics.setBlog_size(statistics.getBlog_size() - 1);
-			statistics
-					.setBlog_visible_size(statistics.getBlog_visible_size() - 1);
-			statistics.setBlogType_blog_size(Tools.map2str(Tools
-					.map2map2(Config.blogType_blog_size_map)));
+			Config.statistics.setBlog_size(Config.statistics.getBlog_size() - 1);
+			Config.statistics
+					.setBlog_visible_size(Config.statistics.getBlog_visible_size() - 1);
+//			Config.statistics.setBlogType_blog_size(Tools.map2str(Tools
+//					.map2map2(Config.blogType_blog_size_map)));
 			flag = true;
 		}
 		if (flag) {
 			ReplyDao rd = new ReplyDao();
 			rd.operationReply(Operation.delete, reply);
-			statistics.setReply_size(statistics.getReply_size()
+			Config.statistics.setReply_size(Config.statistics.getReply_size()
 					- repy_size);
 		}
 		UserDao ud = new UserDao();
-		ud.modifyStatistics(statistics);
+		ud.modifyStatistics(Config.statistics);
+		closePM();
 		return flag;
 	}
 
@@ -387,13 +380,14 @@ public class BlogDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Blog> getBlogsByPage(Pages pages) {
+		pages.setRecTotal(Config.statistics.getBlog_size());
 		key = "blogDao_getBlogsByPage_null_null_" + pages.getPageNo() + "_"
-				+ statistics.getBlog_size();
+				+ pages.getRecTotal();
 		List<Blog> blogs = MyCache.get(key);
-		page_key = key + "_pages";
-		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
-				.get(page_key)
-				: pages;
+//		page_key = key + "_pages";
+//		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+//				.get(page_key)
+//				: pages;
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -402,7 +396,6 @@ public class BlogDao {
 				// Query q = pm.newQuery("select count(id) from "
 				// + Blog.class.getName());
 				// Object obj = q.execute();
-				pages.setRecTotal(Config.statistics.getBlog_size());
 
 				Query query = pm.newQuery(Blog.class);
 				query.setOrdering("sdTime desc");
@@ -410,11 +403,11 @@ public class BlogDao {
 						* pages.getPageSize());
 				blogs = (List<Blog>) query.execute();
 				MyCache.put(key, blogs);
-				MyCache.cache.put(page_key, pages);
+//				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 			}
 		}
-		pages.setRecTotal(page.getRecTotal());
+//		pages.setRecTotal(page.getRecTotal());
 		return blogs;
 	}
 
