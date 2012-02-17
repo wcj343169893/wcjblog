@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.Menu;
-import com.google.choujone.blog.entity.Statistics;
 import com.google.choujone.blog.entity.User;
 
 /**
@@ -25,16 +24,16 @@ public class Config {
 	/**
 	 * 统计
 	 */
-	public static Statistics statistics = null;
+//	public static Statistics statistics = null;
 
 	/**
 	 * 博客类型下的博客数量
 	 */
-	public static Map<Long, Integer> blogType_blog_size_map = new HashMap<Long, Integer>();
+//	public static Map<Long, Integer> blogType_blog_size_map = new HashMap<Long, Integer>();
 	/**
 	 * 博客下面的回复数量
 	 */
-	public static Map<Long, Integer> blog_reply_size = new HashMap<Long, Integer>();
+//	public static Map<Long, Integer> blog_reply_size = new HashMap<Long, Integer>();
 
 	public static String getWebUrl() {
 		String url = blog_user.getUrl();
@@ -60,7 +59,7 @@ public class Config {
 		// System.out.println("加载博客信息成功");
 		menus = Tools.split(blog_user.getMenu(), ";", ",");
 		// System.out.println("加载博客导航成功");
-		statistics = ud.getStatistics();
+//		statistics = ud.getStatistics();
 	}
 
 }
