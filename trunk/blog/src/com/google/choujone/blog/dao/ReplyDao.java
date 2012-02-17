@@ -2,19 +2,14 @@ package com.google.choujone.blog.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import com.google.appengine.api.datastore.Text;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
 import com.google.choujone.blog.entity.Reply;
-import com.google.choujone.blog.entity.Statistics;
-import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
 import com.google.choujone.blog.util.Tools;
@@ -44,14 +39,6 @@ public class ReplyDao {
 				reply.setId(dt.getTime());
 				pm.makePersistent(reply);
 				flag = true;
-				Config.blog_reply_size
-						.put(reply.getBid(), Config.blog_reply_size.get(reply
-								.getBid()) != null ? Config.blog_reply_size
-								.get(reply.getBid()) + 1 : 1);
-//				Config.statistics.setBlog_reply_size(new Text(Tools
-//						.map2str2(Config.blog_reply_size)));
-				Config.statistics.setReply_size(Config.statistics
-						.getReply_size() + 1);
 			} catch (Exception e) {
 				e.printStackTrace();
 				flag = false;
@@ -67,18 +54,6 @@ public class ReplyDao {
 					}
 					flag = true;
 				}
-				Config.blog_reply_size
-						.put(
-								reply.getBid(),
-								Config.blog_reply_size.get(reply.getBid()) != null
-										&& Config.blog_reply_size.get(reply
-												.getBid()) > 0 ? Config.blog_reply_size
-										.get(reply.getBid()) - 1
-										: 0);
-//				Config.statistics.setBlog_reply_size(new Text(Tools
-//						.map2str2(Config.blog_reply_size)));
-				Config.statistics.setReply_size(Config.statistics
-						.getReply_size() - 1);
 				// pm.deletePersistent(pm.getObjectById(Blog.class,
 				// blog.getId()));
 				flag = true;
@@ -95,8 +70,6 @@ public class ReplyDao {
 				flag = false;
 			}
 		}
-		UserDao ud = new UserDao();
-		ud.modifyStatistics(Config.statistics);
 		closePM();
 		return flag;
 	}
@@ -135,28 +108,20 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyListByBid(Long bid, Pages pages) {
-		if (bid != null) {
-			pages
-					.setRecTotal(Config.blog_reply_size.get(bid) != null ? Config.blog_reply_size
-							.get(bid)
-							: 0);
-
-		}
-		key = "replyDao_bid_" + bid + "_" + pages.getPageNo() + "_"
-				+ pages.getRecTotal();
+		key = "replyDao_bid_" + bid + "_" + pages.getPageNo();
 		List<Reply> replyList = MyCache.get(key);
-		// page_key = key + "_pages";
-		// Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages)
-		// MyCache.cache
-		// .get(page_key)
-		// : pages;
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
 		if (replyList == null) {
 			try {
 				pm = PMF.get().getPersistenceManager();
-				// Query q = pm.newQuery("select count(id) from "
-				// + Reply.class.getName() + " where bid == " + bid);
-				// Object obj = q.execute();
-				// pages.setRecTotal(Integer.parseInt(obj.toString()));
+				Query q = pm.newQuery("select count(id) from "
+						+ Reply.class.getName() + " where bid == " + bid);
+				Object obj = q.execute();
+				pages.setRecTotal(Integer.parseInt(obj.toString()));
+
 				if (pages.getRecTotal() > 0) {
 					Query query = pm.newQuery(Reply.class, " bid == " + bid);
 					query.setRange(pages.getFirstRec(), pages.getPageNo()
@@ -166,13 +131,14 @@ public class ReplyDao {
 					}
 					replyList = (List<Reply>) query.execute();
 					MyCache.put(key, replyList);
-					// MyCache.cache.put(page_key, pages);
+					MyCache.cache.put(page_key, pages);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			pages.setRecTotal(page.getRecTotal());
 		}
-		// pages.setRecTotal(page.getRecTotal());
 		return replyList;
 	}
 
@@ -184,35 +150,36 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyList(Long bid, Pages pages) {
-		pages.setRecTotal(Config.statistics.getReply_size());
-		key = "replyDao_getReplyList_" + bid + "_" + pages.getPageNo() + "_"
-				+ pages.getRecTotal();
+		key = "replyDao_getReplyList_" + bid + "_" + pages.getPageNo();
 		List<Reply> replyList = MyCache.get(key);
-		// page_key = key + "_pages";
-		// Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages)
-		// MyCache.cache
-		// .get(page_key)
-		// : pages;
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
 		if (replyList == null) {
 			replyList = new ArrayList<Reply>();
 			try {
 				pm = PMF.get().getPersistenceManager();
-				// Query q = pm.newQuery("select count(id) from "
-				// + Reply.class.getName() + " where bid == " + bid);
-				// Object obj = q.execute();
-
-				Query query = pm.newQuery(Reply.class, " bid == " + bid);
-				query.setOrdering(" sdTime desc");
-				query.setRange(pages.getFirstRec(), pages.getPageNo()
-						* pages.getPageSize());
-				replyList = (List<Reply>) query.execute();
-				MyCache.put(key, replyList);
-				// MyCache.cache.put(page_key, pages);
+				Query q = pm.newQuery("select count(id) from "
+						+ Reply.class.getName() + " where bid == " + bid);
+				Object obj = q.execute();
+				pages.setRecTotal(Integer.parseInt(obj.toString()));
+				if (pages.getRecTotal() > 0) {
+					Query query = pm.newQuery(Reply.class, " bid == " + bid);
+					query.setOrdering(" sdTime desc");
+					query.setRange(pages.getFirstRec(), pages.getPageNo()
+							* pages.getPageSize());
+					replyList = (List<Reply>) query.execute();
+					MyCache.put(key, replyList);
+					MyCache.cache.put(page_key, pages);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			pages.setRecTotal(page.getRecTotal());
 		}
-		// pages.setRecTotal(page.getRecTotal());
+
 		return replyList;
 	}
 
@@ -223,34 +190,34 @@ public class ReplyDao {
 	 * @return
 	 */
 	public List<Reply> getReplyList(Pages pages) {
-		pages.setRecTotal(Config.statistics.getReply_size());
-		key = "replyDao_getReplyList_all_" + pages.getPageNo() + "_"
-				+ pages.getRecTotal();
+		key = "replyDao_getReplyList_all_" + pages.getPageNo();
 		List<Reply> replyList = MyCache.get(key);
-		// page_key = key + "_pages";
-		// Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages)
-		// MyCache.cache
-		// .get(page_key)
-		// : pages;
+		page_key = key + "_pages";
+		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+				.get(page_key)
+				: pages;
 		if (replyList == null) {
 			try {
 				pm = PMF.get().getPersistenceManager();
-				// Query q = pm.newQuery("select count(id) from "
-				// + Reply.class.getName());
-				// Object obj = q.execute();
-				// pages.setRecTotal(Integer.parseInt(obj.toString()));
-				// pages.setRecTotal(Config.statistics.getReply_size());
-				Query query = pm.newQuery(Reply.class);
-				query.setOrdering(" sdTime desc");
-				query.setRange(pages.getFirstRec(), pages.getPageNo()
-						* pages.getPageSize());
-				replyList = (List<Reply>) query.execute();
-				MyCache.put(key, replyList);
-				// MyCache.cache.put(page_key, pages);
+				Query q = pm.newQuery("select count(id) from "
+						+ Reply.class.getName());
+				Object obj = q.execute();
+				pages.setRecTotal(Integer.parseInt(obj.toString()));
+				if (pages.getRecTotal() > 0) {
+
+					Query query = pm.newQuery(Reply.class);
+					query.setOrdering(" sdTime desc");
+					query.setRange(pages.getFirstRec(), pages.getPageNo()
+							* pages.getPageSize());
+					replyList = (List<Reply>) query.execute();
+					MyCache.put(key, replyList);
+					MyCache.cache.put(page_key, pages);
+				}
 			} catch (Exception e) {
 			}
+		} else {
+			pages.setRecTotal(page.getRecTotal());
 		}
-		// pages.setRecTotal(page.getRecTotal());
 		return replyList;
 	}
 
