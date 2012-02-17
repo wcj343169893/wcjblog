@@ -188,21 +188,23 @@ public class Tools {
 			// href="/?tid=<%=bt.getId() %>"><%=bt.getName()%>(<%=bd.getCount(bt.getId())
 			// %>)</a></li>
 			if (blogType.getParentId() == null || blogType.getParentId() == 0) {
-				sb.append("<li title=\"" + blogType.getInfo()
-						+ "\"><a href='javascript:void(0)'>"
+				sb.append("<li ><a href='javascript:void(0)'>"
 						+ blogType.getName() + "</a>");
-				sb.append("<ul>");
+				StringBuffer sb_sub=new StringBuffer();
 				for (BlogType bt_c : blogTypeList) {
 					// System.out.println(bt_c.getParentId()+"  "+
 					// blogType.getId());
 					if (bt_c.getParentId() != null
 							&& bt_c.getParentId().equals(blogType.getId())) {
-						sb.append("<li title=\"" + bt_c.getInfo()
-								+ "\"><a href=/?tid=" + bt_c.getId() + ">"
+						sb_sub.append("<li ><a href=/?tid=" + bt_c.getId() + ">"
 								+ bt_c.getName() + "</a></li>");
 					}
 				}
-				sb.append("</ul>");
+				if (sb_sub!=null && !sb_sub.toString().equals("")) {
+					sb.append("<ul>");
+					sb.append(sb_sub);
+					sb.append("</ul>");
+				}
 				sb.append("</li>");
 			}
 		}

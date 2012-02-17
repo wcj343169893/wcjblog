@@ -36,27 +36,27 @@
 	</script>
 	</div><%} if(blog_user.getIsType()==null || blog_user.getIsType()==0){ %>
 	<div class="vito-left-title">文章分类</div>
-	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/jquery.treeview.js"></script>
+		<script src="http://www.google.com/jsapi"></script><script>google.load("mootools", "1.2.1");</script>	
+		<script type="text/javascript" src="/vertical/js/MenuMatic_0.68.3.js"></script>
+		<link rel="stylesheet" href="/vertical/css/MenuMatic.css" type="text/css" media="screen" charset="utf-8" />
+		<!--[if lt IE 7]>
+			<link rel="stylesheet" href="/vertical/css/MenuMatic-ie6.css" type="text/css" media="screen" charset="utf-8" />
+		<![endif]-->
 	<div class="vito-left-contentul">
 		<%
 			BlogTypeDao btd=new BlogTypeDao();
 			List<BlogType> btList=	btd.getBlogTypeList();
 		%>
-		<ul id="blogType">
-			<li title="全部文章">全部文章(<%=bd.getCount(null) %>)</li><%if(btList!=null){ %>
+		<ul id="nav">
+			<%if(btList!=null){ %>
 				<%=Tools.blogTypeList2Str(btList) %>
 			<%} %>
 		</ul>
 	</div>
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$("#blogType").treeview({
-			persist: "location",
-			collapsed: true,
-			unique: true
-		});
-		});
+		window.addEvent('domready', function() {			
+			var myMenu = new MenuMatic({ orientation:'vertical' });			
+		});	
 	</script><%} if(blog_user.getIsTags()==null || blog_user.getIsTags()==0){ %>
 	<div class="vito-left-title">TAGS</div>
 	<div class="vito-left-contentul">
