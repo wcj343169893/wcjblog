@@ -17,8 +17,8 @@
 		<property name="DEFAULT_ENCODING" value="UTF-8"/> 
 	</system-properties>
 	<sessions-enabled>true</sessions-enabled>
-	<!-- bound mail -->
+	<!-- bound mail 
 	<inbound-services>
   		<service>mail</service>
-	</inbound-services>
+	</inbound-services>-->
 </appengine-web-app>
