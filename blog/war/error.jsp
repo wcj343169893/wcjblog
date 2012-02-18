@@ -26,6 +26,9 @@
 		height: 50px;
 		line-height: 50px;
 	}
+	a{
+		text-decoration: none;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -36,7 +39,7 @@
 <body>
 	<div id="error_notice">
 		<div class="notice">
-			对不起，您查找的页面错误或不存在！
+			对不起，您查找的页面错误或不存在！<a href="/">返回首页</a>
 		</div>
 	</div>
 </body>

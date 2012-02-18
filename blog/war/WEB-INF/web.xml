@@ -100,11 +100,12 @@
 		<servlet-name>Spider</servlet-name>
 		<url-pattern>/spider/*</url-pattern>
 	</servlet-mapping>
+	<!--
 		<servlet-mapping>
 		<servlet-name>Rss</servlet-name>
 		<url-pattern>/rss/*</url-pattern>
 	</servlet-mapping>
-	
+	-->
 	<!-- 
 	<servlet>
 	  <servlet-name>mailhandler</servlet-name>
