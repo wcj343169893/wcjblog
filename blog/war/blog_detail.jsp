@@ -14,7 +14,7 @@
 	<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body>
-<div class="notices">访问的文章不存在</div>
+<div class="notices">访问的文章不存在,<a href="/">返回首页</a></div>
 </body><%
 	} else {
 			blogDao.operationBlog(Operation.readTimes, blog);
@@ -202,6 +202,15 @@
 </div>
 </body><%
 	}
-	}
+	}else{
 %>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>访问的文章不存在</title>
+	<jsp:include page="head.jsp"></jsp:include>
+</head>
+<body>
+<div class="notices">访问的文章不存在,<a href="/">返回首页</a></div>
+</body>
+<%} %>
 </html>
