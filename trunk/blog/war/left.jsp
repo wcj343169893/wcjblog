@@ -6,6 +6,20 @@
 	List<Blog> blog_hot = new ArrayList<Blog>();
 	BlogDao bd=new BlogDao();
 	if(blog_user.getIsInfo()==null || blog_user.getIsInfo()==0){ %>
+	<script type="text/javascript">
+	$(document).ready(function(){
+			alert($(".more a"));
+			var preEle=$(".more a").parent().prev();
+			$(".more a").toggle(
+				function(){
+					$(preEle).css("overflow","visible");
+					$(preEle).height("auto");
+				},function(){
+					$(preEle).css("overflow","hidden");
+					$(preEle).height("220px");
+				});
+		});
+	</script>
 	<div class="vito-left-title">个人资料</div>
 	<div class="vito-left-contentul" style="text-align: center;">
 		<ul class="vito-right-contentul">
@@ -29,7 +43,8 @@
 	<script type="text/javascript">
 		function checkCal(year,month){
 			$.post("/calendars", {"year":year, "month":month},function(data){
-					$("#calendars").html(data);
+					//$("#calendars").html(data);
+					document.getElementById("calendars").innerHTML=data;
 				});
 			}
 		checkCal('','');
@@ -110,16 +125,3 @@
 		</ul>
 	</div><%} %>
 </div>
-<script type="text/javascript">
-	$(document).ready(function(){
-			var preEle=$(".more a").parent().prev();
-			$(".more a").toggle(
-				function(){
-					$(preEle).css("overflow","visible");
-					$(preEle).height("auto");
-				},function(){
-					$(preEle).css("overflow","hidden");
-					$(preEle).height("220px");
-				});
-		});
-	</script>
