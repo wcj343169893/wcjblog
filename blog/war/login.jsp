@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	User blog_user=  Config.blog_user;
+	User blog_user=  Config.getBlog_user();
 %>
 <title>登录_<%=blog_user.getpTitle()%></title>
 	<jsp:include page="head.jsp"></jsp:include>

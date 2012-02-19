@@ -137,9 +137,9 @@ public class UserDao {
 
 					u.setIsUpload(user.getIsUpload());
 					// 更新静态设置
-					Config.blog_user = u;
+					Config.setBlog_user(u);
 					// 更新导航
-					Config.menus = Tools.split(u.getMenu(), ";", ",");
+					Config.setMenus(Tools.split(u.getMenu(), ";", ","));
 
 				}
 				flag = true;

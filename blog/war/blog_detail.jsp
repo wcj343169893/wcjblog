@@ -25,7 +25,7 @@
 			//查询所有的分类
 			BlogTypeDao btd = new BlogTypeDao();
 			BlogType bt = btd.getBlogTypeById(blog.getTid());
-			User blog_user =Config.blog_user;
+			User blog_user =Config.getBlog_user();
 %><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=blog.getTitle()%>_<%=bt.getName()%>_<%=blog_user.getpTitle()%></title><%

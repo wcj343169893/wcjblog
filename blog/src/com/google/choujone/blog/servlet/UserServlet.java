@@ -183,7 +183,7 @@ public class UserServlet extends HttpServlet {
 			user.setpTitle("java博客");
 			url = req.getServerName();
 			user.setUrl(url);
-			user.setStyle(Config.style_url);// 设置默认样式
+			user.setStyle(Config.getStyle_url());// 设置默认样式
 			user.setName(name);
 			user.setPassword(password);
 

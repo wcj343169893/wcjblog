@@ -48,16 +48,16 @@ public class BlogServlet extends HttpServlet {
 		} else {
 			// 随机显示博客
 			if (id == null) {
-//				String url = req.getRequestURI();
-//				String temp[] = url.split("/");
-//				id = temp[temp.length - 1];// 获取博客
-//				if (id == null || id.equals("blog")) {
+				String url = req.getRequestURI();
+				String temp[] = url.split("/");
+				id = temp[temp.length - 1];// 获取博客
+				if (id == null || id.equals("blog")) {
 //					id = blogDao.getBlogByRand();
-//				}
-//				req.setAttribute("id", id);
-				//不能随机显示，直接跳转到主页
-				resp.sendRedirect("/");
-				return;
+					//不能随机显示，直接跳转到主页
+					resp.sendRedirect("/");
+					return;
+				}
+				req.setAttribute("id", id);
 			}// 显示某篇文章
 			//如果id==-1
 			if (id.equals("-1")) {
