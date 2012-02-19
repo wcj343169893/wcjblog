@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	User user=Config.blog_user;
+	User user=Config.getBlog_user();
 %>
 <title><%=user.getpTitle() %> -- 博客设置   / 系统设置</title>
 <script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
@@ -63,7 +63,7 @@
 				<tr>
 					<td class="title">博客风格</td>
 					<td>
-						<%List<String> styleList=Config.style_urls; 
+						<%List<String> styleList=Config.getStyle_urls(); 
 						%>
 						<select name="style">
 						<%for(String s :styleList){ %>
@@ -216,7 +216,7 @@
 					<td colspan="3" id="td_menu">
 						<input value="<%=user.getMenu()!=null?user.getMenu().getValue():"" %>" name="blogMenu" size="100" id="menus" type="hidden"/>
 					<%
-						List<Menu> menus=Config.menus;
+						List<Menu> menus=Config.getMenus();
 					%>
 						<input value="新增" type="button" onclick="add_m()">
 						<input value="全部删除" type="button" onclick="del_m('')">

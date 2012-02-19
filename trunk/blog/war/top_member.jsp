@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%><%@page import="com.google.choujone.blog.entity.User,com.google.appengine.api.users.UserService,com.google.appengine.api.users.UserServiceFactory,com.google.choujone.blog.util.Config"%><div id="nav_wrap">
 <%
-	User blog_user=Config.blog_user;
+	User blog_user=Config.getBlog_user();
 %>
 	<div id="top_member"><%
 		     	UserService userService = UserServiceFactory.getUserService();

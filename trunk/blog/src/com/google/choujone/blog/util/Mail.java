@@ -25,7 +25,7 @@ public class Mail {
 		Session session = Session.getDefaultInstance(props, null);
 		String msgBody = content;
 		String subject = "Blog " + bid + " reply";
-		User blogUser = Config.blog_user;
+		User blogUser = Config.getBlog_user();
 		try {
 			Message msg = new MimeMessage(session);
 			msg
@@ -68,7 +68,7 @@ public class Mail {
 		Session session = Session.getDefaultInstance(props, null);
 		String msgBody = content;
 		String subject = "Blog " + bid + " reply";
-		User blogUser = Config.blog_user;
+		User blogUser = Config.getBlog_user();
 		try {
 			Message msg = new MimeMessage(session);
 			msg

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config,com.google.choujone.blog.dao.BlogDao,java.util.Map,com.google.choujone.blog.dao.BlogTypeDao,java.util.List,com.google.choujone.blog.entity.BlogType,com.google.choujone.blog.util.Tools,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.dao.FriendsDao,com.google.choujone.blog.entity.Friends,com.google.choujone.blog.common.Pages"%><html><%User blog_user = Config.blog_user; %>
+<%@page import="com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config,com.google.choujone.blog.dao.BlogDao,java.util.Map,com.google.choujone.blog.dao.BlogTypeDao,java.util.List,com.google.choujone.blog.entity.BlogType,com.google.choujone.blog.util.Tools,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.dao.FriendsDao,com.google.choujone.blog.entity.Friends,com.google.choujone.blog.common.Pages"%><html><%User blog_user = Config.getBlog_user(); %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>网站地图-<%=blog_user.getpTitle() %></title>

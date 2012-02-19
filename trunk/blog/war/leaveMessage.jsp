@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 	User login_user=(User)request.getSession().getAttribute("login_user");//获取登录信息
-	User blog_user=Config.blog_user;
+	User blog_user=Config.getBlog_user();
 %><title>留言板 _<%=blog_user.getpTitle()%></title>
 	<jsp:include page="head.jsp"></jsp:include>
 <script type="text/javascript" src="/js/content.js"></script>

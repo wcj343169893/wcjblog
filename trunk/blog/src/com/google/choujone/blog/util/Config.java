@@ -1,9 +1,7 @@
 package com.google.choujone.blog.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.Menu;
@@ -14,13 +12,13 @@ import com.google.choujone.blog.entity.User;
  * 功能描述：配置 2012-2-13
  */
 public class Config {
-	public static String style_url = "/css/style.css";
-	public static List<String> style_urls = new ArrayList<String>();
+	private static String style_url = "/css/style.css";
+	private static List<String> style_urls = new ArrayList<String>();
 	/**
 	 * 网站用户信息
 	 * */
-	public static User blog_user = null;
-	public static String web_url = null;
+	private static User blog_user = null;
+	private static String web_url = null;
 	/**
 	 * 统计
 	 */
@@ -46,7 +44,7 @@ public class Config {
 		return url;
 	}
 
-	public static List<Menu> menus = new ArrayList<Menu>();
+	private static List<Menu> menus = new ArrayList<Menu>();
 	static {
 		style_urls.add("/css/style.css");
 		style_urls.add("/css/style_guitar.css");
@@ -60,6 +58,41 @@ public class Config {
 		menus = Tools.split(blog_user.getMenu(), ";", ",");
 		// System.out.println("加载博客导航成功");
 //		statistics = ud.getStatistics();
+	}
+	public static String getStyle_url() {
+		return style_url;
+	}
+	public static void setStyle_url(String styleUrl) {
+		style_url = styleUrl;
+	}
+	public static List<String> getStyle_urls() {
+		return style_urls;
+	}
+	public static void setStyle_urls(List<String> styleUrls) {
+		style_urls = styleUrls;
+	}
+	public static User getBlog_user() {
+		if (blog_user==null) {
+			UserDao ud = new UserDao();
+			blog_user = ud.getUserDetail();
+			menus = Tools.split(blog_user.getMenu(), ";", ",");
+		}
+		return blog_user;
+	}
+	public static void setBlog_user(User blogUser) {
+		blog_user = blogUser;
+	}
+	public static String getWeb_url() {
+		return web_url;
+	}
+	public static void setWeb_url(String webUrl) {
+		web_url = webUrl;
+	}
+	public static List<Menu> getMenus() {
+		return menus;
+	}
+	public static void setMenus(List<Menu> menus) {
+		Config.menus = menus;
 	}
 
 }

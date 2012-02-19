@@ -524,13 +524,14 @@ public class BlogDao {
 			counts = new HashMap<String, Integer>();
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
-				Query q = pm.newQuery(Blog.class);
-				List<Blog> blogs = (List<Blog>) q.execute();
+//				Query q = pm.newQuery(Blog.class);
+//				List<Blog> blogs = (List<Blog>) q.execute();
+				List<Blog> blogs = getBlogList();
 				int blogcount = 0;
 				int scancount = 0;
 				int replycount = 0;
 				int allcount = blogs.size();
-				int messagecount = 0;
+//				int messagecount = 0;
 				for (int i = 0; i < allcount; i++) {
 					Blog b = blogs.get(i);
 					if (b.getIsVisible().equals(0)) {
@@ -550,12 +551,12 @@ public class BlogDao {
 				counts.put("replycount", replycount);
 
 				// 查询留言
-				String filter = " select count(id) from "
-						+ Reply.class.getName() + " where bid == -1L";
-				q = pm.newQuery(filter);
-				Object obj = q.execute();
-				messagecount = Integer.parseInt(obj.toString());
-				counts.put("messagecount", messagecount);
+//				String filter = " select count(id) from "
+//						+ Reply.class.getName() + " where bid == -1L";
+//				q = pm.newQuery(filter);
+//				Object obj = q.execute();
+//				messagecount = Integer.parseInt(obj.toString());
+//				counts.put("messagecount", messagecount);
 				MyCache.cache.put("blogDao_getCount", counts);
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/search.css" type="text/css" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-User user=Config.blog_user;
+User user=Config.getBlog_user();
 User login_user=(User)request.getSession().getAttribute("login_user");
 String title=user.getpTitle();
 %><title>搜索_<%=title %></title>
