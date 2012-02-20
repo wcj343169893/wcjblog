@@ -18,6 +18,7 @@
 </head><% BlogDao bd=new BlogDao();%>
 <body>
 <div class="header"><h1>网站地图-<%=blog_user.getpTitle() %></h1></div>
+<%if(blog_user.getIsStatistics()==null || blog_user.getIsStatistics()==0){ %>
 <div>最新文章</div>
 <div><%List<Blog> blogList=bd.getBlogList(); %>
 	<ul><%for(Blog blog:blogList){ %>
@@ -53,6 +54,7 @@
 			%><li title="<%=f.getDescription() %>"><a href="<%=f.getUrl() %>" target="_bank" title="<%=f.getDescription() %>"><%=f.getName() %></a></li><%} %>
 		</ul>
 </div>
+<%} %>
 <div><a href="/">返回首页</a></div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
