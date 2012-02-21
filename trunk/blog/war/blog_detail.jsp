@@ -20,8 +20,6 @@
 			blogDao.operationBlog(Operation.readTimes, blog);
 			Blog preBlog = blogDao.getPreBlog(blog.getId());
 			Blog nextBlog = blogDao.getNextBlog(blog.getId());
-			User login_user = (User) request.getSession().getAttribute(
-					"login_user");//获取登录信息
 			//查询所有的分类
 			BlogTypeDao btd = new BlogTypeDao();
 			BlogType bt = btd.getBlogTypeById(blog.getTid());
@@ -57,16 +55,15 @@
  	if (nextBlog != null) {
  %><span style="float: right; margin: 0 0 0 20px;"><a class="l" href="/blog/<%=nextBlog.getId()%>"><%=nextBlog.getTitle(20)%>&raquo;</a></span><%
  	}
- %></div>
-	<div class="vito-content-title" id="vito-content-title"><%=blog.getTitle()%></div>
-	<div class="vito-content-date"><%=blog.getSdTime()%></div>
-	<div class="vito-detail-content-body"><%=blog.getContent().getValue()%><br><br><%
 		String url_host="";
 		if(blog_user.getUrl().indexOf("http://") != -1){url_host=blog_user.getUrl();}else{url_host="http://"+blog_user.getUrl();}
-	%>本文地址:<a href="<%=url_host %>/blog/<%=id %>" title="<%=blog.getTitle()%>"><%=url_host %>/blog/<%=id %></a><br>
+	%></div>
+	<div class="vito-content-title" id="vito-content-title"><a href="<%=url_host %>/blog/<%=id %>" title="<%=blog.getTitle()%>"><%=blog.getTitle()%></a></div>
+	<div class="vito-content-date"><%=blog.getSdTime()%></div>
+	<div class="vito-detail-content-body"><%=blog.getContent().getValue()%><br><br>本文地址:<a href="<%=url_host %>/blog/<%=id %>" title="<%=blog.getTitle()%>"><%=url_host %>/blog/<%=id %></a><br>
 	<font class="post-tags">Tags:<%=blog.getTag()%></font>
 	<font class="post-footer">发布:<%=blog_user.getName()%>|分类:<%=bt.getName()%>|评论:<%=blog.getReplyCount()%>|浏览:<%=blog.getCount()%><%
-		if (login_user != null) {
+		if (Tools.isLogin(request)) {
 	%>|<a href="/blog?id=<%=blog.getId()%>&op=modify">修改</a><%
 		}
 	%></font>

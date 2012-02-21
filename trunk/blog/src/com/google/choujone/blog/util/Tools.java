@@ -190,17 +190,17 @@ public class Tools {
 			if (blogType.getParentId() == null || blogType.getParentId() == 0) {
 				sb.append("<li ><a href='javascript:void(0)'>"
 						+ blogType.getName() + "</a>");
-				StringBuffer sb_sub=new StringBuffer();
+				StringBuffer sb_sub = new StringBuffer();
 				for (BlogType bt_c : blogTypeList) {
 					// System.out.println(bt_c.getParentId()+"  "+
 					// blogType.getId());
 					if (bt_c.getParentId() != null
 							&& bt_c.getParentId().equals(blogType.getId())) {
-						sb_sub.append("<li ><a href=/?tid=" + bt_c.getId() + ">"
-								+ bt_c.getName() + "</a></li>");
+						sb_sub.append("<li ><a href=/?tid=" + bt_c.getId()
+								+ ">" + bt_c.getName() + "</a></li>");
 					}
 				}
-				if (sb_sub!=null && !sb_sub.toString().equals("")) {
+				if (sb_sub != null && !sb_sub.toString().equals("")) {
 					sb.append("<ul>");
 					sb.append(sb_sub);
 					sb.append("</ul>");
@@ -214,18 +214,26 @@ public class Tools {
 	public static boolean isLogin(ServletRequest request) {
 		boolean isLogin = false;
 		try {
-			HttpServletRequest req = (HttpServletRequest) request;
-			User user = (User) req.getSession().getAttribute("login_user");
-			if (user == null) {// 判断是不是网站用户登陆
-				UserService us = UserServiceFactory.getUserService();
-				if (!us.isUserLoggedIn() || !us.isUserAdmin()) {
-					isLogin = false;
-				} else {
-					isLogin = true;
-				}
-			} else {
+			UserService userService = UserServiceFactory.getUserService();
+			if (userService != null && userService.isUserLoggedIn()
+					&& userService.isUserAdmin()) {
 				isLogin = true;
+			} else {
+				isLogin = false;
 			}
+
+			// HttpServletRequest req = (HttpServletRequest) request;
+			// User user = (User) req.getSession().getAttribute("login_user");
+			// if (user == null) {// 判断是不是网站用户登陆
+			// UserService us = UserServiceFactory.getUserService();
+			// if (!us.isUserLoggedIn() || !us.isUserAdmin()) {
+			// isLogin = false;
+			// } else {
+			// isLogin = true;
+			// }
+			// } else {
+			// isLogin = true;
+			// }
 		} catch (Exception e) {
 		}
 		return isLogin;

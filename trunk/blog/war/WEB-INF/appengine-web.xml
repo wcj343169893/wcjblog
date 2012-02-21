@@ -16,7 +16,7 @@
 		<property name="file.encoding" value="UTF-8"/> 
 		<property name="DEFAULT_ENCODING" value="UTF-8"/> 
 	</system-properties>
-	<sessions-enabled>true</sessions-enabled>
+	<sessions-enabled>false</sessions-enabled>
 	<!-- bound mail 
 	<inbound-services>
   		<service>mail</service>
