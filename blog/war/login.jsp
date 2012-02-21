@@ -10,7 +10,7 @@
 <title>登录_<%=blog_user.getpTitle()%></title>
 	<jsp:include page="head.jsp"></jsp:include>
 </head>
-<body onload="document.forms.loginform.name.focus()">
+<body onload="">
 <jsp:include page="top_member.jsp"></jsp:include>
 <div class="main">
 <!-- 顶部开始 -->
@@ -29,20 +29,21 @@
 	     	UserService userService = UserServiceFactory.getUserService();
 	     	if (!userService.isUserLoggedIn()) {
 	   %>
-		<form action="/user" method="post" id="loginform" name="loginform">
-		<table cellpadding="0" cellspacing="0">
-			<tr>
-				<td class="l_title">用户名：</td><td><input type="text" value="" name="name" size="20" maxlength="20"></td>
-			</tr>
-			<tr>
-				<td class="l_title">密码：</td><td><input type="password" name="password" size="20" maxlength="20"></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td><td><input type="submit" value="登录"><a href="<%=userService.createLoginURL(request.getRequestURI())%>" >google账号登陆</a></td>
-			</tr>
-			<tr>
-		</table>
-		</form>
+<!--		<form action="/user" method="post" id="loginform" name="loginform">-->
+<!--		<table cellpadding="0" cellspacing="0">-->
+<!--			<tr>-->
+<!--				<td class="l_title">用户名：</td><td><input type="text" value="" name="name" size="20" maxlength="20"></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				<td class="l_title">密码：</td><td><input type="password" name="password" size="20" maxlength="20"></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				<td>&nbsp;</td><td><input type="submit" value="登录"><a href="<%=userService.createLoginURL(request.getRequestURI())%>" >google账号登陆</a></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--		</table>-->
+<!--		</form>-->
+		<a href="<%=userService.createLoginURL(request.getRequestURI())%>" >google账号登陆</a>
 	   <% 
 	     } else { 
 	     %>

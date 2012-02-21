@@ -6,7 +6,6 @@
 <%@page import="com.google.choujone.blog.util.Config"%><html>
 <head><%
 	User user=Config.getBlog_user();
-	User login_user=(User)request.getSession().getAttribute("login_user");
 	String title=user!=null ? user.getpTitle():"";
 	Long tid=null;
 	try{
