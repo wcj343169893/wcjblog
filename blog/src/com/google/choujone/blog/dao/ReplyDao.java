@@ -114,25 +114,22 @@ public class ReplyDao {
 		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
 				.get(page_key)
 				: pages;
-		if (replyList == null) {
+		if (replyList == null && page== null) {
 			try {
 				pm = PMF.get().getPersistenceManager();
 				Query q = pm.newQuery("select count(id) from "
 						+ Reply.class.getName() + " where bid == " + bid);
 				Object obj = q.execute();
 				pages.setRecTotal(Integer.parseInt(obj.toString()));
-
-				if (pages.getRecTotal() > 0) {
-					Query query = pm.newQuery(Reply.class, " bid == " + bid);
-					query.setRange(pages.getFirstRec(), pages.getPageNo()
-							* pages.getPageSize());
-					if (bid < 0) {
-						query.setOrdering(" sdTime desc ");
-					}
-					replyList = (List<Reply>) query.execute();
-					MyCache.put(key, replyList);
-					MyCache.cache.put(page_key, pages);
+				Query query = pm.newQuery(Reply.class, " bid == " + bid);
+				query.setRange(pages.getFirstRec(), pages.getPageNo()
+						* pages.getPageSize());
+				if (bid < 0) {
+					query.setOrdering(" sdTime desc ");
 				}
+				replyList = (List<Reply>) query.execute();
+				MyCache.put(key, replyList);
+				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

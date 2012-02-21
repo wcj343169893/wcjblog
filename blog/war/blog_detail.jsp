@@ -106,7 +106,7 @@
 					</span>
 					<br><br>
 					<span class="vito-postcomment-content">
-						<%=reply.getContent2()!=null ? reply.getContent2().getValue() : reply.getContent() %>
+						<%=reply.getContent() %>
 						<%
 							if (reply.getReplyMessage() != null
 													&& !"".equals(reply.getReplyMessage()

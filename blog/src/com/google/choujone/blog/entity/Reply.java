@@ -28,8 +28,8 @@ public class Reply implements Serializable {
 	private String email = "";// 回复者邮箱
 	@Persistent
 	private String content = "";// 回复内容
-	@Persistent
-	private Text content2 = new Text("");
+//	@Persistent
+//	private Text content2 = new Text("");
 	@Persistent
 	private String sdTime = "";// 留言时间
 	@Persistent
@@ -65,30 +65,30 @@ public class Reply implements Serializable {
 		this.email = email;
 	}
 
-	public String getContent() {
-		String val = content;
-		if (content2 != null) {
-			val = content2.getValue();
-		}
-		return val;
-	}
+//	public String getContent() {
+//		String val = content;
+//		if (content2 != null) {
+//			val = content2.getValue();
+//		}
+//		return val;
+//	}
 
-	public String getContent(int length, String str) {
-		String val = content;
-		if (content2 != null) {
-			val = content2.getValue().trim().replaceAll("\\<.*?>", "");
-			val = val.replaceAll(" ", "");
-			val = val.replaceAll("&nbsp;", "");
-			val = val.replaceAll("<br>", "");
-			val = val.replaceAll("<BR>", "");
-			if (length <= 0 || length > val.length()) {
-				length = val.length();
-			}
-			String ending = str != null ? str : "...";
-			val = val.substring(0, length) + ending;
-		}
-		return val;
-	}
+//	public String getContent(int length, String str) {
+//		String val = content;
+//		if (content2 != null) {
+//			val = content2.getValue().trim().replaceAll("\\<.*?>", "");
+//			val = val.replaceAll(" ", "");
+//			val = val.replaceAll("&nbsp;", "");
+//			val = val.replaceAll("<br>", "");
+//			val = val.replaceAll("<BR>", "");
+//			if (length <= 0 || length > val.length()) {
+//				length = val.length();
+//			}
+//			String ending = str != null ? str : "...";
+//			val = val.substring(0, length) + ending;
+//		}
+//		return val;
+//	}
 
 	public void setContent(String content) {
 		this.content = content;
@@ -98,13 +98,13 @@ public class Reply implements Serializable {
 		return bid;
 	}
 
-	public Text getContent2() {
-		return content2;
-	}
-
-	public void setContent2(Text content2) {
-		this.content2 = content2;
-	}
+//	public Text getContent2() {
+//		return content2;
+//	}
+//
+//	public void setContent2(Text content2) {
+//		this.content2 = content2;
+//	}
 
 	public void setBid(Long bid) {
 		this.bid = bid;
@@ -152,6 +152,10 @@ public class Reply implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getContent() {
+		return content;
 	}
 
 }

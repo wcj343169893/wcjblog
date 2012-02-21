@@ -51,7 +51,7 @@
 	</script>
 	</div><%} if(blog_user.getIsType()==null || blog_user.getIsType()==0){ %>
 	<div class="vito-left-title">文章分类</div>
-		<script src="http://www.google.com/jsapi"></script><script>google.load("mootools", "1.2.1");</script>	
+		<script type="text/javascript" src="/vertical/js/mootools-yui-compressed.js"></script>
 		<script type="text/javascript" src="/vertical/js/MenuMatic_0.68.3.js"></script>
 		<link rel="stylesheet" href="/vertical/css/MenuMatic.css" type="text/css" media="screen" charset="utf-8" />
 		<!--[if lt IE 7]>
@@ -93,7 +93,7 @@
 		<ul class="vito-right-contentul">
 			<%if(replyList!= null){ for(int i=0;i<replyList.size();i++){ 
 					Reply r=replyList.get(i);
-			%><li title="post by <%=r.getName() %>  <%=r.getSdTime() %>"><a href="/blog?id=<%=r.getBid() %>"><%=r.getContent(50,null) %></a></li><%}} %>
+			%><li title="post by <%=r.getName() %>  <%=r.getSdTime() %>"><a href="/blog?id=<%=r.getBid() %>"><%=r.getContent() %></a></li><%}} %>
 		</ul>
 	</div><%}if(blog_user.getIsLeaveMessage()==null || blog_user.getIsLeaveMessage()==0){%>
 	<div class="vito-left-title">最新留言</div><%replyList=replyDao.getReplyList(-1L,new Pages(8)); %>
