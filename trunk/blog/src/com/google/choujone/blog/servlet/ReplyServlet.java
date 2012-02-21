@@ -15,7 +15,6 @@ import com.google.choujone.blog.dao.ReplyDao;
 import com.google.choujone.blog.entity.Blog;
 import com.google.choujone.blog.entity.Reply;
 import com.google.choujone.blog.util.Mail;
-import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.Tools;
 
 @SuppressWarnings("serial")
@@ -91,8 +90,8 @@ public class ReplyServlet extends HttpServlet {
 			reply.setName(name);
 			reply.setUrl(url);
 			reply.setBid(Tools.strTolong(bid));
-//			reply.setContent(content);
-			reply.setContent2(new Text(content));
+			reply.setContent(content);
+//			reply.setContent2(new Text(content));
 			// 获取到留言者的信息
 			reply.setVisiter(req.getRemoteAddr() + ";"
 					+ Tools.getAddressByIP(Tools.getIpAddr(req)) + ";"

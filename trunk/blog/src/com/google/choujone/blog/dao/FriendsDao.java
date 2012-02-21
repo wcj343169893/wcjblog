@@ -106,8 +106,9 @@ public class FriendsDao {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else{
+			pages.setRecTotal(page.getRecTotal());
 		}
-		pages.setRecTotal(page.getRecTotal());
 		return friends;
 	}
 

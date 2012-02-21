@@ -120,7 +120,6 @@ public class BlogTypeDao {
 	public BlogType getBlogTypeById(Long id) {
 		key = "blogTypeDao_id_"+id;
 		BlogType bt = (BlogType) MyCache.cache.get(key);
-		;
 		if (bt == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			Query query = pm.newQuery(BlogType.class, " id == " + id);
