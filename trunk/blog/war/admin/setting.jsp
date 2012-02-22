@@ -42,6 +42,13 @@
 			<div>博客设置</div>
 			<table cellpadding="0" cellspacing="0" class="setting">
 				<tr>
+					<td class="title">网站状态</td>
+					<td>
+						<input type="radio" name="closeweb" value="0" <%=user.getCloseweb()==null ||user.getCloseweb().equals(0) ?"checked":"" %> checked="checked" id="isCloseN" style="width: 20px;"><label for="isCloseN">开启</label>
+						<input type="radio" name="closeweb" value="1" <%=user.getCloseweb()!=null&&user.getCloseweb().equals(1) ?"checked":"" %>  id="isCloseY" style="width: 20px;"><label for="isCloseY">关闭</label>
+					</td>
+				</tr>
+				<tr>
 					<td class="title">博客标题</td>
 					<td>
 						<input type="text" name="pTitle" value="<%=user.getpTitle() %>">

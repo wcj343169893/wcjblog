@@ -19,19 +19,23 @@ public class Config {
 	 * */
 	private static User blog_user = null;
 	private static String web_url = null;
+	private static boolean isClose = false;// 网站是否关闭
+
 	/**
 	 * 统计
 	 */
-//	public static Statistics statistics = null;
+	// public static Statistics statistics = null;
 
 	/**
 	 * 博客类型下的博客数量
 	 */
-//	public static Map<Long, Integer> blogType_blog_size_map = new HashMap<Long, Integer>();
+	// public static Map<Long, Integer> blogType_blog_size_map = new
+	// HashMap<Long, Integer>();
 	/**
 	 * 博客下面的回复数量
 	 */
-//	public static Map<Long, Integer> blog_reply_size = new HashMap<Long, Integer>();
+	// public static Map<Long, Integer> blog_reply_size = new HashMap<Long,
+	// Integer>();
 
 	public static String getWebUrl() {
 		String url = blog_user.getUrl();
@@ -57,42 +61,62 @@ public class Config {
 		// System.out.println("加载博客信息成功");
 		menus = Tools.split(blog_user.getMenu(), ";", ",");
 		// System.out.println("加载博客导航成功");
-//		statistics = ud.getStatistics();
+		// statistics = ud.getStatistics();
+		isClose = blog_user.getCloseweb() == null
+				|| blog_user.getCloseweb().equals(1);
 	}
+
 	public static String getStyle_url() {
 		return style_url;
 	}
+
 	public static void setStyle_url(String styleUrl) {
 		style_url = styleUrl;
 	}
+
 	public static List<String> getStyle_urls() {
 		return style_urls;
 	}
+
 	public static void setStyle_urls(List<String> styleUrls) {
 		style_urls = styleUrls;
 	}
+
 	public static User getBlog_user() {
-		if (blog_user==null) {
+		if (blog_user == null) {
 			UserDao ud = new UserDao();
 			blog_user = ud.getUserDetail();
 			menus = Tools.split(blog_user.getMenu(), ";", ",");
 		}
 		return blog_user;
 	}
+
 	public static void setBlog_user(User blogUser) {
 		blog_user = blogUser;
 	}
+
 	public static String getWeb_url() {
 		return web_url;
 	}
+
 	public static void setWeb_url(String webUrl) {
 		web_url = webUrl;
 	}
+
 	public static List<Menu> getMenus() {
 		return menus;
 	}
+
 	public static void setMenus(List<Menu> menus) {
 		Config.menus = menus;
+	}
+
+	public static boolean isClose() {
+		return isClose;
+	}
+
+	public static void setClose(boolean isClose) {
+		Config.isClose = isClose;
 	}
 
 }

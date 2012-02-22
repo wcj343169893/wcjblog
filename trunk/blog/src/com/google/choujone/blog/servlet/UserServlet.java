@@ -45,8 +45,8 @@ public class UserServlet extends HttpServlet {
 			}
 		} else {// 注销
 			req.getSession().removeAttribute("login_user");
-			UserService us=UserServiceFactory.getUserService();
-			String url=us.createLogoutURL("/");
+			UserService us = UserServiceFactory.getUserService();
+			String url = us.createLogoutURL("/");
 			resp.sendRedirect(url);
 		}
 	}
@@ -56,6 +56,9 @@ public class UserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String operation = req.getParameter("op") != null ? req
 				.getParameter("op") : "";// 获取操作
+		Integer closeweb = Integer
+				.parseInt(req.getParameter("closeweb") != null ? req
+						.getParameter("closeweb") : "0");// 是否关闭网站 0为开启
 		String pTitle = req.getParameter("pTitle") != null ? req
 				.getParameter("pTitle") : "";// 
 		String name = req.getParameter("name") != null ? req
@@ -163,8 +166,8 @@ public class UserServlet extends HttpServlet {
 
 				user.setPreMessage(new com.google.appengine.api.datastore.Text(
 						Tools.changeHTML(Tools.toChinese(preMessage))));
-				user.setMenu(new com.google.appengine.api.datastore.Text(
-						Tools.changeHTML(Tools.toChinese(blogMenu))));
+				user.setMenu(new com.google.appengine.api.datastore.Text(Tools
+						.changeHTML(Tools.toChinese(blogMenu))));
 
 				user.setBlogDescription(blogDescription);
 				user.setBlogKeyword(blogKeyword);
@@ -173,9 +176,10 @@ public class UserServlet extends HttpServlet {
 				user.setBlogFoot(blogFoot);
 
 				user.setIsUpload(isUpload);
+				user.setCloseweb(closeweb);
 				userDao.operationUser(Operation.modify, user);
-//				req.setAttribute("user", user);
-//				req.getRequestDispatcher("/admin/setting.jsp").forward(req,resp);
+				// req.setAttribute("user", user);
+				// req.getRequestDispatcher("/admin/setting.jsp").forward(req,resp);
 				resp.sendRedirect("/admin/setting.jsp");
 			}
 		} else if (operation.trim().equals(Operation.add.toString())) {
@@ -188,8 +192,8 @@ public class UserServlet extends HttpServlet {
 			user.setPassword(password);
 
 			userDao.operationUser(Operation.add, user);
-//			req.setAttribute("user", user);
-//			req.getRequestDispatcher("/index.jsp").forward(req, resp);
+			// req.setAttribute("user", user);
+			// req.getRequestDispatcher("/index.jsp").forward(req, resp);
 			resp.sendRedirect("/admin/setting.jsp");
 
 		} else {// 登录
