@@ -104,11 +104,10 @@ public class BlogDao {
 			}
 		} else if (operation.equals(Operation.readTimes)) {// 增加阅读次数
 			try {
-				b = pm.getObjectById(Blog.class, blog.getId());
-				b.setCount(b.getCount() + 1);
+				//取消浏览次数
+//				b = pm.getObjectById(Blog.class, blog.getId());
+//				b.setCount(b.getCount() + 1);
 				flag = true;
-				// Config.statistics.setScan_count(Config.statistics.getScan_count()
-				// + 1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
