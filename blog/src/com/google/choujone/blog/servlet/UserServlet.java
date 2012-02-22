@@ -44,7 +44,7 @@ public class UserServlet extends HttpServlet {
 						resp);
 			}
 		} else {// 注销
-			req.getSession().removeAttribute("login_user");
+//			req.getSession().removeAttribute("login_user");
 			UserService us = UserServiceFactory.getUserService();
 			String url = us.createLogoutURL("/");
 			resp.sendRedirect(url);

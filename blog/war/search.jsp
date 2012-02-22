@@ -5,7 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 User user=Config.getBlog_user();
-User login_user=(User)request.getSession().getAttribute("login_user");
 String title=user.getpTitle();
 %><title>搜索_<%=title %></title>
 	<jsp:include page="head.jsp"></jsp:include>
