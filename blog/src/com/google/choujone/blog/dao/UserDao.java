@@ -136,7 +136,9 @@ public class UserDao {
 					u.setBlogFoot(user.getBlogFoot());
 
 					u.setIsUpload(user.getIsUpload());
+					u.setCloseweb(user.getCloseweb());
 					// 更新静态设置
+					Config.setClose(user.getCloseweb().equals(1));
 					Config.setBlog_user(u);
 					// 更新导航
 					Config.setMenus(Tools.split(u.getMenu(), ";", ","));

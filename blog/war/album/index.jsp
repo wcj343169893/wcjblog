@@ -6,21 +6,12 @@
 <%@page import="com.google.choujone.blog.util.Config"%><html>
 <head><%
 	User user=Config.getBlog_user();
-	User login_user=(User)request.getSession().getAttribute("login_user");
 	String title=user!=null ? user.getpTitle():"";
-	Long tid=null;
-	try{
-		 tid=request.getParameter("tid") != null ? Long.valueOf(request.getParameter("tid").toString()) : null;
-	}catch(Exception e){
-		tid=null;
-	}
-	
-	
 %><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>相册_<%=title %></title>
 	<jsp:include page="../head.jsp"></jsp:include>
 	<link rel="stylesheet" type="text/css" href="picasa.css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="slimbox2.js"></script>
 <script type="text/javascript" src="picasa.js"></script>
 </head>

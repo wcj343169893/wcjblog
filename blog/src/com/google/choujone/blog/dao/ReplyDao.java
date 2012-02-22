@@ -111,9 +111,7 @@ public class ReplyDao {
 		key = "replyDao_bid_" + bid + "_" + pages.getPageNo();
 		List<Reply> replyList = MyCache.get(key);
 		page_key = key + "_pages";
-		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
-				.get(page_key)
-				: pages;
+		Pages page = (Pages) MyCache.cache.get(page_key);
 		if (replyList == null && page== null) {
 			try {
 				pm = PMF.get().getPersistenceManager();

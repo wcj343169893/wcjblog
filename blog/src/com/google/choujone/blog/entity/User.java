@@ -77,6 +77,9 @@ public class User implements Serializable {
 	@Persistent
 	private Text menu = new Text("");// 网站菜单
 
+	@Persistent
+	private Integer closeweb = 0;// 是否关闭网站
+
 	public Long getId() {
 		return id;
 	}
@@ -311,6 +314,14 @@ public class User implements Serializable {
 
 	public void setMenu(Text menu) {
 		this.menu = menu;
+	}
+
+	public Integer getCloseweb() {
+		return closeweb;
+	}
+
+	public void setCloseweb(Integer closeweb) {
+		this.closeweb = closeweb;
 	}
 
 }
