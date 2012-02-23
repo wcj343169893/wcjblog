@@ -68,7 +68,7 @@ public class BlogTypeDao {
 	 */
 	public List<BlogType> getBlogTypeList() {
 		key = "blogTypeDao_getBlogTypeList";
-		List<BlogType> blogTypeList =  MyCache.get(key);
+		List<BlogType> blogTypeList = MyCache.get(key);
 		if (blogTypeList == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -90,7 +90,7 @@ public class BlogTypeDao {
 	 */
 	public List<BlogType> getBlogTypeList(Long parentId) {
 		key = "blogTypeDao_getBlogTypeList_" + parentId;
-		List<BlogType> blogTypeList =MyCache.get(key);
+		List<BlogType> blogTypeList = MyCache.get(key);
 		if (blogTypeList == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -118,14 +118,17 @@ public class BlogTypeDao {
 	 * @return
 	 */
 	public BlogType getBlogTypeById(Long id) {
-		key = "blogTypeDao_id_"+id;
+		key = "blogTypeDao_id_" + id;
 		BlogType bt = (BlogType) MyCache.cache.get(key);
 		if (bt == null) {
-			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
-			Query query = pm.newQuery(BlogType.class, " id == " + id);
-			List<BlogType> blogTypes = (List<BlogType>) query.execute();
-			if (blogTypes.size() > 0) {
-				bt = blogTypes.get(0);
+			try {
+				pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+				Query query = pm.newQuery(BlogType.class, " id == " + id);
+				List<BlogType> blogTypes = (List<BlogType>) query.execute();
+				if (blogTypes.size() > 0) {
+					bt = blogTypes.get(0);
+				}
+			} catch (Exception e) {
 			}
 			MyCache.cache.put(key, bt);
 		}

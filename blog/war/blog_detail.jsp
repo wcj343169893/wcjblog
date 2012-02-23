@@ -26,7 +26,7 @@
 			User blog_user =Config.getBlog_user();
 %><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%=blog.getTitle()%>_<%=bt.getName()%>_<%=blog_user.getpTitle()%></title><%
+<title><%=blog.getTitle()%>_<%=bt!=null ? bt.getName(): "默认分类"%>_<%=blog_user.getpTitle()%></title><%
 	if (blog_user.getBlogHead() != null
 					&& !"".equals(blog_user.getBlogHead().trim())) {
 				out.print(blog_user.getBlogHead());
@@ -62,7 +62,7 @@
 	<div class="vito-content-date"><%=blog.getSdTime()%></div>
 	<div class="vito-detail-content-body"><%=blog.getContent().getValue()%><br><br>本文地址:<a href="<%=url_host %>/blog/<%=id %>" title="<%=blog.getTitle()%>"><%=url_host %>/blog/<%=id %></a><br>
 	<font class="post-tags">Tags:<%=blog.getTag()%></font>
-	<font class="post-footer">发布:<%=blog_user.getName()%>|分类:<%=bt.getName()%>|评论:<%=blog.getReplyCount()%>|浏览:<%=blog.getCount()%><%
+	<font class="post-footer">发布:<%=blog_user.getName()%>|分类:<%=bt!=null ? bt.getName():"默认分类"%>|评论:<%=blog.getReplyCount()%>|浏览:<%=blog.getCount()%><%
 		if (Tools.isLogin(request)) {
 	%>|<a href="/blog?id=<%=blog.getId()%>&op=modify">修改</a><%
 		}
