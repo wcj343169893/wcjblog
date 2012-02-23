@@ -28,7 +28,7 @@ public class MyCache {
 	private static Map props = new HashMap();
 	static {
 		try {
-			props.put(GCacheFactory.EXPIRATION_DELTA, 4800);// 3600秒后过期
+			props.put(GCacheFactory.EXPIRATION_DELTA, 7200);// 3600秒后过期
 			props.put(MemcacheService.SetPolicy.ADD_ONLY_IF_NOT_PRESENT, true);// 如果不存在具有该键的值，则添加该值；如果存在具有该键的值，则不执行任何操作
 
 			cacheFactory = CacheManager.getInstance().getCacheFactory();
