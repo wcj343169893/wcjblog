@@ -272,11 +272,9 @@ public class BlogDao {
 		key = "blogDao_getBlogListByPage_" + tid + "_null_" + pages.getPageNo();
 		page_key = key + "_pages";
 		List<Blog> blogs = MyCache.get(key);
-		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
-				.get(page_key)
-				: pages;
+		Pages page = (Pages) MyCache.cache.get(page_key);
 
-		if (blogs == null) {
+		if (blogs == null && page==null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				String filter = "select count(id) from " + Blog.class.getName()
