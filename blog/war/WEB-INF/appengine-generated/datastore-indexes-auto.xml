@@ -1,17 +1,17 @@
-<!-- Indices written at Thu, 23 Feb 2012 02:50:27 UTC -->
+<!-- Indices written at Fri, 24 Feb 2012 01:52:34 UTC -->
 
 <datastore-indexes>
 
     <!-- Used 1 time in query history -->
     <datastore-index kind="Blog" ancestor="false" source="auto">
         <property name="isVisible" direction="asc"/>
-        <property name="__key__" direction="desc"/>
+        <property name="count" direction="desc"/>
     </datastore-index>
 
     <!-- Used 1 time in query history -->
-    <datastore-index kind="Blog" ancestor="false" source="auto">
-        <property name="isVisible" direction="asc"/>
-        <property name="count" direction="desc"/>
+    <datastore-index kind="Reply" ancestor="false" source="auto">
+        <property name="bid" direction="asc"/>
+        <property name="sdTime" direction="desc"/>
     </datastore-index>
 
 </datastore-indexes>

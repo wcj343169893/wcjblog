@@ -114,7 +114,7 @@
 	</div><%} if(blog_user.getIsFriends()==null || blog_user.getIsFriends()==0){%>
 	<div class="vito-left-title">友情链接</div><%
 		FriendsDao fd=new FriendsDao();
-		List<Friends> friendsList=fd.getFriendsByPage(new Pages(10));
+		List<Friends> friendsList=fd.getFriendsByPage(new Pages());
 	%>
 	<div class="vito-left-contentul">
 		<ul class="vito-right-contentul">

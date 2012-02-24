@@ -4,22 +4,23 @@
 <%@page import="com.google.appengine.api.users.UserService"%>
 <%@page import="com.google.appengine.api.users.UserServiceFactory"%><html><%
 	String id = request.getParameter("id")!=null ? request.getParameter("id") : (String)request.getAttribute("id");
+	boolean isOk=false;
+	BlogDao blogDao=null;
+	Blog blog=null;
 	if (id != null && !"".equals(id.trim())) {
-		BlogDao blogDao = new BlogDao();
-		Blog blog = blogDao.getBlogById(Tools.strTolong(id));
+		isOk=true;
+		blogDao = new BlogDao();
+		blog = blogDao.getBlogById(Tools.strTolong(id));
 		if (blog == null) {
-%><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>访问的文章不存在</title>
-	<jsp:include page="head.jsp"></jsp:include>
-</head>
-<body>
-<div class="notices">访问的文章不存在,<a href="/">返回首页</a></div>
-</body><%
-	} else {
+			isOk=false;
+		}
+	} 
+	if(isOk) {
 			blogDao.operationBlog(Operation.readTimes, blog);
-			Blog preBlog = blogDao.getPreBlog(blog.getId());
-			Blog nextBlog = blogDao.getNextBlog(blog.getId());
+			//Blog preBlog = blogDao.getPreBlog(blog.getId());
+			Blog preBlog = null;
+			//Blog nextBlog = blogDao.getNextBlog(blog.getId());
+			Blog nextBlog = null;
 			//查询所有的分类
 			BlogTypeDao btd = new BlogTypeDao();
 			BlogType bt = btd.getBlogTypeById(blog.getTid());
@@ -198,7 +199,6 @@
 <jsp:include page="footer.jsp"></jsp:include>
 </div>
 </body><%
-	}
 	}else{
 %>
 <head>
@@ -207,7 +207,20 @@
 	<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body>
-<div class="notices">访问的文章不存在,<a href="/">返回首页</a></div>
+<div class="main">
+<!-- 顶部开始 -->
+<jsp:include page="top.jsp"></jsp:include>
+<!-- 顶部结束 -->
+<!-- 左边开始 -->
+<jsp:include page="left.jsp"></jsp:include>
+<!-- 左边结束 -->
+<!-- 右边开始 -->
+<div class="right">
+<div class="right-title">文章</div>
+	<div class="notices">访问的文章不存在,<a href="/">返回首页</a></div>
+</div>
+<jsp:include page="footer.jsp"></jsp:include>
+</div>
 </body>
 <%} %>
 </html>
