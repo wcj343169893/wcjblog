@@ -1,0 +1,17 @@
+<!-- Indices written at Thu, 9 Feb 2012 08:09:46 UTC -->
+
+<datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Blog" ancestor="false" source="auto">
+        <property name="isVisible" direction="asc"/>
+        <property name="count" direction="desc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="Blog" ancestor="false" source="auto">
+        <property name="isVisible" direction="asc"/>
+        <property name="sdTime" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>
