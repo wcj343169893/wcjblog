@@ -39,6 +39,7 @@ public class UserDao {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			closePM();
 		}
 		return user;
 	}
@@ -139,7 +140,7 @@ public class UserDao {
 					u.setCloseweb(user.getCloseweb());
 					// 更新静态设置
 					Config.setClose(user.getCloseweb().equals(1));
-					Config.setBlog_user(u);
+//					Config.setBlog_user(u);
 					// 更新导航
 					Config.setMenus(Tools.split(u.getMenu(), ";", ","));
 

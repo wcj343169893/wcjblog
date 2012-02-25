@@ -4,11 +4,13 @@
 <%@page import="com.google.choujone.blog.entity.User"%>
 <%@page import="java.util.List"%>
 <%@page import="com.google.choujone.blog.util.Config"%>
-<%@page import="com.google.choujone.blog.entity.Menu"%><html>
+<%@page import="com.google.choujone.blog.entity.Menu"%>
+<%@page import="com.google.choujone.blog.dao.UserDao"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	User user=Config.getBlog_user();
+	UserDao ud=new UserDao();
+	User user=  ud.getUserDetail();
 %>
 <title><%=user.getpTitle() %> -- 博客设置   / 系统设置</title>
 <script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>

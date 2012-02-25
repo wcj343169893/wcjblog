@@ -121,16 +121,26 @@ public class BlogTypeDao {
 		key = "blogTypeDao_id_" + id;
 		BlogType bt = (BlogType) MyCache.cache.get(key);
 		if (bt == null) {
-			try {
-				pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
-				Query query = pm.newQuery(BlogType.class, " id == " + id);
-				List<BlogType> blogTypes = (List<BlogType>) query.execute();
-				if (blogTypes.size() > 0) {
-					bt = blogTypes.get(0);
+			List<BlogType> blogTypeList = MyCache
+					.get("blogTypeDao_getBlogTypeList");
+			if (blogTypeList == null) {
+				try {
+					pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+					Query query = pm.newQuery(BlogType.class, " id == " + id);
+					List<BlogType> blogTypes = (List<BlogType>) query.execute();
+					if (blogTypes.size() > 0) {
+						bt = blogTypes.get(0);
+					}
+				} catch (Exception e) {
 				}
-			} catch (Exception e) {
+				MyCache.cache.put(key, bt);
+			}else{
+				for (BlogType blogType : blogTypeList) {
+					if (blogType.getId().equals(id)) {
+						bt=blogType;
+					}
+				}
 			}
-			MyCache.cache.put(key, bt);
 		}
 		return bt;
 	}

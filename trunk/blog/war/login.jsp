@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="com.google.choujone.blog.entity.User,com.google.appengine.api.users.UserService,com.google.appengine.api.users.UserServiceFactory,com.google.choujone.blog.util.Config"%><html>
+<%@page import="com.google.choujone.blog.entity.User,com.google.appengine.api.users.UserService,com.google.appengine.api.users.UserServiceFactory,com.google.choujone.blog.util.Config"%>
+<%@page import="com.google.choujone.blog.dao.UserDao"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%
-	User blog_user=  Config.getBlog_user();
+<%UserDao ud=new UserDao();
+	User blog_user=  ud.getUserDetail();
 %>
 <title>登录_<%=blog_user.getpTitle()%></title>
 	<jsp:include page="head.jsp"></jsp:include>

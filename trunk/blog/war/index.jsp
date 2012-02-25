@@ -3,10 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="com.google.choujone.blog.dao.BlogDao,java.util.List,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.common.Pages,com.google.choujone.blog.entity.User,com.google.choujone.blog.common.Operation,java.text.SimpleDateFormat,java.util.Date,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType,java.util.ArrayList,java.util.Map,java.util.HashMap"%>
 <%@page import="com.google.choujone.blog.util.Tools"%>
-<%@page import="com.google.choujone.blog.util.Config"%><html>
+<%@page import="com.google.choujone.blog.dao.UserDao"%><html>
 <head><%
-	User user=Config.getBlog_user();
-	String title=user!=null ? user.getpTitle():"";
+UserDao ud=new UserDao();
+User blog_user=  ud.getUserDetail();
+	String title=blog_user!=null ? blog_user.getpTitle():"";
 	Long tid=null;
 	try{
 		 tid=request.getParameter("tid") != null ? Long.valueOf(request.getParameter("tid").toString()) : null;
@@ -56,7 +57,7 @@ if(blogs!=null && blogs.size()>0){
 for(int i=0;i<blogs.size();i++){
 	Blog blog=blogs.get(i);
 	if(blog.getIsVisible() == 0 ){
-		String link=user.getUrl()+"/blog/"+blog.getId();
+		String link=blog_user.getUrl()+"/blog/"+blog.getId();
 %><div class="vito-content">
 	<div class="vito-content-title">
 		<a href="<%=link %>"><%=blog.getTitle() %></a>
@@ -66,7 +67,7 @@ for(int i=0;i<blogs.size();i++){
 	<div class="vito-content-body"><%=blog.getContent(50).getValue() %>
 	<br><br>
 		<font class="post-tags">Tags:<%=blog.getTag() %></font>
-		<font class="post-footer">发布:<%=user!=null ? user.getName():"" %>|分类:<%=typeMaps.get(blog.getTid())%>|评论:<%=blog.getReplyCount() %>|浏览:<%=blog.getCount() %><%if(Tools.isLogin(request)){	%>|<a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a><%} %></font>
+		<font class="post-footer">发布:<%=blog_user!=null ? blog_user.getName():"" %>|分类:<%=typeMaps.get(blog.getTid())%>|评论:<%=blog.getReplyCount() %>|浏览:<%=blog.getCount() %><%if(Tools.isLogin(request)){	%>|<a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a><%} %></font>
 	</div>
 </div><br><%}	
 } }else{%>

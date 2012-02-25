@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.util.Config,com.google.choujone.blog.entity.*"%><html>
+    pageEncoding="UTF-8"%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.util.Config,com.google.choujone.blog.entity.*"%>
+<%@page import="com.google.choujone.blog.dao.UserDao"%><html>
 <head>
 <link rel="stylesheet" href="/css/search.css" type="text/css" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-User user=Config.getBlog_user();
-String title=user.getpTitle();
+UserDao ud=new UserDao();
+User blog_user = ud.getUserDetail();
+String title=blog_user.getpTitle();
 %><title>搜索_<%=title %></title>
 	<jsp:include page="head.jsp"></jsp:include>
 </head>

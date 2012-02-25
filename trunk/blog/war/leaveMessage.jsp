@@ -7,7 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	User blog_user=Config.getBlog_user();
+UserDao ud=new UserDao();
+User blog_user=  ud.getUserDetail();
 %><title>留言板 _<%=blog_user.getpTitle()%></title>
 	<jsp:include page="head.jsp"></jsp:include>
 <script type="text/javascript" src="/js/content.js"></script>
