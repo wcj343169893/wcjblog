@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%><%@page import="com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config"%><%
-			User blog_user = Config.getBlog_user();
+    UserDao ud=new UserDao();
+	User blog_user=  ud.getUserDetail();
 			if (blog_user != null && blog_user.getBlogHead() != null
 					&& !"".equals(blog_user.getBlogHead())) {
 				out.print(blog_user.getBlogHead());
 }%>
-<meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
+
+<%@page import="com.google.choujone.blog.dao.UserDao"%><meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
 <meta name="keywords" content="<%=blog_user != null ? blog_user.getBlogKeyword() : ""%>">
 <meta name="description" content="<%=blog_user != null ? blog_user.getBlogDescription() : ""%>">
 <script type="text/javascript">

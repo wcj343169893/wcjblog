@@ -1,7 +1,6 @@
 package com.google.choujone.blog.util;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Properties;
 
@@ -16,6 +15,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.User;
 
 public class Mail {
@@ -25,12 +25,13 @@ public class Mail {
 		Session session = Session.getDefaultInstance(props, null);
 		String msgBody = content;
 		String subject = "Blog " + bid + " reply";
-		User blogUser = Config.getBlog_user();
+		UserDao ud = new UserDao();
+		User blogUser = ud.getUserDetail();
 		try {
 			Message msg = new MimeMessage(session);
 			msg
-			.setFrom(new InternetAddress("wcj343169893@163.com",
-			"choujone"));
+					.setFrom(new InternetAddress("wcj343169893@163.com",
+							"choujone"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
 					blogUser.getEmail(), "administrator"));
 			if (bid == null || "-1".equals(bid.trim())) {
@@ -41,7 +42,8 @@ public class Mail {
 			htmlPart.setContent(msgBody, "text/html");
 			mp.addBodyPart(htmlPart);
 			// System.out.println(Charset.defaultCharset());
-//			subject = new String(subject.getBytes(), Charset.defaultCharset());
+			// subject = new String(subject.getBytes(),
+			// Charset.defaultCharset());
 			// subject=new Header(subject,"utf-8");
 			// subject=Header(subject,Charset.defaultCharset());
 			msg.setSubject(subject);
@@ -50,7 +52,7 @@ public class Mail {
 			msg.setSentDate(Tools.changeTime(Tools.changeTime(new Date())));
 			// msg.setReplyTo(addresses)
 			Transport.send(msg);
-			
+
 		} catch (AddressException e) {
 			// ...
 			e.printStackTrace();
@@ -62,18 +64,18 @@ public class Mail {
 			e.printStackTrace();
 		}
 	}
-	public static void send(String bid, String content,String email) {
+
+	public static void send(String bid, String content, String email) {
 		// mail.send_mail();
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		String msgBody = content;
 		String subject = "Blog " + bid + " reply";
-		User blogUser = Config.getBlog_user();
+		UserDao ud = new UserDao();
+		User blogUser = ud.getUserDetail();
 		try {
 			Message msg = new MimeMessage(session);
-			msg
-					.setFrom(new InternetAddress(email,
-							""));
+			msg.setFrom(new InternetAddress(email, ""));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
 					blogUser.getEmail(), "administrator"));
 			if (bid == null || "-1".equals(bid.trim())) {
@@ -84,7 +86,8 @@ public class Mail {
 			htmlPart.setContent(msgBody, "text/html");
 			mp.addBodyPart(htmlPart);
 			// System.out.println(Charset.defaultCharset());
-//			subject = new String(subject.getBytes(), Charset.defaultCharset());
+			// subject = new String(subject.getBytes(),
+			// Charset.defaultCharset());
 			// subject=new Header(subject,"utf-8");
 			// subject=Header(subject,Charset.defaultCharset());
 			msg.setSubject(subject);

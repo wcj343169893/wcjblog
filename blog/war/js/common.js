@@ -107,4 +107,5 @@ function bd_sub(){
 		alert("请输入评论内容");
 		return false;
 	}
+	return true;
 }

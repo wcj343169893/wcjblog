@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.BlogDao,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config,com.google.choujone.blog.common.Operation,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType"%>
 <%@page import="com.google.appengine.api.users.UserService"%>
-<%@page import="com.google.appengine.api.users.UserServiceFactory"%><html><%
+<%@page import="com.google.appengine.api.users.UserServiceFactory"%>
+<%@page import="com.google.choujone.blog.dao.UserDao"%><html><%
 	String id = request.getParameter("id")!=null ? request.getParameter("id") : (String)request.getAttribute("id");
 	boolean isOk=false;
 	BlogDao blogDao=null;
 	Blog blog=null;
+	UserDao ud=new UserDao();
+    User blog_user=  ud.getUserDetail();
 	if (id != null && !"".equals(id.trim())) {
 		isOk=true;
 		blogDao = new BlogDao();
@@ -24,7 +27,7 @@
 			//查询所有的分类
 			BlogTypeDao btd = new BlogTypeDao();
 			BlogType bt = btd.getBlogTypeById(blog.getTid());
-			User blog_user =Config.getBlog_user();
+		 	
 %><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=blog.getTitle()%>_<%=bt!=null ? bt.getName(): "默认分类"%>_<%=blog_user.getpTitle()%></title><%
@@ -150,10 +153,10 @@
 	</div>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
-			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');$('#comment_name').focus();">点击这里 发表评论</a>
+			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');">点击这里 发表评论</a>
 		</p>
 		<div id="commentDiv" style="display: none">
-			<form id="frmSumbit" target="_self" method="post" action="/reply" onsubmit="return bd_sub()">
+			<form id="frmSumbit" target="_self" method="post" action="/reply" onsubmit="return bd_sub();">
 				<div class="vito-ct-id">
 					<input type="hidden" name="bid" value="<%=blog.getId()%>">
 					<input type="hidden" name="p" value="<%=p %>">
@@ -203,7 +206,7 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>访问的文章不存在</title>
+<title>访问的文章不存在_<%=blog_user.getpTitle() %></title>
 	<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body>

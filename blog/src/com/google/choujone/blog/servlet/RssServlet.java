@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.choujone.blog.dao.BlogDao;
 import com.google.choujone.blog.entity.Blog;
-import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.Tools;
 
 public class RssServlet extends HttpServlet {
@@ -52,7 +51,7 @@ public class RssServlet extends HttpServlet {
 			code.append(blog.getTitle());
 			code.append("</title>");
 			code.append("<url>");
-			code.append(Config.getWebUrl() + "blog?" + blog.getId());
+//			code.append(Config.getWebUrl() + "blog?" + blog.getId());
 			code.append("</url>");
 			code.append("<content>");
 			code.append(Tools.escape(blog.getContent(200, "").getValue()));
