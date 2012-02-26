@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.User;
@@ -44,10 +42,10 @@ public class UserServlet extends HttpServlet {
 						resp);
 			}
 		} else {// 注销
-//			req.getSession().removeAttribute("login_user");
-			UserService us = UserServiceFactory.getUserService();
-			String url = us.createLogoutURL("/");
-			resp.sendRedirect(url);
+			req.getSession().removeAttribute("login_user");
+//			UserService us = UserServiceFactory.getUserService();
+//			String url = us.createLogoutURL("/");
+			resp.sendRedirect("/");
 		}
 	}
 

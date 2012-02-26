@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="com.google.choujone.blog.entity.Reply,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.User,com.google.choujone.blog.dao.UserDao"%>
-<%@page import="com.google.appengine.api.users.UserService"%>
-<%@page import="com.google.appengine.api.users.UserServiceFactory"%>
 <%@page import="com.google.choujone.blog.util.Config"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -86,20 +84,14 @@ User blog_user=  ud.getUserDetail();
 			<form id="frmSumbit" name="frmSumbit" target="_self" method="post" action="/reply" onsubmit="return bd_sub()">
 				<div class="vito-ct-id">
 				<%
-				     	UserService userService = UserServiceFactory.getUserService();
 						String gustName="游客";
 						String gustEmail="";
 						String gustURL="";
-				     	if (userService.isUserLoggedIn()){
-				     		gustName=userService.getCurrentUser().getNickname();
-				     		gustEmail=userService.getCurrentUser().getEmail();
-				     		gustURL=userService.getCurrentUser().getAuthDomain();
-				     	}
 				   	%>
 					<input type="hidden" name="op" value="add">
 					<input type="text" name="name"
 						class="text vito-contentbd-input" value="<%=gustName %>" size="28"/>
-					<label for="inpName">署名(*)</label><%if (!userService.isUserLoggedIn()){%><a href="<%=userService.createLoginURL(request.getRequestURI())%>" >google账号登陆</a><%} %>
+					<label for="inpName">署名(*)</label>
 				</div>
 				<div class="vito-ct-id">
 					<input type="text" name="email"
