@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.BlogDao,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config,com.google.choujone.blog.common.Operation,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType"%>
-<%@page import="com.google.appengine.api.users.UserService"%>
-<%@page import="com.google.appengine.api.users.UserServiceFactory"%>
 <%@page import="com.google.choujone.blog.dao.UserDao"%><html><%
 	String id = request.getParameter("id")!=null ? request.getParameter("id") : (String)request.getAttribute("id");
 	boolean isOk=false;
@@ -162,20 +160,14 @@
 					<input type="hidden" name="p" value="<%=p %>">
 					<input type="hidden" name="op" value="add">
 					<%
-				     	UserService userService = UserServiceFactory.getUserService();
 						String gustName="游客";
 						String gustEmail="";
 						String gustURL="";
-				     	if (userService.isUserLoggedIn()){
-				     		gustName=userService.getCurrentUser().getNickname();
-				     		gustEmail=userService.getCurrentUser().getEmail();
-				     		gustURL=userService.getCurrentUser().getAuthDomain();
-				     	}
 				   	%>
 					<input type="text" name="name" id="comment_name" class="text vito-contentbd-input" value="<%=gustName %>" size="28" style="color: gray;"
 					onclick="if(this.value=='<%=gustName %>'){this.value='';this.style.color='';}" 
 					onblur="if(this.value==''){this.value='<%=gustName %>';this.style.color='gray';}"/>
-					<label for="comment_name">署名(*)</label><%if (!userService.isUserLoggedIn()){%><a href="<%=userService.createLoginURL("/blog?id="+id)%>" >google账号登陆</a><%} %>
+					<label for="comment_name">署名(*)</label>
 					
 				</div>
 				<div class="vito-ct-id">

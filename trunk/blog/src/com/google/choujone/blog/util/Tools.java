@@ -214,26 +214,25 @@ public class Tools {
 	public static boolean isLogin(ServletRequest request) {
 		boolean isLogin = false;
 		try {
-			UserService userService = UserServiceFactory.getUserService();
-			if (userService != null && userService.isUserLoggedIn()
-					&& userService.isUserAdmin()) {
-				isLogin = true;
-			} else {
-				isLogin = false;
-			}
-
-			// HttpServletRequest req = (HttpServletRequest) request;
-			// User user = (User) req.getSession().getAttribute("login_user");
-			// if (user == null) {// 判断是不是网站用户登陆
-			// UserService us = UserServiceFactory.getUserService();
-			// if (!us.isUserLoggedIn() || !us.isUserAdmin()) {
+			// UserService userService = UserServiceFactory.getUserService();
+			// if (userService != null && userService.isUserLoggedIn()
+			// && userService.isUserAdmin()) {
+			// isLogin = true;
+			// } else {
 			// isLogin = false;
-			// } else {
-			// isLogin = true;
 			// }
-			// } else {
-			// isLogin = true;
-			// }
+
+			HttpServletRequest req = (HttpServletRequest) request;
+			User user = (User) req.getSession().getAttribute("login_user");
+			if (user != null) {// 判断是不是网站用户登陆
+				// UserService us = UserServiceFactory.getUserService();
+				// if (!us.isUserLoggedIn() || !us.isUserAdmin()) {
+				// isLogin = false;
+				// } else {
+				// isLogin = true;
+				// }
+				isLogin = true;
+			}
 		} catch (Exception e) {
 		}
 		return isLogin;
