@@ -1,0 +1,519 @@
+@CHARSET "UTF-8";
+BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; BACKGROUND: url(/images/blog/body_bg.gif); PADDING-BOTTOM: 0px; MARGIN: 0px; COLOR: #c1c1c1; PADDING-TOP: 0px; FONT-FAMILY: 微软雅黑, Arial, Helvetica, sans-serif
+}
+HTML {
+	FONT-SIZE: 12px; MARGIN: 0px; COLOR: #c1c1c1; FONT-FAMILY: 微软雅黑,Arial, Helvetica, sans-serif
+}
+IMG {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+P {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 20px; MARGIN: 0px; PADDING-TOP: 0px
+}
+LI {
+	LIST-STYLE-TYPE: none
+}
+A:link {
+	COLOR: #b0b0b0; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #b0b0b0; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #b0b0b0; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ffd247; TEXT-DECORATION: none
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+#vito-divall {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px auto; WIDTH: 944px; PADDING-TOP: 0px; HEIGHT: 100%
+}
+#vitobody {
+	BACKGROUND: url(/images/blog/bgrepeat.jpg) repeat-y; OVERFLOW: hidden; ZOOM: 1; HEIGHT: 100%
+}
+.vito-imgmiddle {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 10px; PADDING-BOTTOM: 0px; VERTICAL-ALIGN: middle; PADDING-TOP: 0px
+}
+.vito-imgmiddle-nopadding {
+	VERTICAL-ALIGN: middle
+}
+.vito-contentcutline {
+	CLEAR: both; BACKGROUND: url(/images/blog/vito-table-cutline.jpg) no-repeat center bottom; HEIGHT: 15px
+}
+.vito-other-title {
+	CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 30px; FONT-SIZE: 15px; PADDING-BOTTOM: 0px; MARGIN: 10px 0px 0px; COLOR: #ffd247; PADDING-TOP: 0px; FONT-FAMILY: 微软雅黑, Arial, Helvetica, sans-serif; HEIGHT: 25px
+}
+.vito-clear {
+	CLEAR: both
+}
+#vito-divtop {
+	BACKGROUND: url(/images/blog/topbg.jpg); MARGIN: 16px 0px 0px; OVERFLOW: hidden; WIDTH: 944px; ZOOM: 1; HEIGHT: 88px
+}
+#vitologo {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 120px; BACKGROUND: url(/images/blog/logobg.jpg) no-repeat; FLOAT: left; PADDING-BOTTOM: 0px; WIDTH: 730px; PADDING-TOP: 40px; HEIGHT: 48px
+}
+#vitologo A {
+	FONT-SIZE: 20px; COLOR: #ffd247; FONT-FAMILY: 微软雅黑, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+#vitologocut {
+	FONT-SIZE: 2px; BACKGROUND: url(/images/blog/topcut.jpg) no-repeat; WIDTH: 944px; HEIGHT: 2px
+}
+#vitows {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 32px
+}
+#vitologin {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/login-normal.jpg) no-repeat; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 54px; PADDING-TOP: 0px; HEIGHT: 71px
+}
+#vitologin A:link {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/login-normal.jpg) no-repeat; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 54px; PADDING-TOP: 0px; HEIGHT: 71px
+}
+#vitologin A:active {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/login-normal.jpg) no-repeat; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 54px; PADDING-TOP: 0px; HEIGHT: 71px
+}
+#vitologin A:visited {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/login-normal.jpg) no-repeat; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 54px; PADDING-TOP: 0px; HEIGHT: 71px
+}
+#vitologin A:hover {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/login-hover.jpg) no-repeat; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 54px; PADDING-TOP: 0px; HEIGHT: 71px
+}
+#vitotopright {
+	DISPLAY: block; BACKGROUND: url(/images/blog/topright.jpg) no-repeat right 50%; FLOAT: right; WIDTH: 17px; HEIGHT: 88px
+}
+#vito-leftbg {
+	BACKGROUND: url(/images/blog/vito-navbg.jpg) no-repeat 50% top; FLOAT: left; WIDTH: 93px
+}
+#vito-leftimgbg {
+	BACKGROUND: url(/images/blog/vito-navbg-repeat.jpg); FLOAT: left; WIDTH: 93px; HEIGHT: 100%
+}
+#vito-nav {
+	MARGIN: 0px
+}
+#vito-nav UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 500px; MARGIN: 0px; PADDING-TOP: 10px
+}
+#vito-nav LI {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; PADDING-BOTTOM: 5px; MARGIN: 0px; COLOR: #ffd247; PADDING-TOP: 5px; LIST-STYLE-TYPE: none
+}
+#vito-nav LI A:link {
+	COLOR: #b0b0b0; TEXT-DECORATION: none
+}
+#vito-nav LI A:visited {
+	COLOR: #b0b0b0; TEXT-DECORATION: none
+}
+#vito-nav LI A:visited {
+	COLOR: #b0b0b0; TEXT-DECORATION: none
+}
+#vito-nav LI A:hover {
+	COLOR: #ffd247; TEXT-DECORATION: none
+}
+#vito-middleall {
+	BACKGROUND: #393939; FLOAT: left; WIDTH: 640px; HEIGHT: 100%
+}
+.vito-pagebarall {
+	CLEAR: both; PADDING-RIGHT: 30px; PADDING-LEFT: 17px; BACKGROUND: url(/images/blog/vito-table-cutline.jpg) no-repeat center bottom; PADDING-BOTTOM: 0px; MARGIN: 3px 0px 0px; LINE-HEIGHT: 30px; PADDING-TOP: 0px; HEIGHT: 30px
+}
+#vito-pagebar {
+	FLOAT: left
+}
+#vito-changecss {
+	FLOAT: right
+}
+.vitopagebar {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 3px 0px 0px 5px; LINE-HEIGHT: 18px; PADDING-TOP: 0px; TEXT-ALIGN: center
+}
+.vitopagebar .now-page {
+	BORDER-RIGHT: #ffba00 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #ffba00 1px solid; PADDING-LEFT: 3px; FONT-WEIGHT: bold; BACKGROUND: #fcf100; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 2px; BORDER-LEFT: #ffba00 1px solid; COLOR: black; PADDING-TOP: 0px; BORDER-BOTTOM: #ffba00 1px solid; TEXT-DECORATION: none
+}
+.vitopagebar A {
+	BORDER-RIGHT: gray 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: gray 1px solid; PADDING-LEFT: 3px; BACKGROUND: #646464; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 2px; BORDER-LEFT: gray 1px solid; WIDTH: 30px; COLOR: black; PADDING-TOP: 0px; BORDER-BOTTOM: gray 1px solid; TEXT-ALIGN: center
+}
+.vitopagebar A:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+.vitopagebar A:hover {
+	BORDER-RIGHT: #ffba00 1px solid; BORDER-TOP: #ffba00 1px solid; BACKGROUND: #fcf100; BORDER-LEFT: #ffba00 1px solid; COLOR: black; BORDER-BOTTOM: #ffba00 1px solid; TEXT-DECORATION: none
+}
+.vito-prenext {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/vito-table-cutline.jpg) no-repeat center bottom; PADDING-BOTTOM: 10px; MARGIN: 0px auto; PADDING-TOP: 10px; HEIGHT: 15px; TEXT-ALIGN: center
+}
+.vito-contentall {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/vito-table-cutline.jpg) no-repeat center bottom; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+.vito-content {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.vito-content-title {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 30px; FONT-SIZE: 20px; BACKGROUND: url(/images/blog/article.png) no-repeat left center; PADDING-BOTTOM: 0px; MARGIN: 10px 0px 0px 20px; COLOR: #ffd247; PADDING-TOP: 0px; FONT-FAMILY: 微软雅黑,Arial, Helvetica, sans-serif; LETTER-SPACING: 1px; _background: url(/images/blog/article.gif) no-repeat left
+}
+.vito-content-title A:link {
+	COLOR: #ffd247; TEXT-DECORATION: none
+}
+.vito-content-title A:active {
+	COLOR: #ffd247; TEXT-DECORATION: none
+}
+.vito-content-title A:visited {
+	COLOR: #ffd247; TEXT-DECORATION: none
+}
+.vito-content-title A:hover {
+	COLOR: #ffd247; TEXT-DECORATION: none
+}
+.vito-content-date {
+	PADDING-RIGHT: 0px; DISPLAY: inline-block; PADDING-LEFT: 47px; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; PADDING-TOP: 5px
+}
+.vito-content-body {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; BACKGROUND: url(/images/blog/vito-table-cutline.jpg) no-repeat center bottom; PADDING-BOTTOM: 0px; LINE-HEIGHT: 20px; PADDING-TOP: 20px; TEXT-ALIGN: justify
+}
+.vito-detail-content-body {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; LINE-HEIGHT: 20px; PADDING-TOP: 20px; TEXT-ALIGN: justify
+}
+.vito-content-body P {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 0px; PADDING-BOTTOM: 10px; PADDING-TOP: 0px
+}
+.vito-content-body IMG {
+	BORDER-RIGHT: gray 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: gray 1px solid; PADDING-LEFT: 5px; BACKGROUND: #646464; PADDING-BOTTOM: 5px; BORDER-LEFT: gray 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: gray 1px solid
+}
+.vito-content-readmore {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; FONT-SIZE: 15px; BACKGROUND: url(/images/blog/comment.gif) no-repeat left 50%; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 15px 0px 0px 20px; PADDING-TOP: 0px; FONT-FAMILY: 微软雅黑, "Arial Unicode MS", sans-serif
+}
+.vito-content-readmore A:link {
+	COLOR: #c1c1c1; TEXT-DECORATION: none
+}
+.vito-content-readmore A:active {
+	COLOR: #c1c1c1; TEXT-DECORATION: none
+}
+.vito-content-readmore A:visited {
+	COLOR: #c1c1c1; TEXT-DECORATION: none
+}
+.vito-content-readmore A:hover {
+	COLOR: #ffd247; TEXT-DECORATION: none
+}
+.vito-content-taball {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 5px; MARGIN: 0px; PADDING-TOP: 10px; HEIGHT: 35px
+}
+.vito-content-body-tab {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 15px; FONT-WEIGHT: normal; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; MARGIN: 5px 0px 0px 20px; PADDING-TOP: 0px
+}
+.vito-continue {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 21px; BACKGROUND: url(/images/blog/continue.gif) no-repeat left 50%; PADDING-BOTTOM: 0px; MARGIN: 10px 0px 0px 20px; PADDING-TOP: 0px
+}
+.vito-contentbd {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px
+}
+.vito-contentbd P {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 5px 0px; PADDING-TOP: 0px
+}
+.vito-contentbd-input {
+	BORDER-RIGHT: #2b2b2b 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #2b2b2b 1px solid; PADDING-LEFT: 5px; BACKGROUND: #464646; PADDING-BOTTOM: 0px; BORDER-LEFT: #2b2b2b 1px solid; WIDTH: 200px; LINE-HEIGHT: 25px; PADDING-TOP: 0px; BORDER-BOTTOM: #2b2b2b 1px solid; HEIGHT: 20px; color: white;
+}
+.vito-search-input {
+	MARGIN-LEFT:5px; BORDER-LEFT: #2b2b2b 1px solid; BORDER-RIGHT: #2b2b2b 1px solid; BORDER-TOP: #2b2b2b 1px solid; BORDER-BOTTOM: #2b2b2b 1px solid; PADDING-LEFT: 2px; PADDING-RIGHT: 0px; WIDTH: 166px; BACKGROUND: #464646; HEIGHT: 17px; LINE-HEIGHT: 18px; color: white;
+}
+.vito-add-select {
+	font-size: 10px; height: 19px; background-color: #464646; color: white;
+}
+.vito-search-table td{
+	vertical-align: baseline;
+}
+.vito-login-input {
+	MARGIN-LEFT:5px; BORDER-LEFT: #2b2b2b 1px solid; BORDER-RIGHT: #2b2b2b 1px solid; BORDER-TOP: #2b2b2b 1px solid; BORDER-BOTTOM: #2b2b2b 1px solid; PADDING-LEFT: 2px; PADDING-RIGHT: 0px; WIDTH: 166px; BACKGROUND: #464646; HEIGHT: 17px; LINE-HEIGHT: 18px; color: white;
+}
+.vito-ct-id {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 0px;
+}
+.post-title {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 24px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT-FAMILY: 微软雅黑,Arial, Helvetica, sans-serif
+}
+.post-body {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 0px; LINE-HEIGHT: 18px; PADDING-TOP: 0px
+}
+.post {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/vito-table-cutline.jpg) no-repeat center bottom; PADDING-BOTTOM: 10px; MARGIN: 0px 0px 10px; PADDING-TOP: 0px
+}
+.vito-trackback {
+	BACKGROUND: url(/images/blog/vito-table-cutline.jpg) no-repeat center bottom
+}
+.vito-postcommentdivall {
+	CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #2b2b2b; PADDING-BOTTOM: 0px; MARGIN: 0px auto; WIDTH: 620px; PADDING-TOP: 0px
+}
+.vito-postcomment-table {
+	BORDER-RIGHT: #626262 1px dashed; BORDER-TOP: #626262 1px dashed; BACKGROUND: #2b2b2b; BORDER-LEFT: #626262 1px dashed; BORDER-BOTTOM: #626262 1px dashed
+}
+.vito-postcomment-title {
+	CLEAR: both; PADDING-RIGHT: 5px; PADDING-LEFT: 0px; FONT-SIZE: 15px; PADDING-BOTTOM: 5px; COLOR: #ffd247; LINE-HEIGHT: 100%; PADDING-TOP: 10px; FONT-FAMILY: 微软雅黑, "Arial Unicode MS",sans-serif; HEIGHT: 20px
+}
+.vito-postcommentlist {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/vito-table-cutline.jpg) no-repeat center bottom; PADDING-BOTTOM: 10px; PADDING-TOP: 0px
+}
+.vito-postcomment-one {
+	BORDER-RIGHT: #626262 1px dashed; PADDING-RIGHT: 5px; BORDER-TOP: #626262 1px dashed; DISPLAY: block; PADDING-LEFT: 5px; BACKGROUND: #464646; FLOAT: left; MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 10px; MARGIN-LEFT: 20px; BORDER-LEFT: #626262 1px dashed; WIDTH: 587px; LINE-HEIGHT: 20px; PADDING-TOP: 10px; BORDER-BOTTOM: #626262 1px dashed
+}
+.vito-postcomment-two {
+	BORDER-RIGHT: #626262 1px dashed; PADDING-RIGHT: 5px; BORDER-TOP: #626262 1px dashed; DISPLAY: block; PADDING-LEFT: 5px; BACKGROUND: #393939; FLOAT: left; PADDING-BOTTOM: 10px; MARGIN-LEFT: 20px; BORDER-LEFT: #626262 1px dashed; WIDTH: 500px; LINE-HEIGHT: 20px; PADDING-TOP: 10px; BORDER-BOTTOM: #626262 1px dashed
+}
+.vito-postclear {
+	CLEAR: both
+}
+.vito-postcomment-name {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; COLOR: #ffd247; PADDING-TOP: 0px; LETTER-SPACING: 1px
+}
+.vito-postcomment-name A:link {
+	COLOR: #ffd247; TEXT-DECORATION: underline
+}
+.vito-postcomment-name A:active {
+	COLOR: #ffd247; TEXT-DECORATION: underline
+}
+.vito-postcomment-name A:visited {
+	COLOR: #ffd247; TEXT-DECORATION: underline
+}
+.vito-postcomment-name A:hover {
+	COLOR: #ffd247; TEXT-DECORATION: underline
+}
+.vito-postcomment-content {
+	MARGIN: 10px 0px 0px 10px; COLOR: #c1c1c1; LINE-HEIGHT: 18px
+}
+.vito-postcomment-reback {
+	MARGIN: 0px 0px 0px 20px; COLOR: #ffd247
+}
+.vito-postcomment-yourwords {
+	BORDER-RIGHT: #2b2b2b 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #2b2b2b 1px solid; PADDING-LEFT: 5px; FONT-SIZE: 12px; BACKGROUND: #545454; PADDING-BOTTOM: 5px; MARGIN: 5px 0px 0px; OVERFLOW: auto; BORDER-LEFT: #2b2b2b 1px solid; WIDTH: 580px; COLOR: #e9e9e9; LINE-HEIGHT: 20px; PADDING-TOP: 5px; BORDER-BOTTOM: #2b2b2b 1px solid; HEIGHT: 150px
+}
+.quote {
+	BORDER-RIGHT: #c1c1c1 1px dotted; PADDING-RIGHT: 10px; BORDER-TOP: #c1c1c1 1px dotted; PADDING-LEFT: 10px; BACKGROUND: #545454; PADDING-BOTTOM: 10px; BORDER-LEFT: #c1c1c1 1px dotted; COLOR: #ccc; PADDING-TOP: 0px; BORDER-BOTTOM: #c1c1c1 1px dotted
+}
+.quote-title {
+	COLOR: #ffd247; LINE-HEIGHT: 25px
+}
+.gbook-title {
+	BACKGROUND: url(/images/blog/gbook.jpg) no-repeat; WIDTH: 81px; HEIGHT: 34px
+}
+#vito-right {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/vito-cutline.jpg) #393939 repeat-y left 50%; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 211px; PADDING-TOP: 0px
+}
+#vito-vitosay {
+	LINE-HEIGHT: 18px
+}
+#vito-vitosay P {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 5px; MARGIN: 5px 0px 0px; TEXT-INDENT: 2em; PADDING-TOP: 0px
+}
+#vito-search {
+	FLOAT: right; POSITION: relative; TOP: 20%
+}
+#o-s-bt {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BACKGROUND: url(/images/blog/search.gif) no-repeat; BORDER-BOTTOM-WIDTH: 0px; CURSOR: pointer; BORDER-RIGHT-WIDTH: 0px
+}
+.vito-search {
+	BORDER-RIGHT: #464646 1px solid; BORDER-TOP: #464646 1px solid; BACKGROUND: #515151; MARGIN: 3px 6px 3px 5px; BORDER-LEFT: #464646 1px solid; BORDER-BOTTOM: #464646 1px solid
+}
+#vito-search-bg {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 5px; BORDER-LEFT-WIDTH: 0px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; WIDTH: 160px; COLOR: #ffd247; LINE-HEIGHT: 15px; PADDING-TOP: 0px; HEIGHT: 15px; BORDER-RIGHT-WIDTH: 0px
+}
+.vito-right-title {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 6px; BACKGROUND: url(/images/blog/vito-right-titlebg.jpg); PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 5px; WIDTH: 195px; COLOR: #ffd247; LINE-HEIGHT: 23px; PADDING-TOP: 0px; HEIGHT: 23px
+}
+.vito-right-more {
+	BACKGROUND: url(/images/blog/more.gif) no-repeat; FLOAT: right; MARGIN: 0px 5px 0px 0px; WIDTH: 15px; POSITION: relative; TOP: -70%; HEIGHT: 23px
+}
+.vito-right-content {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 6px; BACKGROUND: url(/images/blog/vito-right-contentbg.jpg) repeat-y; PADDING-BOTTOM: 3px; MARGIN: 0px 0px 0px 5px; WIDTH: 190px; PADDING-TOP: 5px
+}
+.vito-right-content LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.vito-right-contentbottom {
+	FONT-SIZE: 1px; BACKGROUND: url(/images/blog/vito-right-bottom.jpg) no-repeat; MARGIN: 0px 0px 0px 5px; WIDTH: 201px; HEIGHT: 5px
+}
+.vito-right-content UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.vito-right-content LI {
+	DISPLAY: block; LINE-HEIGHT: 18px
+}
+.vito-right-contentul LI {
+	BORDER-RIGHT: #2b2b2b 1px solid; BORDER-TOP: #2b2b2b 1px solid; BACKGROUND: #393939; MARGIN: 0px 0px 3px; BORDER-LEFT: #2b2b2b 1px solid; BORDER-BOTTOM: #2b2b2b 1px solid
+}
+.vito-right-contentul LI A:link {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; WIDTH: 180px; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-contentul LI A:active {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; WIDTH: 180px; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-contentul LI A:visited {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; WIDTH: 180px; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-contentul LI A:hover {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; BACKGROUND: #a3a3a3; PADDING-BOTTOM: 3px; WIDTH: 182px; COLOR: black; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-lithinbg A:link {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; WIDTH: 180px; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-lithinbg A:active {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; WIDTH: 180px; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-lithinbg A:visited {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; WIDTH: 180px; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-lideepbg A:link {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; WIDTH: 180px; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-lideepbg A:active {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; WIDTH: 180px; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-lideepbg A:visited {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; WIDTH: 180px; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-lithinbg A:hover {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; BACKGROUND: #a3a3a3; PADDING-BOTTOM: 3px; WIDTH: 174px; COLOR: black; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-lideepbg A:hover {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; BACKGROUND: #a3a3a3; PADDING-BOTTOM: 3px; WIDTH: 174px; COLOR: black; LINE-HEIGHT: 18px; PADDING-TOP: 4px
+}
+.vito-right-lithinbg {
+	BORDER-RIGHT: #2b2b2b 1px solid; BORDER-TOP: #2b2b2b 1px solid; BACKGROUND: #464646; MARGIN-BOTTOM: 3px; BORDER-LEFT: #2b2b2b 1px solid; BORDER-BOTTOM: #2b2b2b 1px solid
+}
+.vito-right-lideepbg {
+	BORDER-RIGHT: #2b2b2b 1px solid; BORDER-TOP: #2b2b2b 1px solid; BACKGROUND: #393939; MARGIN-BOTTOM: 3px; BORDER-LEFT: #2b2b2b 1px solid; BORDER-BOTTOM: #2b2b2b 1px solid
+}
+#vito-right-postcommentsimg {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 5px; PADDING-TOP: 0px
+}
+.vito-right-postcommentsbox {
+	BORDER-RIGHT: #545454 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #2b2b2b 1px solid; PADDING-LEFT: 3px; FONT-SIZE: 12px; BACKGROUND: #464646; PADDING-BOTTOM: 3px; OVERFLOW: auto; BORDER-LEFT: #2b2b2b 1px solid; WIDTH: 179px; COLOR: #c1c1c1; LINE-HEIGHT: 20px; PADDING-TOP: 3px; BORDER-BOTTOM: #545454 1px solid; HEIGHT: 200px
+}
+.vito-right-postbutton {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/images/blog/) no-repeat; PADDING-BOTTOM: 5px; MARGIN: 0px; PADDING-TOP: 5px; TEXT-ALIGN: center
+}
+#vito-vitolinks {
+	WIDTH: 201px
+}
+.vito-right-ul LI {
+	FLOAT: left; MARGIN: 3px 0px 0px 4px; WIDTH: auto
+}
+.vito-right-lh LI {
+	LINE-HEIGHT: 24px
+}
+#vito-copyright {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 10px; MARGIN: 10px 0px 0px; WIDTH: 100%; PADDING-TOP: 0px; TEXT-ALIGN: center; position:relative; bottom:0px; color: black;
+}
+.vito-bottom {
+	CLEAR: both; BACKGROUND: url(/images/blog/bottom.jpg) no-repeat; MARGIN-BOTTOM: 16px; WIDTH: 944px; HEIGHT: 32px
+}
+
+div.function {float:left;margin:10px 0 0 0;text-align:left; font-size:12px;}
+#divCalendar{text-align:center;	width:220px;}
+
+.tableCalendar td{
+	vertical-align: middle;
+	text-align: center;
+}
+.tableCalendar td.week{
+	font-size:9px;
+	text-decoration:underline;
+	padding: 5px;
+}
+.tableCalendar td.linktd{
+	background: url("/images/blog/links_r.gif") no-repeat center;
+}
+
+
+
+p.w{
+	float:left;
+	width:25px;
+	height:16px;
+	margin:4px 0 0 0;
+	padding:2px 0 1px 0;
+	text-align:center;
+	vertical-align :middle;
+	font-size:9px;
+	text-decoration : underline; 
+}
+
+p.y{
+	text-align:center;
+	height:14px;
+	margin:2px 0 0 0;
+	padding:0 0 0 0;
+	--float:left;
+	width:175px;
+	font-size:12px;
+	font-weight:bold;
+}
+
+p.d{
+	float:left;
+	width:25px;
+	height:18px;
+	margin:0 0 0 0;
+	padding:2px 0 0 0;
+	text-align:center;
+	vertical-align :middle;
+}
+
+p.yd{
+	float:left;
+	width:25px;
+	height:18px;
+	margin:0 0 0 0;
+	padding:2px 0 0 0;
+	text-align:center;
+	vertical-align :middle;
+	font-weight:bolder;
+	color:#6090c0;
+	background: url("/images/blog/links_r.gif") no-repeat 1px 1px;
+}
+
+p.nd{
+	float:left;
+	width:25px;
+	height:18px;
+	margin:0 0 0 0;
+	padding:2px 0 0 0;
+	text-align:center;
+	vertical-align :middle;
+}
+
+p.cd{
+	float:left;
+	width:25px;
+	height:18px;
+	margin:0 0 0 0;
+	padding:2px 0 0 0;
+	text-align:center;
+	vertical-align :middle;
+	font-weight:bold;
+}
+
+div.post-nav a.l{
+	float:left;
+	padding-right:10px;
+	padding-bottom:5px;
+}
+div.post-nav a.r{
+	float:right;
+	padding-left:10px;
+	padding-bottom:5px;
+}
+
+div.post .post-footer{
+	width:666px;
+	margin:10px 0 30px 0;
+	padding:2px 0 0 0;
+	font-size:12px;
+	color:gray;
+	height:20px;
+	text-align:left;
+}
+
+div.post .post-tags{
+	width:661px;
+	margin:2px 0 2px 0px;
+	padding:2px 0 0 0;
+	font-size:12px;
+	color:gray;
+	height:20px;
+	text-align:left;
+}
