@@ -104,7 +104,7 @@ public class BlogDao {
 			}
 		} else if (operation.equals(Operation.readTimes)) {// 增加阅读次数
 			try {
-				//取消浏览次数
+				// 取消浏览次数
 				b = pm.getObjectById(Blog.class, blog.getId());
 				b.setCount(b.getCount() + 1);
 				flag = true;
@@ -272,23 +272,23 @@ public class BlogDao {
 		key = "blogDao_getBlogListByPage_" + tid + "_null_" + pages.getPageNo();
 		page_key = key + "_pages";
 		List<Blog> blogs = MyCache.get(key);
-		Pages page = (Pages) MyCache.cache.get(page_key);
-
-		if (blogs == null && page==null) {
+//		Pages page = (Pages) MyCache.cache.get(page_key);
+		pages.setRecTotal(getCount(tid));
+		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				String filter = "select count(id) from " + Blog.class.getName()
 						+ " where isVisible==0 ";
 				// pages.setRecTotal(Config.statistics.getBlog_visible_size());
-				if (tid != null && tid > 0) {
-					filter += "&& tid == " + tid;
-					// pages.setRecTotal(Config.blogType_blog_size_map.get(tid));
-				}
+//				if (tid != null && tid > 0) {
+//					filter += "&& tid == " + tid;
+//				}
 				// String filter = "";
 				// 查询总条数
-				Query q = pm.newQuery(filter);
-				Object obj = q.execute();
-				pages.setRecTotal(Integer.parseInt(obj.toString()));
+//				Query q = pm.newQuery(filter);
+//				Object obj = q.execute();
+//				pages.setRecTotal(getCount(tid));
+				
 				filter = " isVisible==0 ";
 				if (tid != null && tid > 0) {
 					filter += "&& tid == " + tid;
@@ -303,8 +303,6 @@ public class BlogDao {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else {
-			pages.setRecTotal(page.getRecTotal());
 		}
 		return blogs;
 	}
@@ -514,21 +512,22 @@ public class BlogDao {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Map<String, Integer> getCount() {
-		Map<String, Integer> counts = (Map<String, Integer>) MyCache.cache
+		Map<String, Integer> counts = (Map<String, Integer>) MyCache.cache_count
 				.get("blogDao_getCount");
 		if (counts == null) {
 			counts = new HashMap<String, Integer>();
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
-//				Query q = pm.newQuery(Blog.class);
-//				List<Blog> blogs = (List<Blog>) q.execute();
+				// Query q = pm.newQuery(Blog.class);
+				// List<Blog> blogs = (List<Blog>) q.execute();
 				List<Blog> blogs = getBlogList();
 				int blogcount = 0;
 				int scancount = 0;
 				int replycount = 0;
 				int allcount = blogs.size();
-//				int messagecount = 0;
+				// int messagecount = 0;
 				for (int i = 0; i < allcount; i++) {
 					Blog b = blogs.get(i);
 					if (b.getIsVisible().equals(0)) {
@@ -548,13 +547,13 @@ public class BlogDao {
 				counts.put("replycount", replycount);
 
 				// 查询留言
-//				String filter = " select count(id) from "
-//						+ Reply.class.getName() + " where bid == -1L";
-//				q = pm.newQuery(filter);
-//				Object obj = q.execute();
-//				messagecount = Integer.parseInt(obj.toString());
-//				counts.put("messagecount", messagecount);
-				MyCache.cache.put("blogDao_getCount", counts);
+				// String filter = " select count(id) from "
+				// + Reply.class.getName() + " where bid == -1L";
+				// q = pm.newQuery(filter);
+				// Object obj = q.execute();
+				// messagecount = Integer.parseInt(obj.toString());
+				// counts.put("messagecount", messagecount);
+				MyCache.cache_count.put("blogDao_getCount", counts);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -571,8 +570,8 @@ public class BlogDao {
 	 * @return
 	 */
 	public Integer getCount(Long tid) {
-		key = "blogDao_getCount_" + tid;
-		Integer count = (Integer) MyCache.cache.get(key);
+		String	key = "blogDao_getCount_" + tid;
+		Integer count = (Integer) MyCache.cache_count.get(key);
 		if (count == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			Query q = null;
@@ -584,7 +583,7 @@ public class BlogDao {
 			q = pm.newQuery(filter);
 			Object obj = q.execute();
 			count = Integer.parseInt(obj.toString());
-			MyCache.cache.put(key, count);
+			MyCache.cache_count.put(key, count);
 		}
 		return count;
 	}
@@ -596,7 +595,7 @@ public class BlogDao {
 	 */
 	public Map<String, Integer> getTags() {
 		key = "blogDao_getTags";
-		Map<String, Integer> tagsMap = (Map<String, Integer>) MyCache.cache
+		Map<String, Integer> tagsMap = (Map<String, Integer>) MyCache.cache_count
 				.get(key);
 		if (tagsMap == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
@@ -645,10 +644,34 @@ public class BlogDao {
 				tagsMap.put(infoIds.get(i).getKey(), infoIds.get(i).getValue());
 				// System.out.println(id);
 			}
-			MyCache.cache.put(key, tagsMap);
+			MyCache.cache_count.put(key, tagsMap);
 		}
 		return tagsMap;
 	}
+
+	/**
+	 * 查询博客数量
+	 * 
+	 * @return
+	 */
+	public Integer getBlogCount() {
+		key = "blogVisibleCount";
+		Integer blogCount = (Integer) MyCache.cache_count.get(key);
+		if (blogCount == null) {
+			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			Query q = null;
+			String filter = " select count(id) from " + Blog.class.getName()
+			+ " where isVisible==0 ";
+			q = pm.newQuery(filter);
+			Object obj = q.execute();
+			blogCount = Integer.parseInt(obj.toString());
+			MyCache.cache_count.put(key, blogCount);
+//			closePM();
+		}
+		return blogCount;
+	}
+
+	
 
 	/**
 	 * 关闭链接（不能在显示数据前关闭链接，不然报错）

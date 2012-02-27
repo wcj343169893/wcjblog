@@ -32,7 +32,7 @@ public class UserDao {
 				if (users != null && users.size() > 0) {
 					user = users.get(0);
 				} else {
-					Create();
+					//Create();
 				}
 				// 把用户信息存入缓存中
 				MyCache.cache.put("userDao_getUserDetail", user);

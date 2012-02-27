@@ -24,8 +24,10 @@ import java.lang.reflect.*;
  */
 public class MyCache {
 	public static Cache cache;
+	public static Cache cache_count;
 	private static CacheFactory cacheFactory;
 	private static Map props = new HashMap();
+	private static Map<Long, Integer> blogReplyCount = new HashMap<Long, Integer>();// 博客回复数量
 	static {
 		try {
 			props.put(GCacheFactory.EXPIRATION_DELTA, 7200);// 3600秒后过期
@@ -33,6 +35,10 @@ public class MyCache {
 
 			cacheFactory = CacheManager.getInstance().getCacheFactory();
 			cache = cacheFactory.createCache(props);
+			
+			//专门存放统计数量的缓存
+			props.put(GCacheFactory.EXPIRATION_DELTA, 14400);// 14400秒后过期(4小时过期)
+			cache_count = cacheFactory.createCache(props);
 			System.out.println("启动缓存");
 		} catch (CacheException e) {
 			System.out.println("初始化缓存失败!");
@@ -44,7 +50,7 @@ public class MyCache {
 	 * 
 	 * @return
 	 */
-	public static Cache getCache() {
+	private static Cache getCache() {
 		if (cache == null) {
 			try {
 				CacheFactory factory = CacheManager.getInstance()
@@ -157,6 +163,14 @@ public class MyCache {
 			flag = false;
 		}
 		return flag;
+	}
+
+	public static Map<Long, Integer> getBlogReplyCount() {
+		return blogReplyCount;
+	}
+
+	public static void setBlogReplyCount(Map<Long, Integer> blogReplyCount) {
+		MyCache.blogReplyCount = blogReplyCount;
 	}
 
 	/**
