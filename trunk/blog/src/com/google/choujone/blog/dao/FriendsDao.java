@@ -82,34 +82,47 @@ public class FriendsDao {
 	 */
 	@SuppressWarnings( { "unchecked" })
 	public List<Friends> getFriendsByPage(Pages pages) {
-		String key = "friendsDao_getFriendsByPage_"+pages.getPageNo();
+		String key = "friendsDao_getFriendsByPage_" + pages.getPageNo();
 		List<Friends> friends = MyCache.get(key);
 		page_key = key + "_pages";
-		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
-				.get(page_key)
-				: pages;
+//		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+//				.get(page_key)
+//				: pages;
+		pages.setRecTotal(getCount());
 		if (friends == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				// 查询总条数
-				Query q = pm.newQuery("select count(id) from "
-						+ Friends.class.getName());
-				Object obj = q.execute();
-				pages.setRecTotal(Integer.parseInt(obj.toString()));
+//				Query q = pm.newQuery("select count(id) from "
+//						+ Friends.class.getName());
+//				Object obj = q.execute();
+//				pages.setRecTotal(getCount());
 				Query query = pm.newQuery(Friends.class);
 				query.setOrdering("sdTime desc");
 				query.setRange(pages.getFirstRec(), pages.getPageNo()
 						* pages.getPageSize());
 				friends = (List<Friends>) query.execute();
 				MyCache.put(key, friends);
-				MyCache.cache.put(page_key, pages);
+//				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
-				e.printStackTrace();
 			}
-		}else{
-			pages.setRecTotal(page.getRecTotal());
 		}
 		return friends;
+	}
+
+	public Integer getCount() {
+		Integer count = 0;
+		String key = "friendsDao_frind_count";
+		count = (Integer) MyCache.cache_count.get(key);
+		if (count==null) {
+			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			Query q = pm.newQuery("select count(id) from "
+					+ Friends.class.getName());
+			Object obj = q.execute();
+			count = Integer.parseInt(obj.toString());
+			MyCache.cache_count.put(key, count);
+		}
+		return count;
 	}
 
 	/**

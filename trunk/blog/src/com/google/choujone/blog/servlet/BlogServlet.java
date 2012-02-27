@@ -23,8 +23,9 @@ public class BlogServlet extends HttpServlet {
 		String ids = req.getParameter("ids");// 博客id数组
 		String isVisible = req.getParameter("isVisible");// 是否显示
 		Blog blog = new Blog();
-		BlogDao blogDao = new BlogDao();
+		BlogDao blogDao ;
 		if (operation.trim().equals(Operation.delete.toString())) {// 删除
+			blogDao = new BlogDao();
 			if (ids != null) {
 				String[] id_str = ids.split(",");
 				for (int i = 0; i < id_str.length; i++) {
@@ -42,6 +43,7 @@ public class BlogServlet extends HttpServlet {
 			blogDao.closePM();
 			resp.sendRedirect("/admin/blog_list.jsp");
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 加载修改
+			blogDao = new BlogDao();
 			blog = blogDao.getBlogById(Tools.strTolong(id));
 			req.setAttribute("blog", blog);
 			req.getRequestDispatcher("/admin/blog_edit.jsp").forward(req, resp);

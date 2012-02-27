@@ -111,14 +111,17 @@ public class ReplyDao {
 		key = "replyDao_bid_" + bid + "_" + pages.getPageNo();
 		List<Reply> replyList = MyCache.get(key);
 		page_key = key + "_pages";
-		Pages page = (Pages) MyCache.cache.get(page_key);
-		if (replyList == null && page== null) {
+//		Pages page = (Pages) MyCache.cache.get(page_key);
+		pages.setRecTotal(getBlogReplyCount(bid));
+		if (replyList == null ) {
 			try {
 				pm = PMF.get().getPersistenceManager();
-				Query q = pm.newQuery("select count(id) from "
-						+ Reply.class.getName() + " where bid == " + bid);
-				Object obj = q.execute();
-				pages.setRecTotal(Integer.parseInt(obj.toString()));
+				
+//				Query q = pm.newQuery("select count(id) from "
+//						+ Reply.class.getName() + " where bid == " + bid);
+//				Object obj = q.execute();
+				
+//				pages.setRecTotal(getBlogReplyCount(bid));
 				Query query = pm.newQuery(Reply.class, " bid == " + bid);
 				query.setRange(pages.getFirstRec(), pages.getPageNo()
 						* pages.getPageSize());
@@ -131,9 +134,7 @@ public class ReplyDao {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else {
-			pages.setRecTotal(page.getRecTotal());
-		}
+		} 
 		return replyList;
 	}
 
@@ -240,6 +241,23 @@ public class ReplyDao {
 			}
 		}
 		return replyList;
+	}
+
+	public Integer getBlogReplyCount(Long bid) {
+		String key = "blog_reply_count_bid_" + bid;
+		Integer blogCount = (Integer) MyCache.cache_count.get(key);
+		if (blogCount == null) {
+			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			Query q = null;
+			String filter = " select count(id) from " + Reply.class.getName()
+					+ " where bid==" + bid;
+			q = pm.newQuery(filter);
+			Object obj = q.execute();
+			blogCount = Integer.parseInt(obj.toString());
+			MyCache.cache_count.put(key, blogCount);
+//			closePM();
+		}
+		return blogCount;
 	}
 
 	/**
