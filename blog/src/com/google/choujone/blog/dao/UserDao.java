@@ -98,7 +98,7 @@ public class UserDao {
 		User u = user;
 		try {
 			if (operation.equals(Operation.add)) {// 增加用户信息只运行一次
-				pm.makePersistent(user);
+				//pm.makePersistent(user);
 				flag = true;
 			} else if (operation.equals(Operation.modify)) {// 修改
 				Query query = pm.newQuery(User.class);

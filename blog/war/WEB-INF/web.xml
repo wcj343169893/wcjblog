@@ -125,7 +125,6 @@
 	</security-constraint>
 	-->
 	<!--_ah_sessioncleanup -->
-	<!--
 	<servlet> 
     	<servlet-name>_ah_sessioncleanup</servlet-name> 
  		<servlet-class>com.google.apphosting.utils.servlet.SessionCleanupServlet</servlet-class> 
@@ -143,7 +142,6 @@
 	      <role-name>admin</role-name> 
 	    </auth-constraint> 
    	</security-constraint> 
-	-->
 	<!-- end _ah_sessioncleanup -->
 	<filter>   
 		<filter-name>SetCharacterEncoding</filter-name>   
