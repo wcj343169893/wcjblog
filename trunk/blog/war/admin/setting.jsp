@@ -5,7 +5,8 @@
 <%@page import="java.util.List"%>
 <%@page import="com.google.choujone.blog.util.Config"%>
 <%@page import="com.google.choujone.blog.entity.Menu"%>
-<%@page import="com.google.choujone.blog.dao.UserDao"%><html>
+<%@page import="com.google.choujone.blog.dao.UserDao"%>
+<%@page import="com.google.choujone.blog.util.Tools"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
@@ -225,7 +226,7 @@
 					<td colspan="3" id="td_menu">
 						<input value="<%=user.getMenu()!=null?user.getMenu().getValue():"" %>" name="blogMenu" size="100" id="menus" type="hidden"/>
 					<%
-						List<Menu> menus=Config.getMenus();
+						List<Menu> menus=Tools.split(user.getMenu(), ";", ",");
 					%>
 						<input value="新增" type="button" onclick="add_m()">
 						<input value="全部删除" type="button" onclick="del_m('')">
