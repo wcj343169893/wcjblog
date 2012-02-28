@@ -70,94 +70,26 @@
 		}
 	%></font>
 	</div>
-	<!-- 直接查询评论 -->
-			<%
-				int p = request.getParameter("p") != null ? Integer
-								.parseInt(request.getParameter("p").toString()) : 1;
-						ReplyDao replyDao = new ReplyDao();
-						Pages pages = new Pages();
-						pages.setPageNo(p);
-						List<Reply> replyList = replyDao.getReplyListByBid(blog
-								.getId(), pages);
-			%>
+	<!-- ajax 动态查询评论  -->
 	<div
 		style="font-family: 微软雅黑, 宋体, Arial, Helvetica, sans-serif; font-size: 14px; color: #ffd247; padding: 0 0 10px 20px;">评论列表</div>
-	<div class="vito-postcommentlist">
-	<%
-		if (replyList != null && replyList.size() > 0) {
-	%>
-		<div id="comment">
-			<%
-				for (int i = 0; i < replyList.size(); i++) {
-								Reply reply = replyList.get(i);
-			%>
-			<div class="vito-postcommentlist">
-				<span class="vito-postcomment-one">
-					<span class="vito-postcomment-name" style="color: #8c8c8c">
-						<%
-							int louceng=(pages.getPageNo()-1)*pages.getPageSize()+i+1;
-							if (louceng == 1) {out.print("沙发");} 
-							else if (louceng == 2) {out.print("板凳");} 
-							else if (louceng == 3) {out.print("平地");
-							} else {out.print("第" + louceng+ "楼");}
-						
-						String url=reply.getUrl()!=null && !"".equals(reply.getUrl().trim()) ?reply.getUrl(): blog_user.getUrl();
-						url=url.indexOf("http://")!=-1?url:"http://"+url;
-						%>|<a href="<%=url %>"><%=reply.getName()%></a>
-						<span style="color: #979797"><%=reply.getSdTime()%>说</span>
-					</span>
-					<br><br>
-					<span class="vito-postcomment-content">
-						<%=reply.getContent() %>
-						<%
-							if (reply.getReplyMessage() != null
-													&& !"".equals(reply.getReplyMessage()
-															.trim())) {
-						%>
-						    <blockquote>
-								<div class="quote quote3">
-									<div class="quote-title"><%=blog_user.getName()%>于 <%=reply.getReplyTime()%>回复</div>
-									<%=reply.getReplyMessage()%>
-								</div>
-							</blockquote>
-							<%
-								}
-							%>
-						</span>
-					</span>
-				<span class="vito-postcomment-reback"> </span>
-			</div>
-			<%
-				}
-			%>
-		</div>
-		<br>
-		<div class="vito-prenext">共<%=pages.getRecTotal()%>第<%=pages.getPageNo()%>/<%=pages.getPageTotal()%>页<%
-			if (p > 1) {
-		%><a href="/blog?p=<%=p - 1%>&id=<%=blog.getId()%>">上一页</a><%
-			}
-		%><%
-			if (p < pages.getPageTotal()) {
-		%><a href="/blog?p=<%=p + 1%>&id=<%=blog.getId()%>">下一页</a><%
-			}
-		%></div>
-		<%
-			} else {
-		%>
-		<div class="vito-prenext">还没有人发表评论<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');$('#comment_name').focus();">来坐第一个沙发</a></div>
-		<%
-			}
-		%>
+	<div class="vito-postcommentlist" id="reply_comment">
+		<a href="javascript:initReply(1,<%=blog.getId()%>)">加载评论</a>
 	</div>
+	<script type="text/javascript">
+		jQuery(function($) {
+			//initReply(1,<%=blog.getId()%>);
+		});
+	</script>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
-			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');">点击这里 发表评论</a>
+		&nbsp;性能优化中，暂时关闭评论,如有疑问请到<a href="/leaveMessage.jsp">网站留言板</a>。
+<!--			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');">点击这里 发表评论</a>-->
 		</p>
 		<div id="commentDiv" style="display: none">
 			<form id="frmSumbit" target="_self" method="post" action="/reply" onsubmit="return bd_sub();">
 				<div class="vito-ct-id">
 					<input type="hidden" name="bid" value="<%=blog.getId()%>">
-					<input type="hidden" name="p" value="<%=p %>">
 					<input type="hidden" name="op" value="add">
 					<%
 						String gustName="游客";
