@@ -12,7 +12,6 @@ import com.google.choujone.blog.entity.User;
 import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.MyCache;
 import com.google.choujone.blog.util.PMF;
-import com.google.choujone.blog.util.Tools;
 
 /**
  * choujone'blog<br>
@@ -21,9 +20,10 @@ import com.google.choujone.blog.util.Tools;
 public class UserDao {
 	public PersistenceManager pm;
 	private User user;
+	private String user_key = "user_unit_key";// 用户存入缓存的key
 
 	public User getUserDetail() {
-		user = (User) MyCache.cache.get("userDao_getUserDetail");
+		user = (User) MyCache.cache.get(user_key);
 		if (user == null) {
 			try {
 				pm = PMF.get().getPersistenceManager();
@@ -32,10 +32,10 @@ public class UserDao {
 				if (users != null && users.size() > 0) {
 					user = users.get(0);
 				} else {
-					//Create();
+					// Create();
 				}
 				// 把用户信息存入缓存中
-				MyCache.cache.put("userDao_getUserDetail", user);
+				MyCache.cache.put(user_key, user);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -75,12 +75,12 @@ public class UserDao {
 		user = new User();
 		Date dt = new Date(System.currentTimeMillis());
 		user.setId(dt.getTime());
-		user.setName("choujone");
-		user.setPassword("123456");
-		user.setpTitle("文朝军的博客");
-		user.setCtitle("这是我写的第一个小博客");// 子标题
-		user.setEmail("wcj343169893@163.com");
-		user.setDescription("我目前是一个Java程序员");
+		// user.setName("choujone");
+		// user.setPassword("123456");
+		// user.setpTitle("文朝军的博客");
+		// user.setCtitle("这是我写的第一个小博客");// 子标题
+		// user.setEmail("wcj343169893@163.com");
+		// user.setDescription("我目前是一个Java程序员");
 
 		return user;
 	}
@@ -98,7 +98,7 @@ public class UserDao {
 		User u = user;
 		try {
 			if (operation.equals(Operation.add)) {// 增加用户信息只运行一次
-				//pm.makePersistent(user);
+				// pm.makePersistent(user);
 				flag = true;
 			} else if (operation.equals(Operation.modify)) {// 修改
 				Query query = pm.newQuery(User.class);
@@ -140,9 +140,9 @@ public class UserDao {
 					u.setCloseweb(user.getCloseweb());
 					// 更新静态设置
 					Config.setClose(user.getCloseweb().equals(1));
-//					Config.setBlog_user(u);
+					// Config.setBlog_user(u);
 					// 更新导航
-					Config.setMenus(Tools.split(u.getMenu(), ";", ","));
+					// Config.setMenus(Tools.split(u.getMenu(), ";", ","));
 
 				}
 				flag = true;
@@ -151,7 +151,7 @@ public class UserDao {
 			flag = false;
 			e.printStackTrace();
 		}
-		MyCache.cache.put("userDao_getUserDetail", u);
+		MyCache.cache.put(user_key, u);
 		closePM();
 		return flag;
 	}

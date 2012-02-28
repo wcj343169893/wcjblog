@@ -31,7 +31,7 @@ public class WebFilter implements Filter {
 		}
 		HttpServletRequest req = (HttpServletRequest) arg0;
 		String url = req.getRequestURI();
-		String filter = "album,index.jsp,leaveMessage.jsp,blog_detail.jsp,blog,login.jsp";
+		String filter = "album,index.jsp,leaveMessage.jsp,blog_detail.jsp,blog";
 		String[] filters = filter.split(",");
 		String temp[] = url.split("/");
 		boolean isFilter = temp.length==0;
