@@ -75,7 +75,7 @@ public class User implements Serializable {
 	@Persistent
 	private Integer isUpload;// 是否允许上传
 	@Persistent
-	private Text menu = new Text("");// 网站菜单
+	private Text menu =new Text("");// 网站菜单
 
 	@Persistent
 	private Integer closeweb = 0;// 是否关闭网站
@@ -308,20 +308,20 @@ public class User implements Serializable {
 		this.isUpload = isUpload;
 	}
 
-	public Text getMenu() {
-		return menu;
-	}
-
-	public void setMenu(Text menu) {
-		this.menu = menu;
-	}
-
 	public Integer getCloseweb() {
 		return closeweb;
 	}
 
 	public void setCloseweb(Integer closeweb) {
 		this.closeweb = closeweb;
+	}
+
+	public Text getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Text menu) {
+		this.menu = menu;
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.Text;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.User;
@@ -25,6 +26,12 @@ public class UserServlet extends HttpServlet {
 			// reply.setId(Long.valueOf(ids));
 			// replyDao.operationReply(Operation.delete, reply);
 			// resp.sendRedirect("/admin/reply_list.jsp");
+		} else if (operation.trim().equals(Operation.add.toString())) {
+			user = userDao.getUserDetail();
+			if (user == null) {
+				userDao.operationUser(Operation.add, userDao.Create());// 新增用户
+				user = userDao.getUserDetail();
+			}
 		} else if (operation.trim().equals(Operation.modify.toString())) {
 			// 判断用户是否登录
 			if (!Tools.isLogin(req)) {
@@ -43,8 +50,8 @@ public class UserServlet extends HttpServlet {
 			}
 		} else {// 注销
 			req.getSession().removeAttribute("login_user");
-//			UserService us = UserServiceFactory.getUserService();
-//			String url = us.createLogoutURL("/");
+			// UserService us = UserServiceFactory.getUserService();
+			// String url = us.createLogoutURL("/");
 			resp.sendRedirect("/");
 		}
 	}
@@ -164,8 +171,7 @@ public class UserServlet extends HttpServlet {
 
 				user.setPreMessage(new com.google.appengine.api.datastore.Text(
 						Tools.changeHTML(Tools.toChinese(preMessage))));
-				user.setMenu(new com.google.appengine.api.datastore.Text(Tools
-						.changeHTML(Tools.toChinese(blogMenu))));
+				user.setMenu(new Text(Tools.changeHTML(Tools.toChinese(blogMenu))));
 
 				user.setBlogDescription(blogDescription);
 				user.setBlogKeyword(blogKeyword);
