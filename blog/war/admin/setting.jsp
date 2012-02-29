@@ -224,7 +224,7 @@
 						网站导航
 					</td>
 					<td colspan="3" id="td_menu">
-						<input value="<%=user.getMenu()!=null?user.getMenu().getValue():"" %>" name="blogMenu" size="100" id="menus" type="hidden"/>
+						<input value="<%=user.getMenu()!=null?user.getMenu():"" %>" name="blogMenu" size="100" id="menus" type="hidden"/>
 					<%
 						List<Menu> menus=Tools.split(user.getMenu(), ";", ",");
 					%>
@@ -395,7 +395,8 @@
 	</script>
 	<div id="user_header" title="用户头像">
 		<div style="padding:10px 0;color:#666;">
-		你最好上传一张真人照片证明你是地球人，也可以  <a href="javascript:void(0)" id="use_camera" class="spider_btn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>使用摄像头</a>
+		你最好上传一张真人照片证明你是地球人，也可以  
+		<a href="javascript:void(0)" id="use_camera" class="spider_btn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>使用摄像头</a>
 		</div>
 		<form enctype="multipart/form-data" method="post" name="upform" target="upload_target" action="upload.jsp" onsubmit="return checkFile()">
 			<input type="file" name="Filedata" id="Filedata"/>

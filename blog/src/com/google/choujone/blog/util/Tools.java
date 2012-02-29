@@ -296,7 +296,7 @@ public class Tools {
 	/**
 	 * 字符串转为数组
 	 * 
-	 * @param str
+	 * @param menus
 	 *            源字符串
 	 * @param str1
 	 *            分割字符串1

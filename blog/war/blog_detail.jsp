@@ -20,7 +20,7 @@
 	if(isOk) {
 			//blogDao.operationBlog(Operation.readTimes, blog);
 			//更新阅读时间
-			Config.addBlogReadCount(blog.getTid());
+			Config.addBlogReadCount(blog.getId());
 			//Blog preBlog = blogDao.getPreBlog(blog.getId());
 			Blog preBlog = null;
 			//Blog nextBlog = blogDao.getNextBlog(blog.getId());
