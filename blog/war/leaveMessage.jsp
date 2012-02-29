@@ -89,6 +89,7 @@ User blog_user=  ud.getUserDetail();
 						String gustURL="";
 				   	%>
 					<input type="hidden" name="op" value="add">
+					<input type="hidden" name="title" value="网站留言中心">
 					<input type="text" name="name"
 						class="text vito-contentbd-input" value="<%=gustName %>" size="28"/>
 					<label for="inpName">署名(*)</label>

@@ -2,6 +2,8 @@ package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.BlogDao;
 import com.google.choujone.blog.entity.Blog;
+import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.Tools;
 
 @SuppressWarnings("serial")
@@ -23,7 +26,7 @@ public class BlogServlet extends HttpServlet {
 		String ids = req.getParameter("ids");// 博客id数组
 		String isVisible = req.getParameter("isVisible");// 是否显示
 		Blog blog = new Blog();
-		BlogDao blogDao ;
+		BlogDao blogDao;
 		if (operation.trim().equals(Operation.delete.toString())) {// 删除
 			blogDao = new BlogDao();
 			if (ids != null) {
@@ -47,6 +50,24 @@ public class BlogServlet extends HttpServlet {
 			blog = blogDao.getBlogById(Tools.strTolong(id));
 			req.setAttribute("blog", blog);
 			req.getRequestDispatcher("/admin/blog_edit.jsp").forward(req, resp);
+		} else if (operation.trim().equals(Operation.readTimes.toString())) {// 定时更新阅读次数
+			try {
+				blogDao = new BlogDao();
+				// 读取浏览缓存
+				// 更新点击
+				Map<Long, Integer> blogReadCount = Config.blogReadCount;
+				if (blogReadCount != null) {
+					for (Long bid : blogReadCount.keySet()) {
+						blog = new Blog();
+						blog.setId(bid);
+						blog.setCount(blogReadCount.get(bid));
+						blogDao.operationBlog(Operation.readTimes, blog);
+					}
+				}
+			} catch (Exception e) {
+			}
+			// 清空统计
+			Config.blogReadCount = new HashMap<Long, Integer>();
 		} else {
 			// 随机显示博客
 			if (id == null) {
@@ -54,17 +75,17 @@ public class BlogServlet extends HttpServlet {
 				String temp[] = url.split("/");
 				id = temp[temp.length - 1];// 获取博客
 				if (id == null || id.equals("blog")) {
-//					id = blogDao.getBlogByRand();
-					//不能随机显示，直接跳转到主页
+					// id = blogDao.getBlogByRand();
+					// 不能随机显示，直接跳转到主页
 					resp.sendRedirect("/");
 					return;
 				}
 				req.setAttribute("id", id);
 			}// 显示某篇文章
-			//如果id==-1
+			// 如果id==-1
 			if (id.equals("-1")) {
 				resp.sendRedirect("/leaveMessage.jsp");
-			}else{
+			} else {
 				req.getRequestDispatcher("/blog_detail.jsp").forward(req, resp);
 			}
 		}

@@ -104,9 +104,8 @@ public class BlogDao {
 			}
 		} else if (operation.equals(Operation.readTimes)) {// 增加阅读次数
 			try {
-				// 取消浏览次数
 				b = pm.getObjectById(Blog.class, blog.getId());
-				b.setCount(b.getCount() + 1);
+				b.setCount(b.getCount() + blog.getCount());
 				flag = true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -145,7 +144,8 @@ public class BlogDao {
 		Blog blog = (Blog) MyCache.cache.get(key);
 		if (blog == null) {
 			try {
-				pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+//				pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+				pm=PMF.getPersistenceManager();
 				blog = pm.getObjectById(Blog.class, id);
 				MyCache.cache.put(key, blog);
 			} catch (Exception e) {
@@ -275,7 +275,8 @@ public class BlogDao {
 //		Pages page = (Pages) MyCache.cache.get(page_key);
 		pages.setRecTotal(getCount(tid));
 		if (blogs == null) {
-			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+//			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			pm=PMF.getPersistenceManager();
 			try {
 				String filter = "select count(id) from " + Blog.class.getName()
 						+ " where isVisible==0 ";

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.BlogDao,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config,com.google.choujone.blog.common.Operation,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType"%>
-<%@page import="com.google.choujone.blog.dao.UserDao"%><html><%
+<%@page import="com.google.choujone.blog.dao.UserDao"%>
+<%@page import="com.google.choujone.blog.util.MyCache"%><html><%
 	String id = request.getParameter("id")!=null ? request.getParameter("id") : (String)request.getAttribute("id");
 	boolean isOk=false;
 	BlogDao blogDao=null;
@@ -17,7 +18,9 @@
 		}
 	} 
 	if(isOk) {
-			blogDao.operationBlog(Operation.readTimes, blog);
+			//blogDao.operationBlog(Operation.readTimes, blog);
+			//更新阅读时间
+			Config.addBlogReadCount(blog.getTid());
 			//Blog preBlog = blogDao.getPreBlog(blog.getId());
 			Blog preBlog = null;
 			//Blog nextBlog = blogDao.getNextBlog(blog.getId());
@@ -83,13 +86,14 @@
 	</script>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
-		&nbsp;性能优化中，暂时关闭评论,如有疑问请到<a href="/leaveMessage.jsp">网站留言板</a>。
-<!--			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');">点击这里 发表评论</a>-->
+<!--		&nbsp;性能优化中，暂时关闭评论,如有疑问请到<a href="/leaveMessage.jsp">网站留言板</a>。-->
+			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');">点击这里 发表评论</a>
 		</p>
 		<div id="commentDiv" style="display: none">
 			<form id="frmSumbit" target="_self" method="post" action="/reply" onsubmit="return bd_sub();">
 				<div class="vito-ct-id">
 					<input type="hidden" name="bid" value="<%=blog.getId()%>">
+					<input type="hidden" name="title" value="<%=blog.getTitle()%>">
 					<input type="hidden" name="op" value="add">
 					<%
 						String gustName="游客";

@@ -35,8 +35,8 @@ public class MyCache {
 
 			cacheFactory = CacheManager.getInstance().getCacheFactory();
 			cache = cacheFactory.createCache(props);
-			
-			//专门存放统计数量的缓存
+
+			// 专门存放统计数量的缓存
 			props.put(GCacheFactory.EXPIRATION_DELTA, 14400);// 14400秒后过期(4小时过期)
 			cache_count = cacheFactory.createCache(props);
 			System.out.println("启动缓存");
