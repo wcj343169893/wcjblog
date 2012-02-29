@@ -19,12 +19,11 @@ import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.User;
 
 public class Mail {
-	public static void send(String bid, String content) {
+	public static void send(String title, String content) {
 		// mail.send_mail();
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		String msgBody = content;
-		String subject = "Blog " + bid + " reply";
 		UserDao ud = new UserDao();
 		User blogUser = ud.getUserDetail();
 		try {
@@ -34,9 +33,6 @@ public class Mail {
 							"choujone"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
 					blogUser.getEmail(), "administrator"));
-			if (bid == null || "-1".equals(bid.trim())) {
-				subject = "Leave a message";
-			}
 			Multipart mp = new MimeMultipart();
 			MimeBodyPart htmlPart = new MimeBodyPart();
 			htmlPart.setContent(msgBody, "text/html");
@@ -46,7 +42,7 @@ public class Mail {
 			// Charset.defaultCharset());
 			// subject=new Header(subject,"utf-8");
 			// subject=Header(subject,Charset.defaultCharset());
-			msg.setSubject(subject);
+			msg.setSubject(title);
 			// msg.setText(msgBody);
 			msg.setContent(mp);
 			msg.setSentDate(Tools.changeTime(Tools.changeTime(new Date())));

@@ -9,6 +9,7 @@
         <include path="/**.ico" expiration="365d"/>
         <include path="/**.css" expiration="365d"/>
         <include path="/**.js" expiration="365d"/>
+        <include path="/**.jsp" expiration="1d"/>
    </static-files>
 	<!-- Configure java.util.logging -->
 	<system-properties>

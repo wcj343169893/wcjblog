@@ -49,7 +49,7 @@ public class ReplyServlet extends HttpServlet {
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
 
 		} else {
-//			resp.setContentType("text/html;charset=utf-8");
+			// resp.setContentType("text/html;charset=utf-8");
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("UTF-8");
 			resp.setHeader("Cache-Control", "no-cache");
@@ -59,7 +59,7 @@ public class ReplyServlet extends HttpServlet {
 			pages.setPageNo(page);
 			List<Reply> replyList = replyDao.getReplyListByBid(Long
 					.valueOf(bid), pages);
-			JSONArray ja=new JSONArray();
+			JSONArray ja = new JSONArray();
 			for (Reply r : replyList) {
 				JSONObject obj = new JSONObject();
 				obj.put("replyTime", r.getReplyTime());
@@ -85,6 +85,8 @@ public class ReplyServlet extends HttpServlet {
 		String operation = req.getParameter("op") != null ? req
 				.getParameter("op") : "";// 获取操作
 		String content = req.getParameter("content");// 文章信息
+		String title = req.getParameter("title") != null ? req
+				.getParameter("title") : "无标题";// 文章信息
 
 		String name = req.getParameter("name");// 署名
 		if (name == null || "".equals(name.trim())) {
@@ -143,10 +145,10 @@ public class ReplyServlet extends HttpServlet {
 			// 更新统计
 
 			// 发送 邮件到邮箱
-			Mail.send(bid, content);
+			Mail.send(title, content);
 		} else if (operation.trim().equals(Operation.lists.toString())) {// 评论列表
-		// System.out.println("请求一下");// 功能未完成
-		// req.setAttribute("reply", reply);
+			// System.out.println("请求一下");// 功能未完成
+			// req.setAttribute("reply", reply);
 			resp.setContentType("text/html;charset=utf-8");
 			resp.setCharacterEncoding("UTF-8");
 			resp.setHeader("Cache-Control", "no-cache");
