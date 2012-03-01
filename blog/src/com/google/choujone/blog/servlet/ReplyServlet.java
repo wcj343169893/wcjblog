@@ -29,7 +29,7 @@ public class ReplyServlet extends HttpServlet {
 		String operation = req.getParameter("op") != null ? req
 				.getParameter("op") : "";// 获取操作
 		String bid = req.getParameter("bid");// 博客编号
-		String p = req.getParameter("p");// 页码
+		String p = req.getParameter("p") != null ? req.getParameter("p") : "1";// 页码
 		String ids = req.getParameter("ids");// 评论编号列表
 		String id = req.getParameter("id") != null ? req.getParameter("id")
 				: "";// 回复
@@ -49,27 +49,31 @@ public class ReplyServlet extends HttpServlet {
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
 
 		} else {
-			// resp.setContentType("text/html;charset=utf-8");
-			resp.setContentType("application/json");
-			resp.setCharacterEncoding("UTF-8");
-			resp.setHeader("Cache-Control", "no-cache");
-			PrintWriter out = resp.getWriter();
-			int page = Integer.parseInt(p);
-			Pages pages = new Pages();
-			pages.setPageNo(page);
-			List<Reply> replyList = replyDao.getReplyListByBid(Long
-					.valueOf(bid), pages);
-			JSONArray ja = new JSONArray();
-			for (Reply r : replyList) {
-				JSONObject obj = new JSONObject();
-				obj.put("replyTime", r.getReplyTime());
-				obj.put("sdTime", r.getSdTime());
-				obj.put("replyMessage", r.getReplyMessage());
-				obj.put("content", r.getContent());
-				obj.put("name", r.getName());
-				ja.add(obj);
+			if (bid != null) {
+				// resp.setContentType("text/html;charset=utf-8");
+				resp.setContentType("application/json");
+				resp.setCharacterEncoding("UTF-8");
+				resp.setHeader("Cache-Control", "no-cache");
+				PrintWriter out = resp.getWriter();
+				int page = Integer.parseInt(p);
+				Pages pages = new Pages();
+				pages.setPageNo(page);
+				List<Reply> replyList = replyDao.getReplyListByBid(Long
+						.valueOf(bid), pages);
+				JSONArray ja = new JSONArray();
+				for (Reply r : replyList) {
+					JSONObject obj = new JSONObject();
+					obj.put("replyTime", r.getReplyTime());
+					obj.put("sdTime", r.getSdTime());
+					obj.put("replyMessage", r.getReplyMessage());
+					obj.put("content", r.getContent());
+					obj.put("name", r.getName());
+					ja.add(obj);
+				}
+				out.print(ja.toJSONString());
+			}else{
+				resp.sendRedirect("/");
 			}
-			out.print(ja.toJSONString());
 		}
 		// 清理缓存
 		// String key = "replyDao_bid_" + bid + "_" + p;// 更新前台
