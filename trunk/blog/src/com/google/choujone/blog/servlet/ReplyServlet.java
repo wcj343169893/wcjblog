@@ -145,7 +145,9 @@ public class ReplyServlet extends HttpServlet {
 			// 更新统计
 
 			// 发送 邮件到邮箱
-			Mail.send(title, content);
+			Mail.send(title, content + " <br/>访客信息:" + reply.getName()
+					+ "<br/>" + reply.getEmail() + "<br/>" + reply.getUrl()
+					+ "<br/>" + reply.getVisiter() + "<br/>");
 		} else if (operation.trim().equals(Operation.lists.toString())) {// 评论列表
 			// System.out.println("请求一下");// 功能未完成
 			// req.setAttribute("reply", reply);

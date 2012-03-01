@@ -235,9 +235,10 @@ $(function() {
 	//给开始按钮添加事件
 	$(".start_spider").each(function(){	
 		$(this).click(function() {
+			showResult();
 		$.get("/spider", {
 				"opera" : "start","id":$(this).attr("name")},function(data){
-					alert(data);
+					$("#test_result .result_content").html(data);
 				});
 		});
 	});

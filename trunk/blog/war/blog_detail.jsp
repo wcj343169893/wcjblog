@@ -16,15 +16,15 @@
 		if (blog == null) {
 			isOk=false;
 		}
-	} 
+	}
 	if(isOk) {
 			//blogDao.operationBlog(Operation.readTimes, blog);
 			//更新阅读时间
 			Config.addBlogReadCount(blog.getId());
-			//Blog preBlog = blogDao.getPreBlog(blog.getId());
-			Blog preBlog = null;
-			//Blog nextBlog = blogDao.getNextBlog(blog.getId());
-			Blog nextBlog = null;
+			Blog preBlog = blogDao.getPreBlog(blog.getId());
+			//Blog preBlog = null;
+			Blog nextBlog = blogDao.getNextBlog(blog.getId());
+			//Blog nextBlog = null;
 			//查询所有的分类
 			BlogTypeDao btd = new BlogTypeDao();
 			BlogType bt = btd.getBlogTypeById(blog.getTid());
