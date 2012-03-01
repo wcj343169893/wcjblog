@@ -155,11 +155,14 @@ public class SpiderServlet extends HttpServlet {
 			Long sid = Long.valueOf(id);
 			if (sid > 0) {
 				Spider spider = sd.getSpiderById(sid);
+//				out.print("获取到采集规则<br/>");
 				// TODO 排除重复地址（内容页）
 				// 得到所有的博客
 				BlogDao bd = new BlogDao();
 				List<Blog> blogList = bd.getBlogList();
+//				out.print("开始获取文章地址<br/>");
 				List<WebPage> webPageList = spiderUtil.run(spider);
+//				out.print("获取文章地址成功<br/>");
 				int count=0;
 				Blog blog = null;
 				w: for (WebPage wp : webPageList) {
@@ -178,6 +181,7 @@ public class SpiderServlet extends HttpServlet {
 					blog.setIsVisible(0);
 					blog.setSdTime(Tools.changeTime(new Date()));
 					blog.setSource(wp.getUrl());
+					out.print(count+":"+wp.getTitle()+"<br/>");
 					bd.operationBlog(Operation.add, blog);
 				}
 				//修改spider的运行次数和采集到的总数
