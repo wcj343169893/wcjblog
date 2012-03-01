@@ -9,16 +9,15 @@
 	BlogDao bd=new BlogDao();
 	if(blog_user.getIsInfo()==null || blog_user.getIsInfo()==0){ %>
 	<script type="text/javascript">
-	$(document).ready(function(){
-			alert($(".more a"));
+	jQuery(document).ready(function(){
 			var preEle=$(".more a").parent().prev();
-			$(".more a").toggle(
+			jQuery(".more a").toggle(
 				function(){
-					$(preEle).css("overflow","visible");
-					$(preEle).height("auto");
+					jQuery(preEle).css("overflow","visible");
+					jQuery(preEle).height("auto");
 				},function(){
-					$(preEle).css("overflow","hidden");
-					$(preEle).height("220px");
+					jQuery(preEle).css("overflow","hidden");
+					jQuery(preEle).height("220px");
 				});
 		});
 	</script>
@@ -44,7 +43,7 @@
 		</div>
 	<script type="text/javascript">
 		function checkCal(year,month){
-			$.post("/calendars", {"year":year, "month":month},function(data){
+			jQuery.post("/calendars", {"year":year, "month":month},function(data){
 					//$("#calendars").html(data);
 					document.getElementById("calendars").innerHTML=data;
 				});
