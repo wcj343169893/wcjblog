@@ -36,11 +36,11 @@ public enum Operation {
 	/**
 	 * 清理缓存
 	 * */
-	clearCache, 
+	clearCache,
 	/**
 	 * 测试列表
 	 */
-	testList, 
+	testList,
 	/**
 	 *测试内容
 	 */
@@ -48,5 +48,5 @@ public enum Operation {
 	/**
 	 * 开始
 	 */
-	start
+	start, getUser
 }

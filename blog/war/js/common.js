@@ -3,6 +3,17 @@ function showOrHideDiv(divId) {
 	commentReplyDiv.style.display = commentReplyDiv.style.display == "none" ? "block"
 			: "none";
 }
+//显示留言区域
+function showForm(){
+	var form=jQuery("#frmSumbit");
+	form.attr("action","/reply");
+	var goolge_email=jQuery("#google_account_email"), goolge_nickname=jQuery("#google_account_nickname"),goolge_authDomain=jQuery("#google_account_authDomain");
+	if (goolge_nickname.val()) {
+		form.find("#comment_name").val(goolge_nickname.val());
+	}
+	form.find("#inpEmail").val(goolge_email.val());
+	form.find("#inpHomePage").val(goolge_authDomain.val());
+}
 function closeDiv(id) {
 	$("#" + id).hide();
 }
@@ -113,6 +124,27 @@ function bd_sub() {
 		return false;
 	}
 	return true;
+}
+//动态加载Google登陆信息
+function initGoogleAccount(){
+	var top_member = jQuery("#top_member");
+	var url = window.location.href;
+	top_member.html("<div align='right'><img src='/images/loading.gif' height='20'/></div>");
+	jQuery.getJSON("/user?op=getUser&url="+url,function(data){
+		jQuery(data).each(function(index,domEle){
+//			alert("data"+domEle+" "+ index);
+			if(domEle.isUserLoggedIn){
+				var content="欢迎";
+				if(domEle.isUserAdmin){content+="管理员";}
+				content+=domEle.nickname;
+				content+=" <a href='"+domEle.logoutUrl+"'>退出</a>";
+				content+='<input id="google_account_email" value="'+domEle.email+'" type="hidden"/> <input id="google_account_nickname" value="'+domEle.nickname+'" type="hidden"/>  <input id="google_account_authDomain" value="'+domEle.authDomain+'" type="hidden"/>';
+				top_member.html(content);
+			}else{
+				top_member.html('<a href="'+domEle.loginUrl+'" >Google登陆</a>');
+			}
+		});
+	});
 }
 // 动态加载评论
 function initReply(p, bid) {

@@ -1,13 +1,18 @@
 package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.google.appengine.api.datastore.Text;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.User;
@@ -27,11 +32,11 @@ public class UserServlet extends HttpServlet {
 			// replyDao.operationReply(Operation.delete, reply);
 			// resp.sendRedirect("/admin/reply_list.jsp");
 		} else if (operation.trim().equals(Operation.add.toString())) {
-			user = userDao.getUserDetail();
-			if (user == null) {
-				userDao.operationUser(Operation.add, userDao.Create());// 新增用户
-				user = userDao.getUserDetail();
-			}
+			// user = userDao.getUserDetail();
+			// if (user == null) {
+			// userDao.operationUser(Operation.add, userDao.Create());// 新增用户
+			// user = userDao.getUserDetail();
+			// }
 		} else if (operation.trim().equals(Operation.modify.toString())) {
 			// 判断用户是否登录
 			if (!Tools.isLogin(req)) {
@@ -48,6 +53,28 @@ public class UserServlet extends HttpServlet {
 				req.getRequestDispatcher("/admin/setting.jsp").forward(req,
 						resp);
 			}
+		} else if (operation.trim().equals(Operation.getUser.toString())) {
+			resp.setContentType("application/json");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setHeader("Cache-Control", "no-cache");
+			PrintWriter out = resp.getWriter();
+			UserService userService = UserServiceFactory.getUserService();
+			String url = req.getParameter("url");
+			JSONObject obj = new JSONObject();
+			obj.put("isUserLoggedIn", 0);
+			obj.put("loginUrl", userService.createLoginURL(url));
+			obj.put("logoutUrl", userService.createLogoutURL(url));
+			if (userService.isUserLoggedIn()) {
+				obj.put("isUserLoggedIn", 1);
+				if (userService.isUserAdmin()) {
+					obj.put("isUserAdmin", 1);
+				}
+				obj.put("email", userService.getCurrentUser().getEmail());
+				obj.put("nickname", userService.getCurrentUser().getNickname());
+				obj.put("authDomain", userService.getCurrentUser()
+						.getAuthDomain());
+			}
+			out.print(obj.toJSONString());
 		} else {// 注销
 			req.getSession().removeAttribute("login_user");
 			// UserService us = UserServiceFactory.getUserService();
@@ -171,7 +198,8 @@ public class UserServlet extends HttpServlet {
 
 				user.setPreMessage(new com.google.appengine.api.datastore.Text(
 						Tools.changeHTML(Tools.toChinese(preMessage))));
-				user.setMenu(new Text(Tools.changeHTML(Tools.toChinese(blogMenu))));
+				user.setMenu(new Text(Tools.changeHTML(Tools
+						.toChinese(blogMenu))));
 
 				user.setBlogDescription(blogDescription);
 				user.setBlogKeyword(blogKeyword);

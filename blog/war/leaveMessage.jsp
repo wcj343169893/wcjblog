@@ -78,10 +78,10 @@ User blog_user=  ud.getUserDetail();
 </div>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
-			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv')">点击这里 发表评论</a>
+			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');showForm();">点击这里 发表评论</a>
 		</p>
 		<div id="commentDiv" style="display: none;">
-			<form id="frmSumbit" name="frmSumbit" target="_self" method="post" action="/reply" onsubmit="return bd_sub()">
+			<form id="frmSumbit" name="frmSumbit" target="_self" method="post" action="#" onsubmit="return bd_sub()">
 				<div class="vito-ct-id">
 				<%
 						String gustName="游客";
@@ -90,17 +90,17 @@ User blog_user=  ud.getUserDetail();
 				   	%>
 					<input type="hidden" name="op" value="add">
 					<input type="hidden" name="title" value="网站留言中心">
-					<input type="text" name="name"
+					<input type="text" name="name" id="comment_name"
 						class="text vito-contentbd-input" value="<%=gustName %>" size="28"/>
-					<label for="inpName">署名(*)</label>
+					<label for="comment_name">署名(*)</label>
 				</div>
 				<div class="vito-ct-id">
-					<input type="text" name="email"
+					<input type="text" name="email" id="inpEmail"
 						class="text vito-contentbd-input" value="<%=gustEmail %>" size="28"/>
 					<label for="inpEmail">邮箱</label>
 				</div>
 				<div class="vito-ct-id">
-					<input type="text" name="url" value="<%=gustURL %>"
+					<input type="text" name="url" value="<%=gustURL %>" id="inpHomePage"
 						class="text vito-contentbd-input" size="28"/>
 					<label for="inpHomePage">网站链接</label>
 				</div>
