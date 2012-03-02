@@ -86,11 +86,10 @@
 	</script>
 	<div class="vito-contentbd" id="divCommentPost">
 		<p class="posttop vito-postcomment-title">
-<!--		&nbsp;性能优化中，暂时关闭评论,如有疑问请到<a href="/leaveMessage.jsp">网站留言板</a>。-->
-			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');">点击这里 发表评论</a>
+			<a href="javascript:void(0)" onclick="showOrHideDiv('commentDiv');showForm();">点击这里 发表评论</a>
 		</p>
 		<div id="commentDiv" style="display: none">
-			<form id="frmSumbit" target="_self" method="post" action="/reply" onsubmit="return bd_sub();">
+			<form id="frmSumbit" target="_self" method="post" onsubmit="return bd_sub();">
 				<div class="vito-ct-id">
 					<input type="hidden" name="bid" value="<%=blog.getId()%>">
 					<input type="hidden" name="title" value="<%=blog.getTitle()%>">

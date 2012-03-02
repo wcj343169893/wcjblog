@@ -19,6 +19,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.UserService;
@@ -211,28 +213,44 @@ public class Tools {
 		return sb.toString();
 	}
 
+	public static JSONObject getGoogleCount() {
+		UserService userService = UserServiceFactory.getUserService();
+		JSONObject obj = new JSONObject();
+		obj.put("isUserLoggedIn", 0);
+		if (userService.isUserLoggedIn()) {
+			obj.put("isUserLoggedIn", 1);
+			if (userService.isUserAdmin()) {
+				obj.put("isUserAdmin", 1);
+			}
+			obj.put("email", userService.getCurrentUser().getEmail());
+			obj.put("nickname", userService.getCurrentUser().getNickname());
+			obj.put("authDomain", userService.getCurrentUser().getAuthDomain());
+		}
+		return obj;
+	}
+
 	public static boolean isLogin(ServletRequest request) {
 		boolean isLogin = false;
 		try {
-			// UserService userService = UserServiceFactory.getUserService();
-			// if (userService != null && userService.isUserLoggedIn()
-			// && userService.isUserAdmin()) {
-			// isLogin = true;
-			// } else {
-			// isLogin = false;
-			// }
-
-			HttpServletRequest req = (HttpServletRequest) request;
-			User user = (User) req.getSession().getAttribute("login_user");
-			if (user != null) {// 判断是不是网站用户登陆
-				// UserService us = UserServiceFactory.getUserService();
-				// if (!us.isUserLoggedIn() || !us.isUserAdmin()) {
-				// isLogin = false;
-				// } else {
-				// isLogin = true;
-				// }
+			UserService userService = UserServiceFactory.getUserService();
+			if (userService != null && userService.isUserLoggedIn()
+					&& userService.isUserAdmin()) {
 				isLogin = true;
+			} else {
+				isLogin = false;
 			}
+
+			// HttpServletRequest req = (HttpServletRequest) request;
+			// User user = (User) req.getSession().getAttribute("login_user");
+			// if (user != null) {// 判断是不是网站用户登陆
+			// // UserService us = UserServiceFactory.getUserService();
+			// // if (!us.isUserLoggedIn() || !us.isUserAdmin()) {
+			// // isLogin = false;
+			// // } else {
+			// // isLogin = true;
+			// // }
+			// isLogin = true;
+			// }
 		} catch (Exception e) {
 		}
 		return isLogin;
