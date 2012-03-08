@@ -1,12 +1,15 @@
 package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.FriendsDao;
@@ -40,14 +43,31 @@ public class FriendsServlet extends HttpServlet {
 					resp);
 		} else if (operation.trim().equals(Operation.modify.toString())) {// 加载修改
 			friends = friendsDao.getFriendsById(id);
-			req.setAttribute("friends", friends);
-			req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
-					resp);
+			// req.setAttribute("friends", friends);
+			// req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
+			// resp);
+			// ajax获取内容json数据
+			resp.setContentType("application/json");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setHeader("Cache-Control", "no-cache");
+			PrintWriter out = resp.getWriter();
+			JSONObject obj = new JSONObject();
+			obj.put("id", friends.getId());
+			obj.put("tid", friends.getTid());
+			obj.put("description", friends.getDescription());
+			obj.put("istop", friends.getIstop()!=null ?friends.getIstop() :0);
+			obj.put("name", friends.getName());
+			obj.put("url", friends.getUrl());
+			out.print(obj.toJSONString());
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
 			String key = "friendsDao_getFriendsByPage";
 			MyCache.clear(key);
 			req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
 					resp);
+		} else if (operation.trim().equals(Operation.ttop.toString())) {// 推荐
+			
+		} else if (operation.trim().equals(Operation.dtop.toString())) {// 取消推荐
+
 		}
 	}
 
@@ -60,11 +80,17 @@ public class FriendsServlet extends HttpServlet {
 		Long id = req.getParameter("id") != null ? Tools.strTolong(req
 				.getParameter("id")) : -1L;// 获取编号
 		String url = req.getParameter("url");// 
+		Integer tid = req.getParameter("tid") != null ? Integer.parseInt(req
+				.getParameter("tid")) : 1;// 友情链接分类
+		Integer istop = req.getParameter("istop") != null ? Integer.parseInt(req
+				.getParameter("istop")) : 0;// 是否置顶
 		String description = req.getParameter("description");// 
 		FriendsDao friendsDao = new FriendsDao();
 		Friends friends = new Friends();
 		friends.setName(name);
 		friends.setUrl(url);
+		friends.setTid(tid);
+		friends.setIstop(istop);
 		friends.setDescription(description);
 		if (operation.trim().equals(Operation.add.toString())) {// 新增
 			friends.setSdTime(Tools.changeTime(new Date()));

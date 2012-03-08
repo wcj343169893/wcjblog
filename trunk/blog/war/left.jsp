@@ -122,7 +122,9 @@
 			<%
 				for(int i=0;i<friendsList.size();i++){
 					Friends f=friendsList.get(i);
-			%><li title="<%=f.getDescription() %>"><a href="<%=f.getUrl() %>" target="_bank" title="<%=f.getDescription() %>"><%=f.getName() %></a></li><%} %>
+					if(f.getIstop()!=null && f.getIstop().equals(1)){
+			%><li title="<%=f.getDescription() %>"><a href="<%=f.getUrl() %>" target="_bank" title="<%=f.getDescription() %>"><%=f.getName() %></a></li>
+			<%}} %>
 		</ul>
 	</div><%} %>
 </div>

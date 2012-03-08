@@ -23,7 +23,9 @@ public class Config {
 	private static boolean isClose = false;// 网站是否关闭
 
 	public static Map<Long, Integer> blogReadCount = new HashMap<Long, Integer>();// 博客浏览次数,定时存入数据库
-
+	//友情链接分类
+	private static List<String> ftList=new ArrayList<String>();
+	
 	/**
 	 * 增加博客阅读次数
 	 * 
@@ -64,6 +66,11 @@ public class Config {
 
 	// private static List<Menu> menus = new ArrayList<Menu>();
 	static {
+		ftList.add("友情链接");
+		ftList.add("我参与的网站");
+		ftList.add("商业链接");
+		ftList.add("其他");
+		
 		style_urls.add("/css/style.css");
 		style_urls.add("/css/style_guitar.css");
 		style_urls.add("/css/718375968.css");
@@ -132,6 +139,22 @@ public class Config {
 
 	public static void setClose(boolean isClose) {
 		Config.isClose = isClose;
+	}
+
+	public static Map<Long, Integer> getBlogReadCount() {
+		return blogReadCount;
+	}
+
+	public static void setBlogReadCount(Map<Long, Integer> blogReadCount) {
+		Config.blogReadCount = blogReadCount;
+	}
+
+	public static List<String> getFtList() {
+		return ftList;
+	}
+
+	public static void setFtList(List<String> ftList) {
+		Config.ftList = ftList;
 	}
 
 }
