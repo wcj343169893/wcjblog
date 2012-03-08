@@ -48,5 +48,6 @@ public enum Operation {
 	/**
 	 * 开始
 	 */
-	start, getUser
+	start, getUser,
+	ttop,dtop
 }

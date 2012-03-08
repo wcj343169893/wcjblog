@@ -10,11 +10,10 @@ import javax.jdo.annotations.PrimaryKey;
 
 /**
  * choujone'blog<br>
- * 功能描述：友情链接
- * 2010-11-18
+ * 功能描述：友情链接 2010-11-18
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class Friends implements Serializable{
+public class Friends implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@PrimaryKey
@@ -28,6 +27,10 @@ public class Friends implements Serializable{
 	private String description;// 描述
 	@Persistent
 	private String sdTime = "";// 创建时间
+	@Persistent
+	private Integer istop = 0;// 是否推荐
+	@Persistent
+	private Integer tid = 0;// 分类编号1：友情链接，2：我做的网站，3：商业链接
 
 	public Long getId() {
 		return id;
@@ -69,4 +72,19 @@ public class Friends implements Serializable{
 		this.sdTime = sdTime;
 	}
 
+	public Integer getIstop() {
+		return istop;
+	}
+
+	public void setIstop(Integer istop) {
+		this.istop = istop;
+	}
+
+	public Integer getTid() {
+		return tid;
+	}
+
+	public void setTid(Integer tid) {
+		this.tid = tid;
+	}
 }
