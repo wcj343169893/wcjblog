@@ -60,12 +60,21 @@ public class FriendsDao {
 				f.setDescription(friends.getDescription());
 				f.setIstop(friends.getIstop());
 				f.setTid(friends.getTid());
-				friends=f;
+				friends = f;
 				flag = true;
 			} catch (Exception e) {
 			}
-		}// 更新缓存中的内容
-		key = "friendsDao_getFriendsByPage_1";
+		} else if (operation.equals(Operation.ttop)) {// 推荐
+			Friends f = pm.getObjectById(Friends.class, friends.getId());
+			f.setIstop(1);
+			friends = f;
+		} else if (operation.equals(Operation.dtop)) {// 取消推荐
+			Friends f = pm.getObjectById(Friends.class, friends.getId());
+			f.setIstop(0);
+			friends = f;
+		}
+		// 更新缓存中的内容
+		key = "friendsDao_getFriendsByPage_1_10";
 		MyCache.updateList(key, friends);
 		MyCache.cache.put("blogDao_id_" + friends.getId(), friends);
 		closePM();
@@ -76,11 +85,13 @@ public class FriendsDao {
 		pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 		return (Friends) pm.getObjectById(Friends.class, id);
 	}
-	public List<Friends> getFriends(){
+
+	public List<Friends> getFriends() {
 		List<Friends> friends = MyCache.get(key);
-		
+
 		return friends;
 	}
+
 	/**
 	 * 后台分页查询朋友链接
 	 * 
@@ -89,28 +100,30 @@ public class FriendsDao {
 	 */
 	@SuppressWarnings( { "unchecked" })
 	public List<Friends> getFriendsByPage(Pages pages) {
-		String key = "friendsDao_getFriendsByPage_" + pages.getPageNo()+"_"+pages.getPageSize();
+		String key = "friendsDao_getFriendsByPage_" + pages.getPageNo() + "_"
+				+ pages.getPageSize();
 		List<Friends> friends = MyCache.get(key);
 		page_key = key + "_pages";
-//		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
-//				.get(page_key)
-//				: pages;
+		// Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages)
+		// MyCache.cache
+		// .get(page_key)
+		// : pages;
 		pages.setRecTotal(getCount());
 		if (friends == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
 				// 查询总条数
-//				Query q = pm.newQuery("select count(id) from "
-//						+ Friends.class.getName());
-//				Object obj = q.execute();
-//				pages.setRecTotal(getCount());
+				// Query q = pm.newQuery("select count(id) from "
+				// + Friends.class.getName());
+				// Object obj = q.execute();
+				// pages.setRecTotal(getCount());
 				Query query = pm.newQuery(Friends.class);
 				query.setOrdering("sdTime desc");
 				query.setRange(pages.getFirstRec(), pages.getPageNo()
 						* pages.getPageSize());
 				friends = (List<Friends>) query.execute();
 				MyCache.put(key, friends);
-//				MyCache.cache.put(page_key, pages);
+				// MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 			}
 		}
@@ -121,7 +134,7 @@ public class FriendsDao {
 		Integer count = 0;
 		String key = "friendsDao_frind_count";
 		count = (Integer) MyCache.cache_count.get(key);
-		if (count==null) {
+		if (count == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			Query q = pm.newQuery("select count(id) from "
 					+ Friends.class.getName());
