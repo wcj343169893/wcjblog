@@ -69,7 +69,7 @@ function deletes(url) {
 	for ( var i = 0; i < inputs.length; i++) {
 		e = inputs[i];
 		if (e.type == "checkbox" && e.className == "input_check_single"
-				&& e.checked == true) {
+			&& e.checked == true) {
 			ids += e.value + ",";
 			flag = true;
 		}
@@ -82,6 +82,29 @@ function deletes(url) {
 		}
 	} else {
 		alert("请选择删除项");
+	}
+}
+function tops(url) {
+	var ids = "";
+	var inputs = document.getElementsByTagName("input");
+	var flag = false;
+	var e;
+	for ( var i = 0; i < inputs.length; i++) {
+		e = inputs[i];
+		if (e.type == "checkbox" && e.className == "input_check_single"
+				&& e.checked == true) {
+			ids += e.value + ",";
+			flag = true;
+		}
+	}
+	if (flag) {
+		if (url.indexOf("?") > 0) {
+			to(url + "&ids=" + (ids + "0"));
+		} else {
+			to(url + "?ids=" + (ids + "0"));
+		}
+	} else {
+		alert("请选择操作项");
 	}
 }
 function del(url) {

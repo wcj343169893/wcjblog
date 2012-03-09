@@ -28,6 +28,7 @@ public class FriendsServlet extends HttpServlet {
 		String ids = req.getParameter("ids");// 友情链接id数组
 		FriendsDao friendsDao = new FriendsDao();
 		Friends friends = new Friends();
+		friends.setId(id);
 		if (operation.trim().equals(Operation.delete.toString())) {// 删除
 			if (ids != null) {
 				String[] id_str = ids.split(",");
@@ -55,7 +56,8 @@ public class FriendsServlet extends HttpServlet {
 			obj.put("id", friends.getId());
 			obj.put("tid", friends.getTid());
 			obj.put("description", friends.getDescription());
-			obj.put("istop", friends.getIstop()!=null ?friends.getIstop() :0);
+			obj.put("istop", friends.getIstop() != null ? friends.getIstop()
+					: 0);
 			obj.put("name", friends.getName());
 			obj.put("url", friends.getUrl());
 			out.print(obj.toJSONString());
@@ -65,9 +67,37 @@ public class FriendsServlet extends HttpServlet {
 			req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
 					resp);
 		} else if (operation.trim().equals(Operation.ttop.toString())) {// 推荐
-			
+			if (id > 0) {
+				friendsDao.operationFriends(Operation.ttop, friends);
+			}
+			if (ids != null) {
+				String[] id_str = ids.split(",");
+				for (int i = 0; i < id_str.length; i++) {
+					Long bid = Long.valueOf(id_str[i].trim());
+					if (bid > 0) {
+						friends.setId(bid);
+						friendsDao.operationFriends(Operation.ttop, friends);
+					}
+				}
+			}
+			req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
+					resp);
 		} else if (operation.trim().equals(Operation.dtop.toString())) {// 取消推荐
-
+			if (id > 0) {
+				friendsDao.operationFriends(Operation.dtop, friends);
+			}
+			if (ids != null) {
+				String[] id_str = ids.split(",");
+				for (int i = 0; i < id_str.length; i++) {
+					Long bid = Long.valueOf(id_str[i].trim());
+					if (bid > 0) {
+						friends.setId(bid);
+						friendsDao.operationFriends(Operation.dtop, friends);
+					}
+				}
+			}
+			req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
+					resp);
 		}
 	}
 
@@ -82,8 +112,8 @@ public class FriendsServlet extends HttpServlet {
 		String url = req.getParameter("url");// 
 		Integer tid = req.getParameter("tid") != null ? Integer.parseInt(req
 				.getParameter("tid")) : 1;// 友情链接分类
-		Integer istop = req.getParameter("istop") != null ? Integer.parseInt(req
-				.getParameter("istop")) : 0;// 是否置顶
+		Integer istop = req.getParameter("istop") != null ? Integer
+				.parseInt(req.getParameter("istop")) : 0;// 是否置顶
 		String description = req.getParameter("description");// 
 		FriendsDao friendsDao = new FriendsDao();
 		Friends friends = new Friends();

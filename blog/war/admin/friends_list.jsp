@@ -26,10 +26,13 @@
 			<div class="friends-new" id="friends-new" title="新增链接">
 			<form action="/friends" method="post" id="friends-new-form">
 				<input type="hidden" name="op" value="add">
-				<input type="hidden" name="istop" value="0">
 				<div><div class="container-title-header">名称:</div><input name="name"></div>
 				<div><div class="container-title-header">分类：</div><select name="tid" id="f_t_l"><%for(int i=0;i<ftList.size();i++){%><option value="<%=i %>"><%=ftList.get(i) %></option><%} %></select></div>
 				<div><div class="container-title-header">链接地址：</div><input name="url"></div>
+				<div><div class="container-title-header">推荐：</div>
+				<input name="istop" type="radio" value="0" id="istop_n" checked><label for="istop_n">不推荐</label>
+				<input name="istop" type="radio" value="1" id="istop_y"><label for="istop_y">推荐</label>
+				</div>
 				<div><div class="container-title-header">描述：</div><textarea cols="30" rows="5" name="description"></textarea></div>
 			</form>
 			</div>
@@ -46,6 +49,8 @@
 	<div class="tools">
 		<span class="tools-left">
 			<input type="button" value="删除" onclick="deletes('/friends')">
+			<input type="button" value="推荐" onclick="tops('/friends?op=ttop')">
+			<input type="button" value="取消推荐" onclick="tops('/friends?op=dtop')">
 		</span>
 		<span class="tools-right">
 			共<%=pages.getRecTotal() %>&nbsp;&nbsp;  第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %> 页&nbsp;&nbsp;
@@ -62,12 +67,12 @@
 		<table cellpadding="0" cellspacing="0">
 			<tr>
 				<th class="vito-content-check"><input type="checkbox" id="input_check_all" onclick="allCheckFlag(this)"/></th>
-				<th width="300px;">名称</th>
-				<th>链接</th>
-				<th>分类</th>
+				<th width="200px">名称</th>
+				<th width="200px">链接</th>
+				<th width="150px">分类</th>
 				<th>描述</th>
-				<th>创建时间 </th>
-				<th>操作 </th>
+				<th width="150px">创建时间 </th>
+				<th width="100px">操作 </th>
 			</tr>
 			<%if(friendsList!= null && friendsList.size()>0){
 				for(int i=0;i<friendsList.size();i++){
@@ -125,13 +130,13 @@
 					$("#friends-modify").append('<form action="/friends" method="post"></form>');
 					$(data).each(function(index,domEle){
 						$("#friends-modify>form").append('<input type="hidden" name="op" value="modify">');
-						$("#friends-modify>form").append('<input type="hidden" name="istop" value="'+domEle.istop+'">');
 						$("#friends-modify>form").append('<input type="hidden" name="id" value="'+domEle.id+'">');
 						$("#friends-modify>form").append('<div><div class="container-title-header">名称:</div><input name="name"  value="'+domEle.name+'"></div>');
 						var types=$("#f_t_l").html();
 						$("#friends-modify>form").append('<div><div class="container-title-header">分类:</div><select name="tid" id="f_t_l_m">'+types+'</select></div>');
 						$("#f_t_l_m").val(domEle.tid);//选择下拉菜单
 						$("#friends-modify>form").append('<div><div class="container-title-header">链接:</div><input name="url"  value="'+domEle.url+'"></div>');
+						$("#friends-modify>form").append('<div><div class="container-title-header">推荐:</div><input name="istop" type="radio" value="0" id="istop_n" '+(domEle.istop==0 ? "checked":"")+'><label for="istop_n">不推荐</label><input name="istop" type="radio" value="1" id="istop_y" '+(domEle.istop==1 ? "checked":"")+'><label for="istop_y">推荐</label>');
 						$("#friends-modify>form").append('<div><div class="container-title-header">描述:</div><textarea cols="30" rows="5" name="description">'+domEle.description+'</textarea></div>');
 					});
 					});
