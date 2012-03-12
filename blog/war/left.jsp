@@ -53,11 +53,7 @@
 	</div><%} if(blog_user.getIsType()==null || blog_user.getIsType()==0){ %>
 	<div class="vito-left-title">文章分类</div>
 		<script type="text/javascript" src="/vertical/js/mootools-yui-compressed.js"></script>
-		<script type="text/javascript" src="/vertical/js/MenuMatic_0.68.3.js"></script>
-		<link rel="stylesheet" href="/vertical/css/MenuMatic.css" type="text/css" media="screen" charset="utf-8" />
-		<!--[if lt IE 7]>
-			<link rel="stylesheet" href="/vertical/css/MenuMatic-ie6.css" type="text/css" media="screen" charset="utf-8" />
-		<![endif]-->
+		<script type="text/javascript" src="/vertical/js/mm_0.68.3.js"></script>
 	<div class="vito-left-contentul">
 		<%
 			BlogTypeDao btd=new BlogTypeDao();

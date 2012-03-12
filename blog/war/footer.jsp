@@ -7,28 +7,27 @@
 	<div class="content">Powered By choujone 版权所有.Some Rights Reserved <%=blog_user.getBlogFoot() %></div>
 </div>
 <div class="clear"></div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script>
-(function() {
+jQuery(document).ready(function(){
 	var $backToTopTxt = "返回顶部";
-	var $backToTopEle = $('<div class="backToTop"></div>').appendTo($("body"))
+	var $backToTopEle = jQuery('<div class="backToTop"></div>').appendTo(jQuery("body"))
 		.html("<a onclick='javascript:void(0)' class='cursor' id='go_top'></a>	").attr("title", $backToTopTxt).click(function() {
-			$("html, body").animate({ scrollTop: 0 }, 120);
+			jQuery("html, body").animate({ scrollTop: 0 }, 120);
 	}), $backToTopFun = function() {
-		var st = $(document).scrollTop(), winh = $(window).height();
+		var st = jQuery(document).scrollTop(), winh = jQuery(window).height();
 		(st > 0)? $backToTopEle.show(): $backToTopEle.hide();	
 		//IE6下的定位
 		if (!window.XMLHttpRequest) {
 			$backToTopEle.css("top", st + winh - 166);	
 		}
-		var winw=$(window).width();
+		var winw=jQuery(window).width();
 		if(winw>980){
 			$backToTopEle.css("left",961+(winw-980)/2);
 		}else{
 			$backToTopEle.hide();
 		}
 	};
-	$(window).bind("scroll", $backToTopFun);
-	$(function() { $backToTopFun(); });
-})();
+	jQuery(window).bind("scroll", $backToTopFun);
+	jQuery(function() { $backToTopFun(); });
+});
 </script>

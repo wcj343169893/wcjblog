@@ -23,6 +23,7 @@
 </script>
 <link href="<%=blog_user.getStyle()%>" type="text/css" rel="stylesheet" />
 <!--<link href="/css/jquery.treeview.css" type="text/css" rel="stylesheet" />-->
+<link rel="stylesheet" href="/vertical/css/mm.css" type="text/css" media="screen" charset="utf-8" />
 <script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
