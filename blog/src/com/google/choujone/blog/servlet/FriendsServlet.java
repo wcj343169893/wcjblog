@@ -62,7 +62,7 @@ public class FriendsServlet extends HttpServlet {
 			obj.put("url", friends.getUrl());
 			out.print(obj.toJSONString());
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
-			String key = "friendsDao_getFriendsByPage";
+			String key = "friendsDao_getFriendsByPage_1_10";
 			MyCache.clear(key);
 			req.getRequestDispatcher("/admin/friends_list.jsp").forward(req,
 					resp);

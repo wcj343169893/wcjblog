@@ -92,6 +92,21 @@ public class FriendsDao {
 		return friends;
 	}
 
+	public List<Friends> getFriendList() {
+		key = "friendsDao_getFriendsList";
+		List<Friends> friends = MyCache.get(key);
+		if (friends == null) {
+			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			try {
+				Query query = pm.newQuery(Friends.class, " istop==1");
+				friends = (List<Friends>) query.execute();
+				MyCache.put(key, friends);
+			} catch (Exception e) {
+			}
+		}
+		return friends;
+	}
+
 	/**
 	 * 后台分页查询朋友链接
 	 * 
@@ -103,11 +118,10 @@ public class FriendsDao {
 		String key = "friendsDao_getFriendsByPage_" + pages.getPageNo() + "_"
 				+ pages.getPageSize();
 		List<Friends> friends = MyCache.get(key);
-		page_key = key + "_pages";
-		// Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages)
-		// MyCache.cache
-		// .get(page_key)
-		// : pages;
+//		page_key = key + "_pages";
+//		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
+//				.get(page_key)
+//				: pages;
 		pages.setRecTotal(getCount());
 		if (friends == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
