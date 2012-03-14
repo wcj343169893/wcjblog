@@ -111,16 +111,16 @@
 	</div><%} if(blog_user.getIsFriends()==null || blog_user.getIsFriends()==0){%>
 	<div class="vito-left-title">友情链接</div><%
 		FriendsDao fd=new FriendsDao();
-		List<Friends> friendsList=fd.getFriendsByPage(new Pages());
+		List<Friends> friendsList=fd.getFriendList();
 	%>
 	<div class="vito-left-contentul">
 		<ul class="vito-right-contentul">
-			<%
+			<%if(friendsList!=null && friendsList.size()>0){
 				for(int i=0;i<friendsList.size();i++){
 					Friends f=friendsList.get(i);
 					if(f.getIstop()!=null && f.getIstop().equals(1)){
 			%><li title="<%=f.getDescription() %>"><a href="<%=f.getUrl() %>" target="_bank" title="<%=f.getDescription() %>"><%=f.getName() %></a></li>
-			<%}} %>
+			<%}}} %>
 		</ul>
 	</div><%} %>
 </div>
