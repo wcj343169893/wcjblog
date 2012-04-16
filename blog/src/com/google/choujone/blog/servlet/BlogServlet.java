@@ -94,13 +94,17 @@ public class BlogServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		if (!Tools.isLogin(req)) {
+			resp.sendRedirect("/login.jsp");
+			return;
+		}
 		String operation = req.getParameter("op") != null ? req
 				.getParameter("op") : "";// 获取操作
 		String title = req.getParameter("title");// 标题
 		String content = req.getParameter("content");// 文章信息
 		String tag = req.getParameter("tag");// 关键字
 		String ids = req.getParameter("id");// 文章id
-		String tid = req.getParameter("tid");// 分类id
+		String tid = req.getParameter("tid")!=null ?req.getParameter("tid"):"-1L";// 分类id
 		String isVisible = req.getParameter("isVisible") != null ? req
 				.getParameter("isVisible") : "1";// 是否发布
 		Blog blog = new Blog();
