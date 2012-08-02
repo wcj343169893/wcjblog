@@ -32,7 +32,8 @@ public class UserDao {
 				if (users != null && users.size() > 0) {
 					user = users.get(0);
 				} else {
-					// Create();
+					 //Create();
+					 //operationUser(Operation.add, user);
 				}
 				// 把用户信息存入缓存中
 				MyCache.cache.put(user_key, user);
@@ -77,7 +78,7 @@ public class UserDao {
 		user.setId(dt.getTime());
 		user.setName("choujone");
 		user.setPassword("123456");
-		user.setpTitle("文朝军的博客");
+		user.setpTitle("朝军的博客");
 		user.setCtitle("这是我写的第一个小博客");// 子标题
 		user.setEmail("wcj343169893@163.com");
 		user.setDescription("我目前是一个Java程序员");
