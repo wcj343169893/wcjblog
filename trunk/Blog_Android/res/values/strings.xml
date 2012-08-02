@@ -1,0 +1,15 @@
+<resources>
+
+    <string name="app_name">朝军的博客</string>
+    <string name="hello_world">博客</string>
+    <string name="menu_settings">设置</string>
+    <string name="title_activity_main">发表博客</string>
+    <string name="string_title">标题：</string>
+    <string name="string_category">分类：</string>
+    <string name="string_content">内容：</string>
+    <string name="string_isPublish">发布：</string>
+    <string name="string_yes">是</string>
+    <string name="string_no">否</string>
+    <string name="string_save">保存</string>
+
+</resources>
