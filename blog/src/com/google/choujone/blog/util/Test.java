@@ -1,24 +1,31 @@
 package com.google.choujone.blog.util;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.json.simple.JSONObject;
 
 public class Test {
-//	public static String myurl = "http://www.baidu.com/s?bs=java%CD%F8%D2%B3%C4%DA%C8%DD%D7%A5%C8%A1&f=8&wd=java";
+	public static String myurl = "http://localhost:8888/blogType?opera=lists";
 
 	public static void main(String[] args) {
 		try {
-			// URL urlmy = new URL(myurl);
-			// HttpURLConnection con = (HttpURLConnection)
-			// urlmy.openConnection();
-			// con.setFollowRedirects(true);
-			// con.setInstanceFollowRedirects(false);
-			// con.connect();
-			// BufferedReader br = new BufferedReader(new InputStreamReader(con
-			// .getInputStream(), "gb2312"));
-			// String s = "";
-			// StringBuffer sb = new StringBuffer("");
-			// while ((s = br.readLine()) != null) {
-			// sb.append(s + "\r\n");
-			// }
+			URL urlmy = new URL(myurl);
+			HttpURLConnection con = (HttpURLConnection) urlmy.openConnection();
+			con.setFollowRedirects(true);
+			con.setInstanceFollowRedirects(false);
+			con.connect();
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					con.getInputStream(), "utf-8"));
+			String s = "";
+			StringBuffer sb = new StringBuffer("");
+			while ((s = br.readLine()) != null) {
+				sb.append(s + "\r\n");
+			}
+			JSONObject json = new JSONObject();
+			System.out.println(sb);
 			// <table cellpadding="0" cellspacing="0" class="result"
 			// id="2"><tr><td class=f><a
 			// onmousedown="return c({'fm':'as','F':'770317EA','F1':'9D73F1E4','F2':'4CA63D6B','F3':'54E5243F','T':'1295162879','title':this.innerHTML,'url':this.href,'p1':2,'y':'FEF8FF47'})"
@@ -38,8 +45,8 @@ public class Test {
 			// for (int i = 0; i < list.size(); i++) {
 			// System.out.println(list.get(i));
 			// }
-			SpiderThread st = new SpiderThread();
-			st.start();
+			// SpiderThread st = new SpiderThread();
+			// st.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

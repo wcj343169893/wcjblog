@@ -2,12 +2,16 @@ package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.BlogTypeDao;
@@ -58,6 +62,24 @@ public class BlogTypeServlet extends HttpServlet {
 			}
 			bt.setId(tid);
 			flag = btd.operationBlogType(Operation.modify, bt);
+		} else if (Operation.lists.toString().equals(operation.trim())) {//获取列表
+			resp.setContentType("application/json;charset=utf-8");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setHeader("Cache-Control", "no-cache");
+			PrintWriter out = resp.getWriter();
+			List<BlogType> blogTypeList = btd.getBlogTypeList();
+			Map<Long, String> map = new HashMap<Long, String>();
+			if (blogTypeList != null && blogTypeList.size() > 0) {
+				for (BlogType blogType : blogTypeList) {
+					map.put(blogType.getId(), blogType.getName());
+				}
+				String json = JSONObject.toJSONString(map);
+				out.println(json);
+			} else {
+				out.println(flag);
+			}
+			out.close();
+			return;
 		} else {// 删除
 			Long tid = 0L;
 			try {
@@ -133,32 +155,25 @@ public class BlogTypeServlet extends HttpServlet {
 			}
 			sb.append("</select>&nbsp;");
 			if (isOption.equals("1")) {
-				sb
-						.append("<a href=\"javascript:void(0)\" onclick=\"showOrHideDiv('addType')\">增加</a>&nbsp;");
-				sb
-						.append("<a href=\"javascript:void(0)\" onclick=\"modifyType('modifyType','tids')\">修改</a>&nbsp;");
-				sb
-						.append("<a href=\"javascript:void(0)\" onclick=\"deleteType('tids')\">删除</a>");
+				sb.append("<a href=\"javascript:void(0)\" onclick=\"showOrHideDiv('addType')\">增加</a>&nbsp;");
+				sb.append("<a href=\"javascript:void(0)\" onclick=\"modifyType('modifyType','tids')\">修改</a>&nbsp;");
+				sb.append("<a href=\"javascript:void(0)\" onclick=\"deleteType('tids')\">删除</a>");
 			}
 			out.println(sb.toString());
 		} else {// 根据id查询
 			BlogType bt = btd.getBlogTypeById(tid);
 			if (bt != null) {
 				StringBuffer sb = new StringBuffer();
-				sb
-						.append("<strong>修改：</strong>&nbsp;<input type=\"hidden\" id=\"modifytid\" value=\"");
+				sb.append("<strong>修改：</strong>&nbsp;<input type=\"hidden\" id=\"modifytid\" value=\"");
 				sb.append(bt.getId());
 				sb.append("\" > ");
-				sb
-						.append("分类名:<input type=\"text\" id=\"modifytname\" value=\"");
+				sb.append("分类名:<input type=\"text\" id=\"modifytname\" value=\"");
 				sb.append(bt.getName());
 				sb.append("\" >");
-				sb
-						.append("简 &nbsp;&nbsp;介:<input type=\"text\" id=\"modifyinfo\" value=\"");
+				sb.append("简 &nbsp;&nbsp;介:<input type=\"text\" id=\"modifyinfo\" value=\"");
 				sb.append(bt.getInfo());
 				sb.append("\" >");
-				sb
-						.append("<input type=\"button\" onclick=\"tmodify()\" value=\"保存\">");
+				sb.append("<input type=\"button\" onclick=\"tmodify()\" value=\"保存\">");
 				out.println(sb.toString());
 			}
 

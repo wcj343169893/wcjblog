@@ -9,6 +9,10 @@
 		<servlet-class>com.google.choujone.blog.servlet.BlogServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Blog4Android</servlet-name>
+		<servlet-class>com.google.choujone.blog.servlet.Blog4AndroidServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>Reply</servlet-name>
 		<servlet-class>com.google.choujone.blog.servlet.ReplyServlet</servlet-class>
 	</servlet>
@@ -59,6 +63,10 @@
 	<servlet-mapping>
 		<servlet-name>Blog</servlet-name>
 		<url-pattern>/blog/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Blog4Android</servlet-name>
+		<url-pattern>/blog4Android/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Reply</servlet-name>
