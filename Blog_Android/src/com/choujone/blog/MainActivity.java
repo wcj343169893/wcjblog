@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -60,17 +61,19 @@ public class MainActivity extends Activity {
 			@SuppressLint("ShowToast")
 			@Override
 			public void onClick(View v) {
-				if(tvTitle.getText()== null || "".equals(tvTitle.getText().toString().trim())){
+				if (tvTitle.getText() == null
+						|| "".equals(tvTitle.getText().toString().trim())) {
 					showMessage("标题不能为空!");
 					return;
 				}
-				if(tvContent.getText()== null || "".equals(tvContent.getText().toString().trim())){
+				if (tvContent.getText() == null
+						|| "".equals(tvContent.getText().toString().trim())) {
 					showMessage("内容不能为空!");
 					return;
 				}
 				Category choseValue = (Category) sCategory.getSelectedItem();
 				String isvisible = rgVisible.getCheckedRadioButtonId() == mRadio1
-						.getId()?"0":"1";
+						.getId() ? "0" : "1";
 				if (NetWork.postData(tvTitle.getText().toString(), choseValue
 						.getId().toString(), tvContent.getText().toString(),
 						isvisible)) {
@@ -79,7 +82,7 @@ public class MainActivity extends Activity {
 					tvTitle.setText("");
 					tvContent.setText("");
 					tvTitle.setFocusable(true);
-				}else{
+				} else {
 					showMessage("发布失败~_~！");
 				}
 			}
@@ -93,10 +96,11 @@ public class MainActivity extends Activity {
 		load();
 
 	}
-	public void showMessage(String msg){
-		Toast.makeText(getApplicationContext(), msg,
-				Toast.LENGTH_LONG).show();
+
+	public void showMessage(String msg) {
+		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 	}
+
 	public void load() {
 		final Handler handler = new Handler() {
 			public void handleMessage(android.os.Message msg) {
@@ -122,10 +126,32 @@ public class MainActivity extends Activity {
 		}.start();
 	}
 
+	/*
+	 * 初始化菜单
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
 
+	/*
+	 * 点菜单键的时候触发
+	 */
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// Toast.makeText(this,
+		// "选项菜单显示之前onPrepareOptionsMenu方法会被调用，你可以用此方法来根据打当时的情况调整菜单",
+		// Toast.LENGTH_LONG).show();
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.menu_exits) {
+			this.finish();
+			System.exit(0);
+		}
+		return true;
+	}
 }
