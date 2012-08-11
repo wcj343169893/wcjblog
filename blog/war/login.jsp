@@ -18,10 +18,7 @@
 <jsp:include page="top.jsp"></jsp:include>
 <!-- 顶部结束 -->
 <!-- 左边开始 -->
-<jsp:include page="left.jsp"></jsp:include>
-<!-- 左边结束 -->
-<!-- 右边开始 -->
-<div class="right">
+<div class="left">
 	<div class="right-title">
 		登录后台 <% if(request.getAttribute("error")!= null){out.print(request.getAttribute("error"));} %>
 	</div>
@@ -42,6 +39,9 @@
 		</form>
 	</div>
 </div>
+<!-- 左边结束 -->
+<!-- 右边开始 -->
+<jsp:include page="right.jsp"></jsp:include>
 <jsp:include page="footer.jsp"></jsp:include>
 </div>
 </body>

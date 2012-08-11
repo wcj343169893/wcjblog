@@ -30,6 +30,8 @@ User blog_user=  ud.getUserDetail();
 %><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=title %></title>
 	<jsp:include page="head.jsp"></jsp:include>
+	<script type="text/javascript" src="/js/jquery.masonry.js"></script>
+	<script type="text/javascript" src="/js/jquery.infinitescroll.js"></script>
 </head>
 <body>
 <jsp:include page="top_member.jsp"></jsp:include>
@@ -38,11 +40,37 @@ User blog_user=  ud.getUserDetail();
 <jsp:include page="top.jsp"></jsp:include>
 <!-- 顶部结束 -->
 <!-- 左边开始 -->
-<jsp:include page="left.jsp" flush="true"></jsp:include>
-<!-- 左边结束 -->
-<!-- 右边开始 -->
-<div class="right">
-	<div class="right-title">文章</div><%
+<script type="text/javascript">
+$(function(){
+         var speed = 1000;
+         $("#mainbox").masonry({
+            singleMode: true,
+           // columnWidth: 242,
+            itemSelector: '.mod-blogitem',
+            animate: false,
+            animationOptions: {
+                duration: 500,
+                easing: 'linear',
+                queue: false
+            }
+        });
+        $("#mainbox").infinitescroll({
+            navSelector : '#page_nav', // selector for the paged navigation
+            nextSelector : '#page_nav a', // selector for the NEXT link (to page 2)
+            itemSelector : '.mod-blogitem', // selector for all items you'll retrieve
+            loadingImg : '/images/loading.gif',
+            donetext : '已经到最后一页了',
+            debug: false,
+            errorCallback: function() {
+            // fade out the error message after 2 seconds
+            $('#infscr-loading').animate({opacity: .8},2000).fadeOut('normal');
+            }},
+            // call masonry as a callback.
+            function( newElements ) { $(this).masonry({ appendedContent: $(newElements) }); }
+        );
+     });
+</script>
+<div class="left" id="mainbox"><%
 	BlogDao blogDao = new BlogDao();
 	Integer p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
 	
@@ -50,32 +78,42 @@ User blog_user=  ud.getUserDetail();
 	pages.setPageNo(p);
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
 	List<Blog> blogs = blogDao.getBlogListByPage(pages,tid);
-%>
-<div class="vito-prenext">共<%=pages.getRecTotal() %>条 第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %>页<%if(p > 1){ %>	<a href="/index.jsp?p=<%=p-1 %>&tid=<%=tid %>">上一页</a><%} %><%if(p < pages.getPageTotal()){ %><a href="/index.jsp?p=<%=p + 1 %>&tid=<%=tid %>">下一页</a><%} %></div>
-<%
 if(blogs!=null && blogs.size()>0){
 for(int i=0;i<blogs.size();i++){
 	Blog blog=blogs.get(i);
 	if(blog.getIsVisible() == 0 ){
 		String link="/blog/"+blog.getId();
-%><div class="vito-content">
-	<div class="vito-content-title">
-		<a href="<%=link %>"><%=blog.getTitle() %></a>
+%>
+<article class="mod-blogitem mod-item-text">
+	<div class="box-postdate"><div class="q-day"><%=Tools.changeTime(Tools.changeTime(blog.getSdTime()),"dd")%></div><div class="q-month-year"><%=Tools.changeTime(Tools.changeTime(blog.getSdTime()),"MM/yyyy")%></div></div>
+	<div class="mod-realcontent mod-cs-contentblock">
+		<div class="item-head">
+			<a href="<%=link %>" class="a-incontent a-title cs-contentblock-hoverlink" target="_blank"><%=blog.getTitle() %></a>
+		</div>
+		<div class="item-content cs-contentblock-detailcontent">
+			<div class="q-previewbox"></div>
+			<div class="q-summary">
+				<%=blog.getContent(200).getValue() %>
+			</div>
+		</div>
+		<div class="item-foot clearfix">
+			<span class="box-act">
+				<a href="<%=link %>" class="a-act a-readall">阅读全文</a>
+				<a href="javascript:void(0)" class="a-act a-reply" >评论<span class="comment-count">(<%=blog.getReplyCount() %>)</span></a><%if(Tools.isLogin(request)){	%>
+					<a href="/blog?id=<%=blog.getId() %>&op=modify" class="a-act a-modifyblog">编辑</a>
+				<%} %>
+			</span>
+			<span class="box-tag"><a href="javascript:void(0)" class="a-tag" target="_blank"><span class="q-tag"><%=blog.getTag() %></span></a></span>
+		</div>
+		<div class="blog-cmt-wraper"></div>
 	</div>
-	<!-- <div class="vito-content-rc"><img alt="<%=link %>" src="http://chart.cli.im/chart?chs=150x150&cht=qr&chl=<%=link %>%0A<%=blog.getTitle() %>" style="border: none" title="<%=blog.getTitle() %>"></div>-->
-	<div class="vito-content-date"><%=blog.getSdTime() %></div>
-	<div class="vito-content-body"><%=blog.getContent(50).getValue() %>
-	<br><br>
-		<font class="post-tags">Tags:<%=blog.getTag() %></font>
-		<font class="post-footer">发布:<%=blog_user!=null ? blog_user.getName():"" %>|分类:<%=typeMaps.get(blog.getTid())%>|评论:<%=blog.getReplyCount() %>|浏览:<%=blog.getCount() %><%if(Tools.isLogin(request)){	%>|<a href="/blog?id=<%=blog.getId() %>&op=modify">修改</a><%} %></font>
-	</div>
-</div><br><%}	
-} }else{%>
-<div class="vito-content">
-	<div class="vito-content-title">暂无内容</div>
-</div><%} %>
-<div class="vito-prenext">共<%=pages.getRecTotal() %>条 第<%=pages.getPageNo() %>/<%=pages.getPageTotal() %>页<%if(p > 1){ %>	<a href="/index.jsp?p=<%=p-1 %>&tid=<%=tid %>">上一页</a><%} %><%if(p < pages.getPageTotal()){ %><a href="/index.jsp?p=<%=p + 1 %>&tid=<%=tid %>">下一页</a><%} %></div><%blogDao.closePM();//关闭查询链接 %>
+</article>
+<%}	} }%>
 </div>
+<div id="page_nav" class="hide"><%=pages.getPageNos(tid) %></div>
+<!-- 左边结束 -->
+<!-- 右边开始 -->
+<jsp:include page="right.jsp" flush="true"></jsp:include>
 <!-- 右边结束 -->
 <jsp:include page="footer.jsp"></jsp:include>
 </div>

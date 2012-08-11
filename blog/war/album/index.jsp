@@ -23,17 +23,11 @@
 <!-- 顶部开始 -->
 <jsp:include page="../top.jsp"></jsp:include>
 <!-- 顶部结束 -->
-<!-- 左边开始 -->
-<jsp:include page="../left.jsp" flush="true"></jsp:include>
-<!-- 左边结束 -->
-<!-- 右边开始 -->
-<div class="right">
-	<div class="right-title">相册</div>
+<div class="mod-text-content mod-post-content">
 	<div id="navi"><a href="1" style="display:none;"></a></div>
 	<div id="items"></div>
 </div>
-<!-- 右边结束 -->
-<jsp:include page="../footer.jsp"></jsp:include>
 </div>
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

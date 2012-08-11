@@ -14,7 +14,7 @@
 <div class="main">
 	<jsp:include page="/admin/menu.jsp"></jsp:include>	
 	<div class="address">
-			管理分类（<a href="blogType_add.jsp">新增分类</a>）
+			管理分类（<a href="/admin/blogType_add.jsp">新增分类</a>）
 	</div>
 	<%
 		Long parentId=Long.parseLong(request.getParameter("pid")!=null ?request.getParameter("pid") : "0");

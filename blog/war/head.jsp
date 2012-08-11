@@ -6,7 +6,6 @@
 					&& !"".equals(blog_user.getBlogHead())) {
 				out.print(blog_user.getBlogHead());
 }%>
-
 <%@page import="com.google.choujone.blog.dao.UserDao"%><meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
 <meta name="keywords" content="<%=blog_user != null ? blog_user.getBlogKeyword() : ""%>">
 <meta name="description" content="<%=blog_user != null ? blog_user.getBlogDescription() : ""%>">
@@ -22,8 +21,6 @@
   })();
 </script>
 <link href="<%=blog_user.getStyle()%>" type="text/css" rel="stylesheet" />
-<!--<link href="/css/jquery.treeview.css" type="text/css" rel="stylesheet" />-->
-<link rel="stylesheet" href="/vertical/css/mm.css" type="text/css" media="screen" charset="utf-8" />
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
-<script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>

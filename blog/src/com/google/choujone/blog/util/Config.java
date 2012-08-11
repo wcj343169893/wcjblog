@@ -77,6 +77,7 @@ public class Config {
 		style_urls.add("/css/547847084.css");
 		style_urls.add("/css/584063249.css");
 		style_urls.add("/css/517370554.css");
+		style_urls.add("/css/baidu.css");
 		UserDao ud = new UserDao();
 		User blog_user = ud.getUserDetail();
 		// // System.out.println("加载博客信息成功");
