@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries> 
+	<cron> 
+	    <url>/_ah/sessioncleanup?clear</url> 
+	    <description>Clean up sessions</description> 
+	    <schedule>every 1 hours</schedule> 
+	</cron>
+	<cron> 
+	    <url>/blog?op=readTimes</url> 
+	    <description>Update readTimes</description> 
+	    <schedule>every 30 minutes</schedule> 
+	</cron>
+</cronentries>
