@@ -8,6 +8,7 @@ package com.google.choujone.blog.entity;
 public class Menu {
 	String title;
 	String url;
+	boolean selected;
 
 	public String getTitle() {
 		return title;
@@ -23,6 +24,14 @@ public class Menu {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 
 }

@@ -19,7 +19,7 @@ String title=blog_user.getpTitle();
 <!-- 顶部结束 -->
 <!-- 左边开始 -->
 <!-- 左边结束 -->
-<div class="right" style="height: 440px; background-color: white;">
+<div class="left" style="height: 440px; background-color: white;">
 			<div id="cse" style="width: 90%;">Loading</div>
 			<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 			<script type="text/javascript">
@@ -34,7 +34,7 @@ String title=blog_user.getpTitle();
 			</script>
 </div>
 <!-- 右边结束 -->
-<jsp:include page="footer.jsp"></jsp:include>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

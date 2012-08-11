@@ -190,7 +190,7 @@ public class Tools {
 			// href="/?tid=<%=bt.getId() %>"><%=bt.getName()%>(<%=bd.getCount(bt.getId())
 			// %>)</a></li>
 			if (blogType.getParentId() == null || blogType.getParentId() == 0) {
-				sb.append("<li ><a href='javascript:void(0)'>"
+				sb.append("<li class='q-tagitem0'><a href='javascript:void(0)'>"
 						+ blogType.getName() + "</a>");
 				StringBuffer sb_sub = new StringBuffer();
 				for (BlogType bt_c : blogTypeList) {
@@ -198,12 +198,12 @@ public class Tools {
 					// blogType.getId());
 					if (bt_c.getParentId() != null
 							&& bt_c.getParentId().equals(blogType.getId())) {
-						sb_sub.append("<li ><a href=/?tid=" + bt_c.getId()
-								+ ">" + bt_c.getName() + "</a></li>");
+						sb_sub.append("<li class='q-tagitem'><a href=/?tid=" + bt_c.getId()
+								+ " class=\"a-tagitem cs-sidebar-hoverbglink\">" + bt_c.getName() + "</a></li>");
 					}
 				}
 				if (sb_sub != null && !sb_sub.toString().equals("")) {
-					sb.append("<ul>");
+					sb.append("<ul class='clearfix'>");
 					sb.append(sb_sub);
 					sb.append("</ul>");
 				}

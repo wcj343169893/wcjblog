@@ -152,7 +152,7 @@ function bd_sub() {
 function initGoogleAccount(){
 	var top_member = jQuery("#top_member");
 	var url = window.location.href;
-	top_member.html("<div align='right'><img src='/images/loading.gif' height='20'/></div>");
+	top_member.html("<img src='/images/loading.gif' height='20'/>");
 	jQuery.getJSON("/user?op=getUser&url="+url,function(data){
 		jQuery(data).each(function(index,domEle){
 //			alert("data"+domEle+" "+ index);
@@ -192,7 +192,7 @@ function initReply(p, bid) {
 				content+='<blockquote><div class="quote quote3"><div class="quote-title">管理员 于 '+domEle.replyTime+'回复</div>'+domEle.replyMessage+'</div></blockquote>';
 			}
 			content+='</span></span><span class="vito-postcomment-reback"> </span></div>';
-	  });
+		});
 		if(isContent){
 			content+="<br>";
 			content+="<div class='vito-prenext'>";
@@ -209,6 +209,68 @@ function initReply(p, bid) {
 		jQuery("#reply_comment").html(content);
 	});
 }
+//动态加载评论，，，格式2
+function initReply2(p, bid) {
+	loading_rc2();
+	jQuery.getJSON("/reply?p=" + p + "&bid=" + bid,function(data){
+		var content="";
+		var isContent=false;
+		var count=0;
+		jQuery.each(data,function(index,domEle){
+			isContent=true;
+			count++;
+			content+='<div class="cmt-item" style="height: auto; overflow: visible; "><div class="cmt-item-content clearfix"><div class="cmt-content-box"><div class="cmt-content-detail"><a class="cmt-user-name cs-contentblock-link" href="javascript:void(0)" target="_blank">'+domEle.name+'</a> '+domEle.content+'</div><div class="cmt-pub-time">'+domEle.sdTime+'</div>';
+			if(domEle.replyMessage!=null &&domEle.replyMessage.length>0){
+				content+='<blockquote><div class="quote quote3"><div class="quote-title">管理员 于 '+domEle.replyTime+'回复</div>'+domEle.replyMessage+'</div></blockquote>';
+			}
+			content+='</div></div><div class="cmt-mini-border"></div></div>';
+	  });
+		if(isContent){
+			jQuery(".cmt-seemore .seemore-tip").html("查看更多");
+			jQuery(".cmt-seemore").attr("href","javascript:initReply2("+(p+1)+","+bid+")");
+		}else{
+			if(p>1){
+				content="<div align='center' id='comment-notice'>就这些啦</div>";
+				jQuery(".cmt-seemore .seemore-tip").html("收起");
+				jQuery(".cmt-seemore").toggle(
+					  function () {
+						  	jQuery("#cmt-list").slideUp("slow");
+						  	jQuery(".cmt-seemore .seemore-tip").html("展开");
+						  },
+						  function () {
+						    jQuery("#cmt-list").slideDown("slow");
+						    jQuery(".cmt-seemore .seemore-tip").html("收起");
+						  }
+						);
+				
+			}else{
+				jQuery("#cmt-list").empty();
+				content="<div align='center' id='comment-notice'>还没有人发表评论</div>";
+			}
+		}
+		jQuery("#cmt-list").append(content);
+		hide_loading();
+	});
+}
 function loading_rc(){
 	jQuery("#reply_comment").html("<div align='center'><img src='/images/loading.gif'/></div>");
+}
+//显示loading
+function loading_rc2(){
+	var opts={
+			loadingId:"infscr-loading",
+			loadingImg:"/images/loading.gif",
+			loadingText:"正在加载..."
+	};
+	var loading = jQuery("#"+opts.loadingId);
+	if(loading.length==0){
+		loading = jQuery('<div id="'+opts.loadingId+'" style="text-align: center;"><img alt="Loading..." src="'+
+          opts.loadingImg+'" /><div>'+opts.loadingText+'</div></div>');    
+		jQuery("body").append(loading);
+	}
+	loading.fadeIn("slow");
+}
+//隐藏loading
+function hide_loading(){
+	$("#infscr-loading").fadeOut("slow");
 }

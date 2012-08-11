@@ -63,7 +63,24 @@ public class Pages implements Serializable {
 		ret = (ret < 1) ? 0 : ret;
 		return ret;
 	}
-
+	
+	/**
+	 * @return 分页页码a标签
+	 */
+	public String getPageNos(Long tid){
+		StringBuffer sb = new StringBuffer();
+		//当前页码
+		for (int i = 1; i <= this.getPageTotal(); i++) {
+			String link="";
+			if (this.getPageNo()==i) {
+				link=""+i;
+			}else{
+				link="<a href='index.jsp?tid="+tid+"&p="+i+"'>"+i+"</a>";
+			}
+			sb.append(link);
+		}
+		return sb.toString();
+	}
 	public String getOrderBy() {
 		return orderBy;
 	}

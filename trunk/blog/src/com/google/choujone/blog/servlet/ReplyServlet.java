@@ -2,10 +2,13 @@ package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,31 +52,34 @@ public class ReplyServlet extends HttpServlet {
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
 
 		} else {
+			Long bid_long = -1L;
 			if (bid != null) {
-				// resp.setContentType("text/html;charset=utf-8");
-				resp.setContentType("application/json");
-				resp.setCharacterEncoding("UTF-8");
-				resp.setHeader("Cache-Control", "no-cache");
-				PrintWriter out = resp.getWriter();
-				int page = Integer.parseInt(p);
-				Pages pages = new Pages();
-				pages.setPageNo(page);
-				List<Reply> replyList = replyDao.getReplyListByBid(Long
-						.valueOf(bid), pages);
-				JSONArray ja = new JSONArray();
-				for (Reply r : replyList) {
-					JSONObject obj = new JSONObject();
-					obj.put("replyTime", r.getReplyTime());
-					obj.put("sdTime", r.getSdTime());
-					obj.put("replyMessage", r.getReplyMessage());
-					obj.put("content", r.getContent());
-					obj.put("name", r.getName());
-					ja.add(obj);
-				}
-				out.print(ja.toJSONString());
-			}else{
-				resp.sendRedirect("/");
+				bid_long = Long.valueOf(bid);
 			}
+
+			// resp.setContentType("text/html;charset=utf-8");
+			resp.setContentType("application/json");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setHeader("Cache-Control", "no-cache");
+			PrintWriter out = resp.getWriter();
+			int page = Integer.parseInt(p);
+			Pages pages = new Pages();
+			pages.setPageNo(page);
+			List<Reply> replyList = replyDao.getReplyListByBid(bid_long, pages);
+			JSONArray ja = new JSONArray();
+			for (Reply r : replyList) {
+				JSONObject obj = new JSONObject();
+				obj.put("replyTime", r.getReplyTime());
+				obj.put("sdTime", r.getSdTime());
+				obj.put("replyMessage", r.getReplyMessage());
+				obj.put("content", r.getContent());
+				obj.put("name", r.getName());
+				ja.add(obj);
+			}
+			out.print(ja.toJSONString());
+			// }else{
+			// resp.sendRedirect("/");
+			// }
 		}
 		// 清理缓存
 		// String key = "replyDao_bid_" + bid + "_" + p;// 更新前台
@@ -102,6 +108,32 @@ public class ReplyServlet extends HttpServlet {
 				: "-1L";// 文章id
 		String email = req.getParameter("email");// email
 		String url = req.getParameter("url");// email
+		// 保存游客信息到cookies
+		Cookie[] cookies = req.getCookies();
+		boolean isCookied = false;
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("gustName")) {
+				name = URLDecoder.decode(cookie.getValue(), "UTF-8");
+				isCookied = true;
+			} else if (cookie.getName().equals("gustEmail")) {
+				email = URLDecoder.decode(cookie.getValue(), "UTF-8");
+			} else if (cookie.getName().equals("gustURL")) {
+				url = URLDecoder.decode(cookie.getValue(), "UTF-8");
+			}
+		}
+		if (!isCookied) {
+			Cookie gustName = new Cookie("gustName", URLEncoder.encode(name,
+					"UTF-8"));
+			Cookie gustEmail = new Cookie("gustEmail", URLEncoder.encode(email,
+					"UTF-8"));
+			Cookie gustURL = new Cookie("gustURL", URLEncoder.encode(url,
+					"UTF-8"));
+			resp.setCharacterEncoding("UTF-8");
+			resp.addCookie(gustName);
+			resp.addCookie(gustEmail);
+			resp.addCookie(gustURL);
+		}
+
 		// String repyMsg = req.getParameter("msg");
 		String p = req.getParameter("p") != null ? req.getParameter("p") : "1";
 		ReplyDao replyDao = new ReplyDao();
@@ -131,10 +163,11 @@ public class ReplyServlet extends HttpServlet {
 					+ Tools.getAddressByIP(Tools.getIpAddr(req)) + ";"
 					+ req.getHeader("user-agent"));
 			replyDao.operationReply(Operation.add, reply);
+
 			if (reply.getBid() > 0) {
 				BlogDao blogDao = new BlogDao();
-				blogDao.operationBlog(Operation.replyTimes, new Blog(reply
-						.getBid()));
+				blogDao.operationBlog(Operation.replyTimes,
+						new Blog(reply.getBid()));
 				resp.sendRedirect("/blog?id=" + reply.getBid());
 			} else {
 				resp.sendRedirect("/leaveMessage.jsp");
@@ -162,8 +195,8 @@ public class ReplyServlet extends HttpServlet {
 			int page = Integer.parseInt(p);
 			Pages pages = new Pages();
 			pages.setPageNo(page);
-			List<Reply> replyList = replyDao.getReplyListByBid(Long
-					.valueOf(bid), pages);
+			List<Reply> replyList = replyDao.getReplyListByBid(
+					Long.valueOf(bid), pages);
 			JSONObject obj = new JSONObject();
 			obj.put("url", url);
 			out.print(obj.toJSONString());
