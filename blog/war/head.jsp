@@ -22,5 +22,4 @@
 </script>
 <link href="<%=blog_user.getStyle()%>" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>

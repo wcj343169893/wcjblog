@@ -17,6 +17,10 @@
 		<servlet-class>com.google.choujone.blog.servlet.ReplyServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>ClearCache</servlet-name>
+		<servlet-class>com.google.choujone.blog.servlet.ClearCacheServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>Calendars</servlet-name>
 		<servlet-class>com.google.choujone.blog.servlet.CalendarServlet</servlet-class>
 	</servlet>
@@ -71,6 +75,10 @@
 	<servlet-mapping>
 		<servlet-name>Reply</servlet-name>
 		<url-pattern>/reply</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ClearCache</servlet-name>
+		<url-pattern>/clearCache</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Calendars</servlet-name>

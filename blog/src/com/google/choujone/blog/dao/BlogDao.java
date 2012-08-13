@@ -55,12 +55,6 @@ public class BlogDao {
 				blog.setId(dt.getTime());
 				pm.makePersistent(blog);
 				flag = true;
-				// if (blog.getIsVisible().equals(0)) {
-				// Config.statistics.setBlog_visible_size(Config.statistics
-				// .getBlog_visible_size() + 1);
-				// }
-				// Config.statistics.setBlog_size(Config.statistics.getBlog_size()
-				// + 1);
 			} catch (Exception e) {
 				flag = false;
 			}
@@ -140,12 +134,12 @@ public class BlogDao {
 	 * @return
 	 */
 	public Blog getBlogById(Long id) {
-		key = "blogDao_id_" + id;
+		String key = "blogDao_id_" + id;
 		Blog blog = (Blog) MyCache.cache.get(key);
 		if (blog == null) {
 			try {
-//				pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
-				pm=PMF.getPersistenceManager();
+				// pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+				pm = PMF.getPersistenceManager();
 				blog = pm.getObjectById(Blog.class, id);
 				MyCache.cache.put(key, blog);
 			} catch (Exception e) {
@@ -259,6 +253,39 @@ public class BlogDao {
 	}
 
 	/**
+	 * 根据标签查询
+	 * 
+	 * @param pages
+	 *            分页信息
+	 * @param tid
+	 *            分类编号(暂时没有用到)
+	 * @param tag
+	 *            标签名称
+	 * @return
+	 */
+	public List<Blog> getBlogListByPage(Pages pages, Long tid, String tag) {
+		String key = "blogDao_getBlogListByPage_null_null_" + pages.getPageNo()
+				+ "_tag_" + tag;
+		List<Blog> blogs = MyCache.get(key);
+		pages.setRecTotal(getTags2().get(tag).size());
+		if (blogs == null) {
+			pm = PMF.getPersistenceManager();
+			try {
+				tag = Tools.FilterHTML(tag);
+				List<Long> ls = getTags2().get(tag);
+				blogs = new ArrayList<Blog>();
+				for (Long l : ls) {
+					blogs.add(this.getBlogById(l));
+				}
+				MyCache.put(key, blogs);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return blogs;
+	}
+
+	/**
 	 * 前台分页查询博客
 	 * 
 	 * @param pages
@@ -272,32 +299,32 @@ public class BlogDao {
 		key = "blogDao_getBlogListByPage_" + tid + "_null_" + pages.getPageNo();
 		page_key = key + "_pages";
 		List<Blog> blogs = MyCache.get(key);
-//		Pages page = (Pages) MyCache.cache.get(page_key);
+		// Pages page = (Pages) MyCache.cache.get(page_key);
 		pages.setRecTotal(getCount(tid));
 		if (blogs == null) {
-//			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
-			pm=PMF.getPersistenceManager();
+			// pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			pm = PMF.getPersistenceManager();
 			try {
 				String filter = "select count(id) from " + Blog.class.getName()
 						+ " where isVisible==0 ";
 				// pages.setRecTotal(Config.statistics.getBlog_visible_size());
-//				if (tid != null && tid > 0) {
-//					filter += "&& tid == " + tid;
-//				}
+				// if (tid != null && tid > 0) {
+				// filter += "&& tid == " + tid;
+				// }
 				// String filter = "";
 				// 查询总条数
-//				Query q = pm.newQuery(filter);
-//				Object obj = q.execute();
-//				pages.setRecTotal(getCount(tid));
-				
+				// Query q = pm.newQuery(filter);
+				// Object obj = q.execute();
+				// pages.setRecTotal(getCount(tid));
+
 				filter = " isVisible==0 ";
 				if (tid != null && tid > 0) {
 					filter += "&& tid == " + tid;
 				}
 				Query query = pm.newQuery(Blog.class, filter);
 				query.setOrdering("sdTime desc");
-				query.setRange(pages.getFirstRec(), pages.getPageNo()
-						* pages.getPageSize());
+				query.setRange(pages.getFirstRec(),
+						pages.getPageNo() * pages.getPageSize());
 				blogs = (List<Blog>) query.execute();
 				MyCache.put(key, blogs);
 				MyCache.cache.put(page_key, pages);
@@ -384,8 +411,7 @@ public class BlogDao {
 		List<Blog> blogs = MyCache.get(key);
 		page_key = key + "_pages";
 		Pages page = (Pages) MyCache.cache.get(page_key) != null ? (Pages) MyCache.cache
-				.get(page_key)
-				: pages;
+				.get(page_key) : pages;
 		if (blogs == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			try {
@@ -398,8 +424,8 @@ public class BlogDao {
 
 				Query query = pm.newQuery(Blog.class);
 				query.setOrdering("sdTime desc");
-				query.setRange(pages.getFirstRec(), pages.getPageNo()
-						* pages.getPageSize());
+				query.setRange(pages.getFirstRec(),
+						pages.getPageNo() * pages.getPageSize());
 				blogs = (List<Blog>) query.execute();
 				MyCache.put(key, blogs);
 				MyCache.cache.put(page_key, pages);
@@ -571,7 +597,7 @@ public class BlogDao {
 	 * @return
 	 */
 	public Integer getCount(Long tid) {
-		String	key = "blogDao_getCount_" + tid;
+		String key = "blogDao_getCount_" + tid;
 		Integer count = (Integer) MyCache.cache_count.get(key);
 		if (count == null) {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
@@ -587,6 +613,38 @@ public class BlogDao {
 			MyCache.cache_count.put(key, count);
 		}
 		return count;
+	}
+
+	public Map<String, List<Long>> getTags2() {
+		String key = "blogDao_getTags_list";
+		Map<String, List<Long>> tagsMap = (Map<String, List<Long>>) MyCache.cache_count
+				.get(key);
+		if (tagsMap == null) {
+			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
+			tagsMap = new HashMap<String, List<Long>>();
+			Query q = null;
+			String filter = "select id,tag from " + Blog.class.getName()
+					+ " where isVisible==0 order by id desc";
+			q = pm.newQuery(filter);
+			List<Object> objes = (List<Object>) q.execute();
+			for (Object obj : objes) {
+				Object[] t = (Object[]) obj;
+				String[] tag = ((String) t[1]).split(" ");
+				for (int j = 0; j < tag.length; j++) {
+					List<Long> size = new ArrayList<Long>();
+					if (tag[j] != null && !"".equals(tag[j].trim())) {
+						if (tagsMap.containsKey(tag[j])) {
+							size = tagsMap.get(tag[j]);
+							tagsMap.remove(tag[j]);
+						}
+						size.add((Long) t[0]);
+						tagsMap.put(tag[j], size);
+					}
+				}
+			}
+			MyCache.cache_count.put(key, tagsMap);
+		}
+		return tagsMap;
 	}
 
 	/**
@@ -662,17 +720,15 @@ public class BlogDao {
 			pm = PMF.get().getPersistenceManager();// 获取操作数据库对象
 			Query q = null;
 			String filter = " select count(id) from " + Blog.class.getName()
-			+ " where isVisible==0 ";
+					+ " where isVisible==0 ";
 			q = pm.newQuery(filter);
 			Object obj = q.execute();
 			blogCount = Integer.parseInt(obj.toString());
 			MyCache.cache_count.put(key, blogCount);
-//			closePM();
+			// closePM();
 		}
 		return blogCount;
 	}
-
-	
 
 	/**
 	 * 关闭链接（不能在显示数据前关闭链接，不然报错）

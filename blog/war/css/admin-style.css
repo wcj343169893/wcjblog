@@ -364,3 +364,17 @@ input {
 		repeat-x 50% 50%;
 	border: 1px solid #CCC;
 }
+#infscr-loading {
+	background: none repeat scroll 0 0 #fff;
+	border-radius: 10px 10px 10px 10px;
+	bottom: 20px;
+	color: #333;
+	height: 70px;
+	left: 45%;
+	filter: alpha(opacity =     80);
+	opacity: 0.8;
+	padding: 10px;
+	position: fixed;
+	width: 120px;
+	z-index: 5000;
+}
