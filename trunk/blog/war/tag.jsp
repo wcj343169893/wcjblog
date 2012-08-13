@@ -1,5 +1,5 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="com.google.choujone.blog.dao.BlogDao,java.util.List,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.common.Pages,com.google.choujone.blog.entity.User,com.google.choujone.blog.common.Operation,java.text.SimpleDateFormat,java.util.Date,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType,java.util.ArrayList,java.util.Map,java.util.HashMap,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.UserDao"%><html>
@@ -72,11 +72,11 @@ $(function(){
 <div class="left" id="mainbox"><%
 	BlogDao blogDao = new BlogDao();
 	Integer p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
-	
+	String tag=request.getParameter("t")!= null ? request.getParameter("t").toString() : "";
 	Pages pages=new Pages();
 	pages.setPageNo(p);
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
-	List<Blog> blogs = blogDao.getBlogListByPage(pages,tid);
+	List<Blog> blogs = blogDao.getBlogListByPage(pages,tid,tag);
 if(blogs!=null && blogs.size()>0){
 for(int i=0;i<blogs.size();i++){
 	Blog blog=blogs.get(i);

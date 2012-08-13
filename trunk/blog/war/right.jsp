@@ -21,7 +21,7 @@
 	</div><%}  if(blog_user.getIsTags()==null || blog_user.getIsTags()==0){ %>
 	<div class="mod-taglist">
 		<ul class="q-taglist clearfix">
-			<li class="q-tagitem"><span class="q-icon"></span></li><%Map<String, Integer> tagsMap =bd.getTags();for(String s : tagsMap.keySet()){ %><li class="q-tagitem"><a href="javascript:void(0)" class="a-tagitem cs-sidebar-hoverbglink"><%=s %>(<%=tagsMap.get(s) %>)</a></li>
+			<li class="q-tagitem"><span class="q-icon"></span></li><%Map<String, List<Long>> tagsMap =bd.getTags2();for(String s : tagsMap.keySet()){ %><li class="q-tagitem"><a href="tag.jsp?t=<%=s %>" class="a-tagitem cs-sidebar-hoverbglink"><%=s %>(<%=tagsMap.get(s).size() %>)</a></li>
 			<%} %></ul>
 	</div><%}if(blog_user.getIsStatistics()==null || blog_user.getIsStatistics()==0){%>
 	<section class="mod-side-item mod-side-stat">

@@ -155,8 +155,17 @@ public class MyCache {
 	public static boolean refreshCache() {
 		boolean flag = false;
 		try {
+//			cacheFactory = CacheManager.getInstance().getCacheFactory();
+//			cache = cacheFactory.createCache(props);
+			
+			props.put(GCacheFactory.EXPIRATION_DELTA, 7200);// 7200秒后过期
+
 			cacheFactory = CacheManager.getInstance().getCacheFactory();
 			cache = cacheFactory.createCache(props);
+
+			// 专门存放统计数量的缓存
+			props.put(GCacheFactory.EXPIRATION_DELTA, 14400);// 14400秒后过期(4小时过期)
+			cache_count = cacheFactory.createCache(props);
 			flag = true;
 		} catch (CacheException e) {
 			System.out.println("清理缓存失败!");

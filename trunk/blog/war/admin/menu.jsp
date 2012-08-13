@@ -7,6 +7,21 @@
 <%@page import="com.google.choujone.blog.common.Operation"%><link href="/css/admin-style.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" charset="utf-8" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+	$(".clearCache").bind('click', function() {
+		loading_rc2("清理中...");
+		$.get("/clearCache",function(data){
+			if(data){
+				$("#infscr-loading").html("<div style='margin-top: 30px;font-weight: bold;'>清理成功</div>");
+			}
+			$("#infscr-loading").delay(3000).fadeOut("slow");
+		});
+	});
+});
+//-->
+</script>
 <%
 	UserDao userDao=new UserDao();
 	User user=userDao.getUserDetail();
@@ -50,7 +65,7 @@
 				<a href="/admin/setting.jsp">设置</a>
 			</li>
 			<li>
-				<a href="">清理所有缓存</a>
+				<a href="javascript:void(0)" class="clearCache">清理所有缓存</a>
 			</li>
 			<li>
 				<a href="/admin/adPlace_list.jsp">广告</a>

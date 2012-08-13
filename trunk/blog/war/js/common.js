@@ -256,7 +256,7 @@ function loading_rc(){
 	jQuery("#reply_comment").html("<div align='center'><img src='/images/loading.gif'/></div>");
 }
 //显示loading
-function loading_rc2(){
+function loading_rc2(text){
 	var opts={
 			loadingId:"infscr-loading",
 			loadingImg:"/images/loading.gif",
@@ -265,7 +265,7 @@ function loading_rc2(){
 	var loading = jQuery("#"+opts.loadingId);
 	if(loading.length==0){
 		loading = jQuery('<div id="'+opts.loadingId+'" style="text-align: center;"><img alt="Loading..." src="'+
-          opts.loadingImg+'" /><div>'+opts.loadingText+'</div></div>');    
+          opts.loadingImg+'" /><div>'+(text?text:opts.loadingText)+'</div></div>');    
 		jQuery("body").append(loading);
 	}
 	loading.fadeIn("slow");

@@ -55,7 +55,15 @@
                       <h2 class="title content-title"><%=blog.getTitle()%></h2>  </div> 
                       <div id="" class="content text-content clearfix"><%=blog.getContent().getValue()%></div>   
                       <div class="mod-post-info clearfix"> 
-                      	<div class="tag-box clearfix"><a class="tag" href="javascript:void(0)"><%=blog.getTag()%></a></div> 
+                      	<span class="box-tag clearfix"><%
+								String tags= blog.getTag();
+								if(tags!=null && !"".equals(tags)){
+									String [] taglist=tags.split(" ");
+									for(String str :taglist){
+										if(!"".equals(str.trim())){
+							%>
+								<a href="/tag.jsp?t=<%=str %>" class="tag"><%=str %></a>
+							<% }}}%></span>
 	                      <div class="op-box">  
 		                      <span class="pv">浏览(<%=blog.getCount()%>)</span> 
 		                      <a class="comment-bnt" id="commentBnt" href="javascript:jQuery('#content').focus()">评论<span class="comment-nub hide"></span> </a>   
