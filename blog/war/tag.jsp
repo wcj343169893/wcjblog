@@ -7,6 +7,7 @@
 UserDao ud=new UserDao();
 User blog_user=  ud.getUserDetail();
 	String title=blog_user!=null ? blog_user.getpTitle():"";
+	String tag=request.getParameter("t")!= null ? request.getParameter("t").toString() : "";
 	Long tid=null;
 	try{
 		 tid=request.getParameter("tid") != null ? Long.valueOf(request.getParameter("tid").toString()) : null;
@@ -27,7 +28,7 @@ User blog_user=  ud.getUserDetail();
 		}
 	}
 %><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%=title %></title>
+<title><%=tag%>_<%=title %></title>
 	<jsp:include page="head.jsp"></jsp:include>
 	<script type="text/javascript" src="/js/jquery.masonry.js"></script>
 	<script type="text/javascript" src="/js/jquery.infinitescroll.js"></script>
@@ -72,7 +73,7 @@ $(function(){
 <div class="left" id="mainbox"><%
 	BlogDao blogDao = new BlogDao();
 	Integer p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
-	String tag=request.getParameter("t")!= null ? request.getParameter("t").toString() : "";
+	
 	Pages pages=new Pages();
 	pages.setPageNo(p);
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
@@ -115,7 +116,7 @@ for(int i=0;i<blogs.size();i++){
 		<div class="blog-cmt-wraper"></div>
 	</div>
 </article>
-<%}	} }%>
+<%}	} }else{%><div style="margin: 50px;">Sorry 暂无内容 <a href="/" class="a-incontent a-title cs-contentblock-hoverlink" target="_blank">回到首页</a></div><%} %>
 </div>
 <div id="page_nav" class="hide"><%=pages.getPageNos(tid) %></div>
 <!-- 左边结束 -->

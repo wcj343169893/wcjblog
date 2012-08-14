@@ -28,9 +28,9 @@ User blog_user=  ud.getUserDetail();
 	}
 %><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=title %></title>
-	<jsp:include page="head.jsp"></jsp:include>
-	<script type="text/javascript" src="/js/jquery.masonry.js"></script>
-	<script type="text/javascript" src="/js/jquery.infinitescroll.js"></script>
+<jsp:include page="head.jsp"></jsp:include>
+<script type="text/javascript" src="/js/jquery.masonry.js"></script>
+<script type="text/javascript" src="/js/jquery.infinitescroll.js"></script>
 </head>
 <body>
 <jsp:include page="top_member.jsp"></jsp:include>
@@ -92,7 +92,7 @@ for(int i=0;i<blogs.size();i++){
 		<div class="item-content cs-contentblock-detailcontent">
 			<div class="q-previewbox"></div>
 			<div class="q-summary">
-				<%=blog.getContent(200).getValue() %>
+				<%=blog.getContent(200).getValue().trim() %>
 			</div>
 		</div>
 		<div class="item-foot clearfix">
@@ -115,7 +115,7 @@ for(int i=0;i<blogs.size();i++){
 		<div class="blog-cmt-wraper"></div>
 	</div>
 </article>
-<%}	} }%>
+<%}	} }else{%><div style="margin: 50px;">Sorry 暂无内容 <a href="/" class="a-incontent a-title cs-contentblock-hoverlink" target="_blank">回到首页</a></div><%} %>
 </div>
 <div id="page_nav" class="hide"><%=pages.getPageNos(tid) %></div>
 <!-- 左边结束 -->
