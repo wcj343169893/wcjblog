@@ -267,8 +267,11 @@ public class BlogDao {
 		String key = "blogDao_getBlogListByPage_null_null_" + pages.getPageNo()
 				+ "_tag_" + tag;
 		List<Blog> blogs = MyCache.get(key);
-		pages.setRecTotal(getTags2().get(tag).size());
-		if (blogs == null) {
+		//此标签下的总数
+		int recTotal = getTags2().get(tag) != null ? getTags2().get(tag).size()
+				: 0;
+		pages.setRecTotal(recTotal);
+		if (blogs == null && recTotal > 0) {
 			pm = PMF.getPersistenceManager();
 			try {
 				tag = Tools.FilterHTML(tag);

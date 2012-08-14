@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%><%@page import="com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config"%><%
     UserDao ud=new UserDao();
 	User blog_user=  ud.getUserDetail();
+	String keys=request.getParameter("kw")!=null?request.getParameter("kw"):blog_user.getBlogKeyword();
+	String desc=request.getParameter("desc")!=null?request.getParameter("desc"):blog_user.getBlogDescription();
 			if (blog_user != null && blog_user.getBlogHead() != null
 					&& !"".equals(blog_user.getBlogHead())) {
 				out.print(blog_user.getBlogHead());
-}%>
-<%@page import="com.google.choujone.blog.dao.UserDao"%><meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
-<meta name="keywords" content="<%=blog_user != null ? blog_user.getBlogKeyword() : ""%>">
-<meta name="description" content="<%=blog_user != null ? blog_user.getBlogDescription() : ""%>">
+}%><%@page import="com.google.choujone.blog.dao.UserDao"%><meta name="google-site-verification" content="0YKCfiBLHIYnG9LLMoVWT5MahWg50_rrDxRm9gcmM7k" />
+<meta name="keywords" content="<%=keys %>">
+<meta name="description" content="<%=desc %>">
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-20148773-1']);

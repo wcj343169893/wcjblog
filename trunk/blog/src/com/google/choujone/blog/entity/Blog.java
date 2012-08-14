@@ -72,16 +72,7 @@ public class Blog implements Serializable {
 	}
 
 	public Text getContent(int len) {
-		if (content != null) {
-			String val = content.getValue().trim().replaceAll("\\<.*?>", "");
-			val = val.replaceAll(" ", "");
-			val = val.replaceAll("<br>", "");
-			val = val.replaceAll("<BR>", "");
-			if (len <= 0 || len > val.length())
-				len = val.length();
-			return new Text(val.substring(0, len) + "...");
-		}
-		return new Text("");
+		return getContent(len, "...");
 	}
 
 	public Text getContent(int len, String str) {
@@ -89,8 +80,13 @@ public class Blog implements Serializable {
 			String val = content.getValue().trim().replaceAll("\\<.*?>", "");
 			val = val.replaceAll(" ", "");
 			val = val.replaceAll("&nbsp;", "");
+			val = val.replaceAll("\n;", "");
+			val = val.replaceAll("\t", "");
+			val = val.replaceAll("\"", "");
+			val = val.replaceAll("'", "");
 			val = val.replaceAll("<br>", "");
 			val = val.replaceAll("<BR>", "");
+			val = val.replaceAll("\\s*", "");
 			if (len <= 0 || len > val.length()) {
 				len = val.length();
 			}
