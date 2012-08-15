@@ -23,7 +23,24 @@
 		<ul class="q-taglist clearfix">
 			<li class="q-tagitem"><span class="q-icon"></span></li><%Map<String, List<Long>> tagsMap =bd.getTags2();for(String s : tagsMap.keySet()){ %><li class="q-tagitem"><a href="tag.jsp?t=<%=s %>" class="a-tagitem cs-sidebar-hoverbglink"><%=s %>(<%=tagsMap.get(s).size() %>)</a></li>
 			<%} %></ul>
-	</div><%}if(blog_user.getIsStatistics()==null || blog_user.getIsStatistics()==0){%>
+	</div><%} if(blog_user.getIsFriends()==null || blog_user.getIsFriends()==0){
+		FriendsDao fd=new FriendsDao();
+		List<Friends> friendsList=fd.getFriendList();
+	%>
+	<section class="mod-side-item mod-side-stat">
+		<h2 class="side-title stat-title">友情链接</h2>
+		<div class="stat-content">
+			<%if(friendsList!=null && friendsList.size()>0){
+				for(int i=0;i<friendsList.size();i++){
+					Friends f=friendsList.get(i);
+					if(f.getIstop()!=null && f.getIstop().equals(1)){
+			%>
+			<div class="stat-desc today-stat"><span class="stat-tip"><a href="<%=f.getUrl() %>" target="_bank" title="<%=f.getDescription() %>"><%=f.getName() %></a></span></div>
+			<%}}} %>
+		</div>
+	</section>
+	
+	<%}if(blog_user.getIsStatistics()==null || blog_user.getIsStatistics()==0){%>
 	<section class="mod-side-item mod-side-stat">
 		<div class="side-mini-border"></div>
 		<h2 class="side-title stat-title">访问统计</h2>
