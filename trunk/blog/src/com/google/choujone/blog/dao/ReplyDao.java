@@ -110,7 +110,7 @@ public class ReplyDao {
 	public List<Reply> getReplyListByBid(Long bid, Pages pages) {
 		key = "replyDao_bid_" + bid + "_" + pages.getPageNo();
 		List<Reply> replyList = MyCache.get(key);
-		page_key = key + "_pages";
+//		page_key = key + "_pages";
 //		Pages page = (Pages) MyCache.cache.get(page_key);
 		pages.setRecTotal(getBlogReplyCount(bid));
 		if (replyList == null ) {
@@ -130,7 +130,7 @@ public class ReplyDao {
 				}
 				replyList = (List<Reply>) query.execute();
 				MyCache.put(key, replyList);
-				MyCache.cache.put(page_key, pages);
+//				MyCache.cache.put(page_key, pages);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -74,6 +74,7 @@ public class ReplyServlet extends HttpServlet {
 				obj.put("replyMessage", r.getReplyMessage());
 				obj.put("content", r.getContent());
 				obj.put("name", r.getName());
+				obj.put("url", r.getUrl());
 				ja.add(obj);
 			}
 			out.print(ja.toJSONString());
@@ -156,7 +157,8 @@ public class ReplyServlet extends HttpServlet {
 			reply.setName(name);
 			reply.setUrl(url);
 			reply.setBid(Tools.strTolong(bid));
-			reply.setContent(content);
+			//评论内容 过滤
+			reply.setContent(Tools.FilterHTML(content));
 			// reply.setContent2(new Text(content));
 			// 获取到留言者的信息
 			reply.setVisiter(req.getRemoteAddr() + ";"

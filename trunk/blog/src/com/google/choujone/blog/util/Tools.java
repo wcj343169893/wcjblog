@@ -45,7 +45,7 @@ public class Tools {
 	}
 
 	public static String FilterHTML(String value) {
-		value = value.replace("'", "''");
+		value = value.replace("'", "\'");
 		value = value.replace("&", "&amp;");
 		value = value.replace(" ", "&nbsp;");
 		value = value.replace("<", "&lt;");

@@ -2479,7 +2479,7 @@ textarea.input-box {
 
 .mod-side-stat .stat-content {
 	margin-left: 10px;
-	padding-bottom: 60px
+	padding-bottom: 30px
 }
 
 .mod-side-stat .stat-title {
@@ -2978,4 +2978,7 @@ textarea.input-box {
 	font-weight: bold;
 	padding: 5px;
 	margin-bottom: 5px;
+}
+.side-mini-border{
+	border-top: 1px dotted #C7C7C7;
 }

@@ -219,7 +219,7 @@ function initReply2(p, bid) {
 		jQuery.each(data,function(index,domEle){
 			isContent=true;
 			count++;
-			content+='<div class="cmt-item" style="height: auto; overflow: visible; "><div class="cmt-item-content clearfix"><div class="cmt-content-box"><div class="cmt-content-detail"><a class="cmt-user-name cs-contentblock-link" href="javascript:void(0)" target="_blank">'+domEle.name+'</a> '+domEle.content+'</div><div class="cmt-pub-time">'+domEle.sdTime+'</div>';
+			content+='<div class="cmt-item" style="height: auto; overflow: visible; "><div class="cmt-item-content clearfix"><div class="cmt-content-box"><div class="cmt-content-detail"><a class="cmt-user-name cs-contentblock-link" href="'+domEle.url+'" target="_blank">'+domEle.name+'</a> '+domEle.content+'</div><div class="cmt-pub-time">'+domEle.sdTime+'</div>';
 			if(domEle.replyMessage!=null &&domEle.replyMessage.length>0){
 				content+='<blockquote><div class="quote quote3"><div class="quote-title">管理员 于 '+domEle.replyTime+'回复</div>'+domEle.replyMessage+'</div></blockquote>';
 			}
