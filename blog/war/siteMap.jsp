@@ -25,7 +25,7 @@ User blog_user = ud.getUserDetail(); %>
 <div>最新文章</div>
 <div><%List<Blog> blogList=bd.getBlogList(); %>
 	<ul><%for(Blog blog:blogList){ %>
-		<li><a href="/blog?id=<%=blog.getId() %>"><%=blog.getTitle() %></a></li><%} %>
+		<li><a href="/blog/<%=blog.getId() %>"><%=blog.getTitle() %></a></li><%} %>
 	</ul>
 </div>
 <div>文章分类</div>
@@ -43,7 +43,7 @@ User blog_user = ud.getUserDetail(); %>
 <div>最新标签</div>
 <div>
 <ul><%Map<String, Integer> tagsMap =bd.getTags();for(String s : tagsMap.keySet()){ %>
-	<li><a href="javascript:void(0)" style="font-size: <%=tagsMap.get(s)+12 %>px"><%=s %>(<%=tagsMap.get(s) %>)</a></li><%} %></ul>
+	<li><a href="/tag.jsp?t=<%=s %>" style="font-size: <%=tagsMap.get(s)+12 %>px"><%=s %>(<%=tagsMap.get(s) %>)</a></li><%} %></ul>
 </div>
 <div>友情链接</div>
 <div>
