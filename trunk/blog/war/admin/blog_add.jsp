@@ -5,33 +5,37 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加博客</title>
-	<script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/js/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/kindeditor42/kindeditor-min.js"></script>
+	<script charset="utf-8" src="/kindeditor42/lang/zh_CN.js"></script>
+	<script charset="utf-8" src="/kindeditor42/plugins/code/prettify.js"></script>
 </head>
 <body>
 <div class="main">
 	<jsp:include page="/admin/menu.jsp"></jsp:include>	
-	<div class="address">
-			发布文章 
-	</div>
-	<script type="text/javascript">
-		KE.show({
-			id : 'content',
-			imageUploadJson : "/kindeditor/jsp/upload.jsp",
-			fileManagerJson : '/kindeditor/jsp/file_manager.jsp',
-			allowFileManager : true,
-			afterCreate : function(id) {
-				KE.event.ctrl(document, 13, function() {
-					KE.util.setData(id);
-					document.forms['newblog'].submit();
+	<div class="address">发布文章</div>
+	<script>
+			KindEditor.ready(function(K) {
+					var editor = K.create('textarea[name="content"]', {
+					cssPath : '/kindeditor42/plugins/code/prettify.css',
+					uploadJson : '/kindeditor/jsp/upload.jsp',
+					fileManagerJson : '/kindeditor/jsp/file_manager.jsp',
+					allowFileManager : true,
+					afterCreate : function() {
+						var self = this;
+						K.ctrl(document, 13, function() {
+							self.sync();
+							document.forms['newblog'].submit();
+						});
+						K.ctrl(self.edit.doc, 13, function() {
+							self.sync();
+							document.forms['newblog'].submit();
+						});
+					}
 				});
-				KE.event.ctrl(KE.g[id].iframeDoc, 13, function() {
-					KE.util.setData(id);
-					document.forms['newblog'].submit();
-				});
-			}
-		});
-	</script>
+				prettyPrint();
+			});
+		</script>
 	<div id="container">
 		<form action="/blog" method="post" name="newblog">
 			<input type="hidden" name="op" value="add">

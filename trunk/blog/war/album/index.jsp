@@ -8,10 +8,11 @@
 <head><%
 	UserDao ud=new UserDao();
 	User blog_user=  ud.getUserDetail();
-	String title=blog_user!=null ? blog_user.getpTitle():"";
+	String title=blog_user!=null ? blog_user.getpTitle():"相册";
+	String key="相册 google相册 "+""+title;
 %><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>相册_<%=title %></title>
-	<jsp:include page="../head.jsp"></jsp:include>
+	<jsp:include page="../head.jsp"><jsp:param value="<%=key %>" name="kw"/><jsp:param value="完全动态加载google共享相册，如需查看详细，请到  picasaweb.google.com" name="desc"/></jsp:include>
 	<link rel="stylesheet" type="text/css" href="picasa.css" />
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="slimbox2.js"></script>
@@ -25,7 +26,7 @@
 <!-- 顶部结束 -->
 <div class="mod-text-content mod-post-content">
 	<div id="navi"><a href="1" style="display:none;"></a></div>
-	<div id="items"></div>
+	<div id="items">完全动态加载google共享相册，如需查看详细，请到  <a href="https://picasaweb.google.com">picasaweb.google.com</a></div>
 </div>
 </div>
 <jsp:include page="../footer.jsp"></jsp:include>
