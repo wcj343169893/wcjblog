@@ -6,8 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>修改文章</title>
-<script type="text/javascript" charset="utf-8" src="/kindeditor/kindeditor.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/kindeditor42/kindeditor-min.js"></script>
+	<script charset="utf-8" src="/kindeditor42/lang/zh_CN.js"></script>
+	<script charset="utf-8" src="/kindeditor42/plugins/code/prettify.js"></script>
 </head>
 <body>
 <div class="main">
@@ -17,22 +19,26 @@
 	</div>
 	<% Blog blog=(Blog)request.getAttribute("blog");
 	if(blog!=null){ %>
-		<script type="text/javascript">
-			KE.show({
-				id : 'content',
-				imageUploadJson : "/kindeditor/jsp/upload.jsp",
-				fileManagerJson : '/kindeditor/jsp/file_manager.jsp',
-				allowFileManager : true,
-				afterCreate : function(id) {
-					KE.event.ctrl(document, 13, function() {
-						KE.util.setData(id);
-						document.forms['modifyblog'].submit();
-					});
-					KE.event.ctrl(KE.g[id].iframeDoc, 13, function() {
-						KE.util.setData(id);
-						document.forms['modifyblog'].submit();
-					});
-				}
+		<script>
+			KindEditor.ready(function(K) {
+					var editor = K.create('textarea[name="content"]', {
+					cssPath : '/kindeditor42/plugins/code/prettify.css',
+					uploadJson : '/kindeditor/jsp/upload.jsp',
+					fileManagerJson : '/kindeditor/jsp/file_manager.jsp',
+					allowFileManager : true,
+					afterCreate : function() {
+						var self = this;
+						K.ctrl(document, 13, function() {
+							self.sync();
+							document.forms['newblog'].submit();
+						});
+						K.ctrl(self.edit.doc, 13, function() {
+							self.sync();
+							document.forms['newblog'].submit();
+						});
+					}
+				});
+				prettyPrint();
 			});
 		</script>
 		<div id="container">

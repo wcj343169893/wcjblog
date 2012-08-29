@@ -2,8 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><%@page import="com.google.choujone.blog.dao.BlogDao,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.ReplyDao,com.google.choujone.blog.common.Pages,java.util.List,com.google.choujone.blog.entity.Reply,com.google.choujone.blog.entity.User,com.google.choujone.blog.util.Config,com.google.choujone.blog.common.Operation,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType"%>
-<%@page import="com.google.choujone.blog.dao.UserDao"%>
-<%@page import="com.google.choujone.blog.util.MyCache"%><html><%
+<%@page import="com.google.choujone.blog.dao.UserDao"%><html><%
 	String id = request.getParameter("id")!=null ? request.getParameter("id") : (String)request.getAttribute("id");
 	boolean isOk=false;
 	BlogDao blogDao=null;
