@@ -24,15 +24,13 @@ public class Mail {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		String msgBody = content;
-		UserDao ud = new UserDao();
-		User blogUser = ud.getUserDetail();
+		// UserDao ud = new UserDao();
+		// User blogUser = ud.getUserDetail();
 		try {
 			Message msg = new MimeMessage(session);
-			msg
-					.setFrom(new InternetAddress("wcj343169893@163.com",
-							"choujone"));
+			msg.setFrom(new InternetAddress("wcj343169893@gmail.com", "choujone.com"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-					blogUser.getEmail(), "administrator"));
+					"wcj343169893@vip.qq.com", "administrator"));
 			Multipart mp = new MimeMultipart();
 			MimeBodyPart htmlPart = new MimeBodyPart();
 			htmlPart.setContent(msgBody, "text/html");
@@ -56,7 +54,7 @@ public class Mail {
 			// ...
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// 
+			//
 			e.printStackTrace();
 		}
 	}
@@ -100,7 +98,7 @@ public class Mail {
 			// ...
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// 
+			//
 			e.printStackTrace();
 		}
 	}
