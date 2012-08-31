@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
 import com.google.choujone.blog.dao.BlogDao;
@@ -110,31 +112,48 @@ public class ReplyServlet extends HttpServlet {
 		String email = req.getParameter("email");// email
 		String url = req.getParameter("url");// email
 		// 保存游客信息到cookies
-		Cookie[] cookies = req.getCookies();
-		boolean isCookied = false;
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("gustName")) {
-				name = URLDecoder.decode(cookie.getValue(), "UTF-8");
-				isCookied = true;
-			} else if (cookie.getName().equals("gustEmail")) {
-				email = URLDecoder.decode(cookie.getValue(), "UTF-8");
-			} else if (cookie.getName().equals("gustURL")) {
-				url = URLDecoder.decode(cookie.getValue(), "UTF-8");
+		// Cookie[] cookies = req.getCookies();
+		// boolean isCookied = false;
+		// for (Cookie cookie : cookies) {
+		// if (cookie.getName().equals("gustName")) {
+		// name = URLDecoder.decode(cookie.getValue(), "UTF-8");
+		// isCookied = true;
+		// } else if (cookie.getName().equals("gustEmail")) {
+		// email = URLDecoder.decode(cookie.getValue(), "UTF-8");
+		// } else if (cookie.getName().equals("gustURL")) {
+		// url = URLDecoder.decode(cookie.getValue(), "UTF-8");
+		// }
+		// }
+		// if (!isCookied) {
+		// Cookie gustName = new Cookie("gustName", URLEncoder.encode(name,
+		// "UTF-8"));
+		// Cookie gustEmail = new Cookie("gustEmail", URLEncoder.encode(email,
+		// "UTF-8"));
+		// Cookie gustURL = new Cookie("gustURL", URLEncoder.encode(url,
+		// "UTF-8"));
+		// resp.setCharacterEncoding("UTF-8");
+		// resp.addCookie(gustName);
+		// resp.addCookie(gustEmail);
+		// resp.addCookie(gustURL);
+		// }
+		// 判断是否使用google账号登录
+		UserService userService = UserServiceFactory.getUserService();
+		req.getSession().setAttribute("errorMsg", "");
+		if (!userService.isUserLoggedIn()) {
+			req.getSession().setAttribute("errorMsg", "请登录");
+			if (Tools.strTolong(bid) > 0) {
+				resp.sendRedirect("/blog/" + Tools.strTolong(bid));
+			} else {
+				resp.sendRedirect("/leaveMessage.jsp");
+				// req.getRequestDispatcher("/leaveMessage.jsp")
+				// .forward(req, resp);
+				bid = "-1";
 			}
+			return;
 		}
-		if (!isCookied) {
-			Cookie gustName = new Cookie("gustName", URLEncoder.encode(name,
-					"UTF-8"));
-			Cookie gustEmail = new Cookie("gustEmail", URLEncoder.encode(email,
-					"UTF-8"));
-			Cookie gustURL = new Cookie("gustURL", URLEncoder.encode(url,
-					"UTF-8"));
-			resp.setCharacterEncoding("UTF-8");
-			resp.addCookie(gustName);
-			resp.addCookie(gustEmail);
-			resp.addCookie(gustURL);
-		}
-
+		email = userService.getCurrentUser().getEmail();
+		name = userService.getCurrentUser().getNickname();
+		url = userService.getCurrentUser().getAuthDomain();
 		// String repyMsg = req.getParameter("msg");
 		String p = req.getParameter("p") != null ? req.getParameter("p") : "1";
 		ReplyDao replyDao = new ReplyDao();
@@ -144,8 +163,7 @@ public class ReplyServlet extends HttpServlet {
 			// 判断内容是否为空
 			if (content == null || "".equals(content.trim())) {
 				if (Tools.strTolong(bid) > 0) {
-					resp.sendRedirect("/blog_detail.jsp?id="
-							+ Tools.strTolong(bid));
+					resp.sendRedirect("/blog/" + Tools.strTolong(bid));
 				} else {
 					resp.sendRedirect("/leaveMessage.jsp");
 					bid = "-1";
@@ -157,7 +175,7 @@ public class ReplyServlet extends HttpServlet {
 			reply.setName(name);
 			reply.setUrl(url);
 			reply.setBid(Tools.strTolong(bid));
-			//评论内容 过滤
+			// 评论内容 过滤
 			reply.setContent(Tools.FilterHTML(content));
 			// reply.setContent2(new Text(content));
 			// 获取到留言者的信息
@@ -166,14 +184,16 @@ public class ReplyServlet extends HttpServlet {
 					+ req.getHeader("user-agent"));
 			replyDao.operationReply(Operation.add, reply);
 			// 发送 邮件到邮箱
-			Mail.send(title, content + " <br/>访客信息:" + reply.getName()
-					+ "<br/>" + reply.getEmail() + "<br/>" + reply.getUrl()
-					+ "<br/>" + reply.getVisiter() + "<br/>");
+			Mail.send(title, content + "<br/><hr/><br/>访客信息:" + reply.getName()
+					+ "<br/>google userid:"
+					+ userService.getCurrentUser().getUserId() + "<br/>"
+					+ reply.getEmail() + "<br/>" + reply.getUrl() + "<br/>"
+					+ reply.getVisiter() + "<br/>");
 			if (reply.getBid() > 0) {
 				BlogDao blogDao = new BlogDao();
 				blogDao.operationBlog(Operation.replyTimes,
 						new Blog(reply.getBid()));
-				resp.sendRedirect("/blog?id=" + reply.getBid());
+				resp.sendRedirect("/blog/" + reply.getBid());
 			} else {
 				resp.sendRedirect("/leaveMessage.jsp");
 				bid = "-1";
@@ -186,7 +206,6 @@ public class ReplyServlet extends HttpServlet {
 			// MyCache.clear(key);
 			// 更新统计
 
-			
 		} else if (operation.trim().equals(Operation.lists.toString())) {// 评论列表
 			// System.out.println("请求一下");// 功能未完成
 			// req.setAttribute("reply", reply);

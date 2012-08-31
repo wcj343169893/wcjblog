@@ -169,6 +169,27 @@ function initGoogleAccount(){
 		});
 	});
 }
+function getGoogleAccount(){
+	var top_member = jQuery("#comment_account");
+	var url = window.location.href;
+	top_member.html("<img src='/images/loading.gif' height='20'/>");
+	jQuery.getJSON("/user?op=getUser&url="+url,function(data){
+		jQuery(data).each(function(index,domEle){
+//			alert("data"+domEle+" "+ index);
+			if(domEle.isUserLoggedIn){
+				var content="欢迎";
+				if(domEle.isUserAdmin){content+="管理员 ";}
+				content+="【"+domEle.nickname+"】";
+				content+=" <a href='"+domEle.logoutUrl+"'>退出</a>";
+				//content+='<input name="email" value="'+domEle.email+'" type="hidden"/> <input name="name" value="'+domEle.nickname+'" type="hidden"/>  <input name="url" value="'+domEle.authDomain+'" type="hidden"/>';
+				top_member.html(content);
+				jQuery("#msg_notice").remove();
+			}else{
+				top_member.html('<a href="'+domEle.loginUrl+'" >Google登陆</a>');
+			}
+		});
+	});
+}
 // 动态加载评论
 function initReply(p, bid) {
 	loading_rc();
