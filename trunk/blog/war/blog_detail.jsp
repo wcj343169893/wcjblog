@@ -89,12 +89,9 @@
                     <div class="comment-title">评论</div>
                     <div class="comment-content" style="display: block; overflow: visible; height: auto; ">
                     <div id="qcmt1910464" class="qcmt-wraper-box-comment">
-                    	<div class="cmt-border-top"></div>
-	                    <div class="qcmt-arrow-wraper" style="left:653px;"><div class="qcmt-arrow-border"></div>
-		                    <div class="qcmt-arrow-shadow"></div>
-		                    <div class="qcmt-arrow"></div>
-		                    <div class="qcmt-arrow-inner"></div>
-	                    </div>
+                    	 <%String errorMsg = (String)request.getSession().getAttribute("errorMsg");if(null!=errorMsg && !"".equals(errorMsg.trim())){ %>
+	                   	<div class="fun" id="msg_notice"><%=errorMsg %></div>
+	                   	<%request.getSession().setAttribute("errorMsg", "");} %>
 	                    <div class="qcmt-input-box clearfix">
 		                    <div class="qcmt-input-textarea-box">
 		                    	<form id="frmSumbit" target="_self" method="post" onsubmit="return bd_sub();" action="/reply">
@@ -106,18 +103,18 @@
 											String gustName="游客";
 											String gustEmail="";
 											String gustURL="";
-											boolean isCookied=false;
-											Cookie[] allcookies=request.getCookies();
-											if(allcookies!=null){
-												for(int i=0;i<allcookies.length;i++){
-													Cookie newCookie= allcookies[i];
-													if(newCookie.getName().equals("gustName")){
-														gustName=URLDecoder.decode(newCookie.getValue(), "UTF-8");
-														isCookied=true;
-														break;
-													}
-												}
-											}
+											boolean isCookied=true;
+// 											Cookie[] allcookies=request.getCookies();
+// 											if(allcookies!=null){
+// 												for(int i=0;i<allcookies.length;i++){
+// 													Cookie newCookie= allcookies[i];
+// 													if(newCookie.getName().equals("gustName")){
+// 														gustName=URLDecoder.decode(newCookie.getValue(), "UTF-8");
+// 														isCookied=true;
+// 														break;
+// 													}
+// 												}
+// 											}
 									   	%>
 									   	<%if(!isCookied){ %>
 										   	<div class="qcmt-comment-name">
@@ -135,8 +132,14 @@
 													class="text vito-contentbd-input" size="28"/>
 												<label for="inpHomePage">网站链接</label>
 										   	</div>
-									   	<%}else{ %>	                    
 									   		<div class="qcmt-comment-name">欢迎回来：<%=gustName %></div>
+									   	<%}else{ %>	           
+									   		<div class="qcmt-comment-name" id="comment_account"></div>
+									   		<script type="text/javascript">
+										   		jQuery(function($) {
+													getGoogleAccount();
+												});                 
+									   		</script>         
 									   	<%} %>
 									   	<div class="qcmt-textarea-minishadow">
 					                    	<textarea class="qcmt-textarea-box" id="content" style="overflow: hidden; height: 63px; " name="content"></textarea>
