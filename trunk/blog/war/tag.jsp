@@ -27,9 +27,26 @@ User blog_user=  ud.getUserDetail();
 			title=blogTypeList.get(i).getName()+"_"+title;
 		}
 	}
+	
+	String keywords=tag+","+title;
+	String description=keywords+",";
+	
+	BlogDao blogDao = new BlogDao();
+	Integer p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
+	Pages pages=new Pages();
+	pages.setPageNo(p);
+	List<Blog> blogs = blogDao.getBlogListByPage(pages,tid,tag);
+	if(null!=blogs && blogs.size()>0){
+		for(Blog b:blogs){
+			description+=b.getTitle()+",";
+		}
+	}
+	if(description.length()>180){
+		description=description.substring(0,180);
+	}
 %><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=tag%>_<%=title %></title>
-	<jsp:include page="head.jsp"></jsp:include>
+	<jsp:include page="head.jsp"><jsp:param value="<%=keywords %>" name="kw"/><jsp:param value="<%=description %>" name="desc"/></jsp:include>
 	<script type="text/javascript" src="/js/jquery.masonry.js"></script>
 	<script type="text/javascript" src="/js/jquery.infinitescroll.js"></script>
 </head>
@@ -71,13 +88,10 @@ $(function(){
      });
 </script>
 <div class="left" id="mainbox"><%
-	BlogDao blogDao = new BlogDao();
-	Integer p=request.getParameter("p")!= null ? Integer.parseInt(request.getParameter("p").toString()) : 1;
 	
-	Pages pages=new Pages();
-	pages.setPageNo(p);
+	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
-	List<Blog> blogs = blogDao.getBlogListByPage(pages,tid,tag);
+	
 if(blogs!=null && blogs.size()>0){
 for(int i=0;i<blogs.size();i++){
 	Blog blog=blogs.get(i);
