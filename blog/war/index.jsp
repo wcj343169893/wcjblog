@@ -4,8 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="com.google.choujone.blog.dao.BlogDao,java.util.List,com.google.choujone.blog.entity.Blog,com.google.choujone.blog.common.Pages,com.google.choujone.blog.entity.User,com.google.choujone.blog.common.Operation,java.text.SimpleDateFormat,java.util.Date,com.google.choujone.blog.dao.BlogTypeDao,com.google.choujone.blog.entity.BlogType,java.util.ArrayList,java.util.Map,java.util.HashMap,com.google.choujone.blog.util.Tools,com.google.choujone.blog.dao.UserDao"%><html>
 <head><%
-UserDao ud=new UserDao();
-User blog_user=  ud.getUserDetail();
+	UserDao ud=new UserDao();
+	User blog_user=  ud.getUserDetail();
 	String title=blog_user!=null ? blog_user.getpTitle():"";
 	Long tid=null;
 	try{
@@ -13,6 +13,10 @@ User blog_user=  ud.getUserDetail();
 	}catch(Exception e){
 		tid=null;
 	}
+	
+	String keywords="";
+	String description="";
+	String other="";
 	
 	//查询所有的分类
 	BlogTypeDao btd=new BlogTypeDao();
@@ -24,11 +28,20 @@ User blog_user=  ud.getUserDetail();
 		typeMaps.put(blogTypeList.get(i).getId(),blogTypeList.get(i).getName());
 		if(tid!=null && blogTypeList.get(i).getId().equals(tid)){
 			title=blogTypeList.get(i).getName()+"_"+title;
+			other+=blogTypeList.get(i).getName()+",";
 		}
 	}
+	if(!"".equals(other)){
+		description=other;
+		keywords+=other;
+	}
+	description+=blog_user.getBlogDescription();;
+	keywords+=blog_user.getBlogKeyword();
+	
+	
 %><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=title %></title>
-<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="head.jsp"><jsp:param value="<%=keywords %>" name="kw"/><jsp:param value="<%=description %>" name="desc"/></jsp:include>
 <script type="text/javascript" src="/js/jquery.masonry.js"></script>
 <script type="text/javascript" src="/js/jquery.infinitescroll.js"></script>
 </head>

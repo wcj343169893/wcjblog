@@ -28,7 +28,7 @@
 			//查询所有的分类
 			BlogTypeDao btd = new BlogTypeDao();
 			BlogType bt = btd.getBlogTypeById(blog.getTid());
-			String keywords=blog.getTitle()+" "+(bt!=null ? bt.getName(): "默认分类")+" "+blog.getTag();
+			String keywords=blog.getTitle()+","+(bt!=null ? bt.getName(): "默认分类")+","+blog.getTag()+","+blog_user.getpTitle();
 			String description=blog.getContent(150,"").getValue().trim();
 %><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
