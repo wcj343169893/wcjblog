@@ -1,1 +1,300 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('8 2B(1O){4 1v=1y.2C(1O);1v.N.1P=1v.N.1P=="1Q"?"2w":"1Q"}8 2x(){4 R=c("#2y");R.u("2D","/1k");4 1N=c("#1G"),1A=c("#1F"),1M=c("#22");9(1A.k()){R.1t("#2E").k(1A.k())}R.1t("#2K").k(1N.k());R.1t("#2F").k(1M.k())}8 2G(h){$("#"+h).2H()}8 2M(h){$("#"+h).2q()}8 K(b){1x.1z.m=b}8 1q(b){9(b.12("?")>0){K(b+"&I=1q")}g{K(b+"?I=1q")}}8 2i(C){4 C=$(C);4 E=$(".E");9(C.u("F")){$.A(E,8(n,j){$(j).u("F",s)})}g{$.A(E,8(n,j){$(j).u("F",D)})}}8 2k(C){4 C=$(C);4 E=$("."+C.u("d"));4 11=$("#11");4 x=s;$.A(E,8(n,j){9(!$(j).u("F")){x=D}});9(x){11.u("F",s)}g{11.u("F",D)}}8 2j(b){4 l="";4 G=1y.1R("z");4 x=D;4 e;1S(4 i=0;i<G.Q;i++){e=G[i];9(e.P=="1Y"&&e.1Z=="E"&&e.F==s){l+=e.j+",";x=s}}9(x){9(b.12("?")>0){1g(b+"&I=1L&l="+(l+"0"))}g{1g(b+"?I=1L&l="+(l+"0"))}}g{1j("请选择删除项")}}8 2m(b){4 l="";4 G=1y.1R("z");4 x=D;4 e;1S(4 i=0;i<G.Q;i++){e=G[i];9(e.P=="1Y"&&e.1Z=="E"&&e.F==s){l+=e.j+",";x=s}}9(x){9(b.12("?")>0){K(b+"&l="+(l+"0"))}g{K(b+"?l="+(l+"0"))}}g{1j("请选择操作项")}}8 1g(b){9(3c("是否删除?")){K(b)}}8 1I(h){9(h!=""){$("#"+h).1n()}g{$(".1l").1n()}}8 3e(){4 1i=3b 3a().37();$("#3g").1h("<6 h=\'1T"+1i+"\' d=\'1l\'><z j=\'\' d=\'1U\'/> <z j=\'\' d=\'21\'/> <z j=\'删除\' P=\'39\' 3f=1I(\'1T"+1i+"\')> </6>")}8 3h(){4 B="";$(".1l").A(8(J,7){4 S=$(7).1V(".1U");4 b=$(7).1V(".21");9(S.k()!=""&&b.k()!=""){B=B+S.k()+","+b.k()+";"}});B=B.36(0,B.Q-1);$("#B").k(B)}8 2V(){4 5=$("#5").k();9(5==1u||""==c.2R(5)){1j("请输入评论内容");1C D}1C s}8 2P(){4 w=c("#w");4 b=1x.1z.m;w.o("<1f 1e=\'/1b/q.1d\' 1o=\'20\'/>");c.15("/1p?I=1E&b="+b,8(y){c(y).A(8(J,7){9(7.1D){4 5="欢迎";9(7.1H){5+="管理员"}5+=7.1s;5+=" <a m=\'"+7.1B+"\'>退出</a>";5+=\'<z h="1G" j="\'+7.2Q+\'" P="1w"/> <z h="1F" j="\'+7.1s+\'" P="1w"/>  <z h="22" j="\'+7.34+\'" P="1w"/>\';w.o(5)}g{w.o(\'<a m="\'+7.2f+\'" >2e登陆</a>\')}})})}8 32(){4 w=c("#31");4 b=1x.1z.m;w.o("<1f 1e=\'/1b/q.1d\' 1o=\'20\'/>");c.15("/1p?I=1E&b="+b,8(y){c(y).A(8(J,7){9(7.1D){4 5="欢迎";9(7.1H){5+="管理员 "}5+="【"+7.1s+"】";5+=" <a m=\'"+7.1B+"\'>退出</a>";w.o(5);c("#3d").1n()}g{w.o(\'<a m="\'+7.2f+\'" >2e登陆</a>\')}})})}8 1r(p,v){26();c.15("/1k?p="+p+"&v="+v,8(y){4 5="";4 H=D;4 U=0;y.A(8(7,J){H=s;U++;4 L="";4 T=(p-1)*10+J+1;9(T==1){L="沙发"}g 9(T==2){L="板凳"}g 9(T==3){L="平地"}g{L="第"+T+"楼"}5+=\'<6 d="O-30"><r d="O-16-2Z"><r d="O-16-13" N="2b: #2Y">\'+L+\'|<a m="">\'+7.13+\'</a><r N="2b: #33">\'+7.23+\'说</r></r><14><14>\';5+=\'<r d="O-16-5">\'+7.5;9(7.M!=1u&&!""==7.M){5+=\'<18><6 d="Y 2a"><6 d="Y-S">管理员 于 \'+7.2c+\'回复</6>\'+7.M+\'</6></18>\'}5+=\'</r></r><r d="O-16-2W"> </r></6>\'});9(H){5+="<14>";5+="<6 d=\'O-2O\'>";9(p>1){5+="<a m=\'1a:1r("+(p-1)+","+v+")\'>上一页</a>"}9(U>=10){5+="<a m=\'1a:1r("+(p+1)+","+v+")\'>下一页</a>"}5+="</6>"}g{5="<6 W=\'X\'>还没有人发表评论</6>"}c("#24").o(5)})}8 27(p,v){25();c.15("/1k?p="+p+"&v="+v,8(y){4 5="";4 H=D;4 U=0;c.A(y,8(J,7){H=s;U++;4 b="1a:;";9((7.b).12("3i")!=-1){b=7.b}5+=\'<6 d="f-2d" N="1o: 2N; 2U: 2I; "><6 d="f-2d-5 2s"><6 d="f-5-2n"><6 d="f-5-2u"><a d="f-1p-13 2o-2r-2t" m="\'+b+\'" 2h="2l">\'+7.13+\'</a> <14/><p>\'+7.5+\'</p></6><6 d="f-2v-2L">\'+7.23+\'</6>\';9(7.M!=1u&&7.M.Q>0){5+=\'<18><6 d="Y 2a"><6 d="Y-S">管理员 于 \'+7.2c+\'回复</6>\'+7.M+\'</6></18>\'}5+=\'</6></6><6 d="f-2A-2z"></6></6>\'});9(H){c(".f-t .t-1c").o("查看更多");c(".f-t").u("m","1a:27("+(p+1)+","+v+")")}g{9(p>1){5="<6 W=\'X\' h=\'29-28\'>就这些啦</6>";c(".f-t .t-1c").o("收起");c(".f-t").3j(8(){c("#f-17").38("Z");c(".f-t .t-1c").o("展开")},8(){c("#f-17").35("Z");c(".f-t .t-1c").o("收起")})}g{c("#f-17").2T();5="<6 W=\'X\' h=\'29-28\'>还没有人发表评论</6>"}}c("#f-17").1h(5);1K()})}8 26(){c("#24").o("<6 W=\'X\'><1f 1e=\'/1b/q.1d\'/></6>")}8 25(19){4 V={1m:"1J-q",1W:"/1b/q.1d",1X:"正在加载..."};4 q=c("#"+V.1m);9(q.Q==0){q=c(\'<6 h="\'+V.1m+\'" N="19-W: X;"><1f 2X="2S..." 1e="\'+V.1W+\'" /><6>\'+(19?19:V.1X)+\'</6></6>\');c("2g").1h(q)}q.2p("Z")}8 1K(){$("#1J-q").2J("Z")}',62,206,'||||var|content|div|domEle|function|if||url|jQuery|class||cmt|else|id||value|val|ids|href||html||loading|span|true|seemore|attr|bid|top_member|flag|data|input|each|menus|inputObj|false|input_check_single|checked|inputs|isContent|op|index|to|louceng_str|replyMessage|style|vito|type|length|form|title|louceng|count|opts|align|center|quote|slow||input_check_all|indexOf|name|br|getJSON|postcomment|list|blockquote|text|javascript|images|tip|gif|src|img|del|append|no|alert|reply|d_menu|loadingId|remove|height|user|clearCache|initReply|nickname|find|null|commentReplyDiv|hidden|window|document|location|goolge_nickname|logoutUrl|return|isUserLoggedIn|getUser|google_account_nickname|google_account_email|isUserAdmin|del_m|infscr|hide_loading|delete|goolge_authDomain|goolge_email|divId|display|none|getElementsByTagName|for|menu_|menu_title|children|loadingImg|loadingText|checkbox|className||menu_url|google_account_authDomain|sdTime|reply_comment|loading_rc2|loading_rc|initReply2|notice|comment|quote3|color|replyTime|item|Google|loginUrl|body|target|allCheckFlag|deletes|singleDeleteFlag|_blank|tops|box|cs|fadeIn|show|contentblock|clearfix|link|detail|pub|block|showForm|frmSumbit|border|mini|showOrHideDiv|getElementById|action|comment_name|inpHomePage|closeDiv|hide|visible|fadeOut|inpEmail|time|showDiv|auto|prenext|initGoogleAccount|email|trim|Loading|empty|overflow|bd_sub|reback|alt|8c8c8c|one|postcommentlist|comment_account|getGoogleAccount|979797|authDomain|slideDown|substring|getTime|slideUp|button|Date|new|confirm|msg_notice|add_m|onclick|td_menu|make_m|http|toggle'.split('|'),0,{}))
+function showOrHideDiv(divId) {
+	var commentReplyDiv = document.getElementById(divId);
+	commentReplyDiv.style.display = commentReplyDiv.style.display == "none" ? "block"
+			: "none";
+}
+//显示留言区域
+function showForm(){
+	var form=jQuery("#frmSumbit");
+	form.attr("action","/reply");
+	var goolge_email=jQuery("#google_account_email"), goolge_nickname=jQuery("#google_account_nickname"),goolge_authDomain=jQuery("#google_account_authDomain");
+	if (goolge_nickname.val()) {
+		form.find("#comment_name").val(goolge_nickname.val());
+	}
+	form.find("#inpEmail").val(goolge_email.val());
+	form.find("#inpHomePage").val(goolge_authDomain.val());
+}
+function closeDiv(id) {
+	$("#" + id).hide();
+}
+function showDiv(id) {
+	$("#" + id).show();
+}
+function to(url) {
+	window.location.href = url;
+}
+function clearCache(url) {
+	if (url.indexOf("?") > 0) {
+		to(url + "&op=clearCache");
+	} else {
+		to(url + "?op=clearCache");
+	}
+}
+function allCheckFlag(inputObj) {
+	var inputObj = $(inputObj);
+	var input_check_single = $(".input_check_single");
+	if (inputObj.attr("checked")) {
+		$.each(input_check_single, function(n, value) {
+			$(value).attr("checked", true);
+		});
+	} else {
+		$.each(input_check_single, function(n, value) {
+			$(value).attr("checked", false);
+		});
+	}
+}
+
+function singleDeleteFlag(inputObj) {
+	var inputObj = $(inputObj);
+	var input_check_single = $("." + inputObj.attr("class"));
+	var input_check_all = $("#input_check_all");
+	var flag = true;
+	$.each(input_check_single, function(n, value) {
+		if (!$(value).attr("checked")) {
+			flag = false;
+		}
+	});
+	if (flag) {
+		input_check_all.attr("checked", true);
+	} else {
+		input_check_all.attr("checked", false);
+	}
+}
+
+function deletes(url) {
+	var ids = "";
+	var inputs = document.getElementsByTagName("input");
+	var flag = false;
+	var e;
+	for ( var i = 0; i < inputs.length; i++) {
+		e = inputs[i];
+		if (e.type == "checkbox" && e.className == "input_check_single"
+			&& e.checked == true) {
+			ids += e.value + ",";
+			flag = true;
+		}
+	}
+	if (flag) {
+		if (url.indexOf("?") > 0) {
+			del(url + "&op=delete&ids=" + (ids + "0"));
+		} else {
+			del(url + "?op=delete&ids=" + (ids + "0"));
+		}
+	} else {
+		alert("请选择删除项");
+	}
+}
+function tops(url) {
+	var ids = "";
+	var inputs = document.getElementsByTagName("input");
+	var flag = false;
+	var e;
+	for ( var i = 0; i < inputs.length; i++) {
+		e = inputs[i];
+		if (e.type == "checkbox" && e.className == "input_check_single"
+				&& e.checked == true) {
+			ids += e.value + ",";
+			flag = true;
+		}
+	}
+	if (flag) {
+		if (url.indexOf("?") > 0) {
+			to(url + "&ids=" + (ids + "0"));
+		} else {
+			to(url + "?ids=" + (ids + "0"));
+		}
+	} else {
+		alert("请选择操作项");
+	}
+}
+function del(url) {
+	if (confirm("是否删除?")) {
+		to(url);
+	}
+}
+function del_m(id) {
+	if (id != "") {
+		$("#" + id).remove();
+	} else {
+		$(".d_menu").remove();
+	}
+}
+function add_m() {
+	var no = new Date().getTime();
+	$("#td_menu")
+			.append(
+					"<div id='menu_"
+							+ no
+							+ "' class='d_menu'><input value='' class='menu_title'/> <input value='' class='menu_url'/> <input value='删除' type='button' onclick=del_m('menu_"
+							+ no + "')> </div>");
+}
+function make_m() {
+	var menus = "";
+	$(".d_menu").each(function(index, domEle) {
+		var title = $(domEle).children(".menu_title");
+		var url = $(domEle).children(".menu_url");
+		if (title.val() != "" && url.val() != "") {
+			menus = menus + title.val() + "," + url.val() + ";";
+		}
+	});
+	menus = menus.substring(0, menus.length - 1);
+	$("#menus").val(menus);
+}
+function bd_sub() {
+	var content = $("#content").val();
+	if (content == null || "" == jQuery.trim(content)) {
+		alert("请输入评论内容");
+		return false;
+	}
+	return true;
+}
+/**动态加载Google登陆信息**/
+function initGoogleAccount(){
+	var top_member = jQuery("#top_member");
+	var url = window.location.href;
+	top_member.html("<img src='/images/loading.gif' height='20'/>");
+	jQuery.getJSON("/user?op=getUser&url="+url,function(data){
+		jQuery(data).each(function(index,domEle){
+//			alert("data"+domEle+" "+ index);
+			if(domEle.isUserLoggedIn){
+				var content="欢迎";
+				if(domEle.isUserAdmin){content+="管理员";}
+				content+=domEle.nickname;
+				content+=" <a href='"+domEle.logoutUrl+"'>退出</a>";
+				content+='<input id="google_account_email" value="'+domEle.email+'" type="hidden"/> <input id="google_account_nickname" value="'+domEle.nickname+'" type="hidden"/>  <input id="google_account_authDomain" value="'+domEle.authDomain+'" type="hidden"/>';
+				top_member.html(content);
+			}else{
+				top_member.html('<a href="'+domEle.loginUrl+'" >Google登陆</a>');
+			}
+		});
+	});
+}
+function getGoogleAccount(){
+	var top_member = jQuery("#comment_account");
+	var url = window.location.href;
+	top_member.html("<img src='/images/loading.gif' height='20'/>");
+	jQuery.getJSON("/user?op=getUser&url="+url,function(data){
+		jQuery(data).each(function(index,domEle){
+			if(domEle.isUserLoggedIn){
+				var content="欢迎";
+				if(domEle.isUserAdmin){content+="管理员 ";}
+				content+="【"+domEle.nickname+"】";
+				content+=" <a href='"+domEle.logoutUrl+"'>退出</a>";
+				//content+='<input name="email" value="'+domEle.email+'" type="hidden"/> <input name="name" value="'+domEle.nickname+'" type="hidden"/>  <input name="url" value="'+domEle.authDomain+'" type="hidden"/>';
+				top_member.html(content);
+				jQuery("#msg_notice").remove();
+			}else{
+				top_member.html('<a href="'+domEle.loginUrl+'" >Google登陆</a>');
+			}
+		});
+	});
+}
+/**动态加载评论**/
+function initReply(p, bid) {
+	loading_rc();
+	jQuery.getJSON("/reply?p=" + p + "&bid=" + bid,function(data){
+		var content="";
+		var isContent=false;
+		var count=0;
+		data.each(function(domEle,index){
+			isContent=true;
+			count++;
+			var louceng_str="";
+			var louceng=(p-1)*10+index+1;
+			if (louceng == 1) {louceng_str="沙发";} 
+			else if (louceng == 2) {louceng_str="板凳";} 
+			else if (louceng == 3) {louceng_str="平地";
+			} else {louceng_str="第" + louceng+ "楼";}
+			content+='<div class="vito-postcommentlist"><span class="vito-postcomment-one"><span class="vito-postcomment-name" style="color: #8c8c8c">'+louceng_str+'|<a href="">'+domEle.name+'</a><span style="color: #979797">'+domEle.sdTime+'说</span></span><br><br>';
+			content+='<span class="vito-postcomment-content">'+domEle.content;
+			
+			if(domEle.replyMessage!=null &&!""==domEle.replyMessage){
+				content+='<blockquote><div class="quote quote3"><div class="quote-title">管理员 于 '+domEle.replyTime+'回复</div>'+domEle.replyMessage+'</div></blockquote>';
+			}
+			content+='</span></span><span class="vito-postcomment-reback"> </span></div>';
+		});
+		if(isContent){
+			content+="<br>";
+			content+="<div class='vito-prenext'>";
+			if (p>1) {
+				content+="<a href='javascript:initReply("+(p-1)+","+bid+")'>上一页</a>";
+			}
+			if(count>=10){
+				content+="<a href='javascript:initReply("+(p+1)+","+bid+")'>下一页</a>";
+			}
+			content+="</div>";
+		}else{
+			content="<div align='center'>还没有人发表评论</div>";
+		}
+		jQuery("#reply_comment").html(content);
+	});
+}
+/**动态加载评论，，，格式2**/
+function initReply2(p, bid) {
+	loading_rc2();
+	jQuery.getJSON("/reply?p=" + p + "&bid=" + bid,function(data){
+		var content="";
+		var isContent=false;
+		var count=0;
+		jQuery.each(data,function(index,domEle){
+			isContent=true;
+			count++;
+			var url="javascript:;";
+			if((domEle.url).indexOf("http") != -1){
+				url=domEle.url;
+			}
+			content+='<div class="cmt-item" style="height: auto; overflow: visible; "><div class="cmt-item-content clearfix"><div class="cmt-content-box"><div class="cmt-content-detail"><a class="cmt-user-name cs-contentblock-link" href="'+url+'" target="_blank">'+domEle.name+'</a> <br/><p>'+domEle.content+'</p></div><div class="cmt-pub-time">'+domEle.sdTime+'</div>';
+			if(domEle.replyMessage!=null &&domEle.replyMessage.length>0){
+				content+='<blockquote><div class="quote quote3"><div class="quote-title">管理员 于 '+domEle.replyTime+'回复</div>'+domEle.replyMessage+'</div></blockquote>';
+			}
+			content+='</div></div><div class="cmt-mini-border"></div></div>';
+	  });
+		if(isContent){
+			jQuery(".cmt-seemore .seemore-tip").html("查看更多");
+			jQuery(".cmt-seemore").attr("href","javascript:initReply2("+(p+1)+","+bid+")");
+		}else{
+			if(p>1){
+				content="<div align='center' id='comment-notice'>就这些啦</div>";
+				jQuery(".cmt-seemore .seemore-tip").html("收起");
+				jQuery(".cmt-seemore").toggle(
+					  function () {
+						  	jQuery("#cmt-list").slideUp("slow");
+						  	jQuery(".cmt-seemore .seemore-tip").html("展开");
+						  },
+						  function () {
+						    jQuery("#cmt-list").slideDown("slow");
+						    jQuery(".cmt-seemore .seemore-tip").html("收起");
+						  }
+						);
+				
+			}else{
+				jQuery("#cmt-list").empty();
+				content="<div align='center' id='comment-notice'>还没有人发表评论</div>";
+			}
+		}
+		jQuery("#cmt-list").append(content);
+		hide_loading();
+	});
+}
+function loading_rc(){
+	jQuery("#reply_comment").html("<div align='center'><img src='/images/loading.gif'/></div>");
+}
+/**显示loading**/
+function loading_rc2(text){
+	var opts={
+			loadingId:"infscr-loading",
+			loadingImg:"/images/loading.gif",
+			loadingText:"正在加载..."
+	};
+	var loading = jQuery("#"+opts.loadingId);
+	if(loading.length==0){
+		loading = jQuery('<div id="'+opts.loadingId+'" style="text-align: center;"><img alt="Loading..." src="'+
+          opts.loadingImg+'" /><div>'+(text?text:opts.loadingText)+'</div></div>');    
+		jQuery("body").append(loading);
+	}
+	loading.fadeIn("slow");
+}
+/**隐藏loading**/
+function hide_loading(){
+	$("#infscr-loading").fadeOut("slow");
+}
