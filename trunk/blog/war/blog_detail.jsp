@@ -171,6 +171,11 @@
                     </div>
                 </div>
           </div>
+          	<script type="text/javascript">
+			jQuery(function($) {
+				initReply2(1,<%=blog.getId()%>);
+			});
+			</script>
      </div>
 </div>
 </div>
