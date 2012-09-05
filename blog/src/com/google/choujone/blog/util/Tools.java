@@ -279,7 +279,7 @@ public class Tools {
 	public static String getAddressByIP(String ip) {
 		String addressStr = "";
 		try {
-			URL url = new URL("http://www.ip138.com/ips.asp?ip=" + ip);
+			URL url = new URL("http://www.ip138.com/ips138.asp?action=2&ip=" + ip);
 			URLConnection conn = url.openConnection();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					conn.getInputStream(), "GBK"));
@@ -486,16 +486,18 @@ public class Tools {
 	}
 
 	public static void main(String[] args) {
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("1328885416494", "4");
-		map.put("1328885416433", "67");
-		map.put("1328885413494", "54");
-		map.put("1328885416294", "55");
-		String str = Tools.map2str(map);
-		System.out.println("str:" + str);
-		map = Tools.str2map(str);
-		for (Object obj : map.keySet()) {
-			System.out.println("key:" + obj + "  value:" + map.get(obj));
-		}
+//		Map<Object, Object> map = new HashMap<Object, Object>();
+//		map.put("1328885416494", "4");
+//		map.put("1328885416433", "67");
+//		map.put("1328885413494", "54");
+//		map.put("1328885416294", "55");
+//		String str = Tools.map2str(map);
+//		System.out.println("str:" + str);
+//		map = Tools.str2map(str);
+//		for (Object obj : map.keySet()) {
+//			System.out.println("key:" + obj + "  value:" + map.get(obj));
+//		}
+		String str=Tools.getAddressByIP("119.122.152.135");
+		System.out.println(str);
 	}
 }
