@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+.photo_items{
+	width: 360px;
+	margin: 5px 10px 5px 15px;
+	padding: 5px;
+	line-height: 20px;
+	border: 1px solid;
+	float: left;
+}
+.photo_img{
+	width: 100px;
+	height: 120px;
+	margin-right: 10px;
+	float: left;
+	border: 1px solid;
+}
+.descript_note{
+	height: 20px;
+}
+
+.photo_img img{
+	width: 50px;
+	height: 50px;
+	margin-top: 35px;
+	margin-left: 25px;
+}
+.intro{
+	width: 800px;
+	height: 5px;
+}

@@ -1,0 +1,329 @@
+@CHARSET "UTF-8";
+
+/* CSS Document 基本样式表 016A9F*/
+body {
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	color: #444;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 设置所有字体 */
+* {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 设置页面宽度 */
+#wrap {
+	MARGIN: 0px auto;
+	WIDTH: 1050px;
+}
+
+/* 普通字体颜色1 */
+.font1 {
+	color: #0086E3;
+}
+
+/* 普通字体颜色2 */
+.font2 {
+	color: #3C99C9;
+}
+
+/* 特殊字体颜色3 */
+.font3 {
+	color: red;
+}
+
+/* 特殊字体颜色4 */
+.font4 {
+	color: #A1A1A1;
+}
+
+#wrap div {
+	border-color: #BFE3FF;
+	overflow: hidden;
+}
+
+/* 设置所有图片边框*/
+img {
+	border: 0px;
+}
+
+/* 普通A标签样式 */
+a {
+	color: blue;
+	text-decoration: none;
+}
+
+a:hover {
+	color: red;
+	text-decoration: none;
+}
+
+/*背景颜色*/
+.bg {
+	background-color: #e3f0fc;
+}
+
+/*背景颜色--特殊*/
+.bg1 {
+	background-color: #CCE5F9;
+}
+
+input,button,select {
+	border: 1px solid #999;
+	background-image: url("../images/btn.png") repeat-x 0px 0px;
+}
+
+input {
+	padding: 2px;
+}
+
+input:HOVER {
+	cursor: pointer;
+}
+
+select {
+	height: 22px;
+}
+
+textarea {
+	background-color: #FFFFFF;
+	border: 1px solid #999;
+}
+
+.submit {
+	padding: 0px;
+	border: 0px;
+	height: 22px;
+	width: 50px;
+}
+
+.enter {
+	padding: 0px;
+}
+
+/*CSS page style pagination*/
+DIV.page {
+	TEXT-ALIGN: center;
+	line-height: 25px;
+	margin-left: 100px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	width: 800px;
+	padding-top: 10px;
+}
+
+DIV.page A {
+	BORDER: #BFE3FF 1px solid;
+	PADDING: 2px 8px 2px 8px;
+	COLOR: #20537A;
+	MARGIN-RIGHT: 3px;
+	TEXT-DECORATION: none
+}
+
+DIV.page A:hover {
+	BORDER: #BFE3FF 1px solid;
+	COLOR: #FF5500;
+	BACKGROUND-COLOR: #CCE5F9;
+}
+
+DIV.page A:active {
+	BORDER: #2b55af 1px solid;
+	COLOR: #fff;
+	BACKGROUND-COLOR: #3666d4
+}
+
+DIV.page SPAN.current {
+	PADDING: 2px 6px 2px 6px;
+	FONT-WEIGHT: bold;
+	COLOR: #000;
+	MARGIN-RIGHT: 3px;
+}
+
+DIV.page disabled {
+	DISPLAY: none
+}
+
+.search_key {
+	color: red;
+}
+
+.search_name {
+	color: blue;
+}
+
+.messageBox {
+	position: absolute;
+	margin-left: 30%;
+	width: 200px;
+	height: 100px;
+	background-color: #F5F5F5;
+	margin-top: 250px;
+	margin-top: 150px; !important;
+	display: none;
+	text-align: center;
+	z-index: 10000;
+	border: 1px solid;
+}
+
+.messageBox .message {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.messageBox .message-button {
+	margin-bottom: 10px;
+}
+
+.message_type_list {
+	margin-top: 0px;
+	margin-left: -50px;
+	_margin-left: 0px;
+	*margin-left: 0px;
+}
+
+.message_type_list input{
+	_border: 0px;
+	*border: 0px;
+}
+.message_type_list li {
+	list-style: none;
+	display: inline;
+	margin-left: 10px;
+	padding: 5px 5px 5px 5px;
+}
+
+.error-div {
+	margin: auto;
+	text-align: center;
+	margin-top: 100px;
+}
+
+#buildBox {
+	width: 650px;
+	position: absolute;
+	background-color: #F5F5F5;
+	display: none;
+	padding: 5px 5px 5px 5px;
+}
+
+.homeworks {
+	float: left;
+	margin: 5px 5px 5px 5px;
+}
+
+.buildBox_title {
+	text-align: right;
+}
+
+.homeworks_value {
+	width: 250px;
+}
+
+.buildBox_bottom {
+	text-align: left;
+}
+
+.exams {
+	margin: 5px 5px 5px 5px;
+}
+
+.subjects {
+	margin: 5px 5px 5px 5px;
+}
+
+.linkMan-title {
+	cursor:pointer;
+	font-size: 14px;
+	margin-bottom:5px;
+	padding: 5px 10px 5px 10px;
+}
+
+.template {
+	margin: 5px 5px 5px 5px;
+	padding: 5px 5px 5px 5px;
+}
+
+.template:HOVER {
+	cursor: pointer;
+	background-color: white;
+}
+
+.birthday-div {
+	width: 100%;
+}
+
+.birthday-div-content {
+	float: left;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+.birthday-div-body {
+	width: 100px;
+	float: left;
+	margin: 5px 5px 5px 5px;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid;
+}
+
+.birthday-div-title {
+	padding: 5px 5px 5px 5px;
+	background-color: #F5F5F5;
+	padding: 5px 5px 5px 5px;
+}
+
+.message-div {
+	margin-top: 15px;
+}
+
+.message-div-body {
+	width: 150px;
+	float: left;
+	margin: 5px 5px 5px 5px;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid;
+}
+
+.ipt-t-dft {
+	float: left;
+}
+
+.txt-info {
+	color: gray;
+}
+
+.send_button {
+	height: 80px;
+	width: 100px;
+	float: left;
+	margin-left: 5px;
+}
+
+.update_message_items .dividing_line {
+	border-bottom: 1px solid gray;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.school_info {
+	width: 800px;
+	display: none;
+	z-index: 1000;
+	float: left;
+}
+
+#showgrade {
+	display: none;
+	float: left;
+}
+
+#showsnumber {
+	display: none;
+	float: left;
+}

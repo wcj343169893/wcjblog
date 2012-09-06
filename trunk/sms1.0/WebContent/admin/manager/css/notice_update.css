@@ -1,0 +1,197 @@
+@CHARSET "UTF-8";
+
+.update_items {
+	width: 800px;
+	margin-left: 5px;
+	margin-top: 5px;
+	float: left;
+	line-height: 25px;
+}
+
+.update_items .update_item_name {
+	width: 80px;
+	height: 25px;
+	text-align: right;
+	float: left;
+}
+
+.update_items .update_item_input {
+	width: 150px;
+	height: 25px;
+	float: left;
+	margin-left: 10px;
+}
+
+.update_items .update_item_remarks {
+	width: 400px;
+	float: left;
+}
+
+.update_message_items {
+	width: 900px;
+	float: left;
+	margin-bottom: 2px;
+	margin-left: 10px;
+	padding-left: 10px;
+}
+
+.update_message_items .update_item_name {
+	width: 80px;
+	text-align: right;
+	float: left;
+}
+
+.update_message_items .update_item_input {
+	width: 750px;
+	float: left;
+	padding-left: 10px;
+}
+
+.update_message_items .update_item_input #message_linkman {
+	width: 90%;
+	float: left;
+	border: 1px solid #999999;
+	padding: 5px 5px 5px 5px;
+}
+
+.update_message_items .update_item_input #message_linkman_detail {
+	width: 90%;
+	float: left;
+	border: 0px solid #999999;
+	padding: 5px 5px 5px 5px;
+}
+
+.update_message_items .update_item_input #message_linkman div {
+	border: 1px solid white;
+	cursor: default;
+	height: 20px;
+	margin: 0px 4px 0px 0px;
+	overflow: hidden;
+	padding: 1px;
+	float: left;
+}
+
+.update_message_items .update_item_input #message_linkman div:HOVER {
+	border: 1px solid #999999;
+	background-color: #BFE3FF;
+}
+
+.update_message_items .update_item_input #message_sendman {
+	width: 90%;
+	float: left;
+	border: 1px solid #999999;
+	padding: 5px 5px 5px 5px;
+}
+
+.update_message_items .update_item_remarks {
+	float: left;
+}
+
+.update_message_items .update_item_input #message_linkman_detail {
+	width: 90%;
+	float: left;
+	border: 0px solid #999999;
+	margin-top: -5px;
+}
+
+.update_message_items .update_item_input #message_linkman_detail div {
+	/**
+	display: inline-block;
+	font-family: 宋体;
+	font-size: 12px;
+	line-height: 24px;
+	margin-left: 5px;
+	text-decoration: none;
+	white-space: nowrap;
+	width: auto;
+	word-break: normal;
+	*/
+	border: 1px solid white;
+	cursor: default;
+	height: 20px;
+	margin: 0px 4px 0px 0px;
+	overflow: hidden;
+	padding: 1px;
+	float: left;
+}
+
+.update_message_items .update_item_input #message_linkman_detail div:HOVER
+	{
+	border: 1px solid;
+	background-color: #999999;
+	cursor: pointer;
+}
+
+.del {
+	cursor: pointer;
+}
+
+#linkManList {
+	width: 200px;
+	position: absolute;
+	/**
+	display: none;
+	**/
+	margin: 0px 5px 5px 5px;
+	border: 1px solid #999999;
+}
+
+.role_list {
+	padding: 5px 10px 5px 10px;
+	border-bottom: 1px solid;
+	font-weight: bold;
+}
+
+.role_list a {
+	display: inline-block;
+	font-family: 宋体;
+	font-size: 12px;
+	line-height: 24px;
+	margin-left: 5px;
+	text-decoration: none;
+	white-space: nowrap;
+	width: auto;
+	word-break: normal;
+}
+
+#linkmans {
+	padding: 5px 10px 5px 10px;
+}
+
+#linkmans ul {
+	margin-top: 0px;
+	padding-left: -10px;
+}
+
+#linkmans li {
+	list-style: none;
+	list-style-image: none;
+	margin-left: -40px;
+	padding: 1px 10px 1px 10px;
+	margin-top: 1px;
+}
+
+#linkmans li:HOVER { /*background-color: #999999;
+	cursor: pointer;*/
+	
+}
+
+#linkmans .u:HOVER {
+	background-color: #999999;
+	cursor: pointer;
+}
+
+#lkm_onload {
+	border: 0px;
+}
+
+/***
+#lkm_onload:FOCUS{
+	border: 0px solid red;
+}
+*/
+.message_title {
+	margin-top: 10px;
+	font-size: 20px;
+	font-weight: bold;
+}
