@@ -1,0 +1,117 @@
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+ul.container { /* The topmost UL */
+	width: 182px;
+}
+
+li {
+	list-style: none;
+	text-align: left;
+}
+
+li.menu { /* The main list elements */
+	padding: 5px 0;
+	width: 100%;
+}
+
+li.button a:hover {
+	text-decoration: none;
+}
+
+li.button a span {
+	/* This span acts as the right part of the section's background */
+	height: 44px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 4px;
+	display: block;
+}
+
+/* The hover effects */
+li.button a:hover {
+	background-position: bottom left;
+}
+
+li.button a:hover span {
+	background-position: bottom right;
+}
+
+.dropdown { /* The expandable lists */
+	display: none;
+	width: 100%;
+}
+
+.dropdown li a:LINK{
+	background-image: url(/admin/manager/images/menu_bg1.jpg);
+	background-repeat: no-repeat;
+	color: #333333;
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	height: 26px;
+	line-height: 26px;
+	margin: 0px;
+	overflow: hidden;
+	padding-left: 20px;
+	text-align: left;
+	text-decoration: none;
+	width: 162px;
+}
+.dropdown li a:VISITED{
+	background-image: url(/admin/manager/images/menu_bg1.jpg);
+	background-repeat: no-repeat;
+	color: #333333;
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	height: 26px;
+	line-height: 26px;
+	margin: 0px;
+	overflow: hidden;
+	padding-left: 20px;
+	text-align: left;
+	text-decoration: none;
+	width: 162px;
+}
+
+.dropdown li a:hover { /* Each element in the expandable list */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 26px;
+	font-weight: bold;
+	color: #006600;
+	background-image: url(/admin/manager/images/menu_bg2.jpg);
+	background-repeat: no-repeat;
+	text-align: left;
+	display: block;
+	margin: 0px;
+	height: 26px;
+	width: 162px;
+	padding-left: 20px;
+	text-decoration: none;
+}
+
+.button a{
+	display: block;
+	color: #000;
+	height: 30px;
+	text-decoration: none;
+	background-image: url(/admin/manager/images/nav02.gif);
+	background-repeat: no-repeat;
+	line-height: 30px;
+	width: 162px;
+	padding-left: 20px;
+	margin: 0px;
+	font-weight: bold;
+}
+a{
+	color: #333333;
+}
+a:hover {
+	color: #333333;
+	text-decoration: underline;
+}

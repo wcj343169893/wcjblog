@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+
+.list_items{
+	width: 800px;
+	float: left;
+	line-height: 20px;
+	text-align: center;
+	float: left;
+	border-bottom: 1px solid;
+}
+.list_items .list_id{
+	width: 40px;
+	float: left;
+}
+.list_items .list_title{
+	width: 150px;
+	float: left;
+}
+.list_items .list_path{
+	width: 170px;
+	float: left;
+}
+.list_items .list_time{
+	width: 140px;
+	float: left;
+}
+.list_items .list_content{
+	width: 240px;
+	float: left;
+}
+.list_items .list_root{
+	width: 60px;
+	float: left;
+}
+.list_items .list_root input{
+	width: 50px;
+	float: left;
+}
+.list_items .list_menu{
+	width: 170px;
+	float: left;
+}
+.list_items .list_operate{
+	width: 100px;
+	float: left;
+}
+.list_items .list_long{
+	width: 500px;
+	float: left;
+	
+}
+
+.text_left{
+	text-align: left;
+}
