@@ -24,7 +24,6 @@
 <link href="<%=blog_user.getStyle()%>" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
-<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="100237063" data-redirecturi="http://www.choujone.com/success.jsp" charset="utf-8"></script>
 <!--[if (lt IE 9)]>
 <script type="text/javascript">(function(){var b=("abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video").split(","),a=b.length;while(a--){document.createElement(b[a])}})();</script>
 <![endif]-->

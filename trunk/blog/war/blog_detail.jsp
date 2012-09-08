@@ -140,31 +140,9 @@
 									   		<div class="qcmt-comment-name">欢迎回来：<%=gustName %></div>
 									   	<%}else{ %>	           
 									   		<div class="qcmt-comment-name" id="comment_account"></div>
-									   		<div class="qcmt-comment-name" id="qqLoginBtn"></div>
 									   		<script type="text/javascript">
 										   		jQuery(function($) {
 													getGoogleAccount();
-													QC.Login({
-														btnId : "qqLoginBtn",
-														scope : "all",
-														size : "B_S"
-													}, function(reqData, opts) {
-														var dom = document.getElementById(opts['btnId']), _logoutTemplate = [
-														'<span><img src="{figureurl}" class="{size_key}"/></span>',                                                                     
-														'<span>{nickname}</span>',
-														'<span><a href="javascript:QC.Login.signOut();">退出</a></span>' ].join("");
-														dom && (dom.innerHTML = QC.String.format(_logoutTemplate, {
-															nickname : QC.String.escHTML(reqData.nickname),
-															figureurl : reqData.figureurl
-														}));
-														//进行其他操作
-														//得到下面需要的参数QC.Login.getMe(function(openId, accessToken) {});
-														//https://graph.qq.com/user/get_user_info?access_token="+access_token+"&oauth_consumer_key="+oauth_consumer_key+"&openid="+open_id
-														//下次打开留言内容，如果用户留言了，通过这个请求，得到用户的头像和昵称
-													}, function(opts) {
-														alert('QQ登录 注销成功');
-													});
-												});
 									   		</script>         
 									   	<%} %>
 									   	<div class="qcmt-textarea-minishadow">
