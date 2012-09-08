@@ -1,8 +1,8 @@
-<!-- Indices written at Wed, 5 Sep 2012 04:49:22 UTC -->
+<!-- Indices written at Sat, 8 Sep 2012 03:25:15 UTC -->
 
 <datastore-indexes>
 
-    <!-- Used 2 times in query history -->
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Blog" ancestor="false" source="auto">
         <property name="isVisible" direction="asc"/>
         <property name="sdTime" direction="desc"/>
