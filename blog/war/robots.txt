@@ -1,3 +1,5 @@
-# Robots For choujone
+# Robots For choujone.com
 User-agent: *
 Disallow: /admin/
+Disallow: /blog?*
+Disallow: /blog_detail.jsp?*
