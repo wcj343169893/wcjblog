@@ -190,16 +190,20 @@ public class Tools {
 			// href="/?tid=<%=bt.getId() %>"><%=bt.getName()%>(<%=bd.getCount(bt.getId())
 			// %>)</a></li>
 			if (blogType.getParentId() == null || blogType.getParentId() == 0) {
-				sb.append("<li class='q-tagitem0'><a href='javascript:void(0)'>"
-						+ blogType.getName() + "</a>");
+				sb
+						.append("<li class='q-tagitem0'><a href='javascript:void(0)'>"
+								+ blogType.getName() + "</a>");
 				StringBuffer sb_sub = new StringBuffer();
 				for (BlogType bt_c : blogTypeList) {
 					// System.out.println(bt_c.getParentId()+"  "+
 					// blogType.getId());
 					if (bt_c.getParentId() != null
 							&& bt_c.getParentId().equals(blogType.getId())) {
-						sb_sub.append("<li class='q-tagitem'><a href=/?tid=" + bt_c.getId()
-								+ " class=\"a-tagitem cs-sidebar-hoverbglink\">" + bt_c.getName() + "</a></li>");
+						sb_sub
+								.append("<li class='q-tagitem'><a href=/?tid="
+										+ bt_c.getId()
+										+ " class=\"a-tagitem cs-sidebar-hoverbglink\">"
+										+ bt_c.getName() + "</a></li>");
 					}
 				}
 				if (sb_sub != null && !sb_sub.toString().equals("")) {
@@ -279,7 +283,8 @@ public class Tools {
 	public static String getAddressByIP(String ip) {
 		String addressStr = "";
 		try {
-			URL url = new URL("http://www.ip138.com/ips138.asp?action=2&ip=" + ip);
+			URL url = new URL("http://www.ip138.com/ips138.asp?action=2&ip="
+					+ ip);
 			URLConnection conn = url.openConnection();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					conn.getInputStream(), "GBK"));
@@ -485,19 +490,70 @@ public class Tools {
 		return map;
 	}
 
+	/**
+	 * 判断是否为手机访问
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static boolean isMobile(HttpServletRequest request) {
+		boolean flag = false;
+		String userAgent = request.getHeader("user-agent");
+		if (userAgent != null) {
+			userAgent = userAgent.toUpperCase();
+		} else {
+			userAgent = "unknown";
+		}
+		flag = (userAgent.indexOf("NOKI") > -1 || // Nokia phones and emulators
+				userAgent.indexOf("ERIC") > -1 || // Ericsson WAP phones and
+				// emulators
+				userAgent.indexOf("WAPI") > -1 || // Ericsson WapIDE 2.0
+				userAgent.indexOf("MC21") > -1 || // Ericsson MC218
+				userAgent.indexOf("AUR") > -1 || // Ericsson R320
+				userAgent.indexOf("R380") > -1 || // Ericsson R380
+				userAgent.indexOf("UP.B") > -1 || // UP.Browser
+				userAgent.indexOf("WINW") > -1 || // WinWAP browser
+				userAgent.indexOf("UPG1") > -1 || // UP.SDK 4.0
+				userAgent.indexOf("UPSI") > -1 || // another kind of UP.Browser
+				userAgent.indexOf("QWAP") > -1 || // unknown QWAPPER browser
+				userAgent.indexOf("JIGS") > -1 || // unknown JigSaw browser
+				userAgent.indexOf("JAVA") > -1 || // unknown Java based browser
+				userAgent.indexOf("ALCA") > -1 || // unknown Alcatel-BE3 browser
+				// (UP based)
+				userAgent.indexOf("MITS") > -1 || // unknown Mitsubishi browser
+				userAgent.indexOf("MOT-") > -1 || // unknown browser (UP based)
+				userAgent.indexOf("MY S") > -1 || // unknown Ericsson devkit
+				// browser
+				userAgent.indexOf("WAPJ") > -1 || // Virtual WAPJAG
+				// www.wapjag.de
+				userAgent.indexOf("FETC") > -1 || // fetchpage.cgi Perl script
+				// from www.wapcab.de
+				userAgent.indexOf("ALAV") > -1 || // yet another unknown UP
+				// based browser
+				userAgent.indexOf("WAPA") > -1 || // another unknown browser
+				// (Web based "Wapalyzer")
+				userAgent.indexOf("OPER") > -1 || // Opera
+				userAgent.indexOf("DOPOD") > -1 || // 多普达
+				userAgent.indexOf("SYMBIAN") > -1 || // symbian系统
+				userAgent.indexOf("ANDROID") > -1 || // android系统
+		userAgent.indexOf("MOBILE") > -1 // 标记有mobile的
+		);
+		return flag;
+	}
+
 	public static void main(String[] args) {
-//		Map<Object, Object> map = new HashMap<Object, Object>();
-//		map.put("1328885416494", "4");
-//		map.put("1328885416433", "67");
-//		map.put("1328885413494", "54");
-//		map.put("1328885416294", "55");
-//		String str = Tools.map2str(map);
-//		System.out.println("str:" + str);
-//		map = Tools.str2map(str);
-//		for (Object obj : map.keySet()) {
-//			System.out.println("key:" + obj + "  value:" + map.get(obj));
-//		}
-		String str=Tools.getAddressByIP("119.122.152.135");
+		// Map<Object, Object> map = new HashMap<Object, Object>();
+		// map.put("1328885416494", "4");
+		// map.put("1328885416433", "67");
+		// map.put("1328885413494", "54");
+		// map.put("1328885416294", "55");
+		// String str = Tools.map2str(map);
+		// System.out.println("str:" + str);
+		// map = Tools.str2map(str);
+		// for (Object obj : map.keySet()) {
+		// System.out.println("key:" + obj + "  value:" + map.get(obj));
+		// }
+		String str = Tools.getAddressByIP("119.122.152.135");
 		System.out.println(str);
 	}
 }
