@@ -143,6 +143,7 @@
 									   		<script type="text/javascript">
 										   		jQuery(function($) {
 													getGoogleAccount();
+													});
 									   		</script>         
 									   	<%} %>
 									   	<div class="qcmt-textarea-minishadow">
