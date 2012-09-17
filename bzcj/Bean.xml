@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost/bzcj?useUnicode=true&amp;characterEncoding=UTF-8&amp;</value>		
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<!-- <value>1234</value>-->
+			<value></value>
+		</property>
+		<property name="maxActive">
+			<value>500</value>
+		</property>
+		<property name="initialSize">
+			<value>20</value>
+		</property>
+		<property name="maxWait">
+			<value>2000</value>
+		</property>
+		<property name="minIdle">
+			<value>10</value>
+		</property>
+		<property name="maxIdle">
+			<value>30</value>
+		</property>
+		<property name="removeAbandonedTimeout">
+            <value>20</value>
+        </property>		
+	</bean>
+
+</beans>
+
+
