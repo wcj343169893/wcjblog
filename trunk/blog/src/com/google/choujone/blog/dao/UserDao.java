@@ -33,8 +33,8 @@ public class UserDao {
 					user = users.get(0);
 				} else {
 					//初次使用
-					// Create();
-					 //operationUser(Operation.add, user);
+					 Create();
+					 operationUser(Operation.add, user);
 				}
 				// 把用户信息存入缓存中
 				MyCache.cache.put(user_key, user);
