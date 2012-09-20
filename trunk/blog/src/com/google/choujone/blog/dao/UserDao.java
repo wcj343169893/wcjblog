@@ -32,7 +32,8 @@ public class UserDao {
 				if (users != null && users.size() > 0) {
 					user = users.get(0);
 				} else {
-					 //Create();
+					//初次使用
+					// Create();
 					 //operationUser(Operation.add, user);
 				}
 				// 把用户信息存入缓存中
