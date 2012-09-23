@@ -12,7 +12,7 @@
 			BlogTypeDao btd=new BlogTypeDao();
 			List<BlogType> btList=	btd.getBlogTypeList();
 		%>
-		<div class="q-title"><a href="javascript:void(0)" target="_blank" class="a-incontent cs-sidebar-link">文章分类<span>(<%=btList.size() %>)</span></a></div>
+		<div class="q-title"><h2 class="side-title stat-title">文章分类<span>(<%=btList.size() %>)</span></h2></div>
 		<ul class="q-taglist clearfix q-category">
 			<%if(btList!=null){ %>
 				<%=Tools.blogTypeList2Str(btList) %>
