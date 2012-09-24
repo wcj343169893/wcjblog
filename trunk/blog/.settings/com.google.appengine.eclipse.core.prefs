@@ -4,4 +4,4 @@ gaeDeployDialogSettings=
 gaeIsEclipseDefaultInstPath=false
 googleCloudSqlEnabled=false
 localDevMySqlEnabled=true
-validationExclusions=src/com/google/choujone/blog/util/sdsd.java|src/com/google/choujone/blog/util/CalenderCreator.java|src/com/google/choujone/blog/util/Files.java|src/com/google/choujone/blog/util/Test.java
+validationExclusions=src/com/google/choujone/blog/util/sdsd.java|src/com/google/choujone/blog/util/CalenderCreator.java|src/com/google/choujone/blog/util/Files.java|src/com/google/choujone/blog/util/Test.java|src/com/google/choujone/blog/util/KeyGenDSA.java|src/com/google/choujone/blog/servlet/GetCaptcha.java|src/com/google/choujone/blog/servlet/VerificationCode.java|src/com/google/choujone/blog/servlet/VerificationCodeServlet.java
