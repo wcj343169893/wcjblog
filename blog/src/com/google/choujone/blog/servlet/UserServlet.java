@@ -58,21 +58,25 @@ public class UserServlet extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 			resp.setHeader("Cache-Control", "no-cache");
 			PrintWriter out = resp.getWriter();
-			UserService userService = UserServiceFactory.getUserService();
-			String url = req.getParameter("url");
 			JSONObject obj = new JSONObject();
-			obj.put("isUserLoggedIn", 0);
-			obj.put("loginUrl", userService.createLoginURL(url));
-			obj.put("logoutUrl", userService.createLogoutURL(url));
-			if (userService.isUserLoggedIn()) {
-				obj.put("isUserLoggedIn", 1);
-				if (userService.isUserAdmin()) {
-					obj.put("isUserAdmin", 1);
+			try {
+				UserService userService = UserServiceFactory.getUserService();
+				String url = req.getParameter("url");
+				obj.put("isUserLoggedIn", 0);
+				obj.put("loginUrl", userService.createLoginURL(url));
+				obj.put("logoutUrl", userService.createLogoutURL(url));
+				if (userService.isUserLoggedIn()) {
+					obj.put("isUserLoggedIn", 1);
+					if (userService.isUserAdmin()) {
+						obj.put("isUserAdmin", 1);
+					}
+					obj.put("email", userService.getCurrentUser().getEmail());
+					obj.put("nickname", userService.getCurrentUser()
+							.getNickname());
+					obj.put("authDomain", userService.getCurrentUser()
+							.getAuthDomain());
 				}
-				obj.put("email", userService.getCurrentUser().getEmail());
-				obj.put("nickname", userService.getCurrentUser().getNickname());
-				obj.put("authDomain", userService.getCurrentUser()
-						.getAuthDomain());
+			} catch (Exception e) {
 			}
 			out.print(obj.toJSONString());
 		} else {// 注销
@@ -92,19 +96,19 @@ public class UserServlet extends HttpServlet {
 				.parseInt(req.getParameter("closeweb") != null ? req
 						.getParameter("closeweb") : "0");// 是否关闭网站 0为开启
 		String pTitle = req.getParameter("pTitle") != null ? req
-				.getParameter("pTitle") : "";// 
+				.getParameter("pTitle") : "";//
 		String name = req.getParameter("name") != null ? req
-				.getParameter("name") : "";// 
+				.getParameter("name") : "";//
 		String ctitle = req.getParameter("ctitle") != null ? req
 				.getParameter("ctitle") : "";//
 		String notice = req.getParameter("notice") != null ? req
-				.getParameter("notice") : "";// 
+				.getParameter("notice") : "";//
 		String email = req.getParameter("email") != null ? req
-				.getParameter("email") : "";// 
+				.getParameter("email") : "";//
 		String password = req.getParameter("password") != null ? req
-				.getParameter("password") : "";// 
+				.getParameter("password") : "";//
 		String url = req.getParameter("url") != null ? req.getParameter("url")
-				: "";// 
+				: "";//
 		String address = req.getParameter("address") != null ? req
 				.getParameter("address") : "";
 		String brithday = req.getParameter("brithday") != null ? req
@@ -155,8 +159,7 @@ public class UserServlet extends HttpServlet {
 		String blogKeyword = req.getParameter("blogKeyword") != null ? req
 				.getParameter("blogKeyword") : "";// 博客关键字
 		String blogDescription = req.getParameter("blogDescription") != null ? req
-				.getParameter("blogDescription")
-				: "";// 博客描述
+				.getParameter("blogDescription") : "";// 博客描述
 		String preMessage = req.getParameter("preMessage") != null ? req
 				.getParameter("preMessage") : "";// 博客描述
 		// 2011-10-28 添加顶部和底部代码

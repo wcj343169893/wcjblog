@@ -18,26 +18,42 @@
 <jsp:include page="top.jsp"></jsp:include>
 <!-- 顶部结束 -->
 <!-- 左边开始 -->
-<div class="left">
-	<div class="right-title">
-		登录后台 <% if(request.getAttribute("error")!= null){out.print(request.getAttribute("error"));} %>
+<div class="left masoned login">
+<article class="mod-blogitem mod-item-text">
+	<div class="mod-realcontent mod-cs-contentblock">
+		<div class="item-head">
+			<a href="javascript:;" class="a-incontent a-title cs-contentblock-hoverlink" target="_blank">登录</a>
+		</div>
+		<div class="item-content cs-contentblock-detailcontent">
+			<div class="q-previewbox"></div>
+			<div class="q-summary">
+				<div class="login">
+				<div><% if(request.getAttribute("error")!= null){out.print(request.getAttribute("error"));} %></div>
+				<form action="/user" method="post" id="loginform" name="loginform">
+				<table cellpadding="0" cellspacing="0" class="login_table">
+					<tr>
+						<td class="l_title">用户名：</td><td><input type="text" value="" name="name" size="20" maxlength="20"></td>
+					</tr>
+					<tr>
+						<td class="l_title">密码：</td><td><input type="password" name="password" size="20" maxlength="20"></td>
+					</tr>
+					<tr>
+						<td class="l_title">验证码：</td><td><input type="password" name="password" size="20" maxlength="20"></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td><td><input type="submit" value="登录" class="btn btn-info"></td>
+					</tr>
+					<tr>
+				</table>
+				</form>
+				</div>
+			</div>
+		</div>
+		<div class="item-foot clearfix">
+		</div>
+		<div class="blog-cmt-wraper"></div>
 	</div>
-	<div class="login">
-		<form action="/user" method="post" id="loginform" name="loginform">
-		<table cellpadding="0" cellspacing="0">
-			<tr>
-				<td class="l_title">用户名：</td><td><input type="text" value="" name="name" size="20" maxlength="20"></td>
-			</tr>
-			<tr>
-				<td class="l_title">密码：</td><td><input type="password" name="password" size="20" maxlength="20"></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td><td><input type="submit" value="登录"></td>
-			</tr>
-			<tr>
-		</table>
-		</form>
-	</div>
+</article>
 </div>
 <!-- 左边结束 -->
 <!-- 右边开始 -->
