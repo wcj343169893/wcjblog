@@ -38,9 +38,6 @@
 						<td class="l_title">密码：</td><td><input type="password" name="password" size="20" maxlength="20"></td>
 					</tr>
 					<tr>
-						<td class="l_title">验证码：</td><td><input type="password" name="password" size="20" maxlength="20"></td>
-					</tr>
-					<tr>
 						<td>&nbsp;</td><td><input type="submit" value="登录" class="btn btn-info"></td>
 					</tr>
 					<tr>

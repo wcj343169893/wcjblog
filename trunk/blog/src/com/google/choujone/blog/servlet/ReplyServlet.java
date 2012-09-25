@@ -69,15 +69,17 @@ public class ReplyServlet extends HttpServlet {
 			pages.setPageNo(page);
 			List<Reply> replyList = replyDao.getReplyListByBid(bid_long, pages);
 			JSONArray ja = new JSONArray();
-			for (Reply r : replyList) {
-				JSONObject obj = new JSONObject();
-				obj.put("replyTime", r.getReplyTime());
-				obj.put("sdTime", r.getSdTime());
-				obj.put("replyMessage", r.getReplyMessage());
-				obj.put("content", r.getContent());
-				obj.put("name", r.getName());
-				obj.put("url", r.getUrl());
-				ja.add(obj);
+			if (replyList != null) {
+				for (Reply r : replyList) {
+					JSONObject obj = new JSONObject();
+					obj.put("replyTime", r.getReplyTime());
+					obj.put("sdTime", r.getSdTime());
+					obj.put("replyMessage", r.getReplyMessage());
+					obj.put("content", r.getContent());
+					obj.put("name", r.getName());
+					obj.put("url", r.getUrl());
+					ja.add(obj);
+				}
 			}
 			out.print(ja.toJSONString());
 			// }else{
@@ -191,8 +193,8 @@ public class ReplyServlet extends HttpServlet {
 					+ reply.getVisiter() + "<br/>");
 			if (reply.getBid() > 0) {
 				BlogDao blogDao = new BlogDao();
-				blogDao.operationBlog(Operation.replyTimes,
-						new Blog(reply.getBid()));
+				blogDao.operationBlog(Operation.replyTimes, new Blog(reply
+						.getBid()));
 				resp.sendRedirect("/blog/" + reply.getBid());
 			} else {
 				resp.sendRedirect("/leaveMessage.jsp");
@@ -216,8 +218,8 @@ public class ReplyServlet extends HttpServlet {
 			int page = Integer.parseInt(p);
 			Pages pages = new Pages();
 			pages.setPageNo(page);
-			List<Reply> replyList = replyDao.getReplyListByBid(
-					Long.valueOf(bid), pages);
+			List<Reply> replyList = replyDao.getReplyListByBid(Long
+					.valueOf(bid), pages);
 			JSONObject obj = new JSONObject();
 			obj.put("url", url);
 			out.print(obj.toJSONString());
