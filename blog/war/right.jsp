@@ -27,7 +27,7 @@
 		FriendsDao fd=new FriendsDao();
 		List<Friends> friendsList=fd.getFriendList();
 	%>
-	<section class="mod-side-item mod-side-stat">
+	<section class="mod-side-item mod-side-stat scrolls">
 		<h2 class="side-title stat-title">友情链接</h2>
 		<div class="stat-content">
 			<%if(friendsList!=null && friendsList.size()>0){
@@ -41,7 +41,7 @@
 	</section>
 	
 	<%}if(blog_user.getIsStatistics()==null || blog_user.getIsStatistics()==0){%>
-	<section class="mod-side-item mod-side-stat">
+	<section class="mod-side-item mod-side-stat scrolls">
 		<div class="side-mini-border"></div>
 		<h2 class="side-title stat-title">访问统计</h2>
 		<div class="stat-content"><%	Map<String, Integer> counts= bd.getCount();%>
@@ -52,3 +52,24 @@
 	</section><%} %>
 </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	var m_arr = Array();
+	$(".scrolls").each(function(){m_arr.push($(this).position().top);});
+  	$(document).scroll(function() {
+  		var top=53;
+    	var offset = $(this).scrollTop();
+  		$(".scrolls").each(function(index,doma){
+			var div_offset =$(this).position();
+	    	if(m_arr[index] <= offset+top){
+	    		$(this).addClass("fixed");
+    			$(this).stop().animate({ top: top}, 1000 );
+    			top=top+$(this).outerHeight();
+	    	}else{
+	    		$(this).css("top",0);
+	    		$(this).removeClass("fixed");
+	    	}
+  		});
+  });
+});
+</script>

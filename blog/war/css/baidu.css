@@ -2373,25 +2373,27 @@ textarea.input-box {
 
 .mod-siderbar .q-btn .q-sp {
 	color: #ddd;
-	margin-right: 6px
+	margin-right: 6px;
 }
 
 .mod-siderbar .q-btn .ctl-box {
-	width: 150px
+	width: 150px;
 }
 
 .mod-siderbar .mod-taglist {
-	padding: 20px;
-	border-bottom: 1px dotted #c7c7c7
+/* 	padding: 20px; */
+	border-bottom: 1px dotted #c7c7c7;
 }
 
 .mod-siderbar .mod-taglist .q-taglist {
-	overflow: hidden
+	overflow: hidden;
+	padding: 15px 0 5px 20px;
 }
 
 .mod-siderbar .mod-taglist .q-title {
 	font-size: 14px;
-	font-weight: bold
+	font-weight: bold;
+	padding: 15px 0 5px 20px;
 }
 
 .mod-siderbar .mod-taglist .q-taglist .q-tagitem {
@@ -2482,12 +2484,12 @@ textarea.input-box {
 
 .mod-siderbar .q-followitem a:hover .q-avatar-box {
 	display: block;
-	visibility: visible
+	visibility: visible;
 }
 
 .mod-side-stat .stat-content {
 	margin-left: 20px;
-	padding-bottom: 30px
+	padding-bottom: 10px;
 }
 
 .mod-side-stat .stat-title {
@@ -2496,18 +2498,19 @@ textarea.input-box {
 
 .mod-side-stat .stat-content .stat-desc {
 	color: #959595;
-	font-size: 12px
+	font-size: 12px;
+	padding-bottom: 5px;
 }
 
 .mod-side-stat .stat-content .total-stat {
-	margin-top: 3px
+	margin-top: 3px;
 }
 
 .mod-post-content {
 	border: 1px solid #dedede;
 	border-top: 2px solid #3fa7cb;
 	padding: 25px 20px;
-	background: #fff
+	background: #fff;
 }
 
 .mod-post-content .content-head .title,.mod-post-content .repost-title {
@@ -3178,3 +3181,14 @@ pre.prettyprint {
 }
 
 /*******************code end*******************/
+
+.fixed{
+		position:fixed;
+		width: 200px;
+		border: 1px solid 	#E7E5E6;
+		background: 	white;
+		-webkit-box-shadow: 2px 2px 10px 	#E7E5E6;
+		-moz-box-shadow: 2px 2px 10px #e7e5e6;
+		box-shadow: 2px 2px 10px 	#E7E5E6;
+		overflow: hidden;
+	}
