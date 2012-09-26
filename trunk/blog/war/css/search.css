@@ -39,6 +39,7 @@
 /* Search button */
 .cse input.gsc-search-button,input.gsc-search-button {
 	font-family: inherit;
+	padding: 3px 10px;
 	color: #000000;
 	text-shadow: 0 1px 2px #FFFFFF;
 	background-color: #CECECE;
@@ -161,4 +162,23 @@
 
 .gs-webResult.gs-result .gs-visibleUrl-long {
 	display: block;
+}
+.searchs{
+	min-height: 440px; 
+	_height:440px;
+	background-color: white;
+	width:800px;
+	border: 1px solid #E7E5E6;
+	-webkit-box-shadow: 2px 2px 10px #E7E5E6;
+	-moz-box-shadow: 2px 2px 10px #e7e5e6;
+	box-shadow: 2px 2px 10px #E7E5E6;
+	border: 1px solid #DEDEDE;
+	border-top: 2px solid #3FA7CB;
+	padding: 25px 15px;
+}
+.s_loading{
+	width:300px;
+	margin: 0px auto;
+	padding: 80px 50px;
+	text-align: center;
 }

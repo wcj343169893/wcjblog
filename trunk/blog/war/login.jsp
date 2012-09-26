@@ -7,6 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%UserDao ud=new UserDao();
 	User blog_user=  ud.getUserDetail();
+	if(request.getParameter("wcj")==null){
+		response.sendRedirect("/");
+		return;
+	};
 %>
 <title>登录_<%=blog_user.getpTitle()%></title>
 	<jsp:include page="head.jsp"></jsp:include>

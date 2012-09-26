@@ -9,7 +9,7 @@ UserDao ud=new UserDao();
 User blog_user = ud.getUserDetail();
 String title=blog_user.getpTitle();
 %><title>搜索_<%=title %></title>
-	<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body>
 <jsp:include page="top_member.jsp"></jsp:include>
@@ -19,8 +19,8 @@ String title=blog_user.getpTitle();
 <!-- 顶部结束 -->
 <!-- 左边开始 -->
 <!-- 左边结束 -->
-<div class="left" style="height: 440px; background-color: white;">
-			<div id="cse" style="width: 90%;">Loading</div>
+<div class="left searchs">
+			<div id="cse" style="width: 95%;"><div class="s_loading">Loading...</div></div>
 			<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 			<script type="text/javascript">
 			  google.load('search', '1', {language : 'zh-CN'});
