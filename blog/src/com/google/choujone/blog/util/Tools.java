@@ -198,7 +198,7 @@ public class Tools {
 					// blogType.getId());
 					if (bt_c.getParentId() != null
 							&& bt_c.getParentId().equals(blogType.getId())) {
-						sb_sub.append("<li class='q-tagitem'><a href=/?tid="
+						sb_sub.append("<li class='q-tagitem'><a href=/index.jsp?tid="
 								+ bt_c.getId()
 								+ " class=\"a-tagitem cs-sidebar-hoverbglink\">"
 								+ bt_c.getName() + "</a></li>");
