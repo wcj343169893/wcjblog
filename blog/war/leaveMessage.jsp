@@ -38,36 +38,40 @@ User blog_user=  ud.getUserDetail();
 										String gustName="游客";
 										String gustEmail="";
 										String gustURL="";
-										boolean isCookied=true;
-// 										Cookie[] allcookies=request.getCookies();
-// 										if(allcookies!=null){
-// 											for(int i=0;i<allcookies.length;i++){
-// 												Cookie newCookie= allcookies[i];
-// 												if(newCookie.getName().equals("gustName")){
-// 													gustName=URLDecoder.decode(newCookie.getValue(), "UTF-8");
-// 													isCookied=true;
-// 													break;
-// 												}
-// 											}
-// 										}
+										boolean isCookied=false;
+										boolean useLogin=true;
+										Cookie[] allcookies=request.getCookies();
+										if(allcookies!=null){
+											for(int i=0;i<allcookies.length;i++){
+												Cookie newCookie= allcookies[i];
+												if(newCookie.getName().equals("gustName")){
+													gustName=URLDecoder.decode(newCookie.getValue(), "UTF-8");
+													isCookied=true;
+													break;
+												}
+											}
+										}
 								   	%>
-								   	<%if(!isCookied){ %>
-									   	<div class="qcmt-comment-name">
-											<input type="text" name="name" id="comment_name" class="text vito-contentbd-input" value="<%=gustName %>" size="28" style="color: gray;"
-											onclick="if(this.value=='<%=gustName %>'){this.value='';this.style.color='';}" 
-											onblur="if(this.value==''){this.value='<%=gustName %>';this.style.color='gray';}"/>
-											<label for="comment_name">署名(*)</label>
-									   	</div>
-									   	<div class="qcmt-comment-name">
-									   		<input type="text" name="email" id="inpEmail" class="text vito-contentbd-input" value="<%=gustEmail %>" size="28"/>
-											<label for="inpEmail">邮箱</label>
-									   	</div>				                    
-									   	<div class="qcmt-comment-name">
-									   		<input type="text" name="url" id="inpHomePage" value="<%=gustURL %>"
-												class="text vito-contentbd-input" size="28"/>
-											<label for="inpHomePage">网站链接</label>
-									   	</div>
-								   		<div class="qcmt-comment-name">欢迎回来：<%=gustName %></div>
+								   	<%if(useLogin){ %>
+								   		<%if(!isCookied){ %>
+										   	<div class="qcmt-comment-name">
+												<input type="text" name="name" id="comment_name" class="text vito-contentbd-input" value="<%=gustName %>" size="28" style="color: gray;"
+												onclick="if(this.value=='<%=gustName %>'){this.value='';this.style.color='';}" 
+												onblur="if(this.value==''){this.value='<%=gustName %>';this.style.color='gray';}"/>
+												<label for="comment_name">署名(*)</label>
+										   	</div>
+										   	<div class="qcmt-comment-name">
+										   		<input type="text" name="email" id="inpEmail" class="text vito-contentbd-input" value="<%=gustEmail %>" size="28"/>
+												<label for="inpEmail">邮箱</label>
+										   	</div>				                    
+										   	<div class="qcmt-comment-name">
+										   		<input type="text" name="url" id="inpHomePage" value="<%=gustURL %>"
+													class="text vito-contentbd-input" size="28"/>
+												<label for="inpHomePage">网站链接</label>
+										   	</div>
+									   	<%} else{%>
+								   			<div class="qcmt-comment-name">欢迎回来：<%=gustName %></div>
+										<%} %>									   	
 								   	<%}else{ %>	   
 								   		<div class="qcmt-comment-name" id="comment_account"></div>
 								   		<script type="text/javascript">
