@@ -57,6 +57,7 @@ public class BlogTypeDao {
 			} catch (Exception e) {
 			}
 		}
+		MyCache.clear("blogTypeDao_getBlogTypeList");
 		closePM();
 		return flag;
 	}
