@@ -3,7 +3,7 @@
 	<div class="footer-box">
 	<div class="inner-box">
 	</div>
-	<div class="copy-box">Powered By choujone 版权所有.Some Rights Reserved<%=blog_user.getBlogFoot() %></div></div>
+	<div class="copy-box">Powered By choujone 版权所有.Some Rights Reserved <%=blog_user.getBlogFoot() %></div></div>
 </footer>
 <div class="clear"></div>
 <script>
