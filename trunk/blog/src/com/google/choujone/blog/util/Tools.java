@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -190,18 +192,20 @@ public class Tools {
 			// href="/?tid=<%=bt.getId() %>"><%=bt.getName()%>(<%=bd.getCount(bt.getId())
 			// %>)</a></li>
 			if (blogType.getParentId() == null || blogType.getParentId() == 0) {
-				sb.append("<li class='q-tagitem0'><a href='javascript:void(0)'>"
-						+ blogType.getName() + "</a>");
+				sb
+						.append("<li class='q-tagitem0'><a href='javascript:void(0)'>"
+								+ blogType.getName() + "</a>");
 				StringBuffer sb_sub = new StringBuffer();
 				for (BlogType bt_c : blogTypeList) {
 					// System.out.println(bt_c.getParentId()+"  "+
 					// blogType.getId());
 					if (bt_c.getParentId() != null
 							&& bt_c.getParentId().equals(blogType.getId())) {
-						sb_sub.append("<li class='q-tagitem'><a href=/index.jsp?tid="
-								+ bt_c.getId()
-								+ " class=\"a-tagitem cs-sidebar-hoverbglink\">"
-								+ bt_c.getName() + "</a></li>");
+						sb_sub
+								.append("<li class='q-tagitem'><a href=/index.jsp?tid="
+										+ bt_c.getId()
+										+ " class=\"a-tagitem cs-sidebar-hoverbglink\">"
+										+ bt_c.getName() + "</a></li>");
 					}
 				}
 				if (sb_sub != null && !sb_sub.toString().equals("")) {
@@ -234,13 +238,13 @@ public class Tools {
 	public static boolean isLogin(ServletRequest request) {
 		boolean isLogin = false;
 		try {
-//			UserService userService = UserServiceFactory.getUserService();
-//			if (userService != null && userService.isUserLoggedIn()
-//					&& userService.isUserAdmin()) {
-//				isLogin = true;
-//			} else {
-//				isLogin = false;
-//			}
+			// UserService userService = UserServiceFactory.getUserService();
+			// if (userService != null && userService.isUserLoggedIn()
+			// && userService.isUserAdmin()) {
+			// isLogin = true;
+			// } else {
+			// isLogin = false;
+			// }
 
 			HttpServletRequest req = (HttpServletRequest) request;
 			User user = (User) req.getSession().getAttribute("login_user");
@@ -251,7 +255,7 @@ public class Tools {
 				} else {
 					isLogin = true;
 				}
-			}else{
+			} else {
 				isLogin = true;
 			}
 		} catch (Exception e) {
@@ -361,6 +365,27 @@ public class Tools {
 		return map != null && !map.isEmpty();
 	}
 
+	/**
+	 * 是否是邮箱
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public static boolean isEmail(String email) {
+		boolean flag = false;
+		try {
+			if (isNotNull(email)) {
+				Pattern pattern = Pattern
+						.compile("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
+				Matcher matcher = pattern.matcher(email);
+				flag = matcher.matches();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return flag;
+	}
+
 	public static String escape(String s) {
 		if (!isNotNull(s)) {
 			return "";
@@ -444,8 +469,8 @@ public class Tools {
 		Map<Long, Integer> map = new HashMap<Long, Integer>();
 		try {
 			for (Object key : obj.keySet()) {
-				map.put(Long.valueOf(key.toString()),
-						Integer.parseInt(obj.get(key).toString()));
+				map.put(Long.valueOf(key.toString()), Integer.parseInt(obj.get(
+						key).toString()));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

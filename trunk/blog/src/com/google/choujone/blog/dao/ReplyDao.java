@@ -65,6 +65,11 @@ public class ReplyDao {
 				Reply r = (Reply) pm.getObjectById(Reply.class, reply.getId());
 				r.setReplyMessage(reply.getReplyMessage());
 				r.setReplyTime(Tools.changeTime(new Date()));
+				reply.setEmail(r.getEmail());
+				reply.setContent(r.getContent());
+				reply.setBid(r.getBid());
+				reply.setName(r.getName());
+				reply.setSdTime(r.getSdTime());
 			} catch (Exception e) {
 				e.printStackTrace();
 				flag = false;

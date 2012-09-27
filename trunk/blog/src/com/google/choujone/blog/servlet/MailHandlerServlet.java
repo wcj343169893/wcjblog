@@ -48,8 +48,18 @@ public class MailHandlerServlet extends HttpServlet {
 			// System.out.println(multipart.getBodyPart(0).getHeader("Subject"));
 			// BodyPart bodyPart= multipart.getBodyPart(0);
 			// System.out.println(bodyPart.getHeader("Subject"));
-			Mail.send("-1", "我已经收到你的邮件，重复一下你发的内容:"
-					+ multipart.getBodyPart(0).getContent(), address[0] + "");
+			// 主题 以后可以作为博客标题+分类
+			String subject = multipart.getBodyPart(0).getHeader("Subject")
+					.toString();
+			// 内容
+			String content = multipart.getBodyPart(0).getContent().toString();
+			// 发送类型
+			String type = multipart.getBodyPart(0).getContentType();
+			// 发件人
+			String email = address[0] + "";
+			// TODO 利用这个，可以直接用邮箱发布信息
+			// Mail.send("choujone.com", "我已经收到你的邮件，重复一下你发的内容:" + content, email
+			// + "", email);
 		} catch (MessagingException e) {
 
 		}

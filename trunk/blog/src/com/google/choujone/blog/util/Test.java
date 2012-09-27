@@ -1,31 +1,28 @@
 package com.google.choujone.blog.util;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.json.simple.JSONObject;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Test {
 	public static String myurl = "http://localhost:8888/blogType?opera=lists";
 
 	public static void main(String[] args) {
 		try {
-			URL urlmy = new URL(myurl);
-			HttpURLConnection con = (HttpURLConnection) urlmy.openConnection();
-			con.setFollowRedirects(true);
-			con.setInstanceFollowRedirects(false);
-			con.connect();
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					con.getInputStream(), "utf-8"));
-			String s = "";
-			StringBuffer sb = new StringBuffer("");
-			while ((s = br.readLine()) != null) {
-				sb.append(s + "\r\n");
-			}
-			JSONObject json = new JSONObject();
-			System.out.println(sb);
+			// URL urlmy = new URL(myurl);
+			// HttpURLConnection con = (HttpURLConnection)
+			// urlmy.openConnection();
+			// con.setFollowRedirects(true);
+			// con.setInstanceFollowRedirects(false);
+			// con.connect();
+			// BufferedReader br = new BufferedReader(new InputStreamReader(
+			// con.getInputStream(), "utf-8"));
+			// String s = "";
+			// StringBuffer sb = new StringBuffer("");
+			// while ((s = br.readLine()) != null) {
+			// sb.append(s + "\r\n");
+			// }
+			// JSONObject json = new JSONObject();
+			// System.out.println(sb);
 			// <table cellpadding="0" cellspacing="0" class="result"
 			// id="2"><tr><td class=f><a
 			// onmousedown="return c({'fm':'as','F':'770317EA','F1':'9D73F1E4','F2':'4CA63D6B','F3':'54E5243F','T':'1295162879','title':this.innerHTML,'url':this.href,'p1':2,'y':'FEF8FF47'})"
@@ -47,6 +44,12 @@ public class Test {
 			// }
 			// SpiderThread st = new SpiderThread();
 			// st.start();
+
+			Pattern pattern = Pattern
+					.compile("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
+			Matcher matcher = pattern.matcher("adfsdlfjlk@addda.ff.gg.comd");
+			System.out.println(matcher.matches());
+			System.out.println(Tools.isEmail(""));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
