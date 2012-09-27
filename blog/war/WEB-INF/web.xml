@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<servlet>
 		<servlet-name>Blog</servlet-name>
 		<servlet-class>com.google.choujone.blog.servlet.BlogServlet</servlet-class>
@@ -112,47 +113,47 @@
 		<url-pattern>/spider/*</url-pattern>
 	</servlet-mapping>
 	<!--
-		<servlet-mapping>
-		<servlet-name>Rss</servlet-name>
-		<url-pattern>/rss/*</url-pattern>
-	</servlet-mapping>
-	-->
+			<servlet-mapping>
+			<servlet-name>Rss</servlet-name>
+			<url-pattern>/rss/*</url-pattern>
+		</servlet-mapping>
+		-->
 	<!-- 
-	<servlet>
-	  <servlet-name>mailhandler</servlet-name>
-	  <servlet-class>com.google.choujone.blog.servlet.MailHandlerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-	  <servlet-name>mailhandler</servlet-name>
-	  <url-pattern>/_ah/mail/*</url-pattern>
-	</servlet-mapping>
-	<security-constraint>
-	  <web-resource-collection>
-	    <url-pattern>/_ah/mail/*</url-pattern>
-	  </web-resource-collection>
-	  <auth-constraint>
-	    <role-name>admin</role-name>
-	  </auth-constraint>
-	</security-constraint>
-	-->
+		<servlet>
+		  <servlet-name>mailhandler</servlet-name>
+		  <servlet-class>com.google.choujone.blog.servlet.MailHandlerServlet</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		  <servlet-name>mailhandler</servlet-name>
+		  <url-pattern>/_ah/mail/*</url-pattern>
+		</servlet-mapping>
+		<security-constraint>
+		  <web-resource-collection>
+			<url-pattern>/_ah/mail/*</url-pattern>
+		  </web-resource-collection>
+		  <auth-constraint>
+			<role-name>admin</role-name>
+		  </auth-constraint>
+		</security-constraint>
+		-->
 	<!--_ah_sessioncleanup -->
 	<servlet> 
-    	<servlet-name>_ah_sessioncleanup</servlet-name> 
- 		<servlet-class>com.google.apphosting.utils.servlet.SessionCleanupServlet</servlet-class> 
+		<servlet-name>_ah_sessioncleanup</servlet-name> 
+		<servlet-class>com.google.apphosting.utils.servlet.SessionCleanupServlet</servlet-class> 
 	</servlet> 
-	  <servlet-mapping> 
+	<servlet-mapping> 
 		<servlet-name>_ah_sessioncleanup</servlet-name>
-	    <url-pattern>/_ah/sessioncleanup</url-pattern> 
-	  </servlet-mapping> 
-   	<security-constraint> 
-	    <web-resource-collection> 
-	      <web-resource-name>session-cleanup</web-resource-name> 
-	      <url-pattern>/_ah/sessioncleanup</url-pattern> 
-	    </web-resource-collection> 
-	    <auth-constraint> 
-	      <role-name>admin</role-name> 
-	    </auth-constraint> 
-   	</security-constraint> 
+		<url-pattern>/_ah/sessioncleanup</url-pattern> 
+	</servlet-mapping> 
+	<security-constraint> 
+		<web-resource-collection> 
+			<web-resource-name>session-cleanup</web-resource-name> 
+			<url-pattern>/_ah/sessioncleanup</url-pattern> 
+		</web-resource-collection> 
+		<auth-constraint> 
+			<role-name>admin</role-name> 
+		</auth-constraint> 
+	</security-constraint> 
 	<!-- end _ah_sessioncleanup -->
 	<filter>   
 		<filter-name>SetCharacterEncoding</filter-name>   
@@ -189,41 +190,57 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	<error-page>   
-        <error-code>404</error-code>   
-        <location>/error.jsp</location>   
+		<error-code>404</error-code>   
+		<location>/error.jsp</location>   
 	</error-page>
 	<error-page>   
-        <error-code>500</error-code>   
-        <location>/error.jsp</location>   
+		<error-code>500</error-code>   
+		<location>/error.jsp</location>   
 	</error-page>
+	<servlet>
+		<servlet-name>mailhandler</servlet-name>
+		<servlet-class>com.google.choujone.blog.servlet.MailHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mailhandler</servlet-name>
+		<url-pattern>/_ah/mail/*</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/_ah/mail/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
 	<!--
-	<session-config> 
-	  <session-timeout>60</session-timeout>
-	</session-config> 
-	-->
+		<session-config> 
+		  <session-timeout>60</session-timeout>
+		</session-config> 
+		-->
 	<!--The old Login api,has been scrapped -->
 	<!-- 
- <servlet>
-  <servlet-name>SystemServiceServlet</servlet-name>
-  <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
-  <init-param>
-   <param-name>services</param-name>
-   <param-value/>
-  </init-param>
- </servlet>
- <servlet-mapping>
-  <servlet-name>SystemServiceServlet</servlet-name>
-  <url-pattern>/_ah/spi/*</url-pattern>
- </servlet-mapping>
- -->
- <!-- 
-  <security-constraint>
-        <web-resource-collection>
-            <url-pattern>/admin/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>admin</role-name>
-        </auth-constraint>
-    </security-constraint>
- -->
+		 <servlet>
+		  <servlet-name>SystemServiceServlet</servlet-name>
+		  <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+		  <init-param>
+		   <param-name>services</param-name>
+		   <param-value/>
+		  </init-param>
+		 </servlet>
+		 <servlet-mapping>
+		  <servlet-name>SystemServiceServlet</servlet-name>
+		  <url-pattern>/_ah/spi/*</url-pattern>
+		 </servlet-mapping>
+		 -->
+	<!-- 
+		  <security-constraint>
+				<web-resource-collection>
+					<url-pattern>/admin/*</url-pattern>
+				</web-resource-collection>
+				<auth-constraint>
+					<role-name>admin</role-name>
+				</auth-constraint>
+			</security-constraint>
+		 -->
 </web-app>

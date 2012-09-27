@@ -41,6 +41,7 @@ public class ReplyServlet extends HttpServlet {
 		String repyMsg = req.getParameter("msg");
 		ReplyDao replyDao = new ReplyDao();
 		Reply reply = new Reply();
+		resp.setCharacterEncoding("UTF-8");
 		if (operation.trim().equals(Operation.delete.toString())) {// 删除
 			// reply.setId(Long.valueOf(ids));
 			replyDao.deleteReply(ids);
@@ -50,6 +51,25 @@ public class ReplyServlet extends HttpServlet {
 			reply.setReplyMessage(repyMsg);
 			reply.setReplyTime(Tools.changeTime(new Date()));
 			replyDao.operationReply(Operation.modify, reply);
+			// 发送短信到留言者邮箱中
+			if (Tools.isEmail(reply.getEmail())) {
+				String title = "网站留言";
+				String content = "<div>原信息：" + reply.getContent()
+						+ "<div>留言时间：" + reply.getSdTime() + "</div>"
+						+ "</div><hr/>" + "<div>管理员回复:"
+						+ reply.getReplyMessage() + "<div>回复时间："
+						+ reply.getReplyTime() + "</div>" + "</div>";
+				String url = "http://www.choujone.com/leaveMessage.jsp";
+				if (reply.getBid() > 0) {
+					BlogDao bd = new BlogDao();
+					Blog blog = bd.getBlogById(reply.getBid());
+					title = blog.getTitle();
+					url = "http://www.choujone.com/blog/" + reply.getBid();
+				}
+				content += "<div>链接：<a href='" + url + "'>" + url
+						+ "</a></div>";
+				Mail.send(title, content, reply.getEmail(), reply.getName());
+			}
 			resp.sendRedirect("/admin/reply_list.jsp");
 		} else if (operation.trim().equals(Operation.clearCache.toString())) {// 清理缓存
 
@@ -101,7 +121,7 @@ public class ReplyServlet extends HttpServlet {
 				.getParameter("op") : "";// 获取操作
 		String content = req.getParameter("content");// 文章信息
 		String title = req.getParameter("title") != null ? req
-				.getParameter("title") : "无标题";// 文章信息
+				.getParameter("title") : "网站留言";// 文章信息
 
 		String name = req.getParameter("name");// 署名
 		if (name == null || "".equals(name.trim())) {
@@ -116,15 +136,26 @@ public class ReplyServlet extends HttpServlet {
 		// 保存游客信息到cookies
 		Cookie[] cookies = req.getCookies();
 		boolean isCookied = false;
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("gustName")) {
-				name = URLDecoder.decode(cookie.getValue(), "UTF-8");
-				isCookied = true;
-			} else if (cookie.getName().equals("gustEmail")) {
-				email = URLDecoder.decode(cookie.getValue(), "UTF-8");
-			} else if (cookie.getName().equals("gustURL")) {
-				url = URLDecoder.decode(cookie.getValue(), "UTF-8");
+		try {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("gustName")) {
+					name = URLDecoder.decode(cookie.getValue(), "UTF-8");
+					isCookied = true;
+				} else if (cookie.getName().equals("gustEmail")) {
+					email = URLDecoder.decode(cookie.getValue(), "UTF-8");
+				} else if (cookie.getName().equals("gustURL")) {
+					url = URLDecoder.decode(cookie.getValue(), "UTF-8");
+				}
 			}
+		} catch (Exception e) {
+			req.getSession().setAttribute("errorMsg", "请登录");
+			if (Tools.strTolong(bid) > 0) {
+				resp.sendRedirect("/blog/" + Tools.strTolong(bid));
+			} else {
+				resp.sendRedirect("/leaveMessage.jsp");
+				bid = "-1";
+			}
+			return;
 		}
 		if (!isCookied) {
 			Cookie gustName = new Cookie("gustName", URLEncoder.encode(name,
@@ -137,10 +168,11 @@ public class ReplyServlet extends HttpServlet {
 			resp.addCookie(gustName);
 			resp.addCookie(gustEmail);
 			resp.addCookie(gustURL);
+			isCookied = true;
 		}
 		// 判断是否使用google账号登录
 		String google_id = "";
-		if (false) {
+		if (!isCookied) {
 			try {
 				UserService userService = UserServiceFactory.getUserService();
 				req.getSession().setAttribute("errorMsg", "");
@@ -150,8 +182,6 @@ public class ReplyServlet extends HttpServlet {
 						resp.sendRedirect("/blog/" + Tools.strTolong(bid));
 					} else {
 						resp.sendRedirect("/leaveMessage.jsp");
-						// req.getRequestDispatcher("/leaveMessage.jsp")
-						// .forward(req, resp);
 						bid = "-1";
 					}
 					return;
@@ -194,15 +224,20 @@ public class ReplyServlet extends HttpServlet {
 					+ req.getHeader("user-agent"));
 			replyDao.operationReply(Operation.add, reply);
 			// 发送 邮件到邮箱
-			Mail.send(title,
-					content + "<br/><hr/><br/>访客信息:" + reply.getName()
-							+ "<br/>google userid:" + google_id + "<br/>"
-							+ reply.getEmail() + "<br/>" + reply.getUrl()
-							+ "<br/>" + reply.getVisiter() + "<br/>");
+			String webUrl = "http://www.choujone.com/leaveMessage.jsp";
+			if (reply.getBid() > 0) {
+				webUrl = "http://www.choujone.com/blog/" + reply.getBid();
+			}
+			Mail.send(title, content + "<br/><hr/><div>留言地址<a href='" + webUrl
+					+ "'>" + title + "</a></div></div>访客信息:" + reply.getName()
+					+ "</div>google userid:" + google_id + "<br/>"
+					+ reply.getEmail() + "<br/>" + reply.getUrl() + "<br/>"
+					+ reply.getSdTime() + "<br/>" + reply.getVisiter()
+					+ "<br/>");
 			if (reply.getBid() > 0) {
 				BlogDao blogDao = new BlogDao();
-				blogDao.operationBlog(Operation.replyTimes,
-						new Blog(reply.getBid()));
+				blogDao.operationBlog(Operation.replyTimes, new Blog(reply
+						.getBid()));
 				resp.sendRedirect("/blog/" + reply.getBid());
 			} else {
 				resp.sendRedirect("/leaveMessage.jsp");
@@ -226,8 +261,8 @@ public class ReplyServlet extends HttpServlet {
 			int page = Integer.parseInt(p);
 			Pages pages = new Pages();
 			pages.setPageNo(page);
-			List<Reply> replyList = replyDao.getReplyListByBid(
-					Long.valueOf(bid), pages);
+			List<Reply> replyList = replyDao.getReplyListByBid(Long
+					.valueOf(bid), pages);
 			JSONObject obj = new JSONObject();
 			obj.put("url", url);
 			out.print(obj.toJSONString());
