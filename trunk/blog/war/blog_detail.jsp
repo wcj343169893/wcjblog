@@ -157,8 +157,13 @@
 			                    </form>
 		                    </div>
 		                    <div class="qcmt-sub-bt-box">
-			                    <a href="javascript:jQuery('#frmSumbit').submit();" class="cmt-add button button-save button-cmt clearfix"><span class="button-left">&nbsp;</span>
-			                    <span class="button-text">发布</span>	<span class="button-right">&nbsp;</span></a>
+			                    <a href="javascript:if(checkWord())jQuery('#frmSumbit').submit();" class="cmt-add button button-save button-cmt clearfix">
+			                    <span class="button-left">&nbsp;</span>
+			                    <span class="button-text">发布</span>
+			                    <span class="button-right">&nbsp;</span></a>
+		                    </div>
+		                    <div class="qcmt-sub-bt-box">
+		                    	<span class="fun" id="content_notice"></span>
 		                    </div>
 	                    </div>
 	                    <div class="qcmt-main-wraper">

@@ -100,10 +100,17 @@ a:HOVER {
 
 .vito-content {
 	margin: 10px 10px 10px 10px;
+	line-height: 16px;
 }
 
 .vito-content .vito-title {
 	
+}
+
+.vito-content .content {
+	width: 390px;
+	overflow: hidden;
+	padding: 10px;
 }
 
 .vito-content table {
@@ -206,7 +213,6 @@ a:HOVER {
 	background-color: #E4F2FD;
 	margin: 10px 10px 10px 0px;
 }
-
 
 #container .container-title-header {
 	width: 120px;
@@ -364,6 +370,7 @@ input {
 		repeat-x 50% 50%;
 	border: 1px solid #CCC;
 }
+
 #infscr-loading {
 	background: none repeat scroll 0 0 #fff;
 	border-radius: 10px 10px 10px 10px;
@@ -371,7 +378,7 @@ input {
 	color: #333;
 	height: 70px;
 	left: 45%;
-	filter: alpha(opacity =     80);
+	filter: alpha(opacity =       80);
 	opacity: 0.8;
 	padding: 10px;
 	position: fixed;
