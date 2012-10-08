@@ -83,11 +83,13 @@
 				</td>
 				<td><%=reply.getName()%><div class="explain"><table><tr><td>NAME</td><td><%=reply.getName()%></td></tr><tr><td>EMAIL</td><td><%=reply.getEmail() %></td></tr><tr><td>URL</td><td><%=reply.getUrl() %></td></tr><tr><td>其他信息</td><td><%=reply.getVisiter() %></td></tr></table></div>
 				</td>
-				<td><%=reply.getContent()%></td>
+				<td><div class="content"><%=reply.getContent()%></div></td>
 				<td ondblclick="showOrHideDiv('div-msg-<%=i %>')">
-					<%=reply.getReplyMessage()%>
-					<div id="div-msg-<%=i %>" style="display: none;">
-						<input type="text" value="<%=reply.getReplyMessage()%>" id="msg-<%=i %>" onkeydown="responseEnter(event,'<%=reply.getId() %>','<%=blogid %>','<%=p %>','msg-<%=i %>')"><input type="button" onclick="replys('<%=reply.getId() %>','<%=blogid %>','<%=p %>','msg-<%=i %>')" value="回复">
+					<div class="content">
+						<%=reply.getReplyMessage()%>
+						<div id="div-msg-<%=i %>" style="display: none;">
+							<input type="text" value="<%=reply.getReplyMessage()%>" id="msg-<%=i %>" onkeydown="responseEnter(event,'<%=reply.getId() %>','<%=blogid %>','<%=p %>','msg-<%=i %>')"><input type="button" onclick="replys('<%=reply.getId() %>','<%=blogid %>','<%=p %>','msg-<%=i %>')" value="回复">
+						</div>
 					</div>
 				</td>
 				<td><%=reply.getSdTime() %> </td>

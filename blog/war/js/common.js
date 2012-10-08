@@ -298,3 +298,12 @@ function loading_rc2(text){
 function hide_loading(){
 	$("#infscr-loading").fadeOut("slow");
 }
+function checkWord(){
+	if($("#content").val().length >= 500){
+		$("#content_notice").html("输入长度超过500字符,请删除!");
+		return false;
+	}else{
+		$("#content_notice").html(" ");
+		return true;
+	}
+}
