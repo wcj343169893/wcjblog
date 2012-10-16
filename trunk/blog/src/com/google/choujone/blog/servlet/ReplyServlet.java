@@ -228,16 +228,17 @@ public class ReplyServlet extends HttpServlet {
 			if (reply.getBid() > 0) {
 				webUrl = "http://www.choujone.com/blog/" + reply.getBid();
 			}
-			Mail.send(title, content + "<br/><hr/><div>留言地址<a href='" + webUrl
-					+ "'>" + title + "</a></div></div>访客信息:" + reply.getName()
-					+ "</div>google userid:" + google_id + "<br/>"
-					+ reply.getEmail() + "<br/>" + reply.getUrl() + "<br/>"
-					+ reply.getSdTime() + "<br/>" + reply.getVisiter()
-					+ "<br/>");
+			Mail.send(title,
+					reply.getContent() + "<br/><hr/><div>留言地址<a href='"
+							+ webUrl + "'>" + title + "</a></div><div>访客信息:"
+							+ reply.getName() + "</div><div>google userid:"
+							+ google_id + "<br/>" + reply.getEmail() + "<br/>"
+							+ reply.getUrl() + "<br/>" + reply.getSdTime()
+							+ "<br/>" + reply.getVisiter() + "<br/><br/></div>");
 			if (reply.getBid() > 0) {
 				BlogDao blogDao = new BlogDao();
-				blogDao.operationBlog(Operation.replyTimes, new Blog(reply
-						.getBid()));
+				blogDao.operationBlog(Operation.replyTimes,
+						new Blog(reply.getBid()));
 				resp.sendRedirect("/blog/" + reply.getBid());
 			} else {
 				resp.sendRedirect("/leaveMessage.jsp");
@@ -261,8 +262,8 @@ public class ReplyServlet extends HttpServlet {
 			int page = Integer.parseInt(p);
 			Pages pages = new Pages();
 			pages.setPageNo(page);
-			List<Reply> replyList = replyDao.getReplyListByBid(Long
-					.valueOf(bid), pages);
+			List<Reply> replyList = replyDao.getReplyListByBid(
+					Long.valueOf(bid), pages);
 			JSONObject obj = new JSONObject();
 			obj.put("url", url);
 			out.print(obj.toJSONString());
