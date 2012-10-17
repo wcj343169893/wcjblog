@@ -230,7 +230,7 @@ public class ReplyServlet extends HttpServlet {
 			}
 			Mail.send(title,
 					reply.getContent() + "<br/><hr/><div>留言地址<a href='"
-							+ webUrl + "'>" + title + "</a></div><div>访客信息:"
+							+ webUrl + "'>" + webUrl + "</a></div><div>访客信息:"
 							+ reply.getName() + "</div><div>google userid:"
 							+ google_id + "<br/>" + reply.getEmail() + "<br/>"
 							+ reply.getUrl() + "<br/>" + reply.getSdTime()
