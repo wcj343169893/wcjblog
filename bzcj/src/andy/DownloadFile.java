@@ -11,27 +11,32 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DownloadFile {
+	public static void main(String[] args) {
+		DownloadFile df = new DownloadFile();
+		df.downFile("http://www.mofing.com/app/download/1/29.apk", "appname", "E:/wwwroot/market/wj_lan_app/2012/10/");
+	}
+
 	// 建立缓冲区
 	private int FILESIZE = 4 * 1024;
 
-	public boolean downFile(String pUrl, String pStoreName,String floder) {
+	public boolean downFile(String pUrl, String pStoreName, String floder) {
 		// String lastName =
 		// pUrl.substring(pUrl.lastIndexOf("/"+1,pUrl.length()));//pUrl.split("/");
 		String[] names = pUrl.split("/");
 		String name = names[names.length - 1];
-		name=name.substring(name.lastIndexOf("."),name.lastIndexOf(".")+4);
+		name = name.substring(name.lastIndexOf("."), name.lastIndexOf(".") + 4);
 		OutputStream outputStream = null;
 		InputStream inputStream = null;
 		HttpURLConnection urlConnection;
 		boolean bSuccess = false;
 		URL url;
-		File dir=new File(floder);
+		File dir = new File(floder);
 		if (!dir.exists()) {
 			dir.mkdir();
 		}
-		//floder="E:/kid/swf/";
+		// floder="E:/kid/swf/";
 		// 创建建文件
-		File file = new File(floder+pStoreName + name);
+		File file = new File(floder + pStoreName + name);
 		if ((file != null) && !file.exists()) {
 			try {
 				file.createNewFile();
@@ -53,7 +58,7 @@ public class DownloadFile {
 
 				inputStream = urlConnection.getInputStream();
 				int len = urlConnection.getContentLength();
-				//System.out.println("file size is:" + len);
+				// System.out.println("file size is:" + len);
 				byte[] buffer = new byte[FILESIZE];
 				int byteRead = -1;
 
