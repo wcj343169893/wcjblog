@@ -385,3 +385,6 @@ input {
 	width: 120px;
 	z-index: 5000;
 }
+#ip_address_list{}
+#ip_address_list li{width: 150px;float: left;list-style: none;}
+#ip_address_list li span{padding: 2px 5px;}

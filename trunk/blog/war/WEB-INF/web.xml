@@ -49,6 +49,10 @@
 		<servlet-class>com.google.choujone.blog.servlet.AdServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Ip</servlet-name>
+		<servlet-class>com.google.choujone.blog.servlet.IpServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>Spider</servlet-name>
 		<servlet-class>com.google.choujone.blog.servlet.SpiderServlet</servlet-class>
 	</servlet>
@@ -107,6 +111,10 @@
 	<servlet-mapping>
 		<servlet-name>Ad</servlet-name>
 		<url-pattern>/ad/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Ip</servlet-name>
+		<url-pattern>/ip/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Spider</servlet-name>

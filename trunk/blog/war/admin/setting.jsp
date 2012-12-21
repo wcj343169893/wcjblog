@@ -184,6 +184,7 @@
 					<td>
 						<input type="radio" name="isStatistics" value="0" id="isStatisticsYes" <%=user.getIsStatistics()==null || user.getIsStatistics()==0?"checked":"" %>><label for="isStatisticsYes">显示</label>
 						<input type="radio" name="isStatistics" value="1" id="isStatisticsNo" <%=user.getIsStatistics()!=null && user.getIsStatistics()==1?"checked":"" %>><label for="isStatisticsNo">隐藏</label>
+						<a href="javascript:void(0)" id="ip_btn" class="spider_btn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>ip地址</a>
 					</td>
 				</tr>
 				<tr>
@@ -296,8 +297,15 @@
 		</div>
 		</form>
 	</div>
+	<div id="ip_address" title="禁止留言ip">
+		<div>
+			<label for="ip_input">ip地址</label><input type="text" id="ip_input"/><input type="button" id="ip_save" value="保存">
+		</div>
+		<ul id="ip_address_list"></ul>
+	</div>
 	<script type="text/javascript">
 	$(function() {
+		
 		$("#user_header").dialog({
 			autoOpen : false,
 			width : 560
@@ -311,7 +319,88 @@
 			$("#avatar_editor").html("");
 			hideLoading();
 		});
+		
+		ip.init();
 	});
+	var ip={
+			dialogId:"ip_address",
+			listId:"ip_address_list",
+			inputId:"ip_input",
+			inputSaveBtnId:"ip_save",
+			inputDeleteBtnClass:"ip_delete",
+			openId:"ip_btn",
+			url:"/ip",
+			save:function(){
+				
+			},
+			init:function(){
+				//绑定弹出框
+				$("#"+ip.dialogId).dialog({
+					autoOpen : false,
+					width : 560,
+					modal: true,
+			        buttons: {
+			        	Cancel: function() {
+			                    $( this ).dialog( "close" );
+			                }
+			            }
+				});
+				//绑定点击事件
+				$("#"+ip.openId).click(function() {
+					$('#'+ip.dialogId).dialog('open');
+				});
+				//新增事件
+				$("#"+ip.inputSaveBtnId).click(function() {
+					var address=$("#"+ip.inputId).val();
+					if(address){
+						$.ajax({  
+		                    url : ip.url,  
+		                    type : "get",  
+		                    data : {"address" : address,"opera":"add"},  
+		                    cache : false,  
+		                    dataType : "json",  
+		                    success:function(data){
+		                    	if(data){
+			                    	ip.initData();
+		                    	}
+		                    }  
+		                });
+					}
+				});
+				ip.initData();
+			},
+			initData:function(){
+				//加载数据
+				$.ajax({  
+                    url : ip.url,  
+                    type : "get",  
+                    cache : false,  
+                    dataType : "json",  
+                    success:function(data){
+                    	if(data){
+                    		$list=$("#"+ip.listId);
+                    		$list.html("");
+							$.each(data,function(index,address){
+								$("<li id='ip_id_"+index+"'><span>"+address+"</span></li>").append($("<a href='javascript:;'>删除</a>").click(function(){
+									$.ajax({  
+					                    url : ip.url,  
+					                    type : "get",  
+					                    data : {"id" : index,"opera":"delete"},  
+					                    cache : false,  
+					                    dataType : "json",  
+					                    success:function(data){
+					                    	if(data){
+						                    	ip.initData();
+					                    	}
+					                    }  
+					                });
+								})).appendTo($list);
+							});                 		
+                    	}
+                    }  
+                });
+			}
+	};
 		//允许上传的图片类型
 		var extensions = 'jpg,jpeg,gif,png';
 		//保存缩略图的地址.
@@ -393,6 +482,7 @@
 			
 	
 	</script>
+
 	<div id="user_header" title="用户头像">
 		<div style="padding:10px 0;color:#666;">
 		你最好上传一张真人照片证明你是地球人，也可以  

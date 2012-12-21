@@ -21,8 +21,10 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.common.Pages;
 import com.google.choujone.blog.dao.BlogDao;
+import com.google.choujone.blog.dao.IpDao;
 import com.google.choujone.blog.dao.ReplyDao;
 import com.google.choujone.blog.entity.Blog;
+import com.google.choujone.blog.entity.Ip;
 import com.google.choujone.blog.entity.Reply;
 import com.google.choujone.blog.util.Mail;
 import com.google.choujone.blog.util.Tools;
@@ -200,6 +202,17 @@ public class ReplyServlet extends HttpServlet {
 		Reply reply = new Reply();
 
 		if (operation.trim().equals(Operation.add.toString())) {// 新增
+			IpDao ipdao = new IpDao();
+			String ipAddress = Tools.getIpAddr(req);
+			List<Ip> ips = ipdao.getIpList();
+			if (ips != null && ipAddress != null) {
+				for (Ip ip : ips) {
+					if (ip.getAddress().equals(ipAddress)) {
+						content = null;
+						break;
+					}
+				}
+			}
 			// 判断内容是否为空
 			if (content == null || "".equals(content.trim())) {
 				if (Tools.strTolong(bid) > 0) {
