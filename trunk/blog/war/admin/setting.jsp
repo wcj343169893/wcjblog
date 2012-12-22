@@ -330,8 +330,19 @@
 			inputDeleteBtnClass:"ip_delete",
 			openId:"ip_btn",
 			url:"/ip",
-			save:function(){
-				
+			save:function(address){
+				$.ajax({  
+		            url : ip.url,  
+		            type : "get",  
+		            data : {"address" : address,"opera":"add"},  
+		            cache : false,  
+		            dataType : "json",  
+		            success:function(data){
+		            	if(data){
+		                	ip.initData();
+		            	}
+		            }  
+		        });
 			},
 			init:function(){
 				//绑定弹出框
@@ -353,18 +364,16 @@
 				$("#"+ip.inputSaveBtnId).click(function() {
 					var address=$("#"+ip.inputId).val();
 					if(address){
-						$.ajax({  
-		                    url : ip.url,  
-		                    type : "get",  
-		                    data : {"address" : address,"opera":"add"},  
-		                    cache : false,  
-		                    dataType : "json",  
-		                    success:function(data){
-		                    	if(data){
-			                    	ip.initData();
-		                    	}
-		                    }  
-		                });
+						//判断是否已经增加
+						$list=$("#"+ip.listId);
+						var address_list=$list.data("address");
+						var flag=true;
+						$.each(address_list,function(index,addr){
+							if(addr==address){
+								flag=false;
+							}
+						});
+						if(flag){ip.save(address);}
 					}
 				});
 				ip.initData();
@@ -380,6 +389,7 @@
                     	if(data){
                     		$list=$("#"+ip.listId);
                     		$list.html("");
+                    		$list.data("address",data);
 							$.each(data,function(index,address){
 								$("<li id='ip_id_"+index+"'><span>"+address+"</span></li>").append($("<a href='javascript:;'>删除</a>").click(function(){
 									$.ajax({  
