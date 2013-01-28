@@ -46,6 +46,24 @@ public class Tools {
 		return value;
 	}
 
+	/**
+	 * @功能 移除内容的html标签，防止跨站脚本攻击漏洞
+	 * */
+	public static String removeHtml(String message) {
+		message = message.replace('<', ' ');
+		message = message.replace('>', ' ');
+		message = message.replace('"', ' ');
+		message = message.replace('\'', ' ');
+		message = message.replace('/', ' ');
+		message = message.replace('%', ' ');
+		message = message.replace(';', ' ');
+		message = message.replace('(', ' ');
+		message = message.replace(')', ' ');
+		message = message.replace('&', ' ');
+		message = message.replace('+', '_');
+		return message;
+	}
+
 	public static String FilterHTML(String value) {
 		value = value.replace("'", "\'");
 		value = value.replace("&", "&amp;");
@@ -192,20 +210,18 @@ public class Tools {
 			// href="/?tid=<%=bt.getId() %>"><%=bt.getName()%>(<%=bd.getCount(bt.getId())
 			// %>)</a></li>
 			if (blogType.getParentId() == null || blogType.getParentId() == 0) {
-				sb
-						.append("<li class='q-tagitem0'><a href='javascript:void(0)'>"
-								+ blogType.getName() + "</a>");
+				sb.append("<li class='q-tagitem0'><a href='javascript:void(0)'>"
+						+ blogType.getName() + "</a>");
 				StringBuffer sb_sub = new StringBuffer();
 				for (BlogType bt_c : blogTypeList) {
 					// System.out.println(bt_c.getParentId()+"  "+
 					// blogType.getId());
 					if (bt_c.getParentId() != null
 							&& bt_c.getParentId().equals(blogType.getId())) {
-						sb_sub
-								.append("<li class='q-tagitem'><a href=/index.jsp?tid="
-										+ bt_c.getId()
-										+ " class=\"a-tagitem cs-sidebar-hoverbglink\">"
-										+ bt_c.getName() + "</a></li>");
+						sb_sub.append("<li class='q-tagitem'><a href=/index.jsp?tid="
+								+ bt_c.getId()
+								+ " class=\"a-tagitem cs-sidebar-hoverbglink\">"
+								+ bt_c.getName() + "</a></li>");
 					}
 				}
 				if (sb_sub != null && !sb_sub.toString().equals("")) {
@@ -469,8 +485,8 @@ public class Tools {
 		Map<Long, Integer> map = new HashMap<Long, Integer>();
 		try {
 			for (Object key : obj.keySet()) {
-				map.put(Long.valueOf(key.toString()), Integer.parseInt(obj.get(
-						key).toString()));
+				map.put(Long.valueOf(key.toString()),
+						Integer.parseInt(obj.get(key).toString()));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
