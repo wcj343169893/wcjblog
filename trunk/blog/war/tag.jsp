@@ -7,7 +7,7 @@
 UserDao ud=new UserDao();
 User blog_user=  ud.getUserDetail();
 	String title=blog_user!=null ? blog_user.getpTitle():"";
-	String tag=request.getParameter("t")!= null ? request.getParameter("t").toString() : "";
+	String tag=request.getParameter("t")!= null ? Tools.removeHtml(request.getParameter("t").toString()) : "";
 	Long tid=null;
 	try{
 		 tid=request.getParameter("tid") != null ? Long.valueOf(request.getParameter("tid").toString()) : null;
