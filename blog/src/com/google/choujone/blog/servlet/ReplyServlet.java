@@ -207,7 +207,7 @@ public class ReplyServlet extends HttpServlet {
 			List<Ip> ips = ipdao.getIpList();
 			if (ips != null && ipAddress != null) {
 				for (Ip ip : ips) {
-					if (ip.getAddress().equals(ipAddress)) {
+					if (!Tools.isRightIp(ip.getAddress(), ipAddress)) {
 						content = null;
 						break;
 					}
