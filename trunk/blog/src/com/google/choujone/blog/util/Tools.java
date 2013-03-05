@@ -21,6 +21,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tools.ant.util.regexp.Regexp;
 import org.json.simple.JSONObject;
 
 import com.google.appengine.api.datastore.Blob;
@@ -580,6 +581,17 @@ public class Tools {
 		);
 		return flag;
 	}
+	/**判断新ip是否符合旧ip,可以匹配119.122.*.135 中间加星星的地址
+	 * @param ip 被匹配的地址
+	 * @param newIpAddress 需要匹配的地址
+	 * @return true:符合；false:不符合
+	 */
+	public static boolean isRightIp(String ip,String newIpAddress)
+	{
+        Pattern pattern = Pattern.compile(ip); 
+        Matcher matcher = pattern.matcher(newIpAddress); 
+        return matcher.matches(); 
+	}
 
 	public static void main(String[] args) {
 		// Map<Object, Object> map = new HashMap<Object, Object>();
@@ -593,7 +605,7 @@ public class Tools {
 		// for (Object obj : map.keySet()) {
 		// System.out.println("key:" + obj + "  value:" + map.get(obj));
 		// }
-		String str = Tools.getAddressByIP("119.122.152.135");
-		System.out.println(str);
+		boolean flag = Tools.isRightIp("119.122.*.135","119.122.152.135");
+		System.out.println(flag);
 	}
 }
