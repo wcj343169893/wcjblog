@@ -40,6 +40,6 @@
 </header>
 <script type="text/javascript">
 		jQuery(function($) {
-			initGoogleAccount();
+			//initGoogleAccount();
 		});
 </script>
