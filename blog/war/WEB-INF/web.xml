@@ -57,6 +57,10 @@
 		<servlet-class>com.google.choujone.blog.servlet.SpiderServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Crawl</servlet-name>
+		<servlet-class>com.google.choujone.blog.servlet.CrawlServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>UploadFile</servlet-name>
 		<servlet-class>com.google.choujone.blog.servlet.UploadFileServlet</servlet-class>
 		<init-param>
@@ -119,6 +123,10 @@
 	<servlet-mapping>
 		<servlet-name>Spider</servlet-name>
 		<url-pattern>/spider/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Crawl</servlet-name>
+		<url-pattern>/crawl/*</url-pattern>
 	</servlet-mapping>
 	<!--
 			<servlet-mapping>
