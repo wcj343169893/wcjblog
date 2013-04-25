@@ -529,22 +529,20 @@ Ext.onReady(function () {
 			           icon:'ext-mb-download',
 			           animateTarget: 'mb7'
 			       });
-				$.ajax({
-					  type: "GET",
-					  url: "http://market.mofing.com/getcontent.php?url="+urlStr,
-					  dataType: "jsonp",
-					  success: function(data){
-						  if(data){
-							  edit.setValue(jsonviewer.Obj2str(data));
-							  jsonviewer.format();
-							  Ext.MessageBox.hide();
-						  }else{
-							  Ext.Msg.alert("提示", "网络数据解析错误");
-						  }
-						 },
-					   error:function(){Ext.Msg.alert("提示", "方法调用失败");}
-
-					});
+				 Ext.Ajax.request({
+					 url:"/crawl",
+					 params:{"url":urlStr},
+					 success: function(resp,opts) {
+						 if(resp.responseText){
+							 edit.setValue(resp.responseText);
+							 jsonviewer.format();
+							 Ext.MessageBox.hide();
+						 }
+					 },
+					 failure:function(){
+						 Ext.Msg.alert("提示", "方法调用失败");
+					 } 
+				 });
 			},Obj2str: function(o) {//json转字符串
                 if (o == undefined) {
                     return "''";
