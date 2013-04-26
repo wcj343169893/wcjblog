@@ -121,11 +121,13 @@ public class ReplyServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String operation = req.getParameter("op") != null ? req
 				.getParameter("op") : "";// 获取操作
-		String content = req.getParameter("content");// 文章信息
+		String content = req.getParameter("content") != null ? req
+				.getParameter("content") : "";// 文章信息
 		String title = req.getParameter("title") != null ? req
 				.getParameter("title") : "网站留言";// 文章信息
 
-		String name = req.getParameter("name");// 署名
+		String name = req.getParameter("name") != null ? req
+				.getParameter("name") : "";// 署名
 		if (name == null || "".equals(name.trim())) {
 			name = "匿名";
 		}
@@ -133,8 +135,10 @@ public class ReplyServlet extends HttpServlet {
 				: "";// 回复
 		String bid = req.getParameter("bid") != null ? req.getParameter("bid")
 				: "-1L";// 文章id
-		String email = req.getParameter("email");// email
-		String url = req.getParameter("url");// email
+		String email = req.getParameter("email") != null ? req
+				.getParameter("email") : "";// email
+		String url = req.getParameter("url") != null ? req.getParameter("url")
+				: "";// email
 		// 保存游客信息到cookies
 		Cookie[] cookies = req.getCookies();
 		boolean isCookied = false;
@@ -207,7 +211,7 @@ public class ReplyServlet extends HttpServlet {
 			List<Ip> ips = ipdao.getIpList();
 			if (ips != null && ipAddress != null) {
 				for (Ip ip : ips) {
-					if (!Tools.isRightIp(ip.getAddress(), ipAddress)) {
+					if (Tools.isRightIp(ip.getAddress(), ipAddress)) {
 						content = null;
 						break;
 					}

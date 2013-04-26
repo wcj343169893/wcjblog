@@ -49,7 +49,7 @@ public class CrawlServlet extends HttpServlet {
 				out.print("Json 转换失败!");
 				return;
 			}
-			Mail.send("转换json", emailContent);
+			//Mail.send("转换json", emailContent);
 		} else {
 			Mail.send("非法json", emailContent);
 		}
