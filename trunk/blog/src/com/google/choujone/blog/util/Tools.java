@@ -605,7 +605,7 @@ public class Tools {
 		// for (Object obj : map.keySet()) {
 		// System.out.println("key:" + obj + "  value:" + map.get(obj));
 		// }
-		boolean flag = Tools.isRightIp("119.122.*.135","119.122.152.135");
+		boolean flag = Tools.isRightIp("119.122.*.135","127.0.0.1");
 		System.out.println(flag);
 	}
 }
