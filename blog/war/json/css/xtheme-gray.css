@@ -91,12 +91,15 @@
 /* Buttons */
 
 .x-btn-left{
+	background:none;
 	background-image:url(../img/btn-sprite.gif);
 }
 .x-btn-right{
+	background:none;
 	background-image:url(../img/btn-sprite.gif);
 }
 .x-btn-center{
+	background:none;
 	background-image:url(../img/btn-sprite.gif);
 }
 
@@ -414,3 +417,4 @@ body.x-body-masked .x-window-mc, body.x-body-masked .x-window-plain .x-window-mc
     border-bottom:1px solid #d0d0d0;
 }
 .x-window-body .ext-mb-download{background: url("../img/download.gif") no-repeat;height: 50px;}
+.x-progress-bar{background: #9CBFEE repeat-x left center;}
