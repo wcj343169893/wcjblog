@@ -65,17 +65,28 @@ public class UserServlet extends HttpServlet {
 				obj.put("isUserLoggedIn", 0);
 				obj.put("loginUrl", userService.createLoginURL(url));
 				obj.put("logoutUrl", userService.createLogoutURL(url));
-				if (userService.isUserLoggedIn()) {
+				//TODO 获取google登录用户信息， 参考：https://developers.google.com/appengine/docs/java/users/overview?hl=zh-CN
+				if (req.getUserPrincipal() != null) {
 					obj.put("isUserLoggedIn", 1);
 					if (userService.isUserAdmin()) {
 						obj.put("isUserAdmin", 1);
 					}
 					obj.put("email", userService.getCurrentUser().getEmail());
-					obj.put("nickname", userService.getCurrentUser()
-							.getNickname());
+					obj.put("nickname", req.getUserPrincipal().getName());
 					obj.put("authDomain", userService.getCurrentUser()
 							.getAuthDomain());
 				}
+				// if (userService.isUserLoggedIn()) {
+				// obj.put("isUserLoggedIn", 1);
+				// if (userService.isUserAdmin()) {
+				// obj.put("isUserAdmin", 1);
+				// }
+				// obj.put("email", userService.getCurrentUser().getEmail());
+				// obj.put("nickname", userService.getCurrentUser()
+				// .getNickname());
+				// obj.put("authDomain", userService.getCurrentUser()
+				// .getAuthDomain());
+				// }
 			} catch (Exception e) {
 			}
 			out.print(obj.toJSONString());
