@@ -2,6 +2,8 @@ package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Principal;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -72,7 +74,10 @@ public class UserServlet extends HttpServlet {
 						obj.put("isUserAdmin", 1);
 					}
 					obj.put("email", userService.getCurrentUser().getEmail());
-					obj.put("nickname", req.getUserPrincipal().getName());
+//					obj.put("email", email);
+					//https://www.google.com/accounts/o8/id?id=AItOawlNnqm44jo6qc2YtoXVmJtptJIjExq9xNY 
+//					obj.put("nickname", req.getUserPrincipal().getName());
+					obj.put("nickname", userService.getCurrentUser().getNickname());
 					obj.put("authDomain", userService.getCurrentUser()
 							.getAuthDomain());
 				}
