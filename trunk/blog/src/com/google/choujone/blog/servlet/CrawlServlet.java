@@ -31,7 +31,7 @@ public class CrawlServlet extends HttpServlet {
 		resp.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = resp.getWriter();
 		JSONObject obj = new JSONObject();
-		String link = req.getParameter("url") != null ? req.getParameter("url")
+		String link = req.getParameter("url") != null ? req.getParameter("url").trim()
 				: "";
 		String callback = req.getParameter("callback") != null ? req
 				.getParameter("callback") : "";
