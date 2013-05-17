@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="eclipseftp.contribution1"
+            objectClass="org.eclipse.core.runtime.IAdaptable">
+         <menu
+               label="上传到服务器"
+               path="additions"
+               id="eclipseftp.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="eclipseftp.popup.actions.NewAction"
+               id="eclipseftp.newAction"
+               label="所有服务器"
+               menubarPath="eclipseftp.menu1/group1">
+         </action>
+         <action
+               class="eclipseftp.popup.actions.NewAction"
+               id="eclipseftp.newAction"
+               label="服务器1"
+               menubarPath="eclipseftp.menu1/group1">
+         </action>
+         <action
+               class="eclipseftp.popup.actions.AddServerAction"
+               id="eclipseftp.AddServerAction"
+               label="添加服务器"
+               menubarPath="eclipseftp.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
