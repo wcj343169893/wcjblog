@@ -8,7 +8,7 @@
             id="eclipseftp.contribution1"
             objectClass="org.eclipse.core.runtime.IAdaptable">
          <menu
-               label="上传到服务器"
+               label="FTP"
                path="additions"
                id="eclipseftp.menu1">
             <separator
@@ -16,21 +16,17 @@
             </separator>
          </menu>
          <action
-               class="eclipseftp.popup.actions.NewAction"
-               id="eclipseftp.newAction"
-               label="所有服务器"
-               menubarPath="eclipseftp.menu1/group1">
-         </action>
-         <action
-               class="eclipseftp.popup.actions.NewAction"
-               id="eclipseftp.newAction"
-               label="服务器1"
+               class="eclipseftp.popup.actions.UploadAction"
+               id="eclipseftp.UploadAction"
+               icon="icons/upload.png"
+               label="上传到服务器"
                menubarPath="eclipseftp.menu1/group1">
          </action>
          <action
                class="eclipseftp.popup.actions.AddServerAction"
                id="eclipseftp.AddServerAction"
-               label="添加服务器"
+               icon="icons/setting.png"
+               label="服务器设置"
                menubarPath="eclipseftp.menu1/group1">
          </action>
       </objectContribution>
