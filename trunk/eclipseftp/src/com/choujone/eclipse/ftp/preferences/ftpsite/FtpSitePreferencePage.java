@@ -25,8 +25,8 @@ import com.choujone.eclipse.ftp.projectresource.ProjectResourceManager;
 
 /**
  * This class represents a preference page that is contributed to the
- * Preferences dialog. By subclassing <samp>FieldEditorPreferencePage</samp>,
- * we can use the field support built into JFace that allows us to create a page
+ * Preferences dialog. By subclassing <samp>FieldEditorPreferencePage</samp>, we
+ * can use the field support built into JFace that allows us to create a page
  * that is small and knows how to save, restore and apply itself.
  * <p>
  * This page is used to modify preferences only. They are stored in the
@@ -180,13 +180,16 @@ public class FtpSitePreferencePage extends PreferencePage implements
 
 	public boolean performOk() {
 		List<FtpSite> ftpSiteList = this.fsm.getFtpSite();
-		ProjectResourceManager manager = new ProjectResourceManager();
-		for (FtpSite ftpsite : ftpSiteList) {
-			manager.updateFtp(ftpsite);
+		if (null != ftpSiteList) {
+			ProjectResourceManager manager = new ProjectResourceManager();
+			for (FtpSite ftpsite : ftpSiteList) {
+				manager.updateFtp(ftpsite);
+			}
+			this.fsm.save();
+			manager.save();
+			return true;
 		}
-		this.fsm.save();
-		manager.save();
-		return true;
+		return false;
 	}
 
 }
