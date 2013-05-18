@@ -33,10 +33,25 @@
    </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
-         <page        
-         class="com.choujone.eclipse.ftp.preferences.WorkbenchPreferencePage"        
-         name="Ftp Settings"        
-         id="com.choujone.eclipse.ftp.page"/>
+        <page
+            class="com.choujone.eclipse.ftp.preferences.ClassftpRootPreferencePage"
+            id="com.choujone.eclipse.ftp.preferences.ClassftpRootPreferencePage"
+            name="Ftp Settings">
+      </page>
+      <page
+            category="com.choujone.eclipse.ftp.preferences.ClassftpRootPreferencePage"
+            class="com.choujone.eclipse.ftp.preferences.ftpsite.FtpSitePreferencePage"
+            id="com.choujone.eclipse.ftp.preferences.ftpsite.FtpSitePreferencePage"
+            name="ftpsite">
+      </page>
    </extension>
-
+ <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.choujone.eclipse.ftp.preferences.PreferenceInitializer">
+      </initializer>
+      <initializer
+            class="com.choujone.eclipse.ftp.preferences.ftpsite.PreferenceInitializer">
+      </initializer>
+   </extension>
 </plugin>
