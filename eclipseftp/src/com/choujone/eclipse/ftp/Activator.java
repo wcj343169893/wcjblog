@@ -1,4 +1,4 @@
-package eclipseftp;
+package com.choujone.eclipse.ftp;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

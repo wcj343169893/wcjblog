@@ -1,4 +1,4 @@
-package eclipseftp.popup.util;
+package com.choujone.eclipse.ftp.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
