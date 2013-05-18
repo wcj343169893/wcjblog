@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Eclipseftp
 Bundle-SymbolicName: eclipseftp; singleton:=true
 Bundle-Version: 1.0.0.1
-Bundle-Activator: eclipseftp.Activator
+Bundle-Activator: com.choujone.eclipse.ftp.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
