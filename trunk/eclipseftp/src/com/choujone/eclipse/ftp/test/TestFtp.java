@@ -1,4 +1,4 @@
-package eclipseftp.popup.test;
+package com.choujone.eclipse.ftp.test;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -10,10 +10,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import eclipseftp.popup.util.ContinueFTP2;
-import eclipseftp.popup.util.FileUploadUtil;
-import eclipseftp.popup.util.ContinueFTP2.UploadStatus;
-import eclipseftp.popup.util.FtpManager;
+import com.choujone.eclipse.ftp.util.ContinueFTP2;
+import com.choujone.eclipse.ftp.util.FileUploadUtil;
+import com.choujone.eclipse.ftp.util.FtpManager;
+import com.choujone.eclipse.ftp.util.ContinueFTP2.UploadStatus;
+
 
 public class TestFtp {
 	static String host = "192.168.0.109";

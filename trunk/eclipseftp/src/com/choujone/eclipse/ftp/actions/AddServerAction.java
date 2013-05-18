@@ -1,4 +1,4 @@
-package eclipseftp.popup.actions;
+package com.choujone.eclipse.ftp.actions;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;

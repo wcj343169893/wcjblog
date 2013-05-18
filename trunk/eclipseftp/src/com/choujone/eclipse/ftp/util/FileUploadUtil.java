@@ -1,10 +1,11 @@
-package eclipseftp.popup.util;
+package com.choujone.eclipse.ftp.util;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import eclipseftp.popup.util.ContinueFTP2.UploadStatus;
+import com.choujone.eclipse.ftp.util.ContinueFTP2.UploadStatus;
+
 
 public class FileUploadUtil {
 	private String host = "192.168.0.109";

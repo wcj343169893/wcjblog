@@ -1,4 +1,4 @@
-package eclipseftp.popup.actions;
+package com.choujone.eclipse.ftp.actions;
 
 import java.io.File;
 import java.util.ArrayList;
