@@ -5,31 +5,38 @@
    <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
-            id="eclipseftp.contribution1"
+            id="com.choujone.eclipse.ftp.contribution1"
             objectClass="org.eclipse.core.runtime.IAdaptable">
          <menu
                label="FTP"
                path="additions"
-               id="eclipseftp.menu1">
+               id="com.choujone.eclipse.ftp.menu1">
             <separator
                   name="group1">
             </separator>
          </menu>
          <action
-               class="eclipseftp.popup.actions.UploadAction"
-               id="eclipseftp.UploadAction"
+               class="com.choujone.eclipse.ftp.actions.UploadAction"
+               id="com.choujone.eclipse.ftp.UploadAction"
                icon="icons/upload.png"
                label="上传到服务器"
-               menubarPath="eclipseftp.menu1/group1">
+               menubarPath="com.choujone.eclipse.ftp.menu1/group1">
          </action>
          <action
-               class="eclipseftp.popup.actions.AddServerAction"
-               id="eclipseftp.AddServerAction"
+               class="com.choujone.eclipse.ftp.actions.AddServerAction"
+               id="com.choujone.eclipse.ftp.AddServerAction"
                icon="icons/setting.png"
                label="服务器设置"
-               menubarPath="eclipseftp.menu1/group1">
+               menubarPath="com.choujone.eclipse.ftp.menu1/group1">
          </action>
       </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+         <page        
+         class="com.choujone.eclipse.ftp.preferences.WorkbenchPreferencePage"        
+         name="Ftp Settings"        
+         id="com.choujone.eclipse.ftp.page"/>
    </extension>
 
 </plugin>
