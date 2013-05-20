@@ -7,15 +7,18 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.choujone.eclipse.ftp.preferences.ClassftpRootPreferencePage;
+
 public class AddServerAction implements IObjectActionDelegate {
 	private Shell shell;
 
 	@Override
 	public void run(IAction arg0) {
-		MessageDialog.openInformation(
-				shell,
-				"Eclipseftp",
-				"增加服务器.");
+//		MessageDialog.openInformation(
+//				shell,
+//				"Eclipseftp",
+//				"增加服务器.");
+		
 	}
 
 	@Override
