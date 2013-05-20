@@ -36,6 +36,8 @@ import com.choujone.eclipse.ftp.projectresource.ProjectResourceManager;
 
 public class FtpSitePreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
+	public FtpSitePreferencePage() {
+	}
 	private Table table;
 	TableViewer tableViewer;
 	private FtpSiteManager fsm;
@@ -51,7 +53,7 @@ public class FtpSitePreferencePage extends PreferencePage implements
 		final Group ftpSitesGroup = new Group(topComp, SWT.NONE);
 		ftpSitesGroup
 				.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		ftpSitesGroup.setText("Ftp Sites");
+		ftpSitesGroup.setText("Ftp 站点");
 		final GridLayout gridLayout_1 = new GridLayout();
 		gridLayout_1.makeColumnsEqualWidth = true;
 		ftpSitesGroup.setLayout(gridLayout_1);
@@ -69,27 +71,37 @@ public class FtpSitePreferencePage extends PreferencePage implements
 		final TableColumn newColumnTableColumn = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn.setWidth(100);
-		newColumnTableColumn.setText("Ftp Name");
+		newColumnTableColumn.setText("站点名称");
 
 		final TableColumn newColumnTableColumn_1 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_1.setWidth(100);
-		newColumnTableColumn_1.setText("Host IP");
+		newColumnTableColumn_1.setText("IP地址");
 
 		final TableColumn newColumnTableColumn_2 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_2.setWidth(100);
-		newColumnTableColumn_2.setText("Host Port");
+		newColumnTableColumn_2.setText("端口");
 
 		final TableColumn newColumnTableColumn_3 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_3.setWidth(100);
-		newColumnTableColumn_3.setText("Login Name");
+		newColumnTableColumn_3.setText("登录名");
 
 		final TableColumn newColumnTableColumn_4 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_4.setWidth(100);
-		newColumnTableColumn_4.setText("Login Password");
+		newColumnTableColumn_4.setText("登录密码");
+		
+		final TableColumn newColumnTableColumn_5 = new TableColumn(table,
+				SWT.NONE);
+		newColumnTableColumn_5.setWidth(100);
+		newColumnTableColumn_5.setText("本地路径");
+		
+		final TableColumn newColumnTableColumn_6 = new TableColumn(table,
+				SWT.NONE);
+		newColumnTableColumn_6.setWidth(100);
+		newColumnTableColumn_6.setText("服务器路径");
 
 		fsm = FtpSiteManager.getInstance();
 		tableViewer.setInput(fsm.getFtpSite());
@@ -98,7 +110,7 @@ public class FtpSitePreferencePage extends PreferencePage implements
 		composite.setLayout(new GridLayout());
 		final GridData gd_composite = new GridData(SWT.FILL, SWT.FILL, false,
 				false);
-		gd_composite.widthHint = 61;
+		gd_composite.widthHint = 73;
 		gd_composite.heightHint = 50;
 		composite.setLayoutData(gd_composite);
 

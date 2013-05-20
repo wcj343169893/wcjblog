@@ -30,6 +30,8 @@ public class EditSelectionAdapter extends SelectionAdapter {
 				ftpSite.setHostPort(item.getText(2));
 				ftpSite.setLoginName(item.getText(3));
 				ftpSite.setLoginPwd(item.getText(4));
+				ftpSite.setLocalRoot(item.getText(5));
+				ftpSite.setWebRoot(item.getText(6));
 				Shell shell = new Shell();
 				FtpSiteDialog dialog = new FtpSiteDialog(shell,
 						ftpSitePreferencePage);

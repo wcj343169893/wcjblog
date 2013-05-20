@@ -8,17 +8,23 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.TouchEvent;
+import org.eclipse.swt.events.TouchListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.choujone.eclipse.ftp.model.FtpSite;
 import com.choujone.eclipse.ftp.model.FtpSiteValidate;
+
 //import org.eclipse.swt.widgets.Dialog;
 
 public class FtpSiteDialog extends Dialog {
@@ -29,6 +35,8 @@ public class FtpSiteDialog extends Dialog {
 	private Text txtHostIp;
 	private Text txtHostPort;
 	private Text txtName;
+	private Text localRoot;
+	private Text webRoot;
 	private Label hint;
 	private Button saveButton;
 	protected Object result;
@@ -94,14 +102,13 @@ public class FtpSiteDialog extends Dialog {
 		final GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 2;
 		shell.setLayout(gridLayout);
-		shell.setSize(500, 186);
+		shell.setSize(500, 246);
 		shell.getShell().setText("FtpSite");
 		// shell.setText("FtpSite");
 
 		ModifyListener modifyListener = new ModifyListenerAdapter();
-
 		final Label nameLabel = new Label(shell, SWT.NONE);
-		nameLabel.setText("Name");
+		nameLabel.setText("站点名称");
 
 		txtName = new Text(shell, SWT.BORDER);
 		if (editFtpSite != null) {
@@ -114,57 +121,114 @@ public class FtpSiteDialog extends Dialog {
 		txtName.setLayoutData(gd_txtName);
 		txtName.addModifyListener(modifyListener);
 		final Label hostIpLabel = new Label(shell, SWT.NONE);
-		hostIpLabel.setText("Host IP");
+		hostIpLabel.setText("IP地址");
 
 		txtHostIp = new Text(shell, SWT.BORDER);
 		if (editFtpSite != null) {
 			txtHostIp.setText(editFtpSite.getHostIP());
 		}
-		final GridData gd_txtHostIp = new GridData(SWT.FILL, SWT.CENTER, true,
-				false);
-		txtHostIp.setLayoutData(gd_txtHostIp);
+		txtHostIp
+				.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		txtHostIp.addModifyListener(modifyListener);
 
 		final Label hostPort = new Label(shell, SWT.NONE);
-		hostPort.setText("Host Port");
+		hostPort.setText("端口");
 
 		txtHostPort = new Text(shell, SWT.BORDER);
+		txtHostPort.setText("21");
 		if (editFtpSite != null) {
 			txtHostPort.setText(editFtpSite.getHostPort());
 		}
-		final GridData gd_txtHostPort = new GridData(SWT.FILL, SWT.CENTER,
-				true, false);
-		txtHostPort.setLayoutData(gd_txtHostPort);
+		txtHostPort.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false));
 		txtHostPort.addModifyListener(modifyListener);
 
 		final Label loginNameLabel = new Label(shell, SWT.NONE);
-		loginNameLabel.setText("Login Name");
+		loginNameLabel.setText("登录名");
 
 		txtLoginName = new Text(shell, SWT.BORDER);
 		if (editFtpSite != null) {
 			txtLoginName.setText(editFtpSite.getLoginName());
 		}
-		final GridData gd_txtLoginName = new GridData(SWT.FILL, SWT.CENTER,
-				true, false);
-		txtLoginName.setLayoutData(gd_txtLoginName);
+		txtLoginName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false));
 		txtLoginName.addModifyListener(modifyListener);
 
 		final Label loginPasswordLabel = new Label(shell, SWT.NONE);
-		final GridData gd_loginPasswordLabel = new GridData();
-		loginPasswordLabel.setLayoutData(gd_loginPasswordLabel);
-		loginPasswordLabel.setText("Login Password");
+		loginPasswordLabel.setText("登录密码");
 
 		txtLoginPwd = new Text(shell, SWT.BORDER);
 		if (editFtpSite != null) {
 			txtLoginPwd.setText(editFtpSite.getLoginPwd());
 		}
-		final GridData gd_txtLoginPwd = new GridData(SWT.FILL, SWT.CENTER,
-				true, false);
-		txtLoginPwd.setLayoutData(gd_txtLoginPwd);
+		txtLoginPwd.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false));
 		txtLoginPwd.addModifyListener(modifyListener);
+
+		final Label localRootLabel = new Label(shell, SWT.NONE);
+		localRootLabel.setText("本地跟路径");
+
+		localRoot = new Text(shell, SWT.BORDER);
+		GridData gd_localRoot = new GridData(SWT.FILL, SWT.CENTER, false,
+				false, 1, 1);
+		gd_localRoot.widthHint = 268;
+		localRoot.setLayoutData(gd_localRoot);
+		if (editFtpSite != null) {
+			localRoot.setText(editFtpSite.getLocalRoot());
+		}
+		// localRoot.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+		// true, false));
+		Button localPathBtn = new Button(parent, SWT.NONE);
+		localPathBtn.setText("浏览本地跟路径");
+		// localPathBtn.addTouchListener(selectFloder);
+		localPathBtn.addSelectionListener(new SelectionListener() {
+			/**
+			 * 文件夹（目录）选择对话框
+			 */
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// 新建文件夹（目录）对话框
+				DirectoryDialog folderdlg = new DirectoryDialog(shell
+						.getShell());
+				// 设置文件对话框的标题
+				folderdlg.setText("文件选择");
+				// 设置初始路径
+				folderdlg.setFilterPath("SystemDrive");
+				// 设置对话框提示文本信息
+				folderdlg.setMessage("请选择相应的文件夹");
+				// 打开文件对话框，返回选中文件夹目录
+				String selecteddir = folderdlg.open();
+				if (selecteddir == null) {
+					return;
+				} else {
+					localRoot.setText(selecteddir);
+				}
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		// localPathBtn.setLocation(300, 150);
+
+		localRoot.addModifyListener(modifyListener);
+		final Label webRootLabel = new Label(shell, SWT.NONE);
+		webRootLabel.setText("服务器跟路径");
+
+		webRoot = new Text(shell, SWT.BORDER);
+		webRoot.setText("/");
+		if (editFtpSite != null) {
+			webRoot.setText(editFtpSite.getWebRoot());
+		}
+		webRoot.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		webRoot.addModifyListener(modifyListener);
 
 		hint = new Label(shell, SWT.NONE);
 		hint.setText("               ");
+		new Label(shell, SWT.NONE);
 		if (editFtpSite != null) {
 
 			// txtName.setText(editFtpSite.getName());
@@ -222,6 +286,8 @@ public class FtpSiteDialog extends Dialog {
 		ftpSite.setHostPort(this.txtHostPort.getText().trim());
 		ftpSite.setLoginName(this.txtLoginName.getText().trim());
 		ftpSite.setLoginPwd(this.txtLoginPwd.getText().trim());
+		ftpSite.setWebRoot(this.webRoot.getText().trim());
+		ftpSite.setLocalRoot(this.localRoot.getText().trim());
 
 		logger.debug("===============add ftp==================");
 		logger.debug("ftp Name = " + this.txtName.getText());
@@ -238,6 +304,8 @@ public class FtpSiteDialog extends Dialog {
 		ftpSite.setHostPort(this.txtHostPort.getText().trim());
 		ftpSite.setLoginName(this.txtLoginName.getText().trim());
 		ftpSite.setLoginPwd(this.txtLoginPwd.getText().trim());
+		ftpSite.setWebRoot(this.webRoot.getText().trim());
+		ftpSite.setLocalRoot(this.localRoot.getText().trim());
 		this.ftpSitePreferencePage.editFtpSite(ftpSite);
 	}
 
