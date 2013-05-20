@@ -156,7 +156,8 @@ public class FtpSitePreferencePage extends PreferencePage implements
 			MessageDialog.openInformation(null, "Error",
 					"The host name has existed or is null!");
 			throw new Exception("The host name has existed or is null");
-		}
+		}//这里没刷新成功，也许是tableview绑定问题
+		tableViewer.setInput(fsm.getFtpSite());
 		this.tableViewer.refresh();
 	}
 
