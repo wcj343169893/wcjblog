@@ -1,7 +1,5 @@
 package com.choujone.eclipse.ftp.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class FtpSite {
 	private String name;
@@ -9,6 +7,8 @@ public class FtpSite {
 	private String hostPort;
 	private String loginName;
 	private String loginPwd;
+	private String localRoot = "/";
+	private String webRoot = "/";
 
 	public String getName() {
 		return name;
@@ -50,6 +50,22 @@ public class FtpSite {
 
 	public void setHostPort(String hostPort) {
 		this.hostPort = hostPort;
+	}
+
+	public String getLocalRoot() {
+		return localRoot;
+	}
+
+	public void setLocalRoot(String localRoot) {
+		this.localRoot = localRoot;
+	}
+
+	public String getWebRoot() {
+		return webRoot;
+	}
+
+	public void setWebRoot(String webRoot) {
+		this.webRoot = webRoot;
 	}
 
 

@@ -16,29 +16,65 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.choujone.eclipse.ftp.model.FtpSite;
+import com.choujone.eclipse.ftp.model.FtpSiteManager;
+import com.choujone.eclipse.ftp.util.FileUploadUtil;
+
 /**
  * http://code.google.com/p/slave4j/source/browse/trunk
+ * 
  * @author Administrator
- *
+ * 
  */
 public class UploadAction implements IObjectActionDelegate {
 	private Shell shell;
-	private List<Object> address = new ArrayList<Object>();// 选中文件列表
+	private List<String> address = new ArrayList<String>();// 选中文件列表
+	private FtpSiteManager fsm;
 
 	@Override
 	public void run(IAction action) {
-		if (address.size()>0) {
-			//有选中文件
-			
+		if (address.size() > 0) {
+			// 有选中文件
+			// 读取ftp配置
+			fsm = FtpSiteManager.getInstance();
+			List<FtpSite> ftpSites = fsm.getFtpSite();
+			if (null != ftpSites) {
+				for (FtpSite ftpSite : ftpSites) {
+					new UploadFileThread(ftpSite, address).start();
+				}
+			}
 		}
 	}
 
-	/* 这个方法，每次选中文件，都会请求两次
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
+	class UploadFileThread extends Thread {
+		FtpSite ftpSite;
+		List<String> address = new ArrayList<String>();
+
+		public UploadFileThread() {
+		}
+
+		public UploadFileThread(FtpSite ftpSite, List<String> address) {
+			this.ftpSite = ftpSite;
+			this.address = address;
+		}
+
+		@Override
+		public void run() {
+			FileUploadUtil fuu = new FileUploadUtil(ftpSite);
+			fuu.uploadFiles(address);
+		}
+	}
+
+	/*
+	 * 这个方法，每次选中文件，都会请求两次
+	 * 
+	 * @see
+	 * org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action
+	 * .IAction, org.eclipse.jface.viewers.ISelection)
 	 */
 	@Override
 	public void selectionChanged(IAction arg0, ISelection selection) {
-		address = new ArrayList<Object>();// 选中文件列表
+		address = new ArrayList<String>();// 选中文件列表
 		if (selection instanceof IStructuredSelection) {
 			File directory = null;
 			for (Iterator iterator = ((IStructuredSelection) selection)
@@ -63,13 +99,13 @@ public class UploadAction implements IObjectActionDelegate {
 							((IResource) adaptable.getAdapter(IResource.class))
 									.getLocation().toOSString());
 				}
-				String path=directory.toString();
+				String path = directory.toString();
 				if (!address.contains(path)) {
 					address.add(path);
 					System.out.println("选中文件：" + path);
 				}
 			}
-		} 
+		}
 	}
 
 	protected File getJarFile(IAdaptable adaptable) {
