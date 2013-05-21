@@ -10,18 +10,21 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.jdt.internal.core.PackageFragment;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.dialogs.PreferencesUtil;
 
+import com.choujone.eclipse.ftp.l10n.Language;
 import com.choujone.eclipse.ftp.model.FtpSite;
 import com.choujone.eclipse.ftp.model.FtpSiteManager;
 import com.choujone.eclipse.ftp.util.FileUploadUtil;
 
 /**
- * http://code.google.com/p/slave4j/source/browse/trunk
  * 
  * @author Administrator
  * 
@@ -33,8 +36,8 @@ public class UploadAction implements IObjectActionDelegate {
 
 	@Override
 	public void run(IAction action) {
+		// 有选中文件
 		if (address.size() > 0) {
-			// 有选中文件
 			// 读取ftp配置
 			fsm = FtpSiteManager.getInstance();
 			List<FtpSite> ftpSites = fsm.getFtpSite();
@@ -42,7 +45,18 @@ public class UploadAction implements IObjectActionDelegate {
 				for (FtpSite ftpSite : ftpSites) {
 					new UploadFileThread(ftpSite, address).start();
 				}
+			} else {
+				MessageDialog
+						.openInformation(shell, "Eclipseftp", Language.names("plugin_error_add_site"));
+				PreferenceDialog createPreferenceDialogOn = PreferencesUtil
+						.createPreferenceDialogOn(
+								new Shell(),
+								"com.choujone.eclipse.ftp.preferences.ftpsite.FtpSitePreferencePage",
+								null, null);
+				createPreferenceDialogOn.open();
 			}
+		} else {
+			MessageDialog.openInformation(shell, "Eclipseftp", Language.names("plugin_error_select_file"));
 		}
 	}
 
@@ -100,9 +114,10 @@ public class UploadAction implements IObjectActionDelegate {
 									.getLocation().toOSString());
 				}
 				String path = directory.toString();
+				path = path.replaceAll("\\\\", "/");
 				if (!address.contains(path)) {
 					address.add(path);
-					System.out.println("选中文件：" + path);
+					// System.out.println("选中文件：" + path);
 				}
 			}
 		}
