@@ -171,10 +171,9 @@ public class FtpSitePreferencePage extends PreferencePage implements
 		// TODO add new FtpSite
 		if (!this.fsm.addFtpSite(ftpSite)) {
 			// 报错信息 新增配置的名称已存在或为空
-			MessageDialog.openInformation(null, "Error",
-					Language.names("plugin_error_site_host_name_has_existed"));
+			MessageDialog.openInformation(null, "Error",Language.names("plugin_error_site_host_name_has_existed"));
 			// throw new Exception("The host name has existed or is null");
-		}// 这里没刷新成功，也许是tableview绑定问题
+		}
 		tableViewer.setInput(fsm.getFtpSite());
 		this.tableViewer.refresh();
 	}
