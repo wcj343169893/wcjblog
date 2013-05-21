@@ -22,6 +22,10 @@ public class TableLabelProvider extends LabelProvider implements
 				return ftpSite.getLoginName();
 			} else if (columnIndex == 4) {
 				return ftpSite.getLoginPwd();
+			}else if (columnIndex == 5) {
+				return ftpSite.getLocalRoot();
+			}else if (columnIndex == 6) {
+				return ftpSite.getWebRoot();
 			}
 		}
 		return "";

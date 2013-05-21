@@ -42,6 +42,7 @@ public class ProjectResourceComposite extends Composite {
 	}
 
 	class ContentProvider implements IStructuredContentProvider {
+		@SuppressWarnings("rawtypes")
 		public Object[] getElements(Object inputElement) {
 			if (inputElement instanceof java.util.List) {
 				return ((java.util.List) inputElement).toArray();
@@ -91,6 +92,7 @@ public class ProjectResourceComposite extends Composite {
 					public void selectionChanged(final SelectionChangedEvent event) {
 						IStructuredSelection selection = (IStructuredSelection) event
 								.getSelection();
+						@SuppressWarnings("rawtypes")
 						Iterator iter = selection.iterator();
 						while (iter.hasNext()) {
 							IProject selectedProject = (IProject) iter.next();
@@ -126,6 +128,7 @@ public class ProjectResourceComposite extends Composite {
 		removeButton = new Button(composite_1, SWT.NONE);
 		removeButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 		removeButton.addSelectionListener(new SelectionAdapter() {
+			@SuppressWarnings("rawtypes")
 			public void widgetSelected(final SelectionEvent e) {
 				IStructuredSelection selection = (IStructuredSelection) projectListViewer
 						.getSelection();

@@ -14,6 +14,9 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
+import com.choujone.eclipse.ftp.Factory.ConsoleFactory;
+import com.choujone.eclipse.ftp.l10n.Language;
+
 /** */
 /**
  * 支持断点续传的FTP实用类
@@ -28,7 +31,7 @@ public class ContinueFTP2 {
 
 	public enum UploadStatus {
 		Create_Directory_Fail, // 远程服务器相应目录创建失败
-		Create_Directory_Success, // 远程服务器闯将目录成功
+		Create_Directory_Success, // 远程服务器创建目录成功
 		Upload_New_File_Success, // 上传新文件成功
 		Upload_New_File_Failed, // 上传新文件失败
 		File_Exits, // 文件已经存在
@@ -50,9 +53,11 @@ public class ContinueFTP2 {
 
 	public FTPClient ftpClient = new FTPClient();
 	private String ftpURL, username, pwd, ftpport, file1, file2;
-	private String charset="utf-8";
+	private String charset = "utf-8";
 
-	public ContinueFTP2(){}
+	public ContinueFTP2() {
+	}
+
 	public ContinueFTP2(String _ftpURL, String _username, String _pwd,
 			String _ftpport, String _file1, String _file2) {
 		// 设置将过程中使用到的命令输出到控制台
@@ -62,22 +67,23 @@ public class ContinueFTP2 {
 		ftpport = _ftpport;
 		file1 = _file1;
 		file2 = _file2;
-		this.ftpClient.addProtocolCommandListener(new ProtocolCommandListener() {
-			
-			@Override
-			public void protocolReplyReceived(ProtocolCommandEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void protocolCommandSent(ProtocolCommandEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-//		this.ftpClient.addProtocolCommandListener(new PrintCommandListener(
-//				new PrintWriter(System.out)));
+		this.ftpClient
+				.addProtocolCommandListener(new ProtocolCommandListener() {
+
+					@Override
+					public void protocolReplyReceived(ProtocolCommandEvent arg0) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void protocolCommandSent(ProtocolCommandEvent arg0) {
+						// TODO Auto-generated method stub
+
+					}
+				});
+		// this.ftpClient.addProtocolCommandListener(new PrintCommandListener(
+		// new PrintWriter(System.out)));
 	}
 
 	/** */
@@ -107,12 +113,18 @@ public class ContinueFTP2 {
 		disconnect();
 		return false;
 	}
-	/**定位到跟目录
+
+	/**
+	 * 定位到跟目录
+	 * 
 	 * @param str
 	 * @throws IOException
 	 */
-	public void locate(String str) throws IOException{
-		ftpClient.changeWorkingDirectory(str);
+	public void locate(String remote) throws IOException {
+		// 首先判断文件夹是否存在
+		if (CreateDirecroty(remote, ftpClient) != UploadStatus.Create_Directory_Fail) {
+			ftpClient.changeWorkingDirectory(remote);
+		}
 	}
 
 	/** */
@@ -135,10 +147,9 @@ public class ContinueFTP2 {
 		DownloadStatus result;
 
 		// 检查远程文件是否存在
-		FTPFile[] files = ftpClient.listFiles(new String(
-				remote.getBytes(charset), "iso-8859-1"));
+		FTPFile[] files = ftpClient.listFiles(new String(remote
+				.getBytes(charset), "iso-8859-1"));
 		if (files.length != 1) {
-			System.out.println("远程文件不存在");
 			return DownloadStatus.Remote_File_Noexist;
 		}
 
@@ -149,7 +160,6 @@ public class ContinueFTP2 {
 			long localSize = f.length();
 			// 判断本地文件大小是否大于远程文件大小
 			if (localSize >= lRemoteSize) {
-				System.out.println("本地文件大于远程文件，下载中止");
 				return DownloadStatus.Local_Bigger_Remote;
 			}
 
@@ -168,8 +178,8 @@ public class ContinueFTP2 {
 				long nowProcess = localSize / step;
 				if (nowProcess > process) {
 					process = nowProcess;
-					if (process % 10 == 0)
-						System.out.println("下载进度：" + process);
+//					if (process % 10 == 0)
+//						System.out.println("下载进度：" + process);
 					// TODO 更新文件下载进度,值存放在process变量中
 				}
 			}
@@ -196,8 +206,8 @@ public class ContinueFTP2 {
 				long nowProcess = localSize / step;
 				if (nowProcess > process) {
 					process = nowProcess;
-					if (process % 10 == 0)
-						System.out.println("下载进度：" + process);
+//					if (process % 10 == 0)
+//						System.out.println("下载进度：" + process);
 					// TODO 更新文件下载进度,值存放在process变量中
 				}
 			}
@@ -252,20 +262,26 @@ public class ContinueFTP2 {
 			long localSize = f.length();
 			if (remoteSize == localSize) {
 				return UploadStatus.File_Exits;
-			} else if (remoteSize > localSize) {
-				return UploadStatus.Remote_Bigger_Local;
 			}
+			// else if (remoteSize > localSize) {
+			// return UploadStatus.Remote_Bigger_Local;
+			// }
 
 			// 尝试移动文件内读取指针,实现断点续传
-			result = uploadFile(remoteFileName, f, ftpClient, remoteSize);
-
-			// 如果断点续传没有成功，则删除服务器上文件，重新上传
-			if (result == UploadStatus.Upload_From_Break_Failed) {
-				if (!ftpClient.deleteFile(remoteFileName)) {
-					return UploadStatus.Delete_Remote_Faild;
-				}
-				result = uploadFile(remoteFileName, f, ftpClient, 0);
+			// result = uploadFile(remoteFileName, f, ftpClient, remoteSize);
+			//
+			// // 如果断点续传没有成功，则删除服务器上文件，重新上传
+			// if (result == UploadStatus.Upload_From_Break_Failed) {
+			// if (!ftpClient.deleteFile(remoteFileName)) {
+			// return UploadStatus.Delete_Remote_Faild;
+			// }
+			// result = uploadFile(remoteFileName, f, ftpClient, 0);
+			// }
+			// 断点续传没有验证文件是否为断点文件，所以直接替换掉文件
+			if (!ftpClient.deleteFile(remoteFileName)) {
+				return UploadStatus.Delete_Remote_Faild;
 			}
+			result = uploadFile(remoteFileName, new File(local), ftpClient, 0);
 		} else {
 			result = uploadFile(remoteFileName, new File(local), ftpClient, 0);
 		}
@@ -318,7 +334,7 @@ public class ContinueFTP2 {
 					if (ftpClient.makeDirectory(subDirectory)) {
 						ftpClient.changeWorkingDirectory(subDirectory);
 					} else {
-						System.out.println("创建目录失败");
+						ConsoleFactory.printToConsole("创建目录失败");
 						return UploadStatus.Create_Directory_Fail;
 					}
 				}
@@ -369,19 +385,21 @@ public class ContinueFTP2 {
 		}
 		byte[] bytes = new byte[1024];
 		int c;
-		System.out.println("开始上传");
+		ConsoleFactory.printToConsole(Language.names("plugin_upload_start"));
+//		System.out.println("开始上传");
 		while ((c = raf.read(bytes)) != -1) {
 			out.write(bytes, 0, c);
 			localreadbytes += c;
-			if (step>0 && localreadbytes / step != process) {
+			if (step > 0 && localreadbytes / step != process) {
 				process = localreadbytes / step;
-//				System.out.print("." + process);
-				System.out.print(".");
+				// System.out.print("." + process);
+//				System.out.print(".");
 				// TODO 汇报上传状态,理论上需要回执进度条
 			}
 		}
-		System.out.println();
-		System.out.println("上传完成");
+//		System.out.println();
+//		System.out.println("上传完成");
+		ConsoleFactory.printToConsole(Language.names("plugin_upload_complete"));
 		out.flush();
 		raf.close();
 		out.close();

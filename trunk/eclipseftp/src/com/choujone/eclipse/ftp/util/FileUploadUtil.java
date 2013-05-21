@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import com.choujone.eclipse.ftp.Factory.ConsoleFactory;
 import com.choujone.eclipse.ftp.model.FtpSite;
 import com.choujone.eclipse.ftp.util.ContinueFTP2.UploadStatus;
 
@@ -46,14 +47,15 @@ public class FileUploadUtil {
 		ContinueFTP2 ftp = new ContinueFTP2();
 		try {
 			ftp.connect(host, port, username, password);
-			System.out.println(host+"连接服务器成功");
+			ConsoleFactory.printToConsole("连接服务器 "+host+" 成功");
 			for (String localAddress : address) {
 				upload(localAddress, ftp);
 			}
 			ftp.disconnect();
-			System.out.println("断开连接");
+			ConsoleFactory.printToConsole("断开连接");
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -81,12 +83,19 @@ public class FileUploadUtil {
 			}
 			// 上传文件
 			if (file.isFile()) {
-				String filePath = localAddress.substring(localRoot.length());
+				int lr_length=localRoot.length();
+				if(!StringUtil.endsWithSlash(localRoot)){
+					lr_length++;
+				}
+				String filePath = localAddress.substring(lr_length);
+				if(!StringUtil.endsWithSlash(webRoot)){
+					webRoot=webRoot+"/";
+				}
 				ftp.locate(webRoot);
-				UploadStatus us = ftp.upload(localAddress, webRoot + filePath);
-				System.out.println("本地地址:" + localAddress);
-				System.out.println("服务器:" + filePath);
-				System.out.println("上传状态:" + us.toString());
+				ConsoleFactory.printToConsole("本地地址:" + localAddress);
+				ConsoleFactory.printToConsole("服务器:" + filePath);
+				UploadStatus us = ftp.upload(localAddress, filePath);
+				ConsoleFactory.printToConsole("上传状态:" + us.toString());
 			}
 		}
 	}

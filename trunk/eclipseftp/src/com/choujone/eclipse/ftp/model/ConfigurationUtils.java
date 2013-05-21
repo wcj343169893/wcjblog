@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import com.thoughtworks.xstream.XStream;
 
 public class ConfigurationUtils {
-	public static final String CONFIG_FILE_PATH=System.getProperty("user.home")+"/classftp_ftpsite.xml";
+	public static final String CONFIG_FILE_PATH=System.getProperty("user.home")+"/eclipse_ftp_sites.xml";
 
 	private static Log logger=LogFactory.getLog(ConfigurationUtils.class);
 	

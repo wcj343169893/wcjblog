@@ -10,6 +10,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
+import com.choujone.eclipse.ftp.l10n.Language;
+
 /**
  * This class represents a preference page that is contributed to the
  * Preferences dialog. By subclassing <samp>FieldEditorPreferencePage</samp>,
@@ -37,7 +39,7 @@ public class ClassftpRootPreferencePage extends PreferencePage implements
 		// TODO Auto-generated method stub
 		Composite topComp = new Composite(parent, SWT.NONE);
 		topComp.setLayout(new RowLayout());
-		new Label(topComp, SWT.NONE).setText("Welcome to use classftp");
+		new Label(topComp, SWT.NONE).setText(Language.names("plugin_welcome"));
 		return topComp;
 	}
 

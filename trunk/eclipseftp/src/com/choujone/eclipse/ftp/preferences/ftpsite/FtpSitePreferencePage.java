@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
+import com.choujone.eclipse.ftp.l10n.Language;
 import com.choujone.eclipse.ftp.model.FtpSite;
 import com.choujone.eclipse.ftp.model.FtpSiteManager;
 import com.choujone.eclipse.ftp.projectresource.ProjectResourceManager;
@@ -38,6 +39,7 @@ public class FtpSitePreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
 	public FtpSitePreferencePage() {
 	}
+
 	private Table table;
 	TableViewer tableViewer;
 	private FtpSiteManager fsm;
@@ -53,7 +55,7 @@ public class FtpSitePreferencePage extends PreferencePage implements
 		final Group ftpSitesGroup = new Group(topComp, SWT.NONE);
 		ftpSitesGroup
 				.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		ftpSitesGroup.setText("Ftp 站点");
+		ftpSitesGroup.setText(Language.names("plugin_site_group_name"));
 		final GridLayout gridLayout_1 = new GridLayout();
 		gridLayout_1.makeColumnsEqualWidth = true;
 		ftpSitesGroup.setLayout(gridLayout_1);
@@ -67,41 +69,45 @@ public class FtpSitePreferencePage extends PreferencePage implements
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
 		final TableColumn newColumnTableColumn = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn.setWidth(100);
-		newColumnTableColumn.setText("站点名称");
+		newColumnTableColumn.setText(Language.names("plugin_site_name"));
 
 		final TableColumn newColumnTableColumn_1 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_1.setWidth(100);
-		newColumnTableColumn_1.setText("IP地址");
+		newColumnTableColumn_1
+				.setText(Language.names("plugin_site_ip_address"));
 
 		final TableColumn newColumnTableColumn_2 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_2.setWidth(100);
-		newColumnTableColumn_2.setText("端口");
+		newColumnTableColumn_2.setText(Language.names("plugin_site_port"));
 
 		final TableColumn newColumnTableColumn_3 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_3.setWidth(100);
-		newColumnTableColumn_3.setText("登录名");
+		newColumnTableColumn_3
+				.setText(Language.names("plugin_site_login_name"));
 
 		final TableColumn newColumnTableColumn_4 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_4.setWidth(100);
-		newColumnTableColumn_4.setText("登录密码");
-		
+		newColumnTableColumn_4.setText(Language
+				.names("plugin_site_login_password"));
+
 		final TableColumn newColumnTableColumn_5 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_5.setWidth(100);
-		newColumnTableColumn_5.setText("本地路径");
-		
+		newColumnTableColumn_5.setText(Language
+				.names("plugin_site_local_address"));
+
 		final TableColumn newColumnTableColumn_6 = new TableColumn(table,
 				SWT.NONE);
 		newColumnTableColumn_6.setWidth(100);
-		newColumnTableColumn_6.setText("服务器路径");
+		newColumnTableColumn_6.setText(Language
+				.names("plugin_site_server_address"));
 
 		fsm = FtpSiteManager.getInstance();
 		tableViewer.setInput(fsm.getFtpSite());
@@ -119,20 +125,20 @@ public class FtpSitePreferencePage extends PreferencePage implements
 				.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
 		btnAddFtp.addSelectionListener(new AddSelectionAdapter(this));
 		btnAddFtp.setSelection(true);
-		btnAddFtp.setText("Add");
+		btnAddFtp.setText(Language.names("plugin_site_btn_add"));
 
 		final Button btnEditFtp = new Button(composite, SWT.NONE);
 		btnEditFtp.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false,
 				false));
 		btnEditFtp.addSelectionListener(new EditSelectionAdapter(this));
-		btnEditFtp.setText("Edit");
+		btnEditFtp.setText(Language.names("plugin_site_btn_edit"));
 		btnEditFtp.setEnabled(false);
 
 		final Button btnRemoveFtp = new Button(composite, SWT.NONE);
 		btnRemoveFtp.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false,
 				false));
 		btnRemoveFtp.addSelectionListener(new RemoveSelectionAdapter(this));
-		btnRemoveFtp.setText("Remove");
+		btnRemoveFtp.setText(Language.names("plugin_site_btn_remove"));
 		btnRemoveFtp.setEnabled(false);
 
 		tableViewer
@@ -166,9 +172,9 @@ public class FtpSitePreferencePage extends PreferencePage implements
 		if (!this.fsm.addFtpSite(ftpSite)) {
 			// 报错信息 新增配置的名称已存在或为空
 			MessageDialog.openInformation(null, "Error",
-					"The host name has existed or is null!");
-			throw new Exception("The host name has existed or is null");
-		}//这里没刷新成功，也许是tableview绑定问题
+					Language.names("plugin_error_site_host_name_has_existed"));
+			// throw new Exception("The host name has existed or is null");
+		}// 这里没刷新成功，也许是tableview绑定问题
 		tableViewer.setInput(fsm.getFtpSite());
 		this.tableViewer.refresh();
 	}
@@ -176,8 +182,8 @@ public class FtpSitePreferencePage extends PreferencePage implements
 	public void editFtpSite(FtpSite ftpSite) throws Exception {
 		if (!this.fsm.updateFtpSite(ftpSite)) {
 			MessageDialog.openInformation(null, "Error",
-					"can not find the host name!");
-			throw new Exception("can not find the host name!");
+					Language.names("plugin_error_site_host_name_not_exists"));
+			// throw new Exception("can not find the host name!");
 		}
 		this.tableViewer.refresh();
 	}
@@ -185,8 +191,8 @@ public class FtpSitePreferencePage extends PreferencePage implements
 	public void removeFtpSite(FtpSite ftpSite) throws Exception {
 		if (!this.fsm.removeFtpSite(ftpSite)) {
 			MessageDialog.openInformation(null, "Error",
-					"the config could be used in projects now!");
-			throw new Exception("the config could be used in projects now!");
+					Language.names("plugin_error_site_host_name_not_exists"));
+			// throw new Exception("the config could be used in projects now!");
 		}
 		this.tableViewer.refresh();
 	}
