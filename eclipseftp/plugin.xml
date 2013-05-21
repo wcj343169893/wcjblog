@@ -8,7 +8,7 @@
             id="com.choujone.eclipse.ftp.contribution1"
             objectClass="org.eclipse.core.runtime.IAdaptable">
          <menu
-               label="FTP"
+               label="FTP 上传"
                path="additions"
                id="com.choujone.eclipse.ftp.menu1">
             <separator
@@ -36,13 +36,13 @@
         <page
             class="com.choujone.eclipse.ftp.preferences.ClassftpRootPreferencePage"
             id="com.choujone.eclipse.ftp.preferences.ClassftpRootPreferencePage"
-            name="Ftp Settings">
+            name="FTP 设置">
       </page>
       <page
             category="com.choujone.eclipse.ftp.preferences.ClassftpRootPreferencePage"
             class="com.choujone.eclipse.ftp.preferences.ftpsite.FtpSitePreferencePage"
             id="com.choujone.eclipse.ftp.preferences.ftpsite.FtpSitePreferencePage"
-            name="ftpsite">
+            name="FTP 站点">
       </page>
    </extension>
  <extension
@@ -54,4 +54,7 @@
             class="com.choujone.eclipse.ftp.preferences.ftpsite.PreferenceInitializer">
       </initializer>
    </extension>
+ <extension
+       point="org.eclipse.ui.console.consoleFactories">
+ </extension>
 </plugin>
