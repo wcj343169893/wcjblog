@@ -64,7 +64,9 @@
 				关键字：
 			</div>
 			<input type="text" name="tag"><br>
-			<input type="checkbox" value="0" id="isVisible" name="isVisible"><label for="isVisible">发布</label> &nbsp;<input type="submit" value="保存">(提交快捷键: Ctrl + Enter)
+			<input type="checkbox" value="1" id="isComment" name="isComment" checked="checked"><label for="isComment">允许评论</label> &nbsp;
+			<input type="checkbox" value="0" id="isVisible" name="isVisible"><label for="isVisible">发布</label> &nbsp;
+			<input type="submit" value="保存">(提交快捷键: Ctrl + Enter)
 		</form>
 		<script type="text/javascript">
 				function tlist(){

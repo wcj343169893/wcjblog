@@ -71,8 +71,8 @@
 								<a href="/tag.jsp?t=<%=str %>" class="tag"><%=str %></a>
 							<% }}}%></span>
 	                      <div class="op-box">  
-		                      <span class="pv">浏览(<%=blog.getCount()%>)</span> 
-		                      <a class="comment-bnt" id="commentBnt" href="javascript:jQuery('#content').focus()">评论<span class="comment-nub hide"></span> </a>   
+		                      <span class="pv">浏览(<%=blog.getCount()%>)</span><%if(blog.getIsComment()==null || blog.getIsComment()==1){ %>
+		                      <a class="comment-bnt" id="commentBnt" href="javascript:jQuery('#content').focus()">评论<span class="comment-nub hide"></span></a><%} %>
 		                      <%if (Tools.isLogin(request)) {%><a href="/blog?id=<%=blog.getId()%>&op=modify" class="edit-bnt"> 编辑 </a> <%}%>
                       	  </div>
 	                  </div>              
@@ -90,6 +90,7 @@
                     </div>
                     <%} %>
            </div>
+           <%if(blog.getIsComment()==null || blog.getIsComment()==1){ %>
                 <div id="commentDetail" class="mod-comment-detail clearfix">
                     <div class="comment-title">评论</div>
                     <div class="comment-content" style="display: block; overflow: visible; height: auto; ">
@@ -190,6 +191,11 @@
 				initReply2(1,<%=blog.getId()%>);
 			});
 			</script>
+			<%}else{ %>
+			 <div id="commentDetail" class="mod-comment-detail clearfix">
+                   <div class="comment-title">对不起，此文章不允许评论！</div>
+             </div>
+			<%} %>
      </div>
 </div>
 </div>

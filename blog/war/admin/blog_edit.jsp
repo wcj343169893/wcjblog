@@ -70,7 +70,9 @@
 					关键字：
 				</div>
 				<input type="text" name="tag" value="<%=blog.getTag() %>"><br>
-				<input type="checkbox" value="0" id="isVisible" name="isVisible" <%=blog.getIsVisible() == 0 ? "checked":"" %>><label for="isVisible">发布</label> &nbsp;<input type="submit" value="保存">
+				<input type="checkbox" value="1" id="isComment" name="isComment" <%if(blog.getIsComment()==null || blog.getIsComment() == 1){ %>checked<%} %>><label for="isComment">允许评论</label> &nbsp;
+				<input type="checkbox" value="0" id="isVisible" name="isVisible" <%=blog.getIsVisible() == 0 ? "checked":"" %>><label for="isVisible">发布</label> &nbsp;
+				<input type="submit" value="保存">
 			</form>
 		</div>
 		<script type="text/javascript">

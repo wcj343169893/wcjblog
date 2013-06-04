@@ -90,10 +90,12 @@ public class BlogDao {
 				b.setTag(blog.getTag());
 				b.setTitle(blog.getTitle());
 				b.setTid(blog.getTid());
+				b.setIsComment(blog.getIsComment());
 				b.setMoTime(Tools.changeTime(new Date()));
 				b.setIsVisible(blog.getIsVisible());
 				// pm.flush();
 				flag = true;
+				MyCache.clear("blogDao_id_" + blog.getId());
 			} catch (Exception e) {
 			}
 		} else if (operation.equals(Operation.readTimes)) {// 增加阅读次数
@@ -267,7 +269,7 @@ public class BlogDao {
 		String key = "blogDao_getBlogListByPage_null_null_" + pages.getPageNo()
 				+ "_tag_" + tag;
 		List<Blog> blogs = MyCache.get(key);
-		//此标签下的总数
+		// 此标签下的总数
 		int recTotal = getTags2().get(tag) != null ? getTags2().get(tag).size()
 				: 0;
 		pages.setRecTotal(recTotal);
