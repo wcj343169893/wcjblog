@@ -34,6 +34,8 @@ public class Blog implements Serializable {
 	@Persistent
 	private Integer isVisible = 0;// 是否发表
 	@Persistent
+	private Integer isComment = 0;// 是否允许评论
+	@Persistent
 	private String moTime = "";// 最后修改时间
 	@Persistent
 	private String source = "";// 内容来源
@@ -166,6 +168,14 @@ public class Blog implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Integer getIsComment() {
+		return isComment;
+	}
+
+	public void setIsComment(Integer isComment) {
+		this.isComment = isComment;
 	}
 
 }

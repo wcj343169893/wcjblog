@@ -82,7 +82,7 @@ public class BlogServlet extends HttpServlet {
 				}
 				req.setAttribute("id", id);
 			}// 显示某篇文章
-			// 如果id==-1
+				// 如果id==-1
 			if (id.equals("-1")) {
 				resp.sendRedirect("/leaveMessage.jsp");
 			} else {
@@ -104,15 +104,19 @@ public class BlogServlet extends HttpServlet {
 		String content = req.getParameter("content");// 文章信息
 		String tag = req.getParameter("tag");// 关键字
 		String ids = req.getParameter("id");// 文章id
-		String tid = req.getParameter("tid")!=null ?req.getParameter("tid"):"-1L";// 分类id
+		String tid = req.getParameter("tid") != null ? req.getParameter("tid")
+				: "-1L";// 分类id
 		String isVisible = req.getParameter("isVisible") != null ? req
 				.getParameter("isVisible") : "1";// 是否发布
+		String isComment = req.getParameter("isComment") != null ? req
+				.getParameter("isComment") : "0";// 是否允许评论（默认为允许）
 		Blog blog = new Blog();
 		BlogDao blogDao = new BlogDao();
 		blog.setTag(tag);
 		blog.setTitle(title);
 		blog.setTid(Long.valueOf(tid));
 		blog.setIsVisible(Integer.parseInt(isVisible));
+		blog.setIsComment(Integer.parseInt(isComment));
 		blog.setContent(new com.google.appengine.api.datastore.Text(Tools
 				.changeHTML(Tools.toChinese(content))));
 		if (operation.trim().equals(Operation.add.toString())) {// 新增
