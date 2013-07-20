@@ -19,7 +19,7 @@
 			<%} %>
 		</ul>
 	</div><%}  if(blog_user.getIsTags()==null || blog_user.getIsTags()==0){ %>
-	<div class="mod-taglist">
+	<div class="mod-taglist tags_more">
 		<ul class="q-taglist clearfix">
 			<li class="q-tagitem"><span class="q-icon"></span></li><%Map<String, List<Long>> tagsMap =bd.getTags2();for(String s : tagsMap.keySet()){ %><li class="q-tagitem"><a href="tag.jsp?t=<%=s %>" class="a-tagitem cs-sidebar-hoverbglink"><%=s %>(<%=tagsMap.get(s).size() %>)</a></li>
 			<%} %></ul>
@@ -80,5 +80,22 @@ $(document).ready(function(){
 	 		$('.right').css({'position':'',"top":""});
 	 	}
   });
+  	//tag收缩
+  	var $tm =$(".tags_more");
+  	var tm_height=$tm.height();
+  	if(tm_height>300){
+  		var more_btn=$("<a href='javascript:;'>更多</a>").toggle(
+  			  function () {
+  			    $(this).html("收起");
+  			  	$tm.animate({"height":tm_height});
+  			  },
+  			  function () {
+  			    $(this).html("更多");
+  			  	$tm.animate({"height":"245"});
+  			  }
+  			).css({"display": "inline-block","float":"right","margin-top":"-1px","margin-right":"0px","background":"#f5f5f5","width":"40px","border-radius":"0px 0px 0px 7px","height":"22px","line-height":"22px","text-align":"center","z-index":"200"});
+  		$tm.after(more_btn);
+  		$tm.css({"height":"245","overflow":"hidden","padding-bottom":"7px"});
+  	}
 });
 </script>
