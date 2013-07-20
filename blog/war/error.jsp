@@ -5,8 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>访问出错啦</title>
+<!-- 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/jquery.corner.js"></script>
+
 <style type="text/css">
 	#error_notice{
 		width: 400px;
@@ -31,16 +33,18 @@
 	}
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#error_notice").corner();
-	});
+	//$(document).ready(function(){
+		//$("#error_notice").corner();
+	//});
 </script>
+ -->
 </head>
 <body>
-	<div id="error_notice">
-		<div class="notice">
-			对不起，您查找的页面错误或不存在！<a href="/">返回首页</a>
-		</div>
+<div id="error_notice" style="display: none;">
+	<div class="notice">
+		对不起，您查找的页面错误或不存在！<a href="/">返回首页</a>
 	</div>
+</div>
+<script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
 </body>
 </html>
