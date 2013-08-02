@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blacklistentries>
+  <blacklist>
+    <subnet>117.26.202.10</subnet>
+    <description>fujian hack</description>
+  </blacklist>
+</blacklistentries>
