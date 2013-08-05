@@ -91,6 +91,11 @@
                     <%} %>
            </div>
            <%if(blog.getIsComment()==null || blog.getIsComment()==1){ %>
+           <%if(blog_user.getCommentCode()!=null && !"".equals(blog_user.getCommentCode())){ %>
+           		<div id="commentDetail" class="mod-comment-detail clearfix">
+           			<%=blog_user.getCommentCode() %>
+           		</div>
+           <%}else{ %>
                 <div id="commentDetail" class="mod-comment-detail clearfix">
                     <div class="comment-title">评论</div>
                     <div class="comment-content" style="display: block; overflow: visible; height: auto; ">
@@ -191,7 +196,7 @@
 				initReply2(1,<%=blog.getId()%>);
 			});
 			</script>
-			<%}else{ %>
+			<%}}else{ %>
 			 <div id="commentDetail" class="mod-comment-detail clearfix">
                    <div class="comment-title">对不起，此文章不允许评论！</div>
              </div>

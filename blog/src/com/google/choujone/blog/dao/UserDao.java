@@ -140,6 +140,8 @@ public class UserDao {
 
 					u.setIsUpload(user.getIsUpload());
 					u.setCloseweb(user.getCloseweb());
+					
+					u.setCommentCode(user.getCommentCode());
 					// 更新静态设置
 					Config.setClose(user.getCloseweb().equals(1));
 					// Config.setBlog_user(u);
