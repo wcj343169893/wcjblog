@@ -275,6 +275,14 @@
 						<textarea rows="10" cols="70" name="blogFoot"><%=user.getBlogFoot() %></textarea>
 					</td>
 				</tr>
+				<tr>
+					<td class="title">
+						评论代码
+					</td>
+					<td colspan="3">
+						<textarea rows="10" cols="70" name="commentCode"><%=user.getCommentCode() %></textarea>
+					</td>
+				</tr>
 			</table>
 			<br>
 			<table>
