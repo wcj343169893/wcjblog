@@ -79,6 +79,9 @@ public class User implements Serializable {
 
 	@Persistent
 	private Integer closeweb = 0;// 是否关闭网站
+	
+	@Persistent
+	private String commentCode = "";// 评论代码
 
 	public Long getId() {
 		return id;
@@ -322,6 +325,14 @@ public class User implements Serializable {
 
 	public void setMenu(Text menu) {
 		this.menu = menu;
+	}
+
+	public String getCommentCode() {
+		return commentCode;
+	}
+
+	public void setCommentCode(String commentCode) {
+		this.commentCode = commentCode;
 	}
 
 }

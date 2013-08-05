@@ -67,17 +67,19 @@ public class UserServlet extends HttpServlet {
 				obj.put("isUserLoggedIn", 0);
 				obj.put("loginUrl", userService.createLoginURL(url));
 				obj.put("logoutUrl", userService.createLogoutURL(url));
-				//TODO 获取google登录用户信息， 参考：https://developers.google.com/appengine/docs/java/users/overview?hl=zh-CN
+				// TODO 获取google登录用户信息，
+				// 参考：https://developers.google.com/appengine/docs/java/users/overview?hl=zh-CN
 				if (req.getUserPrincipal() != null) {
 					obj.put("isUserLoggedIn", 1);
 					if (userService.isUserAdmin()) {
 						obj.put("isUserAdmin", 1);
 					}
 					obj.put("email", userService.getCurrentUser().getEmail());
-//					obj.put("email", email);
-					//https://www.google.com/accounts/o8/id?id=AItOawlNnqm44jo6qc2YtoXVmJtptJIjExq9xNY 
-//					obj.put("nickname", req.getUserPrincipal().getName());
-					obj.put("nickname", userService.getCurrentUser().getNickname());
+					// obj.put("email", email);
+					// https://www.google.com/accounts/o8/id?id=AItOawlNnqm44jo6qc2YtoXVmJtptJIjExq9xNY
+					// obj.put("nickname", req.getUserPrincipal().getName());
+					obj.put("nickname", userService.getCurrentUser()
+							.getNickname());
 					obj.put("authDomain", userService.getCurrentUser()
 							.getAuthDomain());
 				}
@@ -133,6 +135,8 @@ public class UserServlet extends HttpServlet {
 				.getParameter("description") : "";
 		String style = req.getParameter("style") != null ? req
 				.getParameter("style") : "";
+		String commentCode = req.getParameter("commentCode") != null ? req
+				.getParameter("commentCode") : "";
 
 		Integer isWeather = Integer
 				.parseInt(req.getParameter("isWeather") != null ? req
@@ -214,6 +218,8 @@ public class UserServlet extends HttpServlet {
 				user.setIsInfo(isInfo);
 				user.setIsTags(isTags);
 				user.setIsType(isType);
+				
+				user.setCommentCode(commentCode);
 
 				user.setPreMessage(new com.google.appengine.api.datastore.Text(
 						Tools.changeHTML(Tools.toChinese(preMessage))));
