@@ -112,7 +112,8 @@ for(int i=0;i<blogs.size();i++){
 			<span class="box-act">
 				<a href="<%=link %>" class="a-act a-readall">阅读全文(<%=blog.getCount() %>)</a>
 				<%if(blog.getIsComment()==null || blog.getIsComment()==1){ %>
-				<a href="<%=link %>#commentDetail" class="a-act a-reply" >评论<span class="comment-count">(<%=blog.getReplyCount() %>)</span></a><%} %>
+<%-- 				<a href="<%=link %>#commentDetail" class="a-act a-reply" >评论<span class="comment-count">(<%=blog.getReplyCount() %>)</span></a> --%>
+				<%} %>
 				<%if(Tools.isLogin(request)){	%>
 					<a href="/blog?id=<%=blog.getId() %>&op=modify" class="a-act a-modifyblog">编辑</a>
 				<%} %>
