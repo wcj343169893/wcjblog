@@ -10,6 +10,9 @@ UserDao ud=new UserDao();
 User blog_user=  ud.getUserDetail();
 %><title>留言板 _<%=blog_user.getpTitle()%></title>
 	<jsp:include page="head.jsp"></jsp:include>
+	<script type="text/javascript">
+		window.location.href="/";
+	</script>
 </head>
 <body>
 <jsp:include page="top_member.jsp"></jsp:include>
