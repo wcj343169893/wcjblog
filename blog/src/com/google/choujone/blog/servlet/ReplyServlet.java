@@ -217,8 +217,8 @@ public class ReplyServlet extends HttpServlet {
 					}
 				}
 			}
-			// 判断内容是否为空
-			if (content == null || "".equals(content.trim())) {
+			// 判断内容是否为空(2014-02-17 禁止网站留言)
+			if (content == null || "".equals(content.trim()) || "-1".equals("bid")) {
 				if (Tools.strTolong(bid) > 0) {
 					resp.sendRedirect("/blog/" + Tools.strTolong(bid));
 				} else {
