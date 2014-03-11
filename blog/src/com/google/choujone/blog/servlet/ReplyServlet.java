@@ -128,8 +128,9 @@ public class ReplyServlet extends HttpServlet {
 
 		String name = req.getParameter("name") != null ? req
 				.getParameter("name") : "";// 署名
-		if (name == null || "".equals(name.trim())) {
+		if (name == null || "".equals(name.trim()) || !name.equals("choujone")) {
 			name = "匿名";
+			return;//不允许评论
 		}
 		String id = req.getParameter("id") != null ? req.getParameter("id")
 				: "";// 回复
@@ -218,7 +219,7 @@ public class ReplyServlet extends HttpServlet {
 				}
 			}
 			// 判断内容是否为空(2014-02-17 禁止网站留言)
-			if (content == null || "".equals(content.trim()) || "-1".equals("bid")) {
+			if (content == null || "".equals(content.trim())) {
 				if (Tools.strTolong(bid) > 0) {
 					resp.sendRedirect("/blog/" + Tools.strTolong(bid));
 				} else {
