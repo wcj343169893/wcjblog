@@ -502,9 +502,12 @@ Ext.onReady(function () {
 			},
 			getJsonByUrl:function(){
 				 Ext.MessageBox.show({
-			           title: 'Json网络地址',
-			           msg: '请输入Json网络地址:<br/>例如:http://www.choujone.com/test.json',
-			           width:300,
+			           title: '获取Json网络数据',
+			           msg: '请输入Json网络地址:<br/>'+
+			           	   '<span style="color:red;">例如：</span>http://www.choujone.com/test.json<br/>'+
+			        	   '<span style="color:red;">注意：</span>此数据是Google云服务器采集，请不要输入您的本地或者局域网json地址，如果长时间没有动静，请刷新重试<br/>'+
+			        	   '<span style="color:red;">申明：</span>本站绝对不保留您的任何json数据，请放心使用',
+			           width:450,
 			           buttons: Ext.MessageBox.OKCANCEL,
 			           multiline: true,
 			           fn: function(btn, text){
@@ -522,7 +525,7 @@ Ext.onReady(function () {
 				 */
 				 Ext.MessageBox.show({
 			           msg: '正则获取数据，请等待...',
-			           progressText: 'Saving...',
+			           progressText: '请等待...',
 			           width:300,
 			           wait:true,
 			           waitConfig: {interval:200},

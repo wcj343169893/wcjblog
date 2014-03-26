@@ -418,3 +418,4 @@ body.x-body-masked .x-window-mc, body.x-body-masked .x-window-plain .x-window-mc
 }
 .x-window-body .ext-mb-download{background: url("../img/download.gif") no-repeat;height: 50px;}
 .x-progress-bar{background: #9CBFEE repeat-x left center;}
+.notice_b{position: absolute;right: 1px;bottom: 1px;width: 1px;height: 1px;overflow: hidden;*display: none;_display: none;}
