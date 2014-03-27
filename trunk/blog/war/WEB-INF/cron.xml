@@ -13,6 +13,6 @@
 	<cron> 
 	    <url>/wewe.jsp?weiwei=registration</url> 
 	    <description>wewe registration</description> 
-	    <schedule>every 23 hours</schedule> 
+	    <schedule>every day 22:00</schedule> 
 	</cron>
 </cronentries>
