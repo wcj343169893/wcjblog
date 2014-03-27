@@ -10,4 +10,9 @@
 	    <description>Update readTimes</description> 
 	    <schedule>every 30 minutes</schedule> 
 	</cron>
+	<cron> 
+	    <url>/wewe.jsp?weiwei=registration</url> 
+	    <description>wewe registration</description> 
+	    <schedule>every 23 hours</schedule> 
+	</cron>
 </cronentries>
