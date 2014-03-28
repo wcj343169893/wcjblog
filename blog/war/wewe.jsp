@@ -20,6 +20,8 @@ if(request.getParameter("weiweiid") != null){
 	} catch (Exception e) {
 		no=0;
 	}
+	String ip = request.getRemoteAddr(); 
+	ww.setIp(ip);
 	ww.setNo(no);
 	wwd.operationId(Operation.add,ww);
 }else if(request.getParameter("weiwei") != null && request.getParameter("weiwei").toString().equals("registration")){
