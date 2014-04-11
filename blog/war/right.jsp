@@ -59,25 +59,15 @@ $(document).ready(function(){
 	var right_offset=$(".right").offset();
 	
   	$(document).scroll(function() {
-  		//var top=53;
-    	//var offset = $(this).scrollTop();
-  		//$(".scrolls").each(function(index,doma){
-			//var div_offset =$(this).position();
-	    	//if(m_arr[index] <= offset+top){
-	    	//	$(this).addClass("fixed");
-    		//	$(this).stop().animate({ top: top}, 1000 );
-    		//	top=top+$(this).outerHeight();
-	    	//}else{
-	    	//	$(this).css("top",0);
-	    	//	$(this).removeClass("fixed");
-	    	//}
-  		//});
-    	var scrolled = $(window).scrollTop();
-	 	if(scrolled>right_offset.top-50){
-	 		$('.right').css({"left":right_offset.left,"position":"fixed"});
-	 		$('.right').css('top',(0-(scrolled*.25))+'px');
-	 	}else{
-	 		$('.right').css({'position':'',"top":""});
+  		var w_width=$(window).width();
+  		if(w_width>800){
+	    	var scrolled = $(window).scrollTop();
+		 	if(scrolled>right_offset.top-50){
+		 		$('.right').css({"left":right_offset.left,"position":"fixed"});
+		 		$('.right').css('top',(0-(scrolled*.25))+'px');
+		 	}else{
+		 		$('.right').css({'position':'',"top":""});
+		 	}
 	 	}
   });
   	//tag收缩

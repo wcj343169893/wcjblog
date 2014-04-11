@@ -28,6 +28,7 @@
 			<div class="right-box">
 				<ul class="q-navbox"><!--<li class="q-navitem q-nav-sp"><span></span></li>-->
 					<li class="q-navitem" id="top_member"><a href="javascript:hig();">High 起来</a> </li>
+					<li class="q-navitem-menu" id="top_member"><a href="javascript:showmenu();"><img src="/images/menu.png" alt="menu"/></a> </li>
 				</ul>
 			</div>
 			<div class="mod-msg-unread-num hide" style="top: 7px; left: 732px; ">
@@ -42,5 +43,16 @@
 		jQuery(function($) {
 			//initGoogleAccount();
 		});
+	var ismenushow=false;
+	function showmenu(){
+		if(!ismenushow){
+			$(".center-box").animate({right:0},"slow");
+			ismenushow=true;
+		}else{
+			$(".center-box").animate({right:-161},"slow");
+			ismenushow=false;
+		}
+	}
+	
 </script>
 <script type="text/javascript" src="/js/hi.js"></script>
