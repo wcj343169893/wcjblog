@@ -48,9 +48,15 @@
 		if(!ismenushow){
 			$(".center-box").animate({right:0},"slow");
 			ismenushow=true;
+			//创建一个遮罩层，用来关闭菜单
+			var z=$("<div id='menu_shadow'>&nbsp;</div>").click(function(){
+				showmenu();
+			});
+			$("body").append(z);
 		}else{
 			$(".center-box").animate({right:-161},"slow");
 			ismenushow=false;
+			$("#menu_shadow").remove();
 		}
 	}
 	
