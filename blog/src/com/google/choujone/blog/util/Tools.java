@@ -592,6 +592,41 @@ public class Tools {
         Matcher matcher = pattern.matcher(newIpAddress); 
         return matcher.matches(); 
 	}
+	/**
+	 * 返回文件的预览图
+	 * */
+	public static String getFileThumb(String str){
+		String s="/images/default_100.jpg";
+		String rar_s="rar,zip,tar,cab,uue,jar,iso,z,7-zip,ace,lzh,arj,gzip,bz2";
+		String pic_s="jpg,jpeg,png,gif,bmp";
+		for (String string : rar_s.split(",")) {
+			if(str.toLowerCase().endsWith(string)){
+				return "/images/zip.png";
+			}
+		}
+		for (String string : pic_s.split(",")) {
+			if(str.toLowerCase().endsWith(string)){
+				return str;
+			}
+		}
+		//zip.png
+		return s;
+	}
+	/**
+	 * 返回文件类型
+	 * */
+	public static String getFileContentType(String str){
+		String s="application/octet-stream";
+		String pic_s="jpg,jpeg,png,gif,bmp";
+		for (String string : pic_s.split(",")) {
+			if(str.toLowerCase().endsWith(string)){
+				return "image/jpeg";
+			}
+		}
+		return s;
+	}
+	
+	
 
 	public static void main(String[] args) {
 		// Map<Object, Object> map = new HashMap<Object, Object>();
