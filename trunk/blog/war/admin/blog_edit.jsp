@@ -52,7 +52,7 @@
 				<div class="container-content">
 					内容：
 				</div>
-					<textarea rows="20" cols="100" name="content"><%=blog.getContent().getValue() %></textarea>
+					<textarea rows="20" cols="100" name="content"><%=htmlspecialchars(blog.getContent().getValue()) %></textarea>
 				<div class="container-type">
 					分类：<input type="hidden" value="<%=blog.getTid()  %>" id="t">
 					<span id="addType" style="display: none;">
@@ -143,3 +143,12 @@
 </div>
 </body>
 </html>
+<%!
+private String htmlspecialchars(String str) {
+	str = str.replaceAll("&", "&amp;");
+	str = str.replaceAll("<", "&lt;");
+	str = str.replaceAll(">", "&gt;");
+	str = str.replaceAll("\"", "&quot;");
+	return str;
+}
+%>

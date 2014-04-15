@@ -13,6 +13,7 @@ import com.google.choujone.blog.dao.UserDao;
 import com.google.choujone.blog.entity.DataFile;
 import com.google.choujone.blog.entity.User;
 import com.google.choujone.blog.util.MyCache;
+import com.google.choujone.blog.util.Tools;
 
 public class FileDownloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1857614584140595636L;
@@ -28,8 +29,10 @@ public class FileDownloadServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		try {
-			resp.setContentType("image/jpeg");
 			String url = req.getRequestURI();
+			String ct = Tools.getFileContentType(url);
+			resp.setContentType(ct);
+//			resp.setContentType("image/jpeg");
 			int ind = url.lastIndexOf("/");
 			if (ind == -1)
 				return;

@@ -7,7 +7,8 @@
 <%@page import="com.google.choujone.blog.dao.DataFileDao"%>
 <%@page import="java.util.List"%>
 <%@page import="com.google.choujone.blog.entity.DataFile"%>
-<%@page import="com.google.choujone.blog.common.Pages"%><html>
+<%@page import="com.google.choujone.blog.common.Pages"%>
+<%@page import="com.google.choujone.blog.util.Tools"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/css/3d.css" type="text/css" rel="stylesheet" />
@@ -47,8 +48,8 @@
 setTimeout(function() {
 	m3D.init(
 		[ 
-			<%for (DataFile df:dataFileList){%>
-			{ src: '<%=df.getId()%>_<%=df.getFilename()%>', url: '', title: '<%=df.getFilename()%>', color: '#fff' },
+			<%for (DataFile df:dataFileList){String fi=Tools.getFileThumb(df.getId()+"_"+df.getFilename());%>
+			{ src: '<%=fi%>', url: '', title: '<%=df.getFilename()%>', color: '#fff' },
 			<%}%>
 		]
 	);
