@@ -72,12 +72,15 @@
 							<% }}}%></span>
 	                      <div class="op-box">  
 		                      <span class="pv">浏览(<%=blog.getCount()%>)</span><%if(blog.getIsComment()==null || blog.getIsComment()==1){ %>
-		                      <a class="comment-bnt" id="commentBnt" href="javascript:jQuery('#content').focus()">评论<span class="comment-nub hide"></span></a><%} %>
+		                      <a class="comment-bnt" id="commentBnt" href="javascript:jQuery('#commentDetail').focus()">评论<span class="comment-nub hide"></span></a><%} %>
 		                      <%if (Tools.isLogin(request)) {%><a href="/blog?id=<%=blog.getId()%>&op=modify" class="edit-bnt"> 编辑 </a> <%}%>
                       	  </div>
 	                  </div>              
+            <div class="mod-share-detail" id="shareDetail" style="">
+            	<div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_more" data-cmd="more"></a></div>
+				<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","weixin","tqq","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+            </div>
           </div>
-            <div class="mod-share-detail" id="shareDetail" style="display:none"></div>
             <div class="mod-detail-pager clearfix">
             		<%if (preBlog != null) { %>
                     <div class="detail-nav-pre">
