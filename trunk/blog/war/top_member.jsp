@@ -28,7 +28,7 @@
 			<div class="right-box">
 				<ul class="q-navbox"><!--<li class="q-navitem q-nav-sp"><span></span></li>-->
 					<li class="q-navitem" id="top_member"><a href="javascript:hig();">High 起来</a> </li>
-					<li class="q-navitem-menu" id="top_member"><a href="javascript:showmenu();"><img src="/images/menu.png" alt="menu"/></a> </li>
+					<li class="q-navitem-menu" id="top_member"><a href="javascript:showmenu();"><img src="/images/menu.png" alt="menu" width="40" height="30"/></a> </li>
 				</ul>
 			</div>
 			<div class="mod-msg-unread-num hide" style="top: 7px; left: 732px; ">
