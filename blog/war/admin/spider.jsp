@@ -94,20 +94,20 @@
 		    </ul>
 		<div id="web_list">
 			<div class="">
-				<div class="container-title-header">网址：</div><input type="text" name="web_host" id="web_host" value="http://www.xiaodiao.com/" size="50"> 
+				<div class="container-title-header">网址：</div><input type="text" name="web_host" id="web_host" value="http://www.dy2018.com/" size="50"> 
 			</div>
 			<div>
 			<div class="container-title-header">网站编码：</div>
 				<select name="web_charSet" id="web_charSet">
 					<option value="utf-8">utf-8</option>
 					<option value="gbk">gbk</option>
-					<option value="gb2312">gb2312</option>
+					<option value="gb2312" selected="selected">gb2312</option>
 					<option value="ISO8859-1">ISO8859-1</option>
 				</select>
 			
 			</div>
 			<div>
-				<div class="container-title-header">列表页地址：</div><input type="text"	name="web_list_url" id="web_list_url" size="50" value="http://www.xiaodiao.com/html/gndy/dyzz/index.html"> 
+				<div class="container-title-header">列表页地址：</div><input type="text"	name="web_list_url" id="web_list_url" size="50" value="http://www.dy2018.com/html/gndy/dyzz/index.html"> 
 			</div>
 			<div>
 				<div class="container-title-header">列表页开始位置：</div><textarea rows="5" cols="50" name="web_list_begin" id="web_list_begin"><div class="co_content8"></textarea>
