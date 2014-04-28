@@ -214,6 +214,13 @@ public class BlogDao {
 		return getBlogList(null);
 	}
 
+	/**
+	 * 根据条件，查询博客
+	 * 
+	 * @param count
+	 *            条数
+	 * @return
+	 */
 	public List<Blog> getBlogList(String filter) {
 		key = "blogDao_getBlogList_" + filter;
 		List<Blog> blogs = MyCache.get(key);
@@ -231,10 +238,9 @@ public class BlogDao {
 	}
 
 	/**
-	 * 查询最新博客
+	 * 查询浏览量最大博客
 	 * 
-	 * @param count
-	 *            条数
+	 * @param count 条数
 	 * @return
 	 */
 	public List<Blog> getBlogList_hot(int count) {

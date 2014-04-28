@@ -4,8 +4,6 @@
     UserDao ud=new UserDao();
 	User blog_user=  ud.getUserDetail();
 	ReplyDao replyDao=new ReplyDao();
-	List<Reply> replyList=new ArrayList<Reply>();
-	List<Blog> blog_hot = new ArrayList<Blog>();
 	BlogDao bd=new BlogDao(); %>
 <div class="mod-siderbar"><% if(blog_user.getIsType()==null || blog_user.getIsType()==0){ %>
 	<div class="mod-taglist"><%
@@ -18,7 +16,18 @@
 				<%=Tools.blogTypeList2Str(btList) %>
 			<%} %>
 		</ul>
-	</div><%}  if(blog_user.getIsTags()==null || blog_user.getIsTags()==0){ %>
+	</div><% }%>
+	<div class="mod-taglist">
+		<div class="q-title"><h2 class="side-title stat-title">大家最喜欢<span></span></h2></div>
+		<ul class="q-taglist clearfix q-hot">
+			<% List<Blog> blog_hot=bd.getBlogList_hot(10); 
+				if(blog_hot!=null && blog_hot.size()>0){
+					for(Blog b:blog_hot){%>
+					<li class="q-tagitem"><a href="/blog/<%=b.getId() %>" title="<%=b.getTitle() %>"><%=b.getTitle() %></a></li>
+			<% }}%>
+		</ul>
+	</div>
+	<%  if(blog_user.getIsTags()==null || blog_user.getIsTags()==0){ %>
 	<div class="mod-taglist tags_more">
 		<ul class="q-taglist clearfix">
 			<li class="q-tagitem"><span class="q-icon"></span></li><%Map<String, List<Long>> tagsMap =bd.getTags2();for(String s : tagsMap.keySet()){ %><li class="q-tagitem"><a href="tag.jsp?t=<%=s %>" class="a-tagitem cs-sidebar-hoverbglink"><%=s %>(<%=tagsMap.get(s).size() %>)</a></li>
@@ -68,6 +77,7 @@ $(document).ready(function(){
 		 	}else{
 		 		$('.right').css({'position':'',"top":""});
 		 	}
+		 	//如果滑动超过大家最喜欢，则clone一个，浮动到右下角
 	 	}
   });
   	//tag收缩
