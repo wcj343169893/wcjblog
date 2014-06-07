@@ -1,0 +1,638 @@
+2013-08-20 01:48:57 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:49:08 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:49:09 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:49:09 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:49:09 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:49:09 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:49:09 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:49:09 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:50:01 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:50:01 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:50:01 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:50:01 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:50:02 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:50:02 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:50:02 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:53:59 Error: [MissingControllerException] Controller class DetailController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 01:55:04 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\2.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('2')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('2', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('2')
+#3 [internal function]: PagesController->display('2')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:55:04 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\css\layout.css.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('css/layout.css')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('css/layout.css', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('css/layout.css')
+#3 [internal function]: PagesController->display('css', 'layout.css')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:55:04 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\css\master.css.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('css/master.css')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('css/master.css', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('css/master.css')
+#3 [internal function]: PagesController->display('css', 'master.css')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:55:04 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\js\jquery.nicescroll.min.js.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('js/jquery.nices...')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('js/jquery.nices...', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('js/jquery.nices...')
+#3 [internal function]: PagesController->display('js', 'jquery.nicescro...')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:55:04 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\js\jquery.js.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('js/jquery.js')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('js/jquery.js', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('js/jquery.js')
+#3 [internal function]: PagesController->display('js', 'jquery.js')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:55:04 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\css\base.css.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('css/base.css')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('css/base.css', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('css/base.css')
+#3 [internal function]: PagesController->display('css', 'base.css')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:55:05 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\img\favicon.ico.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('img/favicon.ico')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('img/favicon.ico', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('img/favicon.ico')
+#3 [internal function]: PagesController->display('img', 'favicon.ico')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:56:29 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\2.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('2')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('2', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('2')
+#3 [internal function]: PagesController->display('2')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:56:29 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\css\base.css.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('css/base.css')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('css/base.css', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('css/base.css')
+#3 [internal function]: PagesController->display('css', 'base.css')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:56:29 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\css\layout.css.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('css/layout.css')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('css/layout.css', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('css/layout.css')
+#3 [internal function]: PagesController->display('css', 'layout.css')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:56:29 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\css\master.css.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('css/master.css')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('css/master.css', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('css/master.css')
+#3 [internal function]: PagesController->display('css', 'master.css')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:56:29 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\js\jquery.js.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('js/jquery.js')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('js/jquery.js', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('js/jquery.js')
+#3 [internal function]: PagesController->display('js', 'jquery.js')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:56:29 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\js\jquery.nicescroll.min.js.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('js/jquery.nices...')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('js/jquery.nices...', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('js/jquery.nices...')
+#3 [internal function]: PagesController->display('js', 'jquery.nicescro...')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:56:29 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\img\favicon.ico.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName('img/favicon.ico')
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render('img/favicon.ico', NULL)
+#2 E:\wwwroot\blog\app\Controller\PagesController.php(73): Controller->render('img/favicon.ico')
+#3 [internal function]: PagesController->display('img', 'favicon.ico')
+#4 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#5 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#7 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2013-08-20 01:56:47 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\display.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName(NULL)
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#2 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-08-20 01:56:47 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\display.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName(NULL)
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#2 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-08-20 01:56:47 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\display.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName(NULL)
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#2 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-08-20 01:56:47 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\display.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName(NULL)
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#2 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-08-20 01:56:47 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\display.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName(NULL)
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#2 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-08-20 01:56:47 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\display.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName(NULL)
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#2 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-08-20 01:56:47 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\display.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName(NULL)
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#2 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-08-20 02:32:11 Error: [MissingControllerException] Controller class Link.htmlController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 02:33:47 Error: [MissingActionException] Action PagesController::link() could not be found.
+#0 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-08-20 02:34:38 Error: [MissingControllerException] Controller class IndexController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 02:59:57 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticleTags.article_id' in 'field list'
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1340): DboSource->fetchAll('SELECT `Article...', false)
+#4 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1202): DboSource->fetchAssociated(Object(Article), 'SELECT `Article...', Array)
+#5 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1115): DboSource->queryAssociation(Object(Article), Object(ArticleTags), 'hasMany', 'ArticleTags', Array, Array, true, Array, 0, Array)
+#6 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): DboSource->read(Object(Article), Array)
+#7 E:\wwwroot\blog\app\Controller\PagesController.php(114): Model->find('all', Array)
+#8 E:\wwwroot\blog\app\Controller\PagesController.php(80): PagesController->findBlogByPage(2)
+#9 [internal function]: PagesController->display('2')
+#10 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#11 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#12 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#13 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2013-08-20 03:08:39 Error: [MissingPluginException] Plugin PaypalIpn could not be found.
+#0 E:\wwwroot\blog\lib\Cake\Core\App.php(364): CakePlugin::path('PaypalIpn')
+#1 E:\wwwroot\blog\lib\Cake\Core\App.php(225): App::pluginPath('PaypalIpn')
+#2 E:\wwwroot\blog\lib\Cake\Core\App.php(542): App::path('View/Helper', 'PaypalIpn')
+#3 [internal function]: App::load('PaypalHelper')
+#4 [internal function]: spl_autoload_call('PaypalHelper')
+#5 E:\wwwroot\blog\lib\Cake\View\HelperCollection.php(129): class_exists('PaypalHelper')
+#6 E:\wwwroot\blog\lib\Cake\View\View.php(862): HelperCollection->load('PaypalIpn.Paypa...', Array)
+#7 E:\wwwroot\blog\lib\Cake\View\View.php(469): View->loadHelpers()
+#8 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#9 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-08-20 03:09:19 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-2,2' at line 1
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): DboSource->read(Object(Article), Array)
+#5 E:\wwwroot\blog\app\Controller\PagesController.php(133): Model->find('all', Array)
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(87): PagesController->findBlogByPage(0)
+#7 [internal function]: PagesController->display('home')
+#8 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#9 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-08-20 03:25:13 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:25:13 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:25:37 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:25:37 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:25:52 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:25:52 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:26:08 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:26:08 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:26:36 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:26:36 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:26:40 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:26:40 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:26:44 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:26:44 Error: [MissingControllerException] Controller class JsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-20 03:28:53 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-21 01:51:48 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticleTags.tag_id' in 'field list'
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1340): DboSource->fetchAll('SELECT `Article...', false)
+#4 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1202): DboSource->fetchAssociated(Object(Tag), 'SELECT `Article...', Array)
+#5 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1115): DboSource->queryAssociation(Object(Tag), Object(ArticleTags), 'hasMany', 'ArticleTags', Array, Array, true, Array, 0, Array)
+#6 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): DboSource->read(Object(Tag), Array)
+#7 E:\wwwroot\blog\app\Controller\PagesController.php(67): Model->find('all', Array)
+#8 [internal function]: PagesController->beforeFilter(Object(CakeEvent))
+#9 E:\wwwroot\blog\lib\Cake\Event\CakeEventManager.php(246): call_user_func(Array, Object(CakeEvent))
+#10 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(669): CakeEventManager->dispatch(Object(CakeEvent))
+#11 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(183): Controller->startupProcess()
+#12 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#13 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2013-08-21 01:53:03 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\tag.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName(NULL)
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#2 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-08-21 02:11:14 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticleTags.tagTitle' in 'where clause'
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('SELECT COUNT(*)...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(669): DboSource->execute('SELECT COUNT(*)...', Array, Array)
+#3 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1080): DboSource->fetchAll('SELECT COUNT(*)...', false)
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): DboSource->read(Object(ArticleTags), Array)
+#5 E:\wwwroot\blog\app\Controller\PagesController.php(185): Model->find('count', Array)
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(135): PagesController->findBlogByTagePage(1, 'cakephp')
+#7 [internal function]: PagesController->tag('cakephp')
+#8 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#9 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-08-21 02:12:15 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticleTags.article_oId' in 'on clause'
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('SELECT COUNT(*)...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(669): DboSource->execute('SELECT COUNT(*)...', Array, Array)
+#3 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1080): DboSource->fetchAll('SELECT COUNT(*)...', false)
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): DboSource->read(Object(ArticleTags), Array)
+#5 E:\wwwroot\blog\app\Controller\PagesController.php(185): Model->find('count', Array)
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(135): PagesController->findBlogByTagePage(1, 'cakephp')
+#7 [internal function]: PagesController->tag('cakephp')
+#8 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#9 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-08-21 02:13:38 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): DboSource->read(Object(ArticleTags), Array)
+#5 E:\wwwroot\blog\app\Controller\PagesController.php(203): Model->find('all', Array)
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(135): PagesController->findBlogByTagePage(1, 'cakephp')
+#7 [internal function]: PagesController->tag('cakephp')
+#8 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#9 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-08-21 02:31:00 Error: [MissingControllerException] Controller class TagsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-21 02:43:49 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticleTags.article_id' in 'field list'
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1340): DboSource->fetchAll('SELECT `Article...', false)
+#4 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1202): DboSource->fetchAssociated(Object(Article), 'SELECT `Article...', Array)
+#5 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1115): DboSource->queryAssociation(Object(Article), Object(ArticleTags), 'hasMany', 'ArticleTags', Array, Array, true, Array, 0, Array)
+#6 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): DboSource->read(Object(Article), Array)
+#7 E:\wwwroot\blog\app\Controller\PagesController.php(108): Model->find('first', Array)
+#8 [internal function]: PagesController->article('2013', '08', '20', '1376964970745')
+#9 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#11 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#12 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-08-21 03:16:03 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'or `Article`.`articleTags` like '%cakephp%')    LIMIT 6' at line 1
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): DboSource->read(Object(Article), Array)
+#5 E:\wwwroot\blog\app\Controller\PagesController.php(130): Model->find('all', Array)
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(111): PagesController->findArticleByTag('cakephp')
+#7 [internal function]: PagesController->article('2013', '08', '21', '1377051500011')
+#8 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#9 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-08-21 03:19:46 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')    LIMIT 6' at line 1
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): DboSource->read(Object(Article), Array)
+#5 E:\wwwroot\blog\app\Controller\PagesController.php(133): Model->find('all', Array)
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(111): PagesController->findArticleByTag('cakephp')
+#7 [internal function]: PagesController->article('2013', '08', '21', '1377051500011')
+#8 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#9 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-08-21 03:24:17 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'PRIMARY'
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(459): PDOStatement->execute(Array)
+#1 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(425): DboSource->_execute('INSERT INTO `b3...', Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(1007): DboSource->execute('INSERT INTO `b3...')
+#3 E:\wwwroot\blog\lib\Cake\Model\Model.php(1730): DboSource->create(Object(Article), Array, Array)
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(1582): Model->save(Array, Array)
+#5 E:\wwwroot\blog\app\Controller\PagesController.php(112): Model->saveField('articleViewCoun...', 1)
+#6 [internal function]: PagesController->article('2013', '08', '21', '1377051500011')
+#7 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#8 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#9 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#10 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-08-22 02:42:53 Error: [MissingTableException] Table users for model User was not found in datasource default.
+#0 E:\wwwroot\blog\lib\Cake\Model\Model.php(3179): Model->setSource('users')
+#1 E:\wwwroot\blog\lib\Cake\Model\Model.php(1301): Model->getDataSource()
+#2 E:\wwwroot\blog\lib\Cake\View\Helper\FormHelper.php(197): Model->schema()
+#3 E:\wwwroot\blog\lib\Cake\View\Helper\FormHelper.php(438): FormHelper->_introspectModel('User', 'fields')
+#4 E:\wwwroot\blog\app\Plugin\Admin\View\Helper\BootstrapFormHelper.php(42): FormHelper->create('User', Array)
+#5 E:\wwwroot\blog\app\Plugin\Admin\View\Users\login_form.ctp(3): BootstrapFormHelper->create('User', Array)
+#6 E:\wwwroot\blog\lib\Cake\View\View.php(921): include('E:\wwwroot\blog...')
+#7 E:\wwwroot\blog\lib\Cake\View\View.php(884): View->_evaluate('E:\wwwroot\blog...', Array)
+#8 E:\wwwroot\blog\lib\Cake\View\View.php(476): View->_render('E:\wwwroot\blog...')
+#9 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#11 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#12 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-08-22 02:45:10 Error: [MissingControllerException] Controller class Adminimg­minIconsssistantController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-22 02:45:10 Error: [MissingControllerException] Controller class Adminimg­minIconsºnnerController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-22 02:45:11 Error: [MissingControllerException] Controller class Adminimg­minIconsonsController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-22 02:45:11 Error: [MissingControllerException] Controller class Adminimg­minIconslbumController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-22 02:45:11 Error: [MissingControllerException] Controller class Adminimg­minIconsrkController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-22 02:55:12 Error: [MissingTableException] Table article_tags for model ArticleTag was not found in datasource default.
+#0 E:\wwwroot\blog\lib\Cake\Model\Model.php(3179): Model->setSource('article_tags')
+#1 E:\wwwroot\blog\app\Plugin\Admin\Config\bootstrap.php(65): Model->getDataSource()
+#2 E:\wwwroot\blog\lib\Cake\Core\CakePlugin.php(165): include('E:\wwwroot\blog...')
+#3 E:\wwwroot\blog\lib\Cake\Core\CakePlugin.php(100): CakePlugin::bootstrap('Admin')
+#4 E:\wwwroot\blog\app\Config\bootstrap.php(167): CakePlugin::load('Admin', Array)
+#5 E:\wwwroot\blog\lib\Cake\Core\Configure.php(92): include('E:\wwwroot\blog...')
+#6 E:\wwwroot\blog\lib\Cake\bootstrap.php(146): Configure::bootstrap(true)
+#7 E:\wwwroot\blog\app\webroot\index.php(77): include('E:\wwwroot\blog...')
+#8 {main}
+2013-08-22 02:55:23 Error: [MissingTableException] Table article_tags for model ArticleTag was not found in datasource default.
+#0 E:\wwwroot\blog\lib\Cake\Model\Model.php(3179): Model->setSource('article_tags')
+#1 E:\wwwroot\blog\app\Plugin\Admin\Config\bootstrap.php(65): Model->getDataSource()
+#2 E:\wwwroot\blog\lib\Cake\Core\CakePlugin.php(165): include('E:\wwwroot\blog...')
+#3 E:\wwwroot\blog\lib\Cake\Core\CakePlugin.php(100): CakePlugin::bootstrap('Admin')
+#4 E:\wwwroot\blog\app\Config\bootstrap.php(167): CakePlugin::load('Admin', Array)
+#5 E:\wwwroot\blog\lib\Cake\Core\Configure.php(92): include('E:\wwwroot\blog...')
+#6 E:\wwwroot\blog\lib\Cake\bootstrap.php(146): Configure::bootstrap(true)
+#7 E:\wwwroot\blog\app\webroot\index.php(77): include('E:\wwwroot\blog...')
+#8 {main}
+2013-08-22 02:57:52 Error: [MissingControllerException] Controller class AdminController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-29 03:55:10 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(261): Mysql->connect()
+#1 E:\wwwroot\blog\lib\Cake\Model\ConnectionManager.php(101): DboSource->__construct(Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Model.php(3157): ConnectionManager::getDataSource('default')
+#3 E:\wwwroot\blog\lib\Cake\Model\Model.php(1092): Model->setDataSource('default')
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(3179): Model->setSource('tag')
+#5 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): Model->getDataSource()
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(72): Model->find('all', Array)
+#7 [internal function]: PagesController->beforeFilter(Object(CakeEvent))
+#8 E:\wwwroot\blog\lib\Cake\Event\CakeEventManager.php(246): call_user_func(Array, Object(CakeEvent))
+#9 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(669): CakeEventManager->dispatch(Object(CakeEvent))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(183): Controller->startupProcess()
+#11 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#12 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-08-29 03:55:52 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(261): Mysql->connect()
+#1 E:\wwwroot\blog\lib\Cake\Model\ConnectionManager.php(101): DboSource->__construct(Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Model.php(3157): ConnectionManager::getDataSource('default')
+#3 E:\wwwroot\blog\lib\Cake\Model\Model.php(1092): Model->setDataSource('default')
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(3179): Model->setSource('tag')
+#5 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): Model->getDataSource()
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(72): Model->find('all', Array)
+#7 [internal function]: PagesController->beforeFilter(Object(CakeEvent))
+#8 E:\wwwroot\blog\lib\Cake\Event\CakeEventManager.php(246): call_user_func(Array, Object(CakeEvent))
+#9 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(669): CakeEventManager->dispatch(Object(CakeEvent))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(183): Controller->startupProcess()
+#11 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#12 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-08-29 03:55:54 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(261): Mysql->connect()
+#1 E:\wwwroot\blog\lib\Cake\Model\ConnectionManager.php(101): DboSource->__construct(Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Model.php(3157): ConnectionManager::getDataSource('default')
+#3 E:\wwwroot\blog\lib\Cake\Model\Model.php(1092): Model->setDataSource('default')
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(3179): Model->setSource('tag')
+#5 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): Model->getDataSource()
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(72): Model->find('all', Array)
+#7 [internal function]: PagesController->beforeFilter(Object(CakeEvent))
+#8 E:\wwwroot\blog\lib\Cake\Event\CakeEventManager.php(246): call_user_func(Array, Object(CakeEvent))
+#9 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(669): CakeEventManager->dispatch(Object(CakeEvent))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(183): Controller->startupProcess()
+#11 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#12 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-09-09 09:32:39 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(261): Mysql->connect()
+#1 E:\wwwroot\blog\lib\Cake\Model\ConnectionManager.php(101): DboSource->__construct(Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Model.php(3157): ConnectionManager::getDataSource('default')
+#3 E:\wwwroot\blog\lib\Cake\Model\Model.php(1092): Model->setDataSource('default')
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(3179): Model->setSource('tag')
+#5 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): Model->getDataSource()
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(72): Model->find('all', Array)
+#7 [internal function]: PagesController->beforeFilter(Object(CakeEvent))
+#8 E:\wwwroot\blog\lib\Cake\Event\CakeEventManager.php(246): call_user_func(Array, Object(CakeEvent))
+#9 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(669): CakeEventManager->dispatch(Object(CakeEvent))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(183): Controller->startupProcess()
+#11 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#12 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-09-22 08:49:42 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+#0 E:\wwwroot\blog\lib\Cake\Model\Datasource\DboSource.php(261): Mysql->connect()
+#1 E:\wwwroot\blog\lib\Cake\Model\ConnectionManager.php(101): DboSource->__construct(Array)
+#2 E:\wwwroot\blog\lib\Cake\Model\Model.php(3157): ConnectionManager::getDataSource('default')
+#3 E:\wwwroot\blog\lib\Cake\Model\Model.php(1092): Model->setDataSource('default')
+#4 E:\wwwroot\blog\lib\Cake\Model\Model.php(3179): Model->setSource('tag')
+#5 E:\wwwroot\blog\lib\Cake\Model\Model.php(2630): Model->getDataSource()
+#6 E:\wwwroot\blog\app\Controller\PagesController.php(72): Model->find('all', Array)
+#7 [internal function]: PagesController->beforeFilter(Object(CakeEvent))
+#8 E:\wwwroot\blog\lib\Cake\Event\CakeEventManager.php(246): call_user_func(Array, Object(CakeEvent))
+#9 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(669): CakeEventManager->dispatch(Object(CakeEvent))
+#10 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(183): Controller->startupProcess()
+#11 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#12 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-09-22 08:51:00 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:22:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:22:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:22:42 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:24:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:25:53 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:29:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:29:57 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:29:59 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:30:01 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:30:04 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:30:06 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:37:41 Error: [MissingControllerException] Controller class CrawlController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:38:17 Error: [MissingControllerException] Controller class CrawlController could not be found.
+#0 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-06-07 03:41:56 Error: [MissingViewException] View file "E:\wwwroot\blog\app\View\Pages\crawl.ctp" is missing.
+#0 E:\wwwroot\blog\lib\Cake\View\View.php(473): View->_getViewFileName(NULL)
+#1 E:\wwwroot\blog\lib\Cake\Controller\Controller.php(956): View->render(NULL, NULL)
+#2 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 E:\wwwroot\blog\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\wwwroot\blog\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
