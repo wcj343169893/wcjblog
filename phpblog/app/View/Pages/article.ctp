@@ -37,16 +37,16 @@
         <section class="w90 related">
         	<dl>
             	<dt class="r_t">您可能也感兴趣的：</dt>
-            	<?php if(!empty($otherArticle)){foreach ($otherArticle as $article){?><?php $link="/blog/".$article["Article"]["oId"];?>
-                    <dd><?php echo $this->Html->link($article["Article"]["articleTitle"],$link)?></dd>
+            	<?php if(!empty($otherArticle)){foreach ($otherArticle as $article2){?><?php $link="/blog/".$article2["Article"]["oId"];?>
+                    <dd><?php echo $this->Html->link($article2["Article"]["articleTitle"],$link)?></dd>
                     <?php }}?>
             </dl>
         </section>
         <section class="comments w90 t-20">
             <!-- Duoshuo Comment BEGIN -->
-            <div class="ds-thread"></div>
+            <div class="ds-thread" data-thread-key="<?php echo $article["Article"]["oId"];?>" data-title="<?php echo $article["Article"]["articleTitle"];?>" data-url="<?php echo "http://www.choujone.com/blog/".$article["Article"]["oId"];?>"></div>
             <script type="text/javascript">
-            var duoshuoQuery = {short_name:"r-yang"};
+            var duoshuoQuery = {short_name:"wcj"};
                 (function() {
                     var ds = document.createElement('script');
                     ds.type = 'text/javascript';ds.async = true;
