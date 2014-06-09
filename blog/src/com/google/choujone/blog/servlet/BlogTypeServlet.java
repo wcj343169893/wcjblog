@@ -80,6 +80,29 @@ public class BlogTypeServlet extends HttpServlet {
 			}
 			out.close();
 			return;
+		} else if (Operation.all.toString().equals(operation.trim())) {
+			//查询全部
+			resp.setContentType("application/json;charset=utf-8");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setHeader("Cache-Control", "no-cache");
+			PrintWriter out = resp.getWriter();
+			List<BlogType> blogTypeList = btd.getBlogTypeList();
+			Map<Long, Map<String,String>> map = new HashMap<Long, Map<String,String>>();
+			if (blogTypeList != null && blogTypeList.size() > 0) {
+				for (BlogType blogType : blogTypeList) {
+					Map<String,String> bt1 = new HashMap<String, String>();
+					bt1.put("name", blogType.getName());
+					bt1.put("parentId", blogType.getParentId().toString());
+					bt1.put("info", blogType.getInfo());
+					map.put(blogType.getId(), bt1);
+				}
+				String json = JSONObject.toJSONString(map);
+				out.println(json);
+			} else {
+				out.println(flag);
+			}
+			out.close();
+			return;
 		} else {// 删除
 			Long tid = 0L;
 			try {
