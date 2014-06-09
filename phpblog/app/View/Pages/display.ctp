@@ -29,6 +29,8 @@
 <script type="text/javascript" src="/js/jquery.infinitescroll.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	  var wheight =  $(window).height();
+	  $("#article_list").height(wheight-60);
     var speed = 1000;
     $("#down").masonry({
        singleMode: true,
@@ -64,13 +66,14 @@ $(function(){
        //$('#infscr-loading').animate({opacity: .8},2000).fadeOut('normal');
        }},
        // call masonry as a callback.
-       function( newElements ) { $(this).masonry({ appendedContent: $(newElements) });
+       function( newElements ) { 
+           $(this).masonry({ appendedContent: $(newElements) });
+           setTimeout("initScroll()",500);
         }
    );
    setTimeout("initScroll()",500);
-  
 });
 function initScroll(){
-	 $("#article_list").niceScroll({cursorcolor:"#1cbdc5",cursorwidth:"4px",cursorborder:"0"});
+	 $("#article_list").niceScroll("#down",{cursorcolor:"#1cbdc5",cursorwidth:"4px",cursorborder:"0"});
 }
 </script>
