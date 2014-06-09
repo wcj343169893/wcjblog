@@ -1,8 +1,10 @@
 package com.google.choujone.blog.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,9 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.google.choujone.blog.common.Operation;
 import com.google.choujone.blog.dao.BlogDao;
 import com.google.choujone.blog.entity.Blog;
+import com.google.choujone.blog.entity.BlogType;
 import com.google.choujone.blog.util.Config;
 import com.google.choujone.blog.util.Tools;
 
@@ -68,6 +73,38 @@ public class BlogServlet extends HttpServlet {
 			}
 			// 清空统计
 			Config.blogReadCount = new HashMap<Long, Integer>();
+		} else if (Operation.all.toString().equals(operation.trim())) {
+			//查询全部
+			resp.setContentType("application/json;charset=utf-8");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setHeader("Cache-Control", "no-cache");
+			PrintWriter out = resp.getWriter();
+			blogDao = new BlogDao();
+			List<Blog> blogTypeList = blogDao.getBlogList();
+			Map<Long, Map<String,String>> map = new HashMap<Long, Map<String,String>>();
+			if (blogTypeList != null && blogTypeList.size() > 0) {
+				for (Blog blog2 : blogTypeList) {
+					Map<String,String> bt1 = new HashMap<String, String>();
+					bt1.put("oId", blog2.getId()+"");
+					bt1.put("articleTitle", blog2.getTitle());
+					bt1.put("articleAbstract", blog2.getContent(200).getValue());
+					bt1.put("articleTypeId", blog2.getTid().toString());
+					bt1.put("articleTags", blog2.getTag());
+					bt1.put("articleViewCount", blog2.getCount()+"");
+					bt1.put("articleContent", blog2.getContent().getValue());
+					bt1.put("articleIsPublished", blog2.getIsVisible()+"");
+					bt1.put("articleCreateDate", blog2.getSdTime()+"");
+					bt1.put("articleUpdateDate", blog2.getMoTime()+"");
+					map.put(blog2.getId(), bt1);
+				}
+				String json = JSONObject.toJSONString(map);
+				out.println(json);
+			} else {
+				boolean flag = false;
+				out.println(flag);
+			}
+			out.close();
+			return;
 		} else {
 			// 随机显示博客
 			if (id == null) {

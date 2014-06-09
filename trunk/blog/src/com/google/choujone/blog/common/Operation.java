@@ -49,5 +49,5 @@ public enum Operation {
 	 * 开始
 	 */
 	start, getUser,
-	ttop,dtop
+	ttop,dtop,all
 }
