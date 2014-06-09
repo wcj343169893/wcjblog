@@ -8,7 +8,6 @@
 <title><?php echo $title_for_layout; ?></title>
 <meta name="keywords" content="<?php echo $keywords_for_layout; ?>" />
 <meta name="description" content="<?php echo $description_for_layout; ?>" />
-<meta name="generator" content="DW Yang" />
 <meta name="author" content="<?php echo $auth_for_layout?>" />
 <?php 
 echo $this->Html->meta('icon');
@@ -37,7 +36,7 @@ echo $this->fetch('script');
     	<li>
         	<a href="/" title="朝军的博客" class="n1 <?php echo $nav_index==1?"cu":""?>"><span class="n_01"></span><h4 class="nav-t">朝军的博客</h4></a>
             <a href="/tag/生活小记.html" title="生活小记" class="n2 <?php echo $nav_index==4?"cu":""?>"><span class="n_02"></span><h4 class="nav-t">生活小记</h4></a>
-            <a href="/about.html" title="关于我"class="n3 <?php echo $nav_index==2?"cu":""?>"><span class="n_03"></span><h4 class="nav-t">关于我</h4></a>
+            <a href="/json" title="json格式化"class="n3 <?php echo $nav_index==2?"cu":""?>"><span class="n_03"></span><h4 class="nav-t">json格式化</h4></a>
             <a href="/link.html" title="友情链接"class="n4 <?php echo $nav_index==3?"cu":""?>"><span class="n_04"></span><h4 class="nav-t">友情链接</h4></a>
         </li>
     </ul>
@@ -70,5 +69,9 @@ echo $this->fetch('script');
 	<p>Copyright ©2013-2015 www.choujone.com</p>
 </footer>
 <!--footer end-->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8bb0922290ec926c1bf2d71e9df0e0fb' type='text/javascript'%3E%3C/script%3E"));
+</script>
 </body>
 </html>
