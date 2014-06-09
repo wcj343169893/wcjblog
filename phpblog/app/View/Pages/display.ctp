@@ -6,7 +6,7 @@
     <section class="list relative item"><?php $link="/blog/".$article["Article"]["oId"];?>
 		<h2 class="t"><?php echo $this->Html->link($article["Article"]["articleTitle"],$link)?></h2>
          <blockquote class="cont">
-         	<?php echo $this->Text->truncate(strip_tags($article["Article"]["articleAbstract"]),240,array("html"=>true))?>
+         	<?php echo $article["Article"]["articleAbstract"];?>
          	<?php echo $this->Html->link("查看全文",$link);?>
          </blockquote>
          <footer class="article">
