@@ -6,7 +6,7 @@
     <section class="list relative item">
 		<h2 class="t"><?php echo $this->Html->link($article["Article"]["articleTitle"],$article["Article"]["articlePermalink"])?></h2>
          <blockquote class="cont">
-         	<?php echo $this->Text->truncate(strip_tags($article["Article"]["articleAbstract"]),400,array("html"=>true))?>
+         	<?php echo $article["Article"]["articleAbstract"]?>
          	<?php echo $this->Html->link("查看全文",$article["Article"]["articlePermalink"])?>
          </blockquote>
          <footer class="article">
@@ -19,10 +19,10 @@
 </aside>
 </div>
 <div id="page_nav" style="display:none;">
-	<?php if($page<$sumPage){
+	<?php //if($page<$sumPage){
 		$nextPage=$page+1;
-			echo $this->Html->link($nextPage,array('controller' => 'pages',"ext"=>"html",$tag,$nextPage));
-	}?>
+    	echo $this->Html->link($nextPage,"/tag.html?name=".$tag."&p=".$nextPage);
+	//}?>
 </div>
 <script type="text/javascript" src="/js/jquery.masonry.js"></script>
 <script type="text/javascript" src="/js/jquery.infinitescroll.min.js"></script>
@@ -63,13 +63,15 @@ $(function(){
        //$('#infscr-loading').animate({opacity: .8},2000).fadeOut('normal');
        }},
        // call masonry as a callback.
-       function( newElements ) { $(this).masonry({ appendedContent: $(newElements) });
+       function( newElements ) { 
+           	$(this).masonry({ appendedContent: $(newElements) });
+       		setTimeout("initScroll()",500);
         }
    );
    setTimeout("initScroll()",500);
   
 });
 function initScroll(){
-	 $("#article_list").niceScroll({cursorcolor:"#1cbdc5",cursorwidth:"4px",cursorborder:"0"});
+	 $("#article_list").niceScroll("#down",{cursorcolor:"#1cbdc5",cursorwidth:"4px",cursorborder:"0"});
 }
 </script>
