@@ -194,27 +194,19 @@ class PagesController extends AppController {
 		$alltag = $this->Tag->find ( "all" );
 		$this->set ( compact ( 'alltag' ) );
 	}
-	public function tag($tagname = "", $page = 1) {
-		$path = func_get_args ();
+	public function tag() {
+// 		$path = func_get_args ();
 		
-		$count = count ( $path );
-		if (! $count) {
+// 		$count = count ( $path );
+		$title_for_layout = null;
+		$tag=!empty($_REQUEST["name"])?h($_REQUEST["name"]):"";
+		$page=!empty($_REQUEST["p"])?intval($_REQUEST["p"]):1;
+		if (empty($tag)) {
 			$this->redirect ( '/' );
 		}
-		$tag = $title_for_layout = null;
-		$page = 1;
-		
-		if (! empty ( $path [0] )) {
-			$tag = h ( $path [0] );
-		}
-		if (! empty ( $path [1] )) {
-			$page = intval ( $path [1] );
-		}
-		if (! empty ( $path [$count - 1] )) {
-			$title_for_layout = Inflector::humanize ( $path [$count - 1] ) . " -- " . $this->title_for_layout;
-		}
+		$title_for_layout = Inflector::humanize ( $tag ) . " -- " . $this->title_for_layout;
 		$this->set ( compact ( 'tag', 'title_for_layout' ) );
-		$this->findBlogByTagePage ( $page, $tag );
+		$this->findBlogByTagePage ( $page, $tag ,10);
 	}
 	/**
 	 * 分页查询文章
