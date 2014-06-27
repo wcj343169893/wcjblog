@@ -251,10 +251,6 @@ Ext.onReady(function () {
 			{text: '删除空格并转义', handler: function () {
 				jsonviewer.removeWhiteSpace2();
 			}},
-			'-',
-			{text: '微微网络电话自动签到', handler: function(){
-				window.location.href="http://www.choujone.com/wewe.jsp";
-			}},
 			'->',
 			{text: '回到首页', handler: function(){
 				window.location.href="http://www.choujone.com/";
