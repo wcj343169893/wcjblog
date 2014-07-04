@@ -18,6 +18,12 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+
+/* Begin IIS MOD_REWRITE Code */
+//$_SERVER['REQUEST_URI'] = $_GET['REQUEST_URI'];
+//unset($_GET['REQUEST_URI']);
+/* End IIS MOD_REWRITE Code */
+
 /**
  * Use the DS to separate the directories in other defines
  */
