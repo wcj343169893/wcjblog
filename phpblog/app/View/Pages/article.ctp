@@ -59,8 +59,11 @@
             <!-- Duoshuo Comment END -->
         </section>
     </aside>
+<?php echo $this->Html->script("jquery.nicescroll.min",array("inline"=>false));?>
 <script type="text/javascript">
 $(function(){
-$("#down").niceScroll({cursorcolor:"#1cbdc5",cursorwidth:"4px",cursorborder:"0"});
+	var wheight =  $(window).height();
+	$("#down").height(wheight-60);
+	$("#down").niceScroll({cursorcolor:"#1cbdc5",cursorwidth:"4px",cursorborder:"0"});
 });
 </script>

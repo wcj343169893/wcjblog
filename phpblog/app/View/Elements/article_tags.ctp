@@ -3,7 +3,9 @@
 	<?php 
 		$tags = explode(" ", $data);
 		foreach($tags as $ta){
-			echo '<a href="/tag.html?name='.$ta.'" title="">'.$ta.'</a> ';
+			if(!empty($ta)){
+				echo '<a href="/tag/'.$ta.'.html" title="">'.$ta.'</a> ';
+			}
 		}
 	?>
 <?php }?>
