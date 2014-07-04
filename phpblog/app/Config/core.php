@@ -116,7 +116,7 @@
  * Turn off all caching application-wide.
  *
  */
-	//Configure::write('Cache.disable', true);
+// 	Configure::write('Cache.disable', true);
 
 /**
  * Enable cache checking.
@@ -125,9 +125,16 @@
  * public $cacheAction inside your controllers to define caching settings.
  * You can either set it controller-wide by setting public $cacheAction = true,
  * or in each action using $this->cacheAction = true.
- *
+ * 开启views缓存，
+ * example:
+ * var $helpers = array ('Cache');
+ * var $cacheAction = array(
+ * 'view' => array('callbacks' => true, 'duration' => 21600),
+ * 'add' => array('callbacks' => true, 'duration' => 36000),
+ * 'index' => array('callbacks' => true, 'duration' => 48000)
+ * );
  */
-	//Configure::write('Cache.check', true);
+Configure::write ( 'Cache.check', true );
 
 /**
  * Defines the default error type when using the log() function. Used for
@@ -230,6 +237,7 @@
  * any date & time related errors.
  */
 	//date_default_timezone_set('UTC');
+	date_default_timezone_set('Asia/Shanghai');
 
 /**
  * Pick the caching engine to use.  If APC is enabled use it.
