@@ -15,7 +15,8 @@ echo $this->Html->css('base');
 echo $this->Html->css('layout');
 echo $this->Html->css('master');
 echo $this->Html->script('jquery');
-echo $this->Html->script('jquery.nicescroll.min');
+echo $this->Html->script('plugins');
+echo $this->Html->script('sly.min');
 
 echo $this->fetch('css');
 echo $this->fetch('script');
@@ -35,7 +36,7 @@ echo $this->fetch('script');
 	<ul>
     	<li>
         	<a href="/" title="朝军的博客" class="n1 <?php echo $nav_index==1?"cu":""?>"><span class="n_01"></span><h4 class="nav-t">朝军的博客</h4></a>
-            <a href="/tag.html?name=cakephp" title="cakephp" class="n2 <?php echo $nav_index==4?"cu":""?>"><span class="n_02"></span><h4 class="nav-t">cakephp</h4></a>
+            <a href="/tag/cakephp.html" title="cakephp" class="n2 <?php echo $nav_index==4?"cu":""?>"><span class="n_02"></span><h4 class="nav-t">cakephp</h4></a>
             <a href="/json" title="json格式化"class="n3 <?php echo $nav_index==2?"cu":""?>"><span class="n_03"></span><h4 class="nav-t">json格式化</h4></a>
             <a href="/link.html" title="友情链接"class="n4 <?php echo $nav_index==3?"cu":""?>"><span class="n_04"></span><h4 class="nav-t">友情链接</h4></a>
         </li>
@@ -47,7 +48,7 @@ echo $this->fetch('script');
 	<ul>
     	<li>
     	<?php foreach($toptags as $tag){
-    	echo $this->Html->link($tag["Tag"]["tagTitle"],"/tag.html?name=".$tag["Tag"]["tagTitle"]);
+    	echo $this->Html->link($tag["Tag"]["tagTitle"],"/tag/{$tag["Tag"]["tagTitle"]}.html");
          }?>
         <a href="/tags.html" title="其他">其他</a> 
         </li>

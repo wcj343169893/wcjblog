@@ -61,6 +61,14 @@ class PagesController extends AppController {
 			"Preference",
 			"ArticleTags" 
 	);
+	var $cacheAction = array(
+		 'display' => array('callbacks' => true, 'duration' => 21600),
+		 'article' => array('callbacks' => true, 'duration' => 36000),
+		 'link' => array('callbacks' => true, 'duration' => 48000),
+		 'about' => array('callbacks' => true, 'duration' => 48000),
+		'tag' => array('callbacks' => true, 'duration' => 48000),
+		 'tags' => array('callbacks' => true, 'duration' => 48000),
+	 );
 	public function beforeFilter() {
 		// 查询多的6个tag
 		$this->Tag->hasMany = array ();
@@ -194,17 +202,31 @@ class PagesController extends AppController {
 		$alltag = $this->Tag->find ( "all" );
 		$this->set ( compact ( 'alltag' ) );
 	}
-	public function tag() {
+	public function tag($tag="",$page=1) {
 // 		$path = func_get_args ();
-		
 // 		$count = count ( $path );
 		$title_for_layout = null;
-		$tag=!empty($_REQUEST["name"])?h($_REQUEST["name"]):"";
-		$page=!empty($_REQUEST["p"])?intval($_REQUEST["p"]):1;
+// 		echo $tag;
+// 		$tag=!empty($_REQUEST["name"])?h($_REQUEST["name"]):"";
+// 		$page=!empty($_REQUEST["p"])?intval($_REQUEST["p"]):1;
 		if (empty($tag)) {
 			$this->redirect ( '/' );
 		}
+// 		if($count>0){
+// 			$tag=h($path[0],true,"UTF-8");
+// 		}
+// 		if($count>1){
+// 			$page=intval($path[1]);
+// 		}
+		if(function_exists("iconv")){
+			$tag=iconv('GB2312', 'UTF-8', $tag); 
+		}
+// 		header("Content-Type: text/html; charset=utf-8");
+// 		echo iconv('GB2312', 'UTF-8', $tag); 
+// 		print_r($this->request);
+// 		die(); 
 		$title_for_layout = Inflector::humanize ( $tag ) . " -- " . $this->title_for_layout;
+// 		$title_for_layout =$tag.  "标签--".$this->title_for_layout;
 		$this->set ( compact ( 'tag', 'title_for_layout' ) );
 		$this->findBlogByTagePage ( $page, $tag ,10);
 	}
